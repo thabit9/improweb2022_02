@@ -1,0 +1,42 @@
+@{
+    Layout = null;
+}
+
+<!-- #region Left SideBar -->
+<aside id="content-left" class="col-lg-3 mb-4 mb-lg-0 d-none d-lg-block border_">
+    <div class="block block-catmenu mb-3">
+        <nav class="list-group catmenu">
+            <a class="list-group-item list-group-item-action catmenu-path-item expanded" asp-controller="customer" asp-action="dashboard">
+                <span class="has-count">My Account</span>
+            </a>
+            <a class="list-group-item active catmenu-item" asp-controller="customer" asp-action="profile">
+                <i class="fal fa-fw fal fa-user list-group-item-icon"></i>
+                <span>Customer info</span>
+            </a>
+            <a class="list-group-item list-group-item-action catmenu-item" asp-controller="customer" asp-action="Addresses">
+                <i class="fal fa-fw fal fa-address-book list-group-item-icon"></i>
+                <span>Addresses</span>
+            </a>
+            <a class="list-group-item list-group-item-action catmenu-item" asp-controller="customer" asp-action="History">
+                <i class="fal fa-fw fal fa-file-invoice list-group-item-icon"></i>
+                <span>Order History</span>
+            </a>
+            <a class="list-group-item list-group-item-action catmenu-item" asp-controller="customer" asp-action="ChangePassword">
+                <i class="fal fa-fw fal fa-unlock-alt list-group-item-icon"></i>
+                <span>Change Password</span>
+            </a>
+            <a class="list-group-item list-group-item-action catmenu-item" asp-controller="customer" asp-action="Posts">
+                <i class="fal fa-fw fal fa-envelope list-group-item-icon"></i>
+                <span>My Posts</span>
+            </a>
+            <a class="list-group-item list-group-item-action catmenu-item" asp-controller="customer" asp-action="CompanyDetails">
+                <i class="fal fa-fw fal fa-download list-group-item-icon"></i>
+                <span>Company Details</span>
+            </a>
+            <a class="list-group-item list-group-item-action catmenu-item" asp-controller="customer" asp-action="Basket">
+                <i class="fal fa-fw fa fa-wallet list-group-item-icon"></i>
+                <span>My Wallet</span>
+            </a>
+        </nav>
+    </div>
+</aside>

@@ -1,0 +1,656 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <!--li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="customer" asp-action="dashboard" title="Dashboard" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Dashboard</span>
+                    </a>
+                </li-->
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Cart (@ViewBag.countItems)</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <!-- #region Product Detail -->
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="costeps row no-gutters">
+                <div class="col-2 costep active border_" data-step="cart">
+                    <a class="costep-link" href="/cart">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Cart</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="address">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Address</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="shipping">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Shipping</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="payment">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Payment</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="confirm">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Confirm</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="complete">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Complete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="page shopping-cart-page">
+                <div class="page-title border_">
+                    <h1 class="h3">Shopping cart</h1>
+                </div>
+                <div class="page-body">
+                    <div class="order-summary-content cart-content" data-empty-text="Your Shopping Cart is empty!">
+                        <form asp-controller="cart" asp-action="update" enctype="multipart/form-data" id="cartform" method="post" novalidate="novalidate">            
+                            <div class="card border_">
+                                <div id="cart-items" class="cart mb-0 cart-editable border_">
+                                    <div class="cart-head">
+                                        <div class="cart-row border_">
+                                            <div class="cart-col cart-col-main border_">
+                                                Product(s)
+                                            </div>
+                                            <div class="cart-col cart-col-price border_">
+                                                Price
+                                            </div>
+                                            <div class="cart-col cart-col-qty border_">
+                                                Qty.
+                                            </div>
+                                            <div class="cart-col cart-col-price cart-col-subtotal border_">
+                                                Total
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart-body">
+                                        @if (ViewBag.cart != null)
+                                        {   var i = 1;
+                                            @foreach (var productInfo in ViewBag.cart)
+                                            {
+                                            <div class="cart-row border_">
+                                                <div class="cart-col cart-col-main">
+                                                <div class="row sm-gutters">
+                                                    <div class="col cart-item-img border_">
+                                                        <img class="img-fluid" alt="@productInfo.ProductName" src="~/products/@productInfo.Photo?size=256" title="Show details for @productInfo.ProductName">
+                                                    </div>
+                                                    <div class="col">
+                                                        <a class="cart-item-link border_" asp-controller="product" asp-action="details" asp-route-id="@productInfo.ProdID"  title="Description">@productInfo.ProductName</a>
+                                                        <div class="cart-item-desc fs-sm border_">
+                                                            @productInfo.Description
+                                                        </div>
+                                                        <div class="cart-item-attrs fs-sm my-2 border_">
+                                                            <div class="row cart-item-attr deliverytime-group">
+                                                                <div class="col-3 border_">
+                                                                    Arrives:
+                                                                </div>
+                                                                <div class="col-9 border_">
+                                                                    <span class="delivery-date"><b>Thu, Feb 24</b> - <b>Mon, Mar 7</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <div class="cart-row-actions btn-group-vertical border_">
+                                                            <a class="btn btn-gray btn-to-danger btn-sm btn-icon ajax-action-link border_" title="Remove" asp-controller="cart" asp-action="remove" asp-route-id="@productInfo.ProdID" >
+                                                                <i class="fa fa-2x">×</i>
+                                                            </a>
+                                                            <a class="btn btn-secondary btn-sm btn-icon ajax-action-link border_" title="Move to wishlist" href="#" rel="nofollow" data-href="/shoppingcart/moveitembetweencartandwishlist?cartItemId=1&amp;cartType=ShoppingCart&amp;isCartPage=True" data-name="TRANSOCEAN CHRONOGRAPH" data-type="wishlist" data-action="addfromcart">
+                                                                <i class="fal fa-heart"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="cart-col cart-col-price border_" data-caption="Price">
+                                                    <span class="price border_">R @productInfo.PurchasePrice incl VAT</span>
+                                                </div>
+                                                <div class="cart-col cart-col-qty border_" data-caption="Quantity">
+                                                    <div class="qty-input">
+                                                        <div class="input-group bootstrap-touchspin">
+                                                            @{var buttonMinus = "bootstrap-touchspin-down"+ i; }
+                                                            <span class="input-group-btn border_">
+                                                                <button class="btn btn-secondary @buttonMinus" type="button" onclick="subst(@i)"><i class="fa fa-minus"></i></button>
+                                                            </span>
+                                                            <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                                                            @{var numberInput = "itemquantity"+ i; }
+                                                            <input class="form-control" data-max="10000" data-min="1" data-postfix="" data-sci-item="1" data-step="1" data-val="true" data-val-number="The field 'EnteredQuantity' must be a number." id="@numberInput" name="quantity" type="text" value="@productInfo.Quantity" style="display: block;">
+                                                            <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                                                            @{var buttonAdd = "bootstrap-touchspin-up"+ i; }
+                                                            <span class="input-group-btn border_">
+                                                                <button class="btn btn-secondary @buttonAdd" type="button" onclick="add(@i)"><i class="fa fa-plus"></i></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-col cart-col-price cart-col-subtotal border_" data-caption="Total">
+                                                    <span class="price">R @(productInfo.PurchasePrice * productInfo.Quantity) incl VAT</span>
+                                                </div>
+                                            </div>
+                                            i++;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function add(i) {
+                                        //let form = document.getElementById("cartform");
+                                        var a = $("#itemquantity"+ i ).val();
+                                        a++;
+                                        if (a && a >= 1) {
+                                            $(".bootstrap-touchspin-down"+ i ).removeAttr("disabled");
+                                        }
+                                        $("#itemquantity"+ i ).val(a);
+                                        $( "#cartform" ).delay(60000).submit();
+                                    };
+                                    function subst(i) {
+                                        //let form = document.getElementById("cartform");
+                                        var b = $("#itemquantity"+ i).val();
+                                        // this is wrong part
+                                        if (b && b >= 1) {
+                                            b--;
+                                            $("#itemquantity"+ i ).val(b);
+                                            $( "#cartform" ).delay(60000).submit();
+                                        }
+                                        else {
+                                            $(".bootstrap-touchspin-down"+ i ).attr("disabled", "disabled");
+                                        }
+                                    };
+                                </script>
+
+                                <div class="cart-footer rounded-bottom">
+                                    <div class="row">
+                                        <div class="col-md-6 border_">
+                                            <div class="cart-action cart-action-coupon border_">
+                                                <h5 class="cart-action-title collapsed border_" data-toggle="collapse" data-target="#cart-action-coupon-body" aria-controls="cart-action-coupon-body">
+                                                    I have a discount code
+                                                </h5> 
+                                                <div class="cart-action-body collapse" id="cart-action-coupon-body">
+                                                    <div class="coupon-code form-group">
+                                                        <div class="input-group">
+                                                            <input name="discountcouponcode" type="text" class="form-control form-control-success discount-coupon-code" placeholder="Enter your coupon here">
+                                                            <span class="input-group-btn input-group-append border_">
+                                                                <button type="submit" class="btn btn-primary apply-discount-coupon-code-button border_" title="Apply coupon" name="applydiscountcouponcode" value="applydiscountcouponcode">
+                                                                    <i class="fa fa-check"></i>
+                                                                    <span>Apply coupon</span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cart-action cart-action-giftcard border_">
+                                                <h5 class="cart-action-title collapsed" data-toggle="collapse" data-target="#cart-action-giftcard-body" aria-controls="cart-action-giftcard-body">
+                                                    I have a gift card
+                                                </h5>
+                                                <div class="cart-action-body collapse" id="cart-action-giftcard-body">
+                                                    <div class="coupon-code form-group">
+                                                        <div class="input-group">
+                                                            <input name="giftcardcouponcode" type="text" class="form-control gift-card-coupon-code" placeholder="Enter gift card code">
+                                                            <span class="input-group-btn input-group-append">
+                                                                <button type="submit" class="btn btn-primary apply-gift-card-coupon-code-button" name="applygiftcardcouponcode" value="applygiftcardcouponcode">
+                                                                <i class="fa fa-check"></i>
+                                                                <span>Add gift card</span>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cart-action cart-action-shipping border_">
+                                                <h5 class="cart-action-title collapsed border_" data-toggle="collapse" data-target="#cart-action-shipping-body" aria-controls="cart-action-shipping-body">
+                                                    Estimate shipping
+                                                </h5>
+                                                <div class="cart-action-body collapse" id="cart-action-shipping-body">
+                                                    <div class="alert alert-info border_">Enter your destination to get a shipping estimate</div>
+                                                    <div class="shipping-options">
+                                                    <div class="form-group">
+                                                        <label for="CountryId" class="border_">Country</label>
+                                                        <select class="form-control noskin country-input country-selector border_" data-addemptystateifrequired="true" data-region-control-selector="#StateProvinceId" data-states-ajax-url="/country/getstatesbycountryid" data-val="true" data-val-number="The field 'Country' must be a number." id="CountryId" name="CountryId">
+                                                        <option value="3">Germany</option>
+                                                        <option value="4">Austria</option>
+                                                        <option value="5">Switzerland</option>
+                                                        <option value="1">United States</option>
+                                                        <option value="2">Canada</option>
+                                                        <option value="86">Afghanistan</option>
+                                                        <option value="87">Albania</option>
+                                                        <option value="88">Algeria</option>
+                                                        <option value="89">American Samoa</option>
+                                                        <option value="90">Andorra</option>
+                                                        <option value="91">Angola</option>
+                                                        <option value="92">Anguilla</option>
+                                                        <option value="93">Antarctica</option>
+                                                        <option value="94">Antigua and Barbuda</option>
+                                                        <option value="6">Argentina</option>
+                                                        <option value="7">Armenia</option>
+                                                        <option value="8">Aruba</option>
+                                                        <option value="9">Australia</option>
+                                                        <option value="10">Azerbaijan</option>
+                                                        <option value="11">Bahamas</option>
+                                                        <option value="95">Bahrain</option>
+                                                        <option value="12">Bangladesh</option>
+                                                        <option value="96">Barbados</option>
+                                                        <option value="13">Belarus</option>
+                                                        <option value="14">Belgium</option>
+                                                        <option value="15">Belize</option>
+                                                        <option value="97">Benin</option>
+                                                        <option value="16">Bermuda</option>
+                                                        <option value="98">Bhutan</option>
+                                                        <option value="17">Bolivia</option>
+                                                        <option value="18">Bosnia and Herzegowina</option>
+                                                        <option value="99">Botswana</option>
+                                                        <option value="100">Bouvet Island</option>
+                                                        <option value="19">Brazil</option>
+                                                        <option value="101">British Indian Ocean Territory</option>
+                                                        <option value="102">Brunei Darussalam</option>
+                                                        <option value="20">Bulgaria</option>
+                                                        <option value="103">Burkina Faso</option>
+                                                        <option value="104">Burundi</option>
+                                                        <option value="105">Cambodia</option>
+                                                        <option value="106">Cameroon</option>
+                                                        <option value="107">Cape Verde</option>
+                                                        <option value="21">Cayman Islands</option>
+                                                        <option value="108">Central African Republic</option>
+                                                        <option value="109">Chad</option>
+                                                        <option value="22">Chile</option>
+                                                        <option value="23">China</option>
+                                                        <option value="110">Christmas Island</option>
+                                                        <option value="111">Cocos (Keeling) Islands</option>
+                                                        <option value="24">Colombia</option>
+                                                        <option value="112">Comoros</option>
+                                                        <option value="113">Congo</option>
+                                                        <option value="114">Cook Islands</option>
+                                                        <option value="25">Costa Rica</option>
+                                                        <option value="115">Cote D'Ivoire</option>
+                                                        <option value="26">Croatia</option>
+                                                        <option value="27">Cuba</option>
+                                                        <option value="28">Cyprus</option>
+                                                        <option value="29">Czech Republic</option>
+                                                        <option value="30">Denmark</option>
+                                                        <option value="116">Djibouti</option>
+                                                        <option value="117">Dominica</option>
+                                                        <option value="31">Dominican Republic</option>
+                                                        <option value="32">Ecuador</option>
+                                                        <option value="33">Egypt</option>
+                                                        <option value="118">El Salvador</option>
+                                                        <option value="119">Equatorial Guinea</option>
+                                                        <option value="120">Eritrea</option>
+                                                        <option value="121">Estonia</option>
+                                                        <option value="122">Ethiopia</option>
+                                                        <option value="123">Falkland Islands (Malvinas)</option>
+                                                        <option value="124">Faroe Islands</option>
+                                                        <option value="125">Fiji</option>
+                                                        <option value="34">Finland</option>
+                                                        <option value="35">France</option>
+                                                        <option value="126">French Guiana</option>
+                                                        <option value="127">French Polynesia</option>
+                                                        <option value="128">French Southern Territories</option>
+                                                        <option value="129">Gabon</option>
+                                                        <option value="130">Gambia</option>
+                                                        <option value="36">Georgia</option>
+                                                        <option value="131">Ghana</option>
+                                                        <option value="37">Gibraltar</option>
+                                                        <option value="38">Greece</option>
+                                                        <option value="132">Greenland</option>
+                                                        <option value="133">Grenada</option>
+                                                        <option value="134">Guadeloupe</option>
+                                                        <option value="135">Guam</option>
+                                                        <option value="39">Guatemala</option>
+                                                        <option value="136">Guinea</option>
+                                                        <option value="137">Guinea-bissau</option>
+                                                        <option value="138">Guyana</option>
+                                                        <option value="139">Haiti</option>
+                                                        <option value="140">Heard and Mc Donald Islands</option>
+                                                        <option value="141">Honduras</option>
+                                                        <option value="40">Hong Kong</option>
+                                                        <option value="41">Hungary</option>
+                                                        <option value="142">Iceland</option>
+                                                        <option value="42">India</option>
+                                                        <option value="43">Indonesia</option>
+                                                        <option value="143">Iran (Islamic Republic of)</option>
+                                                        <option value="144">Iraq</option>
+                                                        <option value="44">Ireland</option>
+                                                        <option value="45">Israel</option>
+                                                        <option value="46">Italy</option>
+                                                        <option value="47">Jamaica</option>
+                                                        <option value="48">Japan</option>
+                                                        <option value="49">Jordan</option>
+                                                        <option value="50">Kazakhstan</option>
+                                                        <option value="145">Kenya</option>
+                                                        <option value="146">Kiribati</option>
+                                                        <option value="147">Korea</option>
+                                                        <option value="51">Korea, Democratic People's Republic of</option>
+                                                        <option value="52">Kuwait</option>
+                                                        <option value="148">Kyrgyzstan</option>
+                                                        <option value="149">Lao People's Democratic Republic</option>
+                                                        <option value="150">Latvia</option>
+                                                        <option value="151">Lebanon</option>
+                                                        <option value="152">Lesotho</option>
+                                                        <option value="153">Liberia</option>
+                                                        <option value="154">Libyan Arab Jamahiriya</option>
+                                                        <option value="155">Liechtenstein</option>
+                                                        <option value="156">Lithuania</option>
+                                                        <option value="157">Luxembourg</option>
+                                                        <option value="158">Macau</option>
+                                                        <option value="159">Macedonia</option>
+                                                        <option value="160">Madagascar</option>
+                                                        <option value="161">Malawi</option>
+                                                        <option value="53">Malaysia</option>
+                                                        <option value="162">Maldives</option>
+                                                        <option value="163">Mali</option>
+                                                        <option value="164">Malta</option>
+                                                        <option value="165">Marshall Islands</option>
+                                                        <option value="166">Martinique</option>
+                                                        <option value="167">Mauritania</option>
+                                                        <option value="168">Mauritius</option>
+                                                        <option value="169">Mayotte</option>
+                                                        <option value="54">Mexico</option>
+                                                        <option value="170">Micronesia</option>
+                                                        <option value="171">Moldova</option>
+                                                        <option value="172">Monaco</option>
+                                                        <option value="173">Mongolia</option>
+                                                        <option value="174">Montenegro</option>
+                                                        <option value="175">Montserrat</option>
+                                                        <option value="176">Morocco</option>
+                                                        <option value="177">Mozambique</option>
+                                                        <option value="178">Myanmar</option>
+                                                        <option value="179">Namibia</option>
+                                                        <option value="180">Nauru</option>
+                                                        <option value="181">Nepal</option>
+                                                        <option value="55">Netherlands</option>
+                                                        <option value="182">Netherlands Antilles</option>
+                                                        <option value="183">New Caledonia</option>
+                                                        <option value="56">New Zealand</option>
+                                                        <option value="184">Nicaragua</option>
+                                                        <option value="185">Niger</option>
+                                                        <option value="186">Nigeria</option>
+                                                        <option value="187">Niue</option>
+                                                        <option value="188">Norfolk Island</option>
+                                                        <option value="189">Northern Mariana Islands</option>
+                                                        <option value="57">Norway</option>
+                                                        <option value="190">Oman</option>
+                                                        <option value="58">Pakistan</option>
+                                                        <option value="191">Palau</option>
+                                                        <option value="192">Panama</option>
+                                                        <option value="193">Papua New Guinea</option>
+                                                        <option value="59">Paraguay</option>
+                                                        <option value="60">Peru</option>
+                                                        <option value="61">Philippines</option>
+                                                        <option value="194">Pitcairn</option>
+                                                        <option value="62">Poland</option>
+                                                        <option value="63">Portugal</option>
+                                                        <option value="64">Puerto Rico</option>
+                                                        <option value="65">Qatar</option>
+                                                        <option value="195">Reunion</option>
+                                                        <option value="66">Romania</option>
+                                                        <option value="67">Russia</option>
+                                                        <option value="196">Rwanda</option>
+                                                        <option value="197">Saint Kitts and Nevis</option>
+                                                        <option value="198">Saint Lucia</option>
+                                                        <option value="199">Saint Vincent and the Grenadines</option>
+                                                        <option value="200">Samoa</option>
+                                                        <option value="201">San Marino</option>
+                                                        <option value="202">Sao Tome and Principe</option>
+                                                        <option value="68">Saudi Arabia</option>
+                                                        <option value="203">Senegal</option>
+                                                        <option value="85">Serbia</option>
+                                                        <option value="204">Seychelles</option>
+                                                        <option value="205">Sierra Leone</option>
+                                                        <option value="69">Singapore</option>
+                                                        <option value="70">Slovakia (Slovak Republic)</option>
+                                                        <option value="71">Slovenia</option>
+                                                        <option value="206">Solomon Islands</option>
+                                                        <option value="207">Somalia</option>
+                                                        <option value="72">South Africa</option>
+                                                        <option value="208">South Georgia &amp; South Sandwich Islands</option>
+                                                        <option value="73">Spain</option>
+                                                        <option value="209">Sri Lanka</option>
+                                                        <option value="210">St. Helena</option>
+                                                        <option value="211">St. Pierre and Miquelon</option>
+                                                        <option value="212">Sudan</option>
+                                                        <option value="213">Suriname</option>
+                                                        <option value="214">Svalbard and Jan Mayen Islands</option>
+                                                        <option value="215">Swaziland</option>
+                                                        <option value="74">Sweden</option>
+                                                        <option value="216">Syrian Arab Republic</option>
+                                                        <option value="75">Taiwan</option>
+                                                        <option value="217">Tajikistan</option>
+                                                        <option value="218">Tanzania</option>
+                                                        <option value="76">Thailand</option>
+                                                        <option value="219">Togo</option>
+                                                        <option value="220">Tokelau</option>
+                                                        <option value="221">Tonga</option>
+                                                        <option value="222">Trinidad and Tobago</option>
+                                                        <option value="223">Tunisia</option>
+                                                        <option value="77">Turkey</option>
+                                                        <option value="224">Turkmenistan</option>
+                                                        <option value="225">Turks and Caicos Islands</option>
+                                                        <option value="226">Tuvalu</option>
+                                                        <option value="227">Uganda</option>
+                                                        <option value="78">Ukraine</option>
+                                                        <option value="79">United Arab Emirates</option>
+                                                        <option value="80">United Kingdom</option>
+                                                        <option value="81">United States minor outlying islands</option>
+                                                        <option value="82">Uruguay</option>
+                                                        <option value="83">Uzbekistan</option>
+                                                        <option value="228">Vanuatu</option>
+                                                        <option value="229">Vatican City State (Holy See)</option>
+                                                        <option value="84">Venezuela</option>
+                                                        <option value="230">Viet Nam</option>
+                                                        <option value="231">Virgin Islands (British)</option>
+                                                        <option value="232">Virgin Islands (U.S.)</option>
+                                                        <option value="233">Wallis and Futuna Islands</option>
+                                                        <option value="234">Western Sahara</option>
+                                                        <option value="235">Yemen</option>
+                                                        <option value="236">Zambia</option>
+                                                        <option value="237">Zimbabwe</option>
+                                                        </select>
+                                                        <span class="field-validation-valid" data-valmsg-for="CountryId" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="StateProvinceId" class="border_">State / province</label>
+                                                        <select class="form-control noskin state-input" data-val="true" data-val-number="The field 'State / province' must be a number." id="StateProvinceId" name="StateProvinceId">
+                                                            <option value="0">Other (Non US)</option>
+                                                        </select>
+                                                        <span class="field-validation-valid" data-valmsg-for="StateProvinceId" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ZipPostalCode" class="border_">Zip / postal code</label>
+                                                        <input class="zip-input form-control" id="ZipPostalCode" name="ZipPostalCode" type="text" value="">
+                                                        <span class="field-validation-valid" data-valmsg-for="ZipPostalCode" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="submit" name="estimateshipping" value="Estimate shipping" class="btn btn-warning estimate-shipping-button">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 border_">
+                                            <div id="order-totals border_">
+                                                <style>
+                                                    .cart-summary td {
+                                                        padding: 0.5rem 0.5rem;
+                                                        vertical-align: top;
+                                                    }
+                                                </style>
+                                                <table class="cart-summary">
+                                                    <tbody>
+                                                    <tr class="cart-summary-subtotal border_">
+                                                    <td class="cart-summary-label border_">Subtotal:</td>
+                                                    <td class="cart-summary-value border_">R @ViewBag.Total incl tax</td>
+                                                    </tr>
+                                                    <tr class="cart-summary-shipping border_">
+                                                    <td class="cart-summary-label border_">
+                                                        <span class="text-nowrap">Shipping:</span>
+                                                    </td>
+                                                    <td class="cart-summary-value border_">
+                                                            <span class="cart-summary-neg">R0.00</span>
+                                                    </td>
+                                                    </tr>
+                                                    <tr class="cart-summary-tax border_">
+                                                        <td class="cart-summary-label border_">Tax:</td>
+                                                        <td class="cart-summary-value border_">R0.00</td>
+                                                    </tr>
+                                                    <tr class="cart-summary-total border_">
+                                                    <td class="cart-summary-label border_">Total:</td>
+                                                    <td class="cart-summary-value border_">
+                                                        <span>R @ViewBag.Total</span>
+                                                    </td>
+                                                    </tr>
+                                                </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-buttons my-4 row border_">
+                                <div class="col-sm-6 col-lg-4 order-last order-sm-first mt-3 mt-sm-0 border_">
+                                    <a class="btn btn-secondary btn-block btn-lg btn-continue-shopping border_" asp-controller="home" asp-action="index" >
+                                        <i class="fa fa-angle-left mr-3"></i>
+                                        <span>Continue shopping</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 ml-lg-auto border_">
+                                    @if (ViewBag.cart != null && ViewBag.countItems > 0)
+                                    {
+                                        <div id="start-checkout-buttons">
+                                            <div class="checkout-buttons">
+                                            <input type="submit" name="startcheckout" value="startcheckout" id="startcheckout" class="d-none">
+                                            <a id="checkout" class="btn btn-danger btn-lg btn-block btn-checkout border_" asp-controller="cart" asp-action="checkout">
+                                                <span>Checkout</span>
+                                                <i class="fa fa-angle-right ml-3"></i>
+                                            </a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <script>
+                        /*$(function () {
+                        var orderSummary = $(".cart-content");
+                        var isWishlist = orderSummary.is('.wishlist-content');
+                        var updatingCart = false;
+                        // Remove cart item and move to wishlist.
+                        orderSummary.on("click", ".ajax-action-link", function (e) {
+                            e.preventDefault();
+                            var link = $(this);
+                            updateShoppingCartItems(link, link.data);
+                            return false;
+                        });
+                        // Quantity touchspin change.
+                        var debouncedUpdate = _.debounce(function (e) {
+                            e.preventDefault();
+                            var link = $(this);
+                            updateShoppingCartItems(link, { sciItemId: link.data("sci-id"), newQuantity: link.val(), isCartPage: true, isWishlist: isWishlist });
+                            return false;
+                        }, 350, false);
+                        orderSummary.on('change', '.qty-input .form-control', debouncedUpdate);
+                        function updateShoppingCartItems(link, data) {
+                            if (updatingCart)
+                            return;
+                            updatingCart = true;
+                            showThrobber();
+                            $.ajax({
+                            cache: false,
+                            url: link.data("href"),
+                            data: data,
+                            type: 'POST',
+                                    success: function (response) {
+                                        if (!_.isEmpty(response.redirect)) {
+                                            location.href = response.redirect;
+                                            return false;
+                                        }
+
+                                if (response.cartItemCount == 0) {
+                                orderSummary.html('<div class="alert alert-warning fade show">' + orderSummary.data('empty-text') + '</div>');
+                                }
+                                var cartBody = $(".cart-body");
+                                var totals = $("#order-totals");
+                                var coupon = $(".cart-action-coupon");
+
+                                        if (response.success) {
+                                            $("#start-checkout-buttons").toggleClass("d-none", !response.displayCheckoutButtons);
+
+                                // Replace HTML.
+                                cartBody.html(response.cartHtml);
+                                totals.html(response.totalsHtml);
+                                coupon.html(response.discountHtml);
+                                }
+                                displayNotification(response.message, response.success ? "success" : "error");
+
+                                // Reinit qty controls.
+                                applyCommonPlugins(cartBody);
+
+                                // Update shopbar.
+                                        ShopBar.loadSummary('cart', true);
+                                        ShopBar.loadSummary('wishlist', true);
+
+                                hideThrobber();
+                            },
+                            complete: function () {
+                                updatingCart = false;
+                            }
+                            });
+                        }
+                        function showThrobber() {
+                            var cnt = $("#cart-items");
+                            var throbber = cnt.data('throbber');
+                            if (!throbber) {
+                            throbber = cnt.throbber({ white: true, small: true, message: '', show: false, speed: 0 }).data('throbber');
+                            }
+
+                            throbber.show();
+                        }
+                        function hideThrobber () {
+                            var cnt = $("#cart-items");
+                            _.delay(function () {
+                            if (cnt.data("throbber"))
+                                cnt.data("throbber").hide();
+                            }, 100);
+                        }
+                        })*/
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

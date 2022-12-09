@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+
+<div id="content-wrapper">
+    <section id="content" class="container">
+        <div class="row">
+            <!-- #region BreadCrump -->
+            <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+                <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                            <meta itemprop="name" content="Home page" />
+                            <meta itemprop="position" content="1" />
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                </ol>
+                <div class="breadcrumb-item active border_">
+                    <span>Privacy</span>
+                </div>
+            </div>
+            <!-- #endregion -->
+        </div>
+        <div id="content-body" class="row">
+            <div id="content-center" class="col-lg-12 border_">
+                <div class="page contact-page border_">
+                    <div class="page-title border_">
+                        <h1 class="h2">Privacy</h1>
+                    </div>
+                    <div class="page-body">
+                        <div class="row">
+                            <p class="border_"><strong> Happy Monkey respects your privacy.</strong><u>We do not sell or rent our customer information to any outside parties.</u></p> 
+                            <p class="border_">Described below is our privacy policy in these areas:</p> 
+                            <ul class="fa-ul" style="color: highlight;"> 
+                                <li class="border_">1. Use of Your Email Address</li> 
+                                <li class="border_">2. Registration</li> 
+                                <li class="border_">3. Sharing of Information</li> 
+                                <li class="border_">4. Cookies</li> 
+                            </ul> 
+                            <h4 class="border_">1. Use of Your Email Address</h4> 
+                            <p class="border_">If you provide us with your email address, register as a customer or make a purchase from us, we will occasionally send you email with recommendations or notices of new products and prices. This email may include paid advertisements from third parties. To block future email of this type, simply follow the instructions at the bottom of the message..</p> 
+                            <p class="border_">In addition, we send email to keep you informed about the status your orders. These messages cannot be blocked.</p> 
+                            <h4 class="border_">2. Registration</h4> 
+                            <p class="border_">During the Happy Monkey registration process, we ask you to provide us with contact information, such as name, billing address, shipping address, email address, and telephone number. We use this information to verify your account and to process your orders.</p> 
+                            <h4 class="border_">3. Sharing of Information</h4> 
+                            <p class="border_">We do not sell, rent or share any customer information, except for transactions involving third parties. In such cases, we provide only the information required to complete the transaction. By contract, the third party is not permitted to sell, rent or share this information.</p> 
+                            <h4 class="border_">4. Cookies</h4> 
+                            <p class="border_">Happy Monkey uses software tags called "cookies" to identify customers when they visit our site. They help us understand your buying preferences and customize our service to your needs. The information we collect with cookies is not sold, rented or shared with any outside parties. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

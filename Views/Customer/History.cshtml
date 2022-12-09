@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Invoice History";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="customer" asp-action="dashboard" title="Dashboard" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Dashboard</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Invoice History</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        @await Component.InvokeAsync("DashboardSideBar")
+        <!-- #endregion -->
+        <!-- #region Content Center -->
+        <div id="content-center" class="col-lg-9">
+            <div class="page category-page">
+                <div class="page-title">
+                    <p class="border_">
+                        INVOICE HISTORY
+                    </p>
+                </div>
+                <div class="page-body">
+                    <table id="CategoryTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>OrderID</th>
+                                <th>Order Date</th>
+                                <th>Description</th>
+                                <th>InvoiceNo</th>
+                                <th>Reference</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var invoice in ViewBag.invoices)
+                            {
+                                <tr>
+                                    <td>@invoice.InvoiceId</td>
+                                    <td>@invoice.Date.ToString("MM/dd/yyyy")</td>
+                                    <td>@invoice.Description</td>
+                                    <td>@invoice.InvoiceNo</td>
+                                    <td>@invoice.Reference</td>
+                                    <td>@(invoice.Status ? "Success" : "Pending")</td>
+                                    <td>
+                                        <a asp-controller="customer" asp-action="details" asp-route-id="@invoice.InvoiceId">Invoice Details</a>
+                                    </td>
+                                </tr> 
+                            
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>OrderID</th>
+                                <th>Order Date</th>
+                                <th>Description</th>
+                                <th>InvoiceNo</th>
+                                <th>Reference</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

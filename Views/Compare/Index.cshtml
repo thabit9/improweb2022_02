@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Compare (@ViewBag.countItems)</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="page compare-products-page">
+                <div class="row mb-4 align-items-center">
+                    <div class="col">
+                        <div class="heading">
+                            <h1 class="heading-title fs-h1">Compare products</h1>
+                        </div>
+                    </div>
+                    <div class="col col-auto">
+                        <a class="btn btn-danger mb-2" asp-controller="compare" asp-action="remove" rel="nofollow">
+                            <i class="far fa-trash-alt"></i>
+                            <span>Clear list</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="page-body">
+                    <div class="row">
+                        @if (ViewBag.Comapare != null)
+                        {   //var i = 1;
+                            @foreach (var productInfo in ViewBag.Comapare)
+                            {
+                            var photoName = "~/products/NoPic.jpg";
+                            if (productInfo.Photo != null){
+                                photoName = productInfo.Photo;
+                            }
+                            if(productInfo.Photo == null){
+                                photoName = "/products/NoPic.jpg";
+                            }
+                            if(productInfo.Photo == ""){
+                                photoName = "/products/NoPic.jpg";
+                            }
+                            <div class="col-sm-4 border_">                    
+                                <div class="card" style="width: 100%;">
+                                    <div class="row xs-gutters flex-nowrap border_">
+                                            <div class="col-auto">
+                                                <div class="btn-group">
+                                                    <a asp-controller="cart" asp-action="buy" asp-route-id="@productInfo.ProdID" class="btn btn-secondary btn-icon btn-flat ajax-cart-link rounded-0 border_" title="Add to cart" rel="nofollow" data-type="cart" data-action="add">
+                                                        <i class="fa fa-cart-arrow-down"></i>
+                                                    </a>
+                                                    <a asp-controller="wishlist" asp-action="addwishlist" asp-route-id="@productInfo.ProdID" asp-route-redirect="@Context.Request.GetEncodedUrl()" class="btn btn-secondary btn-icon btn-flat ajax-cart-link rounded-0 border_" title="Add to wishlist" rel="nofollow" data-type="wishlist" data-action="add">
+                                                        <i class="fal fa-heart"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col text-right">
+                                                <a class="btn btn-secondary btn-to-danger btn-flat btn-icon btn-remove rounded-0 border_" asp-controller="compare" asp-action="remove" asp-route-id="@productInfo.ProdID"  rel="nofollow" title="Remove">
+                                                    X
+                                                </a>
+                                            </div>
+                                    </div>
+                                    <img alt="@Html.Encode(productInfo.Description.ToString()).Substring(0,50)" src="@photoName?size=256" title="Show details for @Html.Encode(productInfo.Description.ToString()).Substring(0,50)" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a class="cart-item-link border_" asp-controller="product" asp-action="details" asp-route-id="@productInfo.ProdID"  title="Description">@Html.Encode(productInfo.Description.ToString()).Substring(0,50)</a>
+                                        </h5>
+                                        <p class="card-text">@productInfo.Description</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Price: R @productInfo.PurchasePrice incl VAT</li>
+                                        <li class="list-group-item">Brand: @productInfo.Manufacturer</li>
+                                        <li class="list-group-item">Warranty: @productInfo.Warranty</li>
+                                        <li class="list-group-item">
+                                            RATINGS
+                                        </li>
+                                    </ul>
+                                    <div class="card-body">
+                                        <a asp-controller="product" asp-action="details" asp-route-id="@productInfo.ProdID" class="card-link">More information</a>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        }else{
+                            <p class="border_">
+                                THERE IS NOTHING TO COMPARE WITH (SELECT PRODUCTS TO COMPARE)
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

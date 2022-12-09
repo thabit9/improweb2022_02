@@ -1,0 +1,71 @@
+@{
+    Layout = null;
+}
+
+@using Microsoft.AspNetCore.Http.Extensions
+
+@foreach (var hotProduct in Model)
+{
+    Product product = (Product)hotProduct;
+                /*ProductImages photo = productInfo.ProductImagesx.SingleOrDefault(ph => ph.Status && ph.Featured);
+                var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
+                var photoName = product.ImgURL == null ? "NoPic.jpg" : product.ImgURL;
+    <div class="col-sm-4">
+        <article class="art border_" data-id="260">
+            <div class="art-picture-block border_">
+                <a class="art-picture img-center-container" asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID" title="@hotProduct.ProductName">
+                    <img src="@photoName" alt="@hotProduct.ProductName" title="@hotProduct.ProductName" loading="lazy">
+                </a>
+            </div>
+            <div class="art-brand border_">
+                <span>@hotProduct.Manufacturer.ManufacturerName</span>
+            </div>
+            <h3 class="art-name border_">
+                <a asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID"  title="@hotProduct.ProductName">
+                    <span>@hotProduct.ProductName</span>
+                </a>
+            </h3>
+            <div class="art-description claimedRight reduceDesc_ border_" title="@hotProduct.Description">
+                @hotProduct.Description
+            </div>
+            <div class="art-price-block">
+                <span class="art-price">
+                    R @(decimal.Parse(hotProduct.PurchasePrice.ToString("#0.00"))) Excl VAT
+                </span>
+            </div>
+            <div class="art-drop" style="bottom: 0px;">
+                <div class="art-variant-info">
+                    <div class="art-color-opts">
+                        <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+                        <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+                        <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+                        <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+                        <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+                    </div>
+                    <div class="art-more-opts">
+                        <span class="bidi-embed">MID:</span>
+                        <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">26</a>
+                        <span class="bidi-embed">DBN:</span>
+                        <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+                        <span class="bidi-embed">CTN:</span>
+                        <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                    </div>
+                </div>
+                <div class="row no-gutters art-btn-group border_">
+                    <a asp-controller="cart" asp-action="buy" asp-route-id="@hotProduct.ProdID" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
+                        <i class="fa fa-cart-arrow-down"></i>
+                    </a>
+                    <a asp-controller="wishlist" asp-action="addwishlist" asp-route-id="@hotProduct.ProdID" asp-route-redirect="@Context.Request.GetEncodedUrl()" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Wishlist" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="wishlist" data-action="add">
+                        <i class="fal fa-heart"></i>
+                    </a>
+                    <a data-href="/frontend/catalog/addproducttocompare/260" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="compare" data-action="add">
+                        <i class="fa fa-retweet"></i>
+                    </a>
+                    <a asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+}

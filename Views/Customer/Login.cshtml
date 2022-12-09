@@ -1,0 +1,95 @@
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@model improweb2022_02.ViewModels.CustomerViewModel;
+
+<div id="content" class="container">
+    <div class="row">
+     <!-- #region BreadCrump -->
+     <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+      <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+       <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+         <meta itemprop="name" content="Home page" />
+         <meta itemprop="position" content="1" />
+         <i class="fa fa-home"></i>
+        </a>
+       </li>
+      </ol>
+      <div class="breadcrumb-item active border_">
+       <span>Sign In</span>
+      </div>
+     </div>
+     <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <div class="row ">
+          <div class="col-sm border_">
+            <h4 class="border_">
+              Not Registered?
+            </h4>
+            <p class="border_">Create your own account now and experience our diversity. With an account you can place orders faster and will always have a perfect overview of your current and previous orders.</p>
+            <a class="btn btn-primary btn-lg btn-block btn-add-to-cart ajax-cart-link border_" asp-controller="customer" asp-action="register"  rel="nofollow" data-href="/cart/addproduct/10/1" data-form-selector="#pd-form" data-type="cart" data-action="add" data-toggle="offcanvas" data-target="#offcanvas-cart">
+              <span>Register</span>
+            </a>
+          </div>
+          <div class="col-sm border_">
+            <div class="card shadow-sm p-3 p-md-4 mb-5 mb-md-0 login-box">
+                <h3 class="h4 mb-0 d-none d-md-block border_">
+                    I am already registered
+                </h3>
+                <hr class="d-none d-md-block">
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.error
+                    </div>
+                }
+                <!-- SignIn Form -->
+                <form asp-controller="customer" asp-action="login"  method="post">
+                  <div class="form-group">
+                    <div class="input-group input-group-lg has-icon border_">
+                        <input class="username form-control" id="UsernameOrEmail" name="email" placeholder="Username or email" type="text">
+                        <span class="input-group-icon text-muted">
+                            <i class="icm icm-user"></i>
+                        </span>
+                    </div>
+                    <span class="field-validation-valid" data-valmsg-for="UsernameOrEmail" data-valmsg-replace="true"></span>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group input-group-lg has-icon border_">
+                        <input type="password" class="password form-control" autocomplete="off" placeholder="Password" id="Password" name="password">
+                        <span class="input-group-icon text-muted">
+                            <i class="icm icm-shield"></i>
+                        </span>
+                    </div>
+                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                  </div>
+                  <div class="form-group d-flex justify-content-between border_">
+                    <div class="form-check border_">
+                        <input class="form-check-input" id="RememberMe" name="RememberMe" type="checkbox" value="true"><input name="RememberMe" type="hidden" value="false">
+                        <label for="RememberMe" class="form-check-label">Remember me?</label>
+                    </div>
+                    <div class="forgot-password border_">
+                        <a href="/customer/passwordrecovery">Forgot password?</a>
+                    </div>
+                  </div>
+                  <div class="form-group border_">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block btn-login">
+                        Sign In
+                    </button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div> 
+        <div class="row" style="padding:15px">
+          <div class="col-sm border_">
+          <h5 class="border_">Secure Shopping Guarantee</h5>
+          <p class="border_">We understand that security is critical to our shoppers so we guarantee that every transaction you make at www.esquireshop.com will be safe and secure. <a href="#">Click here</a> to learn more about our privacy policy.</p>
+          </div>
+        </div>     
+    </div>
+</div>

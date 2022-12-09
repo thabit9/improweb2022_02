@@ -1,0 +1,29 @@
+@{
+    Layout = null;
+}
+
+<form method="get" asp-controller="product" asp-action="search">
+<div class="input-group border_">
+    <div class="input-group-btn search-panel">
+        <button type="button" class="btn btn-light dropdown-toggle department-dropdown-search" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span id="search_concept" name="categoryId">All Categories</span> 
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="">
+            @foreach (var category in Model.categories)
+            {
+                <li><a class="dropdown-item" href="#@category.Id">@category.Name</a></li> 
+            }           
+        </ul>
+    </div>
+    <input type="hidden" name="search_param" value="-1" id="search_param">
+    <input type="text" class="form-control" name="keyword" value="@Model.keyword" placeholder="Search Category, Product Code, or Product Name...">
+    <span class="input-group-btn">
+        <button class="btn btn-secondaryx" type="submit" style="font-size: revert">
+            <span class="fal fa-search"></span>
+        </button>
+    </span>
+</div>
+</form>
+
+

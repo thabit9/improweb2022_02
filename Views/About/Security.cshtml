@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+
+<div id="content-wrapper">
+    <section id="content" class="container">
+        <div class="row">
+            <!-- #region BreadCrump -->
+            <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+                <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                            <meta itemprop="name" content="Home page" />
+                            <meta itemprop="position" content="1" />
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                </ol>
+                <div class="breadcrumb-item active border_">
+                    <span>Security</span>
+                </div>
+            </div>
+            <!-- #endregion -->
+        </div>
+        <div id="content-body" class="row">
+            <div id="content-center" class="col-lg-12 border_">
+                <div class="page contact-page border_">
+                    <div class="page-title border_">
+                        <h1 class="h2">Security Policy</h1>
+                    </div>
+                    <div class="page-body">
+                        <div class="row">
+                            <img style="width: 150px;" alt="" src="https://esquireshop.com/Images/paygatelogo.jpg"> <br>
+                            <p class="border_"><a class="style3" href="http://www.paygate.co.za/" target="_new">PAYGATE</a> (DPO) process all credit card transactions. All credit card transactions are</p>
+                            <p class="border_">128 bit Secure Socket Layers (SSL) encrypted. The company registration documents and the site's registered domain name are checked and verified by Thawte, ensuring the cardholder and merchant that nobody can impersonate PAYGATE to obtain confidential information.</p>
+                            <p class="border_">PAYGATE is committed to providing secure online services. All encryption complies with international standards. Encryption is used to protect the transmission of personal information when completing online transactions. PAYGATE Internet servers are protected by firewalls and intrusion detection systems. The Merchant does not have access to credit details. PAYGATE continually reviews and enhances its security in line with technological changes.</p>
+                            <!--p>All transactions will be processed in South African Rands (ZAR). We accept credit card payments via the website in which case <strong>'{Statement Reflect}'</strong> will reflect on the card holder's statement.</p-->
+                            <p class="border_">All transactions will be processed in South African Rands (ZAR). We accept credit card payments via the website in which case '<strong>Virtual Card Acquiring</strong>' will reflect on the card holder's statement.</p>
+                            <p class="border_">BuyNow Online Retail Store is pleased to announce that we now support</p>
+                            <img class="border_" style="width: 150px;" alt="" src="https://esquireshop.com/Images/mcsc_vbv.gif"> <br>
+                            <p class="border_">@ViewBag.Organisations.OrgName is pleased to announce that we now support MasterCard SecureCode and Verified by VISA, major new initiatives from MasterCard and Visa that make our customers much less vulnerable to fraud. MasterCard SecureCode and Verified by Visa provide the technology that enables a cardholder's identity to be verified online, using a password at the time of purchase. The process of verifying the cardholder's identity is called 'cardholder authentication'. The introduction of cardholder authentication is an important step towards making trading online more secure and reducing the risk of fraud in the non-face-to-face environment.</p>
+                            <br>
+                            <h4 class="border_">How do you protect yourself?</h4>
+                            <p class="border_">he PAYGATE payment gateway pages are 3D Secure compliant and conform to the Verified by Visa and Mastercard Securecode online security platform.</p>
+                            <p class="border_"><strong>So for those who frequently shop online and wish to ensure their credit card details may not be fraudulently used, you will need to sign up for 3D Secure</strong> - which is an added security measure (and verification procedure) employed by the major credit card issuers - before your card will be processed online.</p>
+                            <p class="border_"><strong>You will only need to enrol for 3D Secure</strong> once (for each credit card you own) to be able to safely shop online in the future. This is a 2 step process and can be instantly completed online via your bank's website and is a necessary procedure to ensure peace of mind whilst making online purchases.</p>
+                            <p class="border_">The following are links to the 3D Secure activation (and enrolment) pages provide by your bank. Please choose the bank that your credit card was issued by:</p>
+                            <ul class="fa-ul" style="color: highlight;">
+                                <li class="border_">1. <a href="http://www.nedbank.co.za/website/content/promotions/index_detail.asp?promoID=720" target="_blank">Nedbank</a></li>
+                                <li class="border_">2. <a href="http://www.fnb.co.za/personal/transact/accessyouraccounts/verifiedbyvisa.html" target="_blank">First National Bank</a></li>
+                                <li class="border_">3. <a href="http://www.standardbank.co.za/SBIC/Frontdoor_02_02/0,2454,29489322_29511209_0,00.html" target="_blank">Standard Bank</a></li>
+                                <li class="border_">4. <a href="http://www.absa.co.za/absacoza/content.jsp?VGN_C_ID=1ecfd4fe0b123110VgnVCM1000003511060aRCRD&amp;VGN_CI_ID=23bfd4fe0b123110VgnVCM1000003511060aRCRD" target="_blank">Absa</a></li>
+                            </ul>
+                            <button class="accordion border_">1. Nedbank</button>
+                            <div class="panel ac"> <a href="https://acsnedcor.bankserv.co.za/Activation" target="_blank"><img width="37" height="39" align="absMiddle" alt="Nedbank logo" src="https://esquireshop.com/Images/3d-secure-nedbank.jpg" border="0">Nedbank</a> <br>
+                            <p class="border_"><strong>3D Secure-Online Shopping</strong></p>
+                            <p class="border_">Through Verified by Visa and MasterCard Secure Code, your Nedbank card can be protected against unauthorised use when shopping online. All you need to do is enrol yourself online and once activated your card number cannot be used for purchases without your personal password.</p>
+                            <p class="border_"><strong>Enrolling yourself</strong></p>
+                            <p class="border_">To shop online you are required to enrol and activate your card(s) for this service. You will not be able to shop at participating merchants if you have not activated your card(s).</p>
+                            <p class="border_"><strong>About the activation process:</strong></p>
+                            <p class="border_"><strong>When activating your card you will need to provide the following details:</strong></p>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Card number</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Card verification value, which is the last three numbers on the signature panel on the back of your card</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Expiry date</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Name embossed on the card - please enter your name exactly as it appears in either the ID or passport, which Nedbank has on record from when you opened your card account and update as per FICA requirements;</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Email address if available</li>
+                            </ul>
+                            <p class="border_">To finalise activation a secure PIN will be sent to your cellphone. This pin must be entered online and you will then be prompted to enter your own personal password. When this is completed you are activated and ready to shop online.</p>
+                            <p class="border_">For more information call 011 710 4710</p>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>This initiative is at no additional cost to the cardholder.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span><a href="http://www.nedbank.co.za/website/content/promotions/index_detail.asp?PromoID=821" target="_blank">Terms and conditions</a></li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>To enrol <a href="https://acsnedcor.bankserv.co.za/Activation" target="_blank">click here</a></li>
+                            </ul>
+                            </div>
+                            <button class="accordion border_">2. First National Bank</button>
+                            <div class="panel ac"> <a href="https://acsfnb.bankserv.co.za/Activation" target="_blank"><img width="104" height="45" align="absMiddle" alt="First National Bank logo" src="https://esquireshop.com/Images/3d-secure-fnb.jpg" border="0"><br>
+                            <br>
+                            First National Bank</a>
+                            <p class="border_"><strong>Verified by VISA</strong></p>
+                            <p class="border_">Is this for you?</p>
+                            <p class="border_">If you have a First National Bank VISA Credit Card and make purchases online, this service is designed to give you an extra level of protection against unauthorised use.</p>
+                            <h4 class="border_">What's in it for you?</h4>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Protect your FNB VISA Credit Card online with a personal password</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Provides an extra level of protection for online shopping</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Once you activate your credit card, no one else can use your VISA credit ard number to make a purchase online at participating stores (as long as your password is secure)</li>
+                            </ul>
+                            <h4 class="border_">What are the steps involved?</h4>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span><a href="https://acsfnb.bankserv.co.za/Activation" target="_blank">Activate your credit card</a></li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Complete the necessary details. </li>
+                            </ul>
+                            <h4 class="border_">Frequent Questions</h4>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span><a href="https://www.fnb.co.za/personal/transact/accessyouraccounts/verifiedvisaoverviewfaq.html" target="_blank">Overview</a></li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span><a href="https://www.fnb.co.za/personal/transact/accessyouraccounts/activatingyourcard.html" target="_blank">Activating your credit card</a></li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span><a href="https://www.fnb.co.za/personal/transact/accessyouraccounts/verifiedvisafaqsshopping.html" target="_blank">Shopping with Verified by VISA</a></li>
+                            </ul>
+                            <h4 class="border_">More Information</h4>
+                            <p class="border_">Read the<a href="https://acsfnb.bankserv.co.za/XSLServlet?xslurl=termsofuse.xsl&amp;xmlurl=termsofuse.xml&amp;fiID=2" target="_blank"> Terms of Use </a>that apply to the Verified by VISA programme.</p>
+                            </div>
+                            <button class="accordion border_">3. Standard Bank</button>
+                            <div class="panel ac"> <a href="https://acssb.bankserv.co.za/Activation?fiID=3" target="_blank"><img width="184" height="41" align="absMiddle" alt="Standard Bank Logo" src="https://esquireshop.com/Images/3d-secure-standard-bank.jpg" border="0"><br>
+                            <br>
+                            Standard Bank</a>
+                            <p class="border_">Using a Standard Bank credit or cheque card to pay for goods and services over the Internet is now more secure with our Secure Internet Shopping service.</p>
+                            <p class="border_">This added security service is free to you and easy to set up. All you need to do is activate your card for Secure Internet Shopping service and you can start shopping online at participating merchants with the peace-of-mind you deserve.</p>
+                            <p class="border_">To activate your card for Secure Internet Shopping, you will need to enter a few details and choose a PIN you'll enter when making online purchases.</p>
+                            <p class="border_">Secure Internet Shopping from Standard Bank is in line with MasterCard and Visa's secure online shopping initiatives in the form of MasterCard SecureCode and Verified by Visa.</p>
+                            <p class="border_">Merchants participating in Secure Internet Shopping service will accept payment with a Standard Bank card only if you have activated your card for the service. Note that you will not be able to use your card to shop online at participating merchants unless you have activated your card for the service.</p>
+                            <h4 class="border_">Benefits of Secure Internet Shopping</h4>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>It guarantees your online shopping payments.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>It increases security because your card is activated and it is access controlled with a PIN that you choose.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Once activates it ensures that nobody else can use your card details for shopping online.</li>
+                            </ul>
+                            <h4 class="border_">How Secure Internet Shopping works</h4>
+                            <p class="border_">Once your card has been activated and you have selected your own secret username and PIN, you will automatically be prompted by us to enter your secret PIN, when paying for your goods or services at participating merchants. We will verify this and the transaction will be completed.</p>
+                            <p class="border_">Your secret PIN should never be shared with anyone. It works in the same way as entering your PIN at an ATM.</p>
+                            <h4 class="border_">About the activation process</h4>
+                            <p class="border_">When activating your card you will need to provide the following:</p>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Card number</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Card verification value, which is the last three numbers on the signature panel on the back of your card</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Expiry date</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Name embossed on the card</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Please enter your name exactly as it appears on your card (title, initials and surname) eg. Mr JM Smith.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Personal identification in the form of the number that appears in either the identity document or passport which Standard Bank has on record from when you opened your card account.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Enter a personal message that will appear when you are at the checkout point of a participating merchant and before you enter your PIN. See "Your personal message" for more about this.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Choose and confirm a PIN. See "Your PIN" for more on this.</li>
+                            </ul>
+                            <h4 class="border_">Your personal message</h4>
+                            <p class="border_">The phrase you enter may not exceed 30 characters and should be unique to you so that you can recognise it as yours. This gives you the assurance that your transaction is secure.</p>
+                            <p class="border_">Do not enter your PIN if the message displayed is incorrect. Call 0861 201 311 (South Africa only) or +2711 2411311 (Mozambique and Namibia) immediately and report a possible attempted fraud.</p>
+                            <h4 class="border_">Your PIN</h4>
+                            <p class="border_">Your Secure Internet Shopping PIN must have five digits. Here are some standards to consider when deciding on a PIN.</p>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>It should not contain the same number repeated three consecutive times, for example, 11132.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>It should not be consecutive numbers, for example, 12345.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>It should not be the same as your ATM or Internet banking PINs.</li>
+                            </ul>
+                            <p class="border_">Note that when checking out, you will be asked for your "Customer-selected PIN (CSP)". This is the PIN you chose when activating your card for Secure Internet Shopping.</p>
+                            <h4 class="border_">Preventing fraud</h4>
+                            <p class="border_">Call 0861 201 311 (South Africa only) or +2711 2411311 (Mozambique and Namibia) immediately to report a possible attempted fraud.</p>
+                            <h4 class="border_">For further information</h4>
+                            <p class="border_"><a href="http://www.standardbank.co.za/SBIC/Frontdoor_02_02/0,2454,29489322_29511211_0,00.html" target="_blank">Click here</a> for answers to some questions you may have. Should you still have questions, call us on 0861 201 311 (South Africa only) or +27 11 241 1311, email us at <a href="mailto:ss@standardbank.co.za">ss@standardbank.co.za</a></p>
+                            <h4 class="border_">For further information</h4>
+                            <p class="border_"><a href="https://acssb.bankserv.co.za/Activation?fiID=3" target="_blank">Click here</a> to read the terms and conditions before you <a href="https://acssb.bankserv.co.za/Activation?fiID=3" target="_blank">activate your card.</a></p>
+                            </div>
+                            <button class="accordion border_">4. ABSA Bank</button>
+                            <div class="panel ac"> <a href="http://www.absa.co.za/absacoza/content.jsp?VGN_C_ID=1ecfd4fe0b123110VgnVCM1000003511060aRCRD&amp;VGN_CI_ID=23bfd4fe0b123110VgnVCM1000003511060aRCRD" target="_blank"><img width="145" height="93" align="absMiddle" alt="Absa Bank" src="https://esquireshop.com/Images/3d-secure-absa.jpg" border="0"><br>
+                            <br>
+                            Absa Bank</a>
+                            <h4 class="border_">Verified by VISA and MasterCard SecureCode</h4>
+                            <p class="border_">Online shopping is always a pleasure, but also risky. That's why VISA has developed technology, such as 3D Secure, which is designed to protect you whilst you shop. </p>
+                            <p class="border_">Endorsed by MasterCard and supported by Absa, 3D Secure protects you (the cardholder) and the merchant by verifying your personal details during an online purchase, prior to the transaction being processed. </p>
+                            <h4 class="border_">How does it work?</h4>
+                            <p class="border_">Merchants are required to participate in the 3D Secure environment by using a software module called Merchant Plug-in (MPI). This software authenticates your personal details by means of a personal password and/or identity information during the online purchase process. This is entered on a secure and confidential screen, thus ensuring your safety against unauthorised use of card information.</p>
+                            <h4 class="text-danger border_">Benefits</h4>
+                            <ul class="fa-ul">
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>3D Secure protects your card (VISA and/or MasterCard) by using your personal password as authentication.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Ensures an additional level of protection when shopping online.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Works from any PC. No additional software installation is required, providing the PC has an internet connection.</li>
+                                <li class="border_"><span class="fa-li"><em class="fa fa-reply-all"></em></span>Once activated, it ensures that nobody else can use your card at a participating merchant in an online shopping environment.</li>
+                            </ul>
+                            <h4 class="border_">Contact details</h4>
+                            <p class="border_">Should you require further information, please contact the Absa 3D Secure Call Centre on <strong>012 317 3344</strong>.</p>
+                            <p class="border_">For more information, visit our <a href="http://www.absa.co.za/absacoza/content.jsp?VGN_C_ID=ee70d4fe0b123110VgnVCM1000003511060aRCRD&amp;VGN_CI_ID=1750d4fe0b123110VgnVCM1000003511060aRCRD" target="_blank">FAQ</a> section</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

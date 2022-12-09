@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@model improweb2022_02.ViewModels.CustomerViewModel;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Dashbord</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row border_">
+        @await Component.InvokeAsync("DashboardSideBar")
+        <!-- #endregion -->
+        <!-- #region Content Center -->
+        <div id="content-center" class="col-lg-9">
+            <div class="page category-page">
+                <div class="page-title">
+                    <p class="border_">
+                        TITLE OF SELECTED
+                    </p>
+                </div>
+                <div class="page-body">
+                    <div class="product-list-container">
+                        TEST INFORMATION FOR DASHBOARD
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+</div>

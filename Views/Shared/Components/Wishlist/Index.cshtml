@@ -1,0 +1,15 @@
+@{
+    Layout = null;
+}
+
+<a asp-controller="customer" asp-action="wishlist" class="shopbar-button navbar-toggler" >
+    <span class="shopbar-button-icon border_">
+            <i class="icm icm-heart"></i>
+            <span class="badge badge-pill label-cart-amount badge-warning" style="" data-bind-to="WishlistItemsCount">@ViewBag.countItems</span>
+    </span>
+    <span class="shopbar-button-label border_">
+            <span>Wish</span><br>
+    <strong>List</strong>
+    </span>
+    <span class="shopbar-button-label-sm border_"> Wishlist </span>
+</a>

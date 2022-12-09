@@ -1,0 +1,108 @@
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@model improweb2022_02.ViewModels.CustomerViewModel;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Billing Address</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <div class="col-sm border_">
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.error
+                </div>
+            }
+            <form asp-controller="customer" asp-action="bilingAddress" method="post" class="form-horizontal" id="register-form" novalidate="novalidate">
+                <input name="__RequestVerificationToken" type="hidden" value="52-hh7HFzx16GakHg88WemFLTSgG8fYcOVQ1-rn9QYMldPMsc6b-Yil9GXxmWq9JYXr4SdAsGFNL8cvn0Sa8fcL1_UOCPx0IbuZ1ODC4g_s1">
+                <div class="page registration-page">
+                    <div class="page-title border_">
+                        <h1 class="h3">Billing Address</h1>
+                    </div>
+                    <div class="page-body rowx">
+                        <div class="col-12 col-lg-9 col-xl-8">
+                            <fieldset class="content-group border_">
+                                <legend><span>Account Details</span></legend>
+                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="OrganisationName">Organisation Name</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" asp-for="Customer.PostalCountry"  asp-items="@Model.Countries">
+                                            </select>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="form-group rowx">
+                                    <label class="col-md-3 col-form-label required" for="DefaultBranch">Default Branch:</label>
+                                    <div class="col-md-9">
+                                        <div class="row xs-gutters">
+                                            <div class="col">
+                                                <select class="date-part form-control noskin remember" data-minimum-results-for-search="100" data-native-menu="false" id="DefaultBranch" name="DefaultBranch">
+                                                    <option>Default Branch</option>
+                                                    <option value="1">Midrand</option>
+                                                    <option value="2">Cape Town</option>
+                                                    <option value="3">Durban</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <span class="field-validation-valid" data-valmsg-for="DefaultBranch" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group rowx">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary btn-lg" name="register-button" id="register-button">
+                                        Register
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function(){
+                            $('.my-select').selectpicker();
+                            $(function () {
+                                $('select').selectpicker();
+                            });
+                        });
+                        $(function() {
+                            setRememberedFormFields("registerVals");
+                            _.delay(function() {
+                                $(".country-selector").trigger("change");
+                            }, 50);
+                        });
+
+                        const form = document.getElementById('register-form');
+                        form.addEventListener('focusout', (event) => {
+                            rememberFormFields("register-form", "registerVals");
+                        });
+                    </script>
+            </form>
+            </div>
+        </div>
+        <div class="row" style="padding:15px">
+            <div class="col-sm border_">
+                <h5 class="border_">Secure Shopping Guarantee</h5>
+                <p class="border_">We understand that security is critical to our shoppers so we guarantee that every transaction you make at www.esquireshop.com will be safe and secure. <a href="#">Click here</a> to learn more about our privacy policy.</p>
+            </div>
+        </div>
+    </div>
+</div>

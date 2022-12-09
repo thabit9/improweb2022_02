@@ -1,0 +1,100 @@
+@{
+    Layout = null;
+}
+
+<nav class="list-group catmenu">
+    <!--a class="list-group-item list-group-item-action catmenu-path-item expanded" href="/product/category/1">
+        <span class="has-count">Browse Our Stores</span>
+    </a-->
+     @{
+        var index = 1;
+        var idx = 1;
+        var active = "";
+     }
+     @foreach (var store in Model)
+     {
+        if (index == 1){
+            active = "list-group-item active catmenu-item";
+            <div class="store-mainmenu">
+            <a class="list-group-item @active catmenu-item parent" asp-controller="product" asp-action="category" asp-route-id="@store.ProductGroupTopId">
+                <span class="has-count">@store.Name</span>
+            </a>           
+            @if (store.ProductGroupTopLinks != null)
+            {
+            <div class="store-submenu border_">
+                <div class="col-side-container container border_">
+                    <div class="row">
+                        @{
+                            //var idx = 1;
+                        }
+                        @foreach (var productGroupTopLink in store.ProductGroupTopLinks)
+                        {
+                            <div class="col-sm-4x border_">
+                                <a class="head-name" asp-controller="product" asp-action="category" asp-route-id="@productGroupTopLink.ProductGroupHead.GroupHeadID">
+                                    @productGroupTopLink.ProductGroupHead.HeadName
+                                </a><br/>
+                                @if (productGroupTopLink.ProductGroupHead.ProdGroupLinks != null)
+                                {
+                                    foreach(var productGroupLink in productGroupTopLink.ProductGroupHead.ProdGroupLinks)
+                                    {
+                                        <a class="head-name-sub text-muted" asp-controller="product" asp-action="category" asp-route-id="@productGroupLink.GroupHeadID" asp-route-name="@productGroupLink.ProdGroupName">
+                                            @productGroupLink.ProdGroupName
+                                        </a><br />
+                                        
+                                    }
+                                }
+                                <!--div class="showmore">Show more</div-->
+                                @{idx = idx + 1;}
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div> 
+            }
+            </div>
+        }
+        else
+        {
+            <div class="store-mainmenu">
+            <a class="list-group-item catmenu-item parent" asp-controller="product" asp-action="category" asp-route-id="@store.ProductGroupTopId">
+                <span class="has-count">@store.Name</span>
+            </a>           
+            @if (store.ProductGroupTopLinks != null)
+            {
+            <div class="store-submenu border_">
+                <div class="col-side-container container border_">
+                    <div class="row">
+                        @{
+                            //var idx = 1;
+                        }
+                        @foreach (var productGroupTopLink in store.ProductGroupTopLinks)
+                        {
+                            <div class="col-sm-4x border_">
+                                <a class="head-name" asp-controller="product" asp-action="category" asp-route-id="@productGroupTopLink.ProductGroupHead.GroupHeadID">
+                                    @productGroupTopLink.ProductGroupHead.HeadName
+                                </a><br/>
+                                @if (productGroupTopLink.ProductGroupHead.ProdGroupLinks != null)
+                                {
+                                    foreach(var productGroupLink in productGroupTopLink.ProductGroupHead.ProdGroupLinks)
+                                    {
+                                        <a class="head-name-sub text-muted" asp-controller="product" asp-action="category" asp-route-id="@productGroupLink.GroupHeadID" asp-route-name="@productGroupLink.ProdGroupName">
+                                            @productGroupLink.ProdGroupName
+                                        </a><br />
+                                        
+                                    }
+                                }
+                                <!--div class="showmore">Show more</div-->
+                                @{idx = idx + 1;}
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div> 
+            }
+            </div>
+        }
+        index++;
+     }
+</nav>

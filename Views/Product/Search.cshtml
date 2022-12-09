@@ -1,0 +1,464 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using System.Web;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using improweb2022_02.Models;
+
+<div id="content" class="container">
+    <div class="row">
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page">
+                        <meta itemprop="position" content="1">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a href="#" title="Search" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Search</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>@ViewBag.keyword (@ViewBag.CountProducts)</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="content-body" class="row border_">
+        <aside id="content-left" class="col-lg-3 mb-4 mb-lg-0 d-none d-lg-block border_">
+            <div class="block block-catmenu mb-3">
+                <nav class="list-group catmenu">
+                    <a class="list-group-item list-group-item-action catmenu-path-item expanded" asp-controller="product" asp-action="category" asp-route-id="@ViewBag.Category.Id">
+                        <span class="has-count">@ViewBag.Category.Name</span>
+                    </a>
+                    @{ 
+                        var index = 0;
+                    }
+                    @foreach (var subcategory in ViewBag.SubCategory)
+                    {
+                        var slideActive = "";
+                        if(index == 0){
+                            slideActive = "active";
+                        }
+                        if(slideActive == "active")
+                        {
+                        <a class="list-group-item @slideActive catmenu-item" asp-controller="product" asp-action="category" asp-route-id="@subcategory.Id">
+                            <span class="has-count">@subcategory.Name</span>
+                        </a>
+                        }else
+                        {
+                        <a class="list-group-item list-group-item-action catmenu-item" asp-controller="product" asp-action="category" asp-route-id="@subcategory.Id">
+                            <span class="has-count">@subcategory.Name</span>
+                        </a>
+                        }
+                        index++;
+                    }
+                </nav>
+            </div>
+
+
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            Manufacturer
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <div class="facet-group border_" data-key="manufacturerid" style="padding-left: 10px; 
+                                                    padding-right: 10px;
+                                                    padding-top: 10px">
+                                <div id="facet-body-manufacturerid" class="facet-body collapse show" aria-expanded="aria-expanded" style="">
+                                    <div class="facet-local-search has-icon has-icon-right input-group-sm pb-3">
+                                        <input type="text" class="form-control facet-local-search-input" placeholder="Find Brand...">
+                                        <span class="input-group-icon">
+                                            <i class="fal fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <div class="facet-body-inner scrollable custom-scrollbar border_" style="border-radius: 0; max-height: 300px; overflow:scroll; overflow-x: hidden" id="style-10">
+                                        @foreach(var brand in ViewBag.Manufacturer)
+                                        {
+                                        <div class="facet-item facet-check border_" data-href="/soccer?m=14">
+                                            <label>
+                                            <input class="facet-control-native" type="checkbox" value="14">
+                                            <span class="facet-control-ui"></span>
+                                            <span class="facet-label has-count">
+                                                @brand.BrandName
+                                            </span>
+                                            </label>
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            Price
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body">
+                            <div class="facet-group border_" data-key="price" style="padding-left: 10px; 
+                                                    padding-right: 10px;
+                                                    padding-top: 10px">
+                                <div id="facet-body-price" class="facet-body collapse show" aria-expanded="aria-expanded">
+                                    <div class="facet-body-inner">
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;p=%7e10">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-price" value="~10">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    up to R10.00
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;p=%7e25">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-price" value="~25">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    up to R25.00
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;p=%7e50">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-price" value="~50">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    up to R50.00
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;p=%7e100">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-price" value="~100">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    up to R100.00
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;p=%7e250">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-price" value="~250">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    up to R250.00
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;p=%7e500">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-price" value="~500">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    up to R500.00
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;p=%7e1000">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-price" value="~1000">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    up to R1,000.00
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-range-container d-flex align-items-center mt-2 border_">
+                                            <div class="col-sm flex-grow-1 pr-2 border_">
+                                                <input type="number" maxlength="7" id="price-range-from" class="facet-range-from form-control form-control-sm" value="" placeholder="From">
+                                            </div>
+                                            <div class="col-sm flex-grow-0 font-weight-700">
+                                                <span>-</span>
+                                            </div>
+                                            <div class="col-sm flex-grow-1 pl-2 border_">
+                                                <input type="number" maxlength="7" id="price-range-to" class="facet-range-to form-control form-control-sm" value="" placeholder="to">
+                                            </div>
+                                            <div class="col-sm flex-grow-0 pl-3 border_">
+                                                <button type="button" class="btn-custom-range btn btn-primary btn-sm btn-icon" id="btn-custom-price-range" data-qname="p" style="margin-top: -10px;">
+                                                    <i class="fa fa-angle-right fs-h5"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            Rating
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body">
+                            <div class="facet-group" data-key="rating" style="padding-left: 10px; 
+                                                    padding-right: 10px;
+                                                    padding-top: 10px">
+                                <div id="facet-body-rating" class="facet-body collapse show" aria-expanded="aria-expanded">
+                                    <div class="facet-body-inner facet-body-rating">
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;r=4" title="4 stars &amp; more">
+                                            <label>
+                                                <input class="facet-control-native" type="radio" name="optradio-rating" value="4">
+                                                <span class="facet-control-ui"></span>
+                                                <span class="facet-label has-count">
+                                                    <span class="rating">
+                                                    <span style="width: 80%"></span>
+                                                    </span>
+                                                    <span>&amp; more</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;r=3" title="3 stars &amp; more">
+                                            <label>
+                        <input class="facet-control-native" type="radio" name="optradio-rating" value="3">
+                        <span class="facet-control-ui"></span>
+                        <span class="facet-label has-count">
+                        <span class="rating">
+                            <span style="width: 60%"></span>
+                        </span>
+                        <span>&amp; more</span>
+                        </span>
+                    </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;r=2" title="2 stars &amp; more">
+                                            <label>
+                        <input class="facet-control-native" type="radio" name="optradio-rating" value="2">
+                        <span class="facet-control-ui"></span>
+                        <span class="facet-label has-count">
+                        <span class="rating">
+                            <span style="width: 40%"></span>
+                        </span>
+                        <span>&amp; more</span>
+                        </span>
+                    </label>
+                                        </div>
+                                        <div class="facet-item facet-radio border_" data-href="/soccer?s=12&amp;o=5&amp;r=1" title="1 star &amp; more">
+                                            <label>
+                        <input class="facet-control-native" type="radio" name="optradio-rating" value="1">
+                        <span class="facet-control-ui"></span>
+                        <span class="facet-label has-count">
+                        <span class="rating">
+                            <span style="width: 20%"></span>
+                        </span>
+                        <span>&amp; more</span>
+                        </span>
+                    </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                            Availability
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                        <div class="accordion-body">
+                            <div class="facet-group" data-key="available" style="padding-left: 10px; 
+                                                    padding-right: 10px;
+                                                    padding-top: 10px">
+                                <div id="facet-body-available" class="facet-body collapse show" style="">
+                                    <div class="facet-body-inner scrollable custom-scrollbar">
+                                        <div class="facet-item facet-check border_" data-href="/soccer?s=12&amp;o=5&amp;a=True">
+                                            <label>
+                                            <input class="facet-control-native" type="checkbox" value="True">
+                                            <span class="facet-control-ui"></span>
+                                            <span class="facet-label has-count">
+                                                Include Out of Stock
+                                            </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div id="content-center" class="col-lg-9">
+            <div class="page category-page">
+                <div class="page-title">
+                    <p class="border_">
+                        @ViewBag.keyword (@ViewBag.CountProducts)
+                    </p>
+                    <h5 class="search-hitcount border_"><span class="lrm">1 - 2</span> of <span class="lrm">@ViewBag.CountProducts</span></h5>
+                </div>
+                <div class="page-body">
+                    <div class="product-list-container">
+                        <div class="artlist-actions artlist-actions--top d-flex flex-wrap border_">
+                            <div class="artlist-action-group artlist-action-group--filtersort">
+                                <!-- Filter -->
+                                <div class="artlist-action artlist-action--filter d-lg-none border_">
+                                    <div class="mf-dropdown border_">
+                                        <button class="btn btn-warning btn-labeled icon-right btn-no-border btn-block btn-toggle-filter-widget border_">
+                                            <span>Filter</span>
+                                            <b><i class="fa fa-fw fa-sliders-h"></i></b>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Sort -->
+                                <div class="artlist-action artlist-action--sort border_">
+                                    <div class="mf-dropdown">
+                                        <button class="btn btn-secondary btn-artlist-action d-none d-lg-block" title="Sort by Featured">
+                                            <i class="fa fa-sort d-xl-none"></i>
+                                            <span class="d-xl-none">Featured</span>
+                                            <em class="d-none d-xl-inline">Sort by <span>Featured</span></em>
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                        <button class="btn btn-light btn-no-border btn-labeled icon-right btn-block d-lg-none">
+                                            <span>Sort</span>
+                                            <b><i class="fa fa-fw fa-sort"></i></b>
+                                        </button>
+                                        <select class="artlist-action-select form-control noskin border_" name="artlist-action-sort" id="artlist-action-sort" data-qname="o" title="Sort by Featured">
+                                            <option value="1" selected="selected">Featured</option>
+                                            <option value="5">Name: A to Z</option>
+                                            <option value="6">Name: Z to A</option>
+                                            <option value="10">Price: Low to High</option>
+                                            <option value="11">Price: High to Low</option>
+                                            <option value="15">Newest Arrivals</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="artlist-action-group artlist-action-group--page border_">
+                                <div class="artlist-action artlist-action--viewmode">
+                                    <a href="http://localhost:88/basketball?v=list" class="btn btn-light btn-artlist-action tooltip-toggle d-lg-none" data-toggle="tooltip" rel="nofollow" title="Show">
+                                        <i class="fa fa-list"></i>
+                                    </a>
+
+                                    <a href="http://localhost:88/basketball?v=list" class="btn btn-secondary btn-artlist-action tooltip-toggle d-none d-lg-inline-block" data-toggle="tooltip" rel="nofollow" title="" data-original-title="Show">
+                                        <i class="fa fa-list"></i>
+                                    </a>
+                                </div>
+                                <div class="artlist-action artlist-action--pagesize ml-auto">
+                                    <div class="mf-dropdown">
+                                        <button class="btn btn-secondary btn-artlist-action">
+                                            <em><span>24</span> per Page</em>
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                        <select class="artlist-action-select form-control noskin" name="artlist-action-pagesize" id="artlist-action-pagesize" data-qname="s" data-url="http://localhost:88/basketball" title="24 per Page">
+                                            <option value="12">12</option>
+                                            <option value="24" selected="selected">24</option>
+                                            <option value="36">36</option>
+                                            <option value="48">48</option>
+                                            <option value="72">72</option>
+                                            <option value="120">120</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        @if(ViewBag.Products != null)
+                        {
+                        <div class="row product-row-spacing border_">
+                            @foreach (var product in ViewBag.Products)
+                            {
+                                Product productInfo = (Product)product;
+                                /*ProductImages photo = productInfo.ProductImagesx.SingleOrDefault(ph => ph.Status && ph.Featured);
+                                        var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
+                                        var photoName = product.ImgURL == null ? "NoPic.jpg" : product.ImgURL;
+
+                                <div class="col-sm-3 row-item border_">
+                                    <article class="art border_" data-id="@productInfo.ProdID">
+                                        <div class="art-picture-block border_">
+                                            <a class="art-picture img-center-container" asp-controller="product" asp-action="details" title="@productInfo.ProductName">
+                                                <img src="~/products/@photoName" alt="@productInfo.ProductName" title="@productInfo.ProductName" loading="lazy">
+                                            </a>
+                                        </div>
+                                        <div class="art-brand border_">
+                                            <span>@product.Manufacturer.BrandName</span>
+                                        </div>
+                                        <h3 class="art-name border_">
+                                            <a asp-controller="product" asp-action="details" asp-route-id="@productInfo.ProdID" title="@productInfo.ProductName">
+                                                <span class="reduceTitle_">@productInfo.ProductName</span>
+                                            </a>
+                                        </h3>
+                                        <div class="art-description claimedRight reduceDesc_ border_" title="@productInfo.Description">
+                                            @productInfo.Description
+                                        </div>
+                                        <div class="art-price-block">
+                                            <span class="art-price">
+                                                R @productInfo.PurchasePrice Excl VAT
+                                            </span>
+                                        </div>
+                                        <div class="art-drop" style="bottom: 0px;">
+                                            <div class="art-variant-info">
+                                                <div class="art-color-opts">
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+                                                </div>
+                                                <div class="art-more-opts">
+                                                    <span class="bidi-embed">MID:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">@productInfo.StockQty</a>
+                                                    <span class="bidi-embed">DBN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+                                                    <span class="bidi-embed">CTN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters art-btn-group border_">
+                                                <a data-href="/frontend/cart/addproductsimple/260?forceredirection=False" href="#" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart"
+                                                    data-action="add">
+                                                    <i class="fa fa-cart-arrow-down"></i>
+                                                </a>
+                                                <a data-href="/frontend/cart/addproductsimple/260?shoppingCartTypeId=2" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Wishlist" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="wishlist" data-action="add">
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a data-href="/frontend/catalog/addproducttocompare/260" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="compare" data-action="add">
+                                                    <i class="fa fa-retweet"></i>
+                                                </a>
+                                                <a asp-controller="product" asp-action="details" asp-route-id="@productInfo.ProdID" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>                                                               
+                            }
+                        </div>
+                        <div class="row product-row-spacing border_">
+                            <div class="pagination">
+                                <ul>
+                                @Html.PagedListPager((IPagedList)ViewBag.Products, page => Url.Action("category", "product", new { page = page, keyword = ViewBag.keyword }))
+                                </ul>
+                            </div>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="row product-row-spacing border_">
+                            <p>Results for your search returned 0</p>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

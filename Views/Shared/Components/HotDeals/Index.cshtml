@@ -1,0 +1,71 @@
+@{
+    Layout = null;
+}
+
+@foreach (var hotProduct in Model)
+{
+    Product product = (Product)hotProduct;
+    /*ProductImages photo = productInfo.ProductImagesx.SingleOrDefault(ph => ph.Status && ph.Featured);
+    var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
+    var photoName = product.ImgURL == null ? "NoPic.jpg" : product.ImgURL;
+<article class="art border_" data-id="260">
+    <div class="art-picture-block border_" style="width: 150px; float: left; margin-right: 10px;">
+        <a class="art-picture img-center-container" asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID" title="@hotProduct.ProductName">
+            <img src="@photoName" alt="@hotProduct.ProductName" title="@hotProduct.ProductName" loading="lazy">
+        </a>
+    </div>
+    <div class="art-data-block">
+        <div class="art-info-block">
+            <div class="art-info-group">
+                <div class="art-brand border_">
+                    <span>@hotProduct.Manufacturer.ManufacturerName</span>
+                </div>
+            </div>
+            <h3 class="art-name border_">
+                <a asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID"  title="@hotProduct.ProductName">
+                    <span>@hotProduct.ProductName</span>
+                </a>
+            </h3>
+            <div class="art-description claimedRight reduceDesc_ border_" title="@hotProduct.Description">
+                @hotProduct.Description
+            </div>
+            <div class="art-variant-info">
+                <div class="art-color-opts">
+                    <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+                    <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+                    <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+                    <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+                    <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+                </div>
+                <div class="art-more-opts border_">
+                    <span class="bidi-embed">MID:</span>
+                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">26</a>
+                    <span class="bidi-embed">DBN:</span>
+                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+                    <span class="bidi-embed">CTN:</span>
+                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                </div>
+            </div>
+        </div>
+        <div class="art-actions-block">
+            <div class="art-price-block border_">
+                <span class="art-price">
+                    R @(decimal.Parse(hotProduct.PurchasePrice.ToString("#0.00"))) Excl VAT
+                </span>
+            </div>
+            <div class="my-3 border_">
+                <a asp-controller="cart" asp-action="buy" asp-route-id="@hotProduct.ProdID" data-href="/frontend/cart/addproductsimple/260?forceredirection=False" class="btn btn-primary ajax-cart-link px-sm-2 btn-block d-none d-md-block" title="In den Warenkorb" data-toggle="" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
+                    <i class="fa fa-cart-arrow-down"></i>
+                    <span>Add To Basket</span>
+                </a>
+            </div>
+            <div class="row no-gutters art-btn-group border_">
+                <a asp-controller="cart" asp-action="buy" asp-route-id="@hotProduct.ProdID" data-href="/frontend/cart/addproductsimple/260?forceredirection=False" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col d-md-none" title="In den Warenkorb" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
+                    <i class="fa fa-cart-arrow-down"></i>
+                    <span class="d-none d-sm-inline">Add To Basket</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+}

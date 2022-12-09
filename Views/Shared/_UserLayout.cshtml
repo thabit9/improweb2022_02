@@ -1,0 +1,940 @@
+﻿@using System.Security.Claims;
+@{
+    var user = User.FindFirst(ClaimTypes.Name);
+}
+<!DOCTYPE html>
+<html lang="en" class=" wkit not-framed not-ie"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+    <meta name="HandheldFriendly" content="true">
+    <title>Esquire Technologies - Home</title>
+    <meta name="description" content="Shop on-line for special prices on computer hardware, software and many more products in South Africa">
+    <meta name="keywords" content="computers, screens, mouse, it, keybord, ink cartridges, pc components, hard drives, cds, drivers, cables, gaming, dvd, credit card transactions, on-line computer shop, hardware specials, software specials, list your products, latest computer prices, specials, computer store, South Africa, cheap prices, unbeatable deals, fast and easy">
+
+    <meta name="accept-language" content="en-US">
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- #region Font Awesome Pro -->
+    <link rel="preconnect" href="https://pro.fontawesome.com">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css" integrity="sha384-y++enYq9sdV7msNmXr08kJdkX4zEI1gMjjkw0l9ttOepH7fMdhb7CePwuRQCfwCr" crossorigin="anonymous">
+    <link as="style" crossorigin="anonymous" href="~/user/Theme02/Content/fontastic/fonts/fontastic.woff" rel="stylesheet preload prefetch">
+    <link as="style" crossorigin="anonymous" href="~/user/Theme02/Content/vendors/fa5/webfonts/fa-solid-900.woff2" rel="stylesheet preload prefetch">
+    <link as="style" crossorigin="anonymous" href="~/user/Theme02/Content/vendors/fa5/webfonts/fa-regular-400.woff2" rel="stylesheet preload prefetch">
+
+    <!-- #endregion -->
+    <!-- #region OWL Carousel -->
+    <link rel="stylesheet" href="~/user/Theme02/assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/user/Theme02/assets/owlcarousel/assets/owl.theme.default.min.css">
+    <script src="~/user/Theme02/assets/vendors/jquery.min.js"></script>
+    <script src="~/user/Theme02/assets/owlcarousel/owl.carousel.js"></script>
+    <!-- #endregion -->
+    <!-- #region Custom CSS -->
+    <link href="~/user/Theme02/css/custom-style.css" rel="stylesheet">
+    <link href="~/user/Theme02/css/product-display.css" rel="stylesheet">
+    <link href="~/user/Theme02/css/subscribe-newsletter.css" rel="stylesheet">
+    <link href="~/user/Theme02/css/footer.css" rel="stylesheet">
+    <link href="~/user/Theme02/css/Takealot-grids.css" rel="stylesheet">
+    <!--link href="~/user/Theme02/css/product-detail.css" rel="stylesheet"-->
+    <link href="~/user/Theme02/css/product-filtering-sorting.css" rel="stylesheet">
+    <link href="~/user/Theme02/css/spystore-theme.css" rel="stylesheet">
+    <link href="~/user/Theme02/css/kaiwroqv5h-z1rrtpbcsflbsbcvwh2pvbrxbslqbuw41.css" rel="stylesheet">
+    <!-- Search Select -->
+    <link rel="stylesheet" href="~/admin/bower_components/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- #endregion -->
+    <!-- #region Syles  -->
+    <!-- #endregion -->
+    <!--script async="" src="//www.google-analytics.com/analytics.js"></script-->
+    <script>
+        try {
+            if (typeof navigator === "undefined") navigator = {};
+            html = document.documentElement;
+            if (/Edge\/\d+/.test(navigator.userAgent)) {
+                html.className += " edge";
+            } else if ("mozMatchesSelector" in html) {
+                html.className += " moz";
+            } else if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                html.className += " ios";
+            } else if ("webkitMatchesSelector" in html) {
+                html.className += " wkit";
+            } else if (/constructor/i.test(window.HTMLElement)) {
+                html.className += " safari";
+            }
+            html.className += (this.top === this.window ? " not-" : " ") + "framed";
+        } catch (e) {}
+    </script>
+    <!--[if !IE]>-->
+    <script>
+        var ieMode = 0;
+        try {
+            if (document.documentMode) {
+                ieMode = document.documentMode;
+                html.className += " ie iepost8 ie" + document.documentMode;
+            } else {
+                html.className += " not-ie";
+            }
+        } catch (e) {}
+        navigator.isIE = ieMode;
+    </script>
+    <!-- <![endif]-->
+    <script>
+        if (navigator.isIE) {
+            document.addEventListener("DOMContentLoaded", function() {
+                // Add html alert after header, before content
+                const alert = document.createElement("div");
+                alert.className = "container alert alert-warning mt-3";
+                alert.innerText = "You are using an unsupported browser! Please consider switching to a modern browser such as Google Chrome, Firefox or Opera to fully enjoy your shopping experience.";
+                const page = document.getElementsByClassName("page-main");
+                if (page.length < 1) return;
+
+                const content = document.getElementById("content-wrapper");
+                if (!content) return;
+
+                page[0].insertBefore(alert, content);
+            });
+        }
+    </script>
+</head>
+
+<body class="lyt-cols-1" data-aos-easing="ease" data-aos-duration="1000" data-aos-delay="0" data-new-gr-c-s-check-loaded="14.1049.0" data-gr-ext-installed="">
+    <div id="page" style="border:1px dashed green">
+        <div class="canvas-blocker canvas-slidable"></div>
+        <div class="page-main canvas-slidable">
+            <!-- #region COVID Banner  -->
+            <div class="covid-banner-module_covid-banner_2mRkf text-center border_" id="covid19-advert">
+                <p class="border_">Visit the SA Department of Health's website for COVID-19 updates: <a href="https://www.sacoronavirus.co.za">www.sacoronavirus.co.za</a>
+                </p>
+                <div class="covid-banner-module_close-icon_h--s8" id="covid19-close"></div>
+            </div>
+            <!-- #endregion -->
+            <!-- #region Header Menu Section -->
+            <section class="header-section border_">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2 border_">
+                            <a asp-controller="home" asp-action="index">
+                                <img src="~/Logo/Logo.png" alt="Esquire Logo" class="logo border_">
+                            </a>
+                        </div>
+                        <div class="col-sm border_">
+                            <div class="row">
+                                <div class="col-sm border_">
+                                    <!-- #region Top Menu -->
+                                    <ul class="nav justify-content-end">
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="contact" asp-action="index">Contact Us</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Service</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item" href="#">Whats New</a></li>
+                                                <li><a class="dropdown-item" href="#">Recently Viewed Products</a>
+                                                </li>
+                                                <li><a class="dropdown-item" asp-controller="compare" asp-action="index">Compare Product List</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="index">About Us</a></li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="customer">Customer Information</a></li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="disclaimer">Disclaimer</a></li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="privacy">Privacy Policy</a></li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="information">General Information</a></li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="Security">Security Policy</a></li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="terms">Shipping & Returns</a></li>
+                                                <li><a class="dropdown-item" asp-controller="about" asp-action="terms">Terms & Conditions</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="https://www.esquire.co.za">Main Website</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Data Feed</a>
+                                        </li>
+                                        @if(user != null)
+                                        {
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" asp-controller="customer" asp-action="Dashboard" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-user-circle menubar-icon"></i>
+                                                    <span title="demo">@user.Value</span>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <li>
+                                                        <a class="dropdown-item" asp-controller="customer" asp-action="Dashboard">
+                                                            <i class="fal fa-user fa-fw"></i>
+                                                            <span>My Account</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" asp-controller="customer" asp-action="Wishlist">
+                                                            <i class="fal fa-heart fa-fw"></i>
+                                                            <span>Whishlist</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" asp-controller="cart" asp-action="index">
+                                                            <i class="fal fa-shopping-bag fa-fw"></i>
+                                                            <span>Shopping Cart</span>
+                                                        </a>
+                                                    </li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li>
+                                                        <a class="dropdown-item" asp-controller="customer" asp-action="logout">
+                                                            <i class="fal fa-sign-out-alt fa-fw"></i>
+                                                            <span>Log out</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link" asp-controller="customer" asp-action="signin">Sign In</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" asp-controller="customer" asp-action="register">Register</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <!-- #endregion -->
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 10px">
+                                <!-- #region Search & Basket Section -->
+                                <div class="col-sm border_">
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        @await Component.InvokeAsync("Search")
+                                        <!--div class="input-group border_">
+                                            <div class="input-group-btn search-panel">
+                                                <button type="button" class="btn btn-light dropdown-toggle department-dropdown-search" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <span id="search_concept">All Categories</span> <span class="caret"></span></button>
+
+                                            </div>
+                                            <input type="hidden" name="search_param" value="all" id="search_param">
+                                            <input type="text" class="form-control" name="x" placeholder="Search Category, Product Code, or Product Name...">
+                                            <span class="input-group-btn">
+                                                    <button class="btn btn-secondaryx" type="button" style="font-size: revert">
+                                                        <span class="fal fa-search"></span>
+                                            </button>
+                                            </span>
+                                        </div-->
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 border_">
+                                    <div class="shopbar-col-group shopbar-col-group-tools">
+                                        <!-- TOOLS -->
+                                        <div class="shopbar-col shopbar-tools" data-summary-href="/shoppingcart/cartsummary?cart=True&amp;wishlist=True&amp;compare=True">
+                                            <div class="shopbar-tool border_" id="shopbar-cart" data-target="#cart-tab">
+                                                @await Component.InvokeAsync("CartTop")
+                                            </div>
+                                            <div class="shopbar-tool border_" id="shopbar-wishlist" data-target="#wishlist-tab">
+                                                @await Component.InvokeAsync("Wishlist")
+                                            </div>
+                                            <div class="shopbar-tool border_" id="shopbar-compare" data-target="#compare-tab">
+                                                @await Component.InvokeAsync("CompareTop")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- #endregion -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="main-menu border_">
+                <div class="container">
+                    <div class="row border_">
+                        <!-- #region Navbar Menu -->
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="navbar-brand" href="#">Main Menu</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">Specials</a>
+                                    </li>
+                                    <li class="nav-item dropdown ">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop
+                                                By Brands</a>
+                                        @await Component.InvokeAsync("Brand")
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Become A Partner</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <!-- #endregion -->
+                    </div>
+                </div>
+            </section>
+            <!-- #endregion -->
+
+            
+            @if(ViewBag.isHome != null)
+            {
+            <section class="header-section border_">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 border_" style="/*padding-top: 10px;*/">
+                            <ul class="list-group bg-custom border_" style="border-radius: 0;">
+                                <li class="list-group-item bg-custom" aria-current="true" style="color: #FFF;">BROWSE OUR STORES
+                                </li>
+                            </ul>
+                            <div class="stores-container" style="border-radius: 0; max-height: 430px; overflow:scroll; overflow-x: hidden">
+                            @await Component.InvokeAsync("Stores")
+                            </div>
+                        </div>
+                        <div class="col-sm-9 border_">
+                            <div class="row">
+                                <div class="col-sm-9 border_">
+                                    @await Component.InvokeAsync("Banner")                                                                         
+                                </div>
+                                <div class="col-sm-3">
+                                    <article class="art border_" data-id="260">
+                                        <div class="art-picture-block border_">
+                                            <a class="art-picture img-center-container" href="/frontend/iphone-plus" title="Zeige Details für iPhone Plus">
+                                                <img src="~/user/Theme02/images/Products/iphone-plus.jpg" alt="Bild von iPhone Plus" title="Zeige Details für iPhone Plus" loading="lazy">
+                                            </a>
+                                        </div>
+                                        <div class="art-brand border_">
+                                            <span>Apple</span>
+                                        </div>
+                                        <h3 class="art-name border_">
+                                            <a href="/frontend/iphone-plus" title="iPhone Plus">
+                                                <span>iPhone Plus</span>
+                                            </a>
+                                        </h3>
+                                        <div class="art-description border_" title="Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum iPhone macht, noch einmal viel besser. Es hat fortschrittliche neue Kamerasysteme. Die beste Leistung und Batterielaufzeit, die ein iPhone je hatte. Beeindruckende Stereo-Lautsprecher. Das hellste iPhone Display. Mit noch mehr Farben. Schutz vor Spritzwasser. Und es sieht so großartig aus, wie es ist. Das ist das iPhone.">
+                                            Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum...
+                                        </div>
+                                        <div class="art-price-block">
+                                            <span class="art-price border_">
+                                                    R 799,00 Excl VAT
+                                                </span>
+                                        </div>
+                                        <div class="art-drop" style="bottom: 0px;">
+                                            <div class="art-variant-info">
+                                                <div class="art-color-opts">
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+                                                </div>
+                                                <div class="art-more-opts border_">
+                                                    <span class="bidi-embed">MID:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">26</a>
+                                                    <span class="bidi-embed">DBN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+                                                    <span class="bidi-embed">CTN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters art-btn-group border_">
+                                                <a data-href="/frontend/cart/addproductsimple/260?forceredirection=False" href="#" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
+                                                    <i class="fa fa-cart-arrow-down"></i>
+                                                </a>
+                                                <a data-href="/frontend/cart/addproductsimple/260?shoppingCartTypeId=2" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Wishlist" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="wishlist" data-action="add">
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a data-href="/frontend/catalog/addproducttocompare/260" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="compare" data-action="add">
+                                                    <i class="fa fa-retweet"></i>
+                                                </a>
+                                                <a href="/frontend/iphone-plus" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 10px;">
+                                <div class="col-sm border_">                                    
+                                    @await Component.InvokeAsync("Bannerx")                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <hr>
+                </div>
+            </section>
+            }
+
+
+            <!-- #region  Body Section -->
+            <section class="body-section border_">
+                @if(ViewBag.isHome != null)
+                {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 border_">
+                            <ul class="list-group border_" style="border-radius: 0;">
+                                <li class="list-group-item active  bg-custom" aria-current="true" style="color: #FFF;">HOT DEALS
+                                </li>
+                            </ul>
+                            @await Component.InvokeAsync("HotDeals") 
+                        </div>
+                        <div class="col-sm-8 border_">
+                            <div class="row">
+                                @await Component.InvokeAsync("SlideShow")
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <article class="art border_" data-id="260">
+                                        <div class="art-picture-block border_">
+                                            <a class="art-picture img-center-container" href="/frontend/iphone-plus" title="Zeige Details für iPhone Plus">
+                                                <img src="~/user/Theme02/images/Products/iphone-plus.jpg" alt="Bild von iPhone Plus" title="Zeige Details für iPhone Plus" loading="lazy">
+                                            </a>
+                                        </div>
+                                        <div class="art-brand border_">
+                                            <span>Apple</span>
+                                        </div>
+                                        <h3 class="art-name border_">
+                                            <a href="/frontend/iphone-plus" title="iPhone Plus">
+                                                <span>iPhone Plus</span>
+                                            </a>
+                                        </h3>
+                                        <div class="art-description border_" title="Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum iPhone macht, noch einmal viel besser. Es hat fortschrittliche neue Kamerasysteme. Die beste Leistung und Batterielaufzeit, die ein iPhone je hatte. Beeindruckende Stereo-Lautsprecher. Das hellste iPhone Display. Mit noch mehr Farben. Schutz vor Spritzwasser. Und es sieht so großartig aus, wie es ist. Das ist das iPhone.">
+                                            Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum...
+                                        </div>
+                                        <div class="art-price-block">
+                                            <span class="art-price">
+                                                    R 799,00 Excl VAT
+                                                </span>
+                                        </div>
+                                        <div class="art-drop" style="bottom: 0px;">
+                                            <div class="art-variant-info">
+                                                <div class="art-color-opts">
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+                                                </div>
+                                                <div class="art-more-opts">
+                                                    <span class="bidi-embed">MID:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">26</a>
+                                                    <span class="bidi-embed">DBN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+                                                    <span class="bidi-embed">CTN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters art-btn-group border_">
+                                                <a data-href="/frontend/cart/addproductsimple/260?forceredirection=False" href="#" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
+                                                    <i class="fa fa-cart-arrow-down"></i>
+                                                </a>
+                                                <a data-href="/frontend/cart/addproductsimple/260?shoppingCartTypeId=2" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Wishlist" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="wishlist" data-action="add">
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a data-href="/frontend/catalog/addproducttocompare/260" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="compare" data-action="add">
+                                                    <i class="fa fa-retweet"></i>
+                                                </a>
+                                                <a href="/frontend/iphone-plus" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-sm-4">
+                                    <article class="art border_" data-id="260">
+                                        <div class="art-picture-block border_">
+                                            <a class="art-picture img-center-container" href="/frontend/iphone-plus" title="Zeige Details für iPhone Plus">
+                                                <img src="~/user/Theme02/images/Products/iphone-plus.jpg" alt="Bild von iPhone Plus" title="Zeige Details für iPhone Plus" loading="lazy">
+                                            </a>
+                                        </div>
+                                        <div class="art-badges">
+                                            <span class="badgex badge-danger art-badge border_">- 5%</span>
+                                        </div>
+                                        <div class="art-badges" style="top: 53px;">
+                                            <span class="badgex badge-secondary art-badge border_">New</span>
+                                        </div>
+                                        <div class="art-brand border_">
+                                            <span>Apple</span>
+                                        </div>
+                                        <h3 class="art-name border_">
+                                            <a href="/frontend/iphone-plus" title="iPhone Plus">
+                                                <span>iPhone Plus</span>
+                                            </a>
+                                        </h3>
+                                        <div class="art-description border_" title="Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum iPhone macht, noch einmal viel besser. Es hat fortschrittliche neue Kamerasysteme. Die beste Leistung und Batterielaufzeit, die ein iPhone je hatte. Beeindruckende Stereo-Lautsprecher. Das hellste iPhone Display. Mit noch mehr Farben. Schutz vor Spritzwasser. Und es sieht so großartig aus, wie es ist. Das ist das iPhone.">
+                                            Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum...
+                                        </div>
+                                        <div class="art-price-block">
+                                            <span class="art-price">
+                                                    R 799,00 Excl VAT
+                                                </span>
+                                        </div>
+                                        <div class="art-drop" style="bottom: 0px;">
+                                            <div class="art-variant-info">
+                                                <div class="art-color-opts">
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+                                                </div>
+                                                <div class="art-more-opts">
+                                                    <span class="bidi-embed">MID:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">26</a>
+                                                    <span class="bidi-embed">DBN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+                                                    <span class="bidi-embed">CTN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters art-btn-group border_">
+                                                <a data-href="/frontend/cart/addproductsimple/260?forceredirection=False" href="#" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
+                                                    <i class="fa fa-cart-arrow-down"></i>
+                                                </a>
+                                                <a data-href="/frontend/cart/addproductsimple/260?shoppingCartTypeId=2" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Wishlist" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="wishlist" data-action="add">
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a data-href="/frontend/catalog/addproducttocompare/260" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="compare" data-action="add">
+                                                    <i class="fa fa-retweet"></i>
+                                                </a>
+                                                <a href="/frontend/iphone-plus" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-sm-4">
+                                    <article class="art border_" data-id="260">
+                                        <div class="art-picture-block border_">
+                                            <a class="art-picture img-center-container" href="/frontend/iphone-plus" title="Zeige Details für iPhone Plus">
+                                                <img src="~/user/Theme02/images/Products/iphone-plus.jpg" alt="Bild von iPhone Plus" title="Zeige Details für iPhone Plus" loading="lazy">
+                                            </a>
+                                        </div>
+                                        <div class="art-brand border_">
+                                            <span>Apple</span>
+                                        </div>
+                                        <h3 class="art-name border_">
+                                            <a href="/frontend/iphone-plus" title="iPhone Plus">
+                                                <span>iPhone Plus</span>
+                                            </a>
+                                        </h3>
+                                        <div class="art-description border_" title="Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum iPhone macht, noch einmal viel besser. Es hat fortschrittliche neue Kamerasysteme. Die beste Leistung und Batterielaufzeit, die ein iPhone je hatte. Beeindruckende Stereo-Lautsprecher. Das hellste iPhone Display. Mit noch mehr Farben. Schutz vor Spritzwasser. Und es sieht so großartig aus, wie es ist. Das ist das iPhone.">
+                                            Das ist iPhone. Das iPhone macht vieles von dem, was das iPhone zum...
+                                        </div>
+                                        <div class="art-price-block">
+                                            <span class="art-price">
+                                                    R 799,00 Excl VAT
+                                                </span>
+                                        </div>
+                                        <div class="art-drop" style="bottom: 0px;">
+                                            <div class="art-variant-info">
+                                                <div class="art-color-opts">
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+                                                    <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+                                                </div>
+                                                <div class="art-more-opts">
+                                                    <span class="bidi-embed">MID:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">26</a>
+                                                    <span class="bidi-embed">DBN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+                                                    <span class="bidi-embed">CTN:</span>
+                                                    <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                                                </div>
+                                            </div>
+                                            <div class="row no-gutters art-btn-group border_">
+                                                <a data-href="/frontend/cart/addproductsimple/260?forceredirection=False" href="#" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
+                                                    <i class="fa fa-cart-arrow-down"></i>
+                                                </a>
+                                                <a data-href="/frontend/cart/addproductsimple/260?shoppingCartTypeId=2" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Wishlist" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="wishlist" data-action="add">
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a data-href="/frontend/catalog/addproducttocompare/260" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="compare" data-action="add">
+                                                    <i class="fa fa-retweet"></i>
+                                                </a>
+                                                <a href="/frontend/iphone-plus" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <hr>
+                </div>
+                }
+                @RenderBody()
+            </section>
+            <!-- #endregion -->
+            <!-- #region Subscription Section -->
+            <section class="subscription bg-white" style="padding: 2% 0; border: 1px dashed #6b6b6b">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 border_">
+                            <div class="subscription-wrapper border_">
+                                <div class="d-flex subscription-content justify-content-between align-items-center flex-column flex-md-row text-center text-md-left">
+                                    <h3 class="flex-fill border_">
+                                        Subscribe <br> to our newsletter
+                                    </h3>
+                                    <form action="#" class="row flex-fill">
+                                        <div class="col-lg-7 my-md-2 my-2"><input type="email" class="form-control px-4 border-0 w-100 text-center text-md-left" id="email" placeholder="Your Email" name="email"></div>
+                                        <div class="col-lg-5 my-md-2 my-2"><button type="submit" class="btn btn-primary btn-lg border-0 w-100">Subscribe Now</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- #endregion -->
+            <!-- #region Footer Section -->
+            <div class="responsive-footer responsive-footer-module_responsive-footer_1qCkQ border_">
+                <button class="back-to-top-button back-to-top-button-module_back-to-top-button_14-bH" style="height: 48px; position: absolute; right: 60px; width: 48px; opacity: 1; top: 0px"></button>
+                <div class="responsive-footer-module_categories_20FZm">
+                    <div class="footer-container grid-container">
+                        <div class="grid-x grid-margin-x">
+                            <div class="category cell show-for-large auto border_">
+                                <h3 class="responsive-footer-module_heading_1XCVq">Shop</h3>
+                                <ul class="responsive-footer-module_category-links_wmmCo">
+                                    <li><a href="/deals">Daily Deals</a></li>
+                                    <li><a href="/deals/app-only">App Only Deals</a></li>
+                                    <li><a href="/promotion/clearancesale">Clearance Sale</a></li>
+                                    <li><a href="/vouchers">Gift Vouchers</a></li>
+                                </ul>
+                            </div>
+                            <div class="category cell show-for-large auto border_">
+                                <h3 class="responsive-footer-module_heading_1XCVq">Help</h3>
+                                <ul class="responsive-footer-module_category-links_wmmCo">
+                                    <li><a href="/help">Help</a></li>
+                                    <li><a href="/about/contact-us">Contact Us</a></li>
+                                    <li><a href="https://forms.gle/1q1dzYzEERkC2LKg9" target="_blank">Submit an
+                                                Idea</a></li>
+                                    <li><a href="https://forms.gle/dSgVZeYvS9vMXihw6" target="_blank">Suggest a
+                                                Product</a></li>
+                                    <li><a href="/help#delivery">Shipping &amp; Delivery</a></li>
+                                    <li><a href="/help#collection">Takealot Pickup Points</a></li>
+                                    <li><a href="/help#returns">Returns</a></li>
+                                    <li><a href="/help/directions-to-warehouse">Directions to Warehouse</a></li>
+                                </ul>
+                            </div>
+                            <div class="category cell show-for-large auto border_">
+                                <h3 class="responsive-footer-module_heading_1XCVq">Account</h3>
+                                <ul class="responsive-footer-module_category-links_wmmCo">
+                                    <li><a href="https://secure.takealot.com/account">My Account</a></li>
+                                    <li><a href="https://secure.takealot.com/account/orders">Track Order</a></li>
+                                    <li><a href="https://secure.takealot.com/account/returns/1">Returns</a></li>
+                                    <li><a href="https://secure.takealot.com/account/personal-details">Personal
+                                                Details</a></li>
+                                    <li><a href="https://secure.takealot.com/account/invoices">Invoices</a></li>
+                                    <li><a href="https://secure.takealot.com/account/digital-library">Digital
+                                                Library</a></li>
+                                </ul>
+                            </div>
+                            <div class="category cell show-for-large auto border_">
+                                <h3 class="responsive-footer-module_heading_1XCVq">Company</h3>
+                                <ul class="responsive-footer-module_category-links_wmmCo">
+                                    <li><a href="/about">About Us</a></li>
+                                    <li><a data-react-link="true" href="/careers">Careers</a></li>
+                                    <li><a data-react-link="true" href="/sell">Sell on Takealot</a></li>
+                                    <li><a href="/about/become-a-driver-partner">Deliver for Takealot</a></li>
+                                    <li><a href="/company-news">Press &amp; News</a></li>
+                                    <li><a href="/competitions">Competitions</a></li>
+                                    <li><a href="/help/terms-and-conditions">Terms &amp; Conditions</a></li>
+                                    <li><a href="/help/privacy-policy">Privacy Policy</a></li>
+                                    <li><a href="https://static.takealot.com/files/pdfs/human-rights-statement.pdf" target="_blank">Human Rights Statement</a></li>
+                                </ul>
+                            </div>
+                            <div class="cell auto border_">
+                                <div class="grid-x grid-margin-x">
+                                    <div class="app-stores cell small-12 medium-auto large-12 responsive-footer-module_app-stores_aN7MU">
+                                        <h3 class="responsive-footer-module_heading_1XCVq">Esquire Divisions</h3>
+                                        <a href="#" class="responsive-footer-module_app-store-link_1QsEU">
+                                            <img src="#" alt="Casey Store" class="divisions_ border_">
+                                        </a>
+                                        <a href="#" class="responsive-footer-module_app-store-link_1QsEU">
+                                            <img src="#" alt="Noble Store" class="divisions_ border_">
+                                        </a>
+                                        <a href="#" class="responsive-footer-module_app-store-link_1QsEU">
+                                            <img src="#" alt="Noble Store" class="divisions_ border_">
+                                        </a>
+                                    </div>
+                                    <div class="social cell small-12 medium-shrink large-12 responsive-footer-module_social_1AArJ">
+                                        <h3 class="responsive-footer-module_heading_1XCVq">Follow Us</h3>
+                                        <ul class="responsive-footer-module_social-list_16fx7">
+                                            <li class="responsive-footer-module_social-item_Bvq5o">
+                                                <a href="https://www.facebook.com/Takealot" target="_blank" rel="noopener noreferrer" title="Facebook" class="responsive-footer-module_facebook_2op82"><span>Facebook</span></a>
+                                            </li>
+                                            <li class="responsive-footer-module_social-item_Bvq5o">
+                                                <a href="https://twitter.com/takealot" target="_blank" rel="noopener noreferrer" title="Twitter" class="responsive-footer-module_twitter_2YTbJ"><span>Twitter</span></a>
+                                            </li>
+                                            <li class="responsive-footer-module_social-item_Bvq5o">
+                                                <a href="https://instagram.com/takealotcom" target="_blank" rel="noopener noreferrer" title="Instagram" class="responsive-footer-module_instagram_2L2I2">
+                                                    <span>Instagram</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tal-group-links cell small-12 medium-shrink large-12 responsive-footer-module_tal-group-links_2FklR">
+                                        <h3 class="responsive-footer-module_heading_1XCVq">Delivery with</h3>
+                                        <ul class="responsive-footer-module_tal-group-links-list_2_P-l">
+                                            <li>
+                                                <a href="https://superbalist.com/?utm_source=referral&amp;utm_medium=takealot_site&amp;utm_campaign=footer" target="_blank" rel="noopener">Courier Direct</a>
+                                            </li>
+                                            <li><a href="https://ap3x.adj.st?adj_t=mxkt0gt&amp;adj_deep_link=mrdfood%3A%2F%2F&amp;adj_fallback=https%3A%2F%2Fwww.mrdfood.com%2F%3Futm_source%3Dtakealot.com%26utm_medium%3Dreferral" target="_blank" rel="noopener">Courier Guy</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="show-for-large footer-container grid-container border_">
+                    <div class="grid-x">
+                        <div class="cell">
+                            <div class="responsive-footer-module_divider_30DFa"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="responsive-footer-module_bottom-strip_p-wFe">
+                    <div class="footer-container grid-container">
+                        <div class="grid-x align-middle">
+                            <div class="cell large-auto responsive-footer-module_logos_1RXDu border_">
+                                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNjJweCIgaGVpZ2h0PSIxOXB4IiB2aWV3Qm94PSIwIDAgNjIgMTkiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8ZyBpZD0iVmlzYS1Gb290ZXIiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxwYXRoIGQ9Ik0zMC4yMjM0NDQ0LDAuMzM2MTAwMDAxIEwyNi40MTQyMDgzLDE4LjcxMjM4MTIgTDIxLjgwODgxOTQsMTguNzEyMzgxMiBMMjUuNjE4MzE5NCwwLjMzNjEwMDAwMSBMMzAuMjIzNDQ0NCwwLjMzNjEwMDAwMSBaIE00OS42MDEwNjk0LDEyLjIwMTczNzQgTDUyLjAyNTk0NDQsNS4zMDEwNjUxIEw1My40MjEzODg5LDEyLjIwMTczNzQgTDQ5LjYwMTA2OTQsMTIuMjAxNzM3NCBaIE01NC43Mzk3Nzc4LDE4LjcxMjM4MTIgTDU5LDE4LjcxMjM4MTIgTDU1LjI4MjU5NzIsMC4zMzYxMDAwMDEgTDUxLjM0OTg2MTEsMC4zMzYxMDAwMDEgQzUwLjQ2NjYyNSwwLjMzNjEwMDAwMSA0OS43MjA4NzUsMC44NjY2Njk1MzQgNDkuMzg5NDMwNiwxLjY4NDMxMzE0IEw0Mi40Nzk1LDE4LjcxMjM4MTIgTDQ3LjMxNTUyNzgsMTguNzEyMzgxMiBMNDguMjc2MDgzMywxNS45NjgyOTA4IEw1NC4xODUwODMzLDE1Ljk2ODI5MDggTDU0LjczOTc3NzgsMTguNzEyMzgxMiBaIE00Mi43MTk2Mzg5LDEyLjcxMjY5NjYgQzQyLjczOTE2NjcsNy44NjIzOTc2OCAzNi4yMjA1ODMzLDcuNTk1MjA2MzUgMzYuMjY1OTcyMiw1LjQyODUzMjUyIEMzNi4yNzk0MzA2LDQuNzY5MTMzNzMgMzYuODg4MjIyMiw0LjA2ODMzNTI3IDM4LjIxOTAxMzksMy44ODg4NDU4OCBDMzguODgwMDU1NiwzLjc5OTc4MjExIDQwLjY5NzQ1ODMsMy43MzE0MTgxNyA0Mi43NjEwNjk0LDQuNzExNjY0NDQgTDQzLjU2OTA5NzIsMC44MTQ5MTk5MzkgQzQyLjQ2MTAyNzgsMC4zOTkyODg5ODEgNDEuMDM0NDQ0NCwwIDM5LjI2MDg0NzIsMCBDMzQuNzA4NzYzOSwwIDMxLjUwNDA5NzIsMi40OTgxNDM2MSAzMS40NzcxODA2LDYuMDc1MTMwMDkgQzMxLjQ0ODQxNjcsOC43MjAzNTE1IDMzLjc2NDMwNTYsMTAuMTk2MDMyMSAzNS41MDk5MzA2LDExLjA3NTc3NTIgQzM3LjMwMzg0NzIsMTEuOTc2NzYyOSAzNy45MDY4MzMzLDEyLjU1MzYzNDcgMzcuODk5MTgwNiwxMy4zNTkwMjE4IEMzNy44ODczMDU2LDE0LjU5Mjg0MTEgMzYuNDY3NTgzMywxNS4xMzYyMTE4IDM1LjE0MzM4ODksMTUuMTU3NzI4OCBDMzIuODI3MjM2MSwxNS4xOTU1ODc3IDMxLjQ4MzUxMzksMTQuNTEyNDkzIDMwLjQxMjEyNSwxMy45OTcxNzYgTDI5LjU3NzQ0NDQsMTguMDIzNTY2OSBDMzAuNjUzNTgzMywxOC41MzM5ODEzIDMyLjYzOTYxMTEsMTguOTc3MTIxMiAzNC43MDAzMTk0LDE5IEMzOS41MzgxOTQ0LDE5IDQyLjcwMzgwNTYsMTYuNTMyMzYxNCA0Mi43MTk2Mzg5LDEyLjcxMjY5NjYgTDQyLjcxOTYzODksMTIuNzEyNjk2NiBaIE0yMy42NDIwNTU2LDAuMzM2MTAwMDAxIEwxNi4xNzk4MDU2LDE4LjcxMjM4MTIgTDExLjMxMDUyNzgsMTguNzEyMzgxMiBMNy42Mzg3Nzc3OCw0LjA0NjgxODMzIEM3LjQxNTUyNzc4LDMuMTQzMzc5MzUgNy4yMjE4MzMzMywyLjgxMjk5OTA0IDYuNTQzMzc1LDIuNDMyNTAzMzMgQzUuNDM3NjgwNTYsMS44MTI1OTc2NiAzLjYwODkzMDU2LDEuMjMwODIzMjYgMiwwLjg2OTkzNzkyOSBMMi4xMTAwNDE2NywwLjMzNjEwMDAwMSBMOS45NDY3NSwwLjMzNjEwMDAwMSBDMTAuOTQ1NTY5NCwwLjMzNjEwMDAwMSAxMS44NDQxMTExLDEuMDIyMTkwNjkgMTIuMDcwNzkxNywyLjIwOTQzNTM0IEwxNC4wMTAzNzUsMTIuODQzOTc3MSBMMTguODAzMzg4OSwwLjMzNjEwMDAwMSBMMjMuNjQyMDU1NiwwLjMzNjEwMDAwMSBMMjMuNjQyMDU1NiwwLjMzNjEwMDAwMSBaIiBpZD0idmJtX2JsdTAxIiBmaWxsPSIjRkZGRkZGIj48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPgo=" alt="VISA" class="border_">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzkiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbC1ydWxlPSJub256ZXJvIiBmaWxsPSJub25lIj48cGF0aCBkPSJNNy4xNDEgMjkuNzA3VjI3Ljc1YzAtLjc1LS40NTYtMS4yNC0xLjIzOS0xLjI0LS4zOTEgMC0uODE1LjEzMS0xLjEwOS41NTUtLjIyOC0uMzU4LS41NTQtLjU1NC0xLjA0My0uNTU0LS4zMjYgMC0uNjUyLjA5OC0uOTEzLjQ1NnYtLjM5aC0uNjg1djMuMTNoLjY4NXYtMS43MjljMC0uNTU0LjI5My0uODE1Ljc1LS44MTUuNDU2IDAgLjY4NS4yOTQuNjg1LjgxNXYxLjcyOWguNjg1di0xLjcyOWMwLS41NTQuMzI2LS44MTUuNzUtLjgxNS40NTYgMCAuNjg0LjI5NC42ODQuODE1djEuNzI5aC43NXptMTAuMTQyLTMuMTNoLTEuMTF2LS45NDdoLS42ODR2Ljk0NmgtLjYydi42MmguNjJ2MS40MzRjMCAuNzE4LjI5NCAxLjE0MiAxLjA3NiAxLjE0Mi4yOTQgMCAuNjItLjA5OC44NDgtLjIyOWwtLjE5Ni0uNTg2Yy0uMTk1LjEzLS40MjQuMTYzLS41ODcuMTYzLS4zMjYgMC0uNDU2LS4xOTYtLjQ1Ni0uNTIydi0xLjQwMmgxLjEwOXYtLjYyem01LjgwNC0uMDY2YS45Mi45MiAwIDAgMC0uODE1LjQ1NnYtLjM5aC0uNjg1djMuMTNoLjY4NXYtMS43NjFjMC0uNTIyLjIyOC0uODE2LjY1Mi0uODE2LjEzIDAgLjI5My4wMzMuNDI0LjA2NmwuMTk1LS42NTNjLS4xMy0uMDMyLS4zMjYtLjAzMi0uNDU2LS4wMzJ6bS04Ljc3Mi4zMjZjLS4zMjYtLjIyOC0uNzgyLS4zMjYtMS4yNzItLjMyNi0uNzgyIDAtMS4zMDQuMzkxLTEuMzA0IDEuMDEgMCAuNTIyLjM5MS44MTYgMS4wNzYuOTE0bC4zMjYuMDMyYy4zNTkuMDY2LjU1NS4xNjMuNTU1LjMyNiAwIC4yMjktLjI2MS4zOTItLjcxOC4zOTJhMS44IDEuOCAwIDAgMS0xLjA0My0uMzI2bC0uMzI2LjUyMWMuMzU4LjI2MS44NDguMzkyIDEuMzM3LjM5Mi45MTMgMCAxLjQzNC0uNDI0IDEuNDM0LTEuMDExIDAtLjU1NC0uNDIzLS44NDgtMS4wNzYtLjk0NmwtLjMyNi0uMDMyYy0uMjkzLS4wMzMtLjUyMS0uMDk4LS41MjEtLjI5NCAwLS4yMjguMjI4LS4zNTkuNTg2LS4zNTkuMzkyIDAgLjc4My4xNjMuOTc5LjI2MWwuMjkzLS41NTR6bTE4LjE5Ni0uMzI2YS45Mi45MiAwIDAgMC0uODE1LjQ1NnYtLjM5aC0uNjg1djMuMTNoLjY4NXYtMS43NjFjMC0uNTIyLjIyOC0uODE2LjY1Mi0uODE2LjEzIDAgLjI5My4wMzMuNDI0LjA2NmwuMTk1LS42NTNjLS4xMy0uMDMyLS4zMjYtLjAzMi0uNDU2LS4wMzJ6bS04Ljc0IDEuNjNjMCAuOTQ2LjY1MyAxLjYzIDEuNjY0IDEuNjMuNDU2IDAgLjc4Mi0uMDk3IDEuMTA4LS4zNThsLS4zMjYtLjU1NGMtLjI2LjE5NS0uNTIxLjI5My0uODE1LjI5My0uNTU0IDAtLjk0NS0uMzkxLS45NDUtMS4wMSAwLS41ODguMzktLjk3OS45NDUtMS4wMTIuMjk0IDAgLjU1NS4wOTguODE1LjI5NGwuMzI2LS41NTRjLS4zMjYtLjI2MS0uNjUyLS4zNi0xLjEwOC0uMzYtMS4wMTEgMC0xLjY2My42ODYtMS42NjMgMS42MzF6bTYuMzI3IDB2LTEuNTY1aC0uNjg1di4zOTFjLS4yMjgtLjI5My0uNTU0LS40NTYtLjk3OC0uNDU2LS44OCAwLTEuNTY1LjY4NS0xLjU2NSAxLjYzIDAgLjk0Ni42ODQgMS42MyAxLjU2NSAxLjYzLjQ1NiAwIC43ODItLjE2Mi45NzgtLjQ1NnYuMzkyaC42ODVWMjguMTR6bS0yLjUxMSAwYzAtLjU1NC4zNTktMS4wMS45NDYtMS4wMS41NTQgMCAuOTQ1LjQyMy45NDUgMS4wMSAwIC41NTUtLjM5MSAxLjAxMS0uOTQ1IDEuMDExLS41ODctLjAzMi0uOTQ2LS40NTYtLjk0Ni0xLjAxem0tOC4xODUtMS42M2MtLjkxMyAwLTEuNTY1LjY1Mi0xLjU2NSAxLjYzIDAgLjk3OS42NTIgMS42MyAxLjU5OCAxLjYzLjQ1NiAwIC45MTMtLjEzIDEuMjcyLS40MjNsLS4zMjctLjQ5Yy0uMjYuMTk2LS41ODcuMzI3LS45MTMuMzI3LS40MjQgMC0uODQ3LS4xOTYtLjk0NS0uNzVoMi4zMTV2LS4yNjFjLjAzMy0xLjAxMS0uNTU0LTEuNjYzLTEuNDM1LTEuNjYzem0wIC41ODdjLjQyNCAwIC43MTguMjYuNzgzLjc1aC0xLjYzYy4wNjUtLjQyNC4zNTgtLjc1Ljg0Ny0uNzV6bTE2Ljk5IDEuMDQzdi0yLjgwNGgtLjY4NXYxLjYzYy0uMjI5LS4yOTMtLjU1NS0uNDU2LS45NzktLjQ1Ni0uODggMC0xLjU2NS42ODUtMS41NjUgMS42MyAwIC45NDYuNjg1IDEuNjMgMS41NjUgMS42My40NTcgMCAuNzgzLS4xNjIuOTc5LS40NTZ2LjM5MmguNjg0VjI4LjE0em0tMi41MTIgMGMwLS41NTQuMzYtMS4wMS45NDYtMS4wMS41NTQgMCAuOTQ2LjQyMy45NDYgMS4wMSAwIC41NTUtLjM5MiAxLjAxMS0uOTQ2IDEuMDExLS41ODctLjAzMi0uOTQ2LS40NTYtLjk0Ni0xLjAxem0tMjIuODkgMHYtMS41NjVoLS42ODZ2LjM5MWMtLjIyOC0uMjkzLS41NTQtLjQ1Ni0uOTc4LS40NTYtLjg4IDAtMS41NjUuNjg1LTEuNTY1IDEuNjMgMCAuOTQ2LjY4NSAxLjYzIDEuNTY1IDEuNjMuNDU3IDAgLjc4My0uMTYyLjk3OC0uNDU2di4zOTJoLjY4NVYyOC4xNHptLTIuNTQ0IDBjMC0uNTU0LjM1OC0xLjAxLjk0NS0xLjAxLjU1NSAwIC45NDYuNDIzLjk0NiAxLjAxIDAgLjU1NS0uMzkxIDEuMDExLS45NDYgMS4wMTEtLjU4Ny0uMDMyLS45NDUtLjQ1Ni0uOTQ1LTEuMDF6TTE0LjA4NyAyLjgwNGgxMC4yNzJ2MTguNDU3SDE0LjA4N3oiIGZpbGw9IiNGRkYiLz48cGF0aCBkPSJNMTQuNzQgMTIuMDMzYzAtMy43NSAxLjc2LTcuMDc2IDQuNDY3LTkuMjI5YTExLjY2NyAxMS42NjcgMCAwIDAtNy4yNC0yLjUxQzUuNDc4LjI5My4yMjggNS41NDMuMjI4IDEyLjAzMmMwIDYuNDg5IDUuMjUgMTEuNzM5IDExLjc0IDExLjczOSAyLjczOSAwIDUuMjUtLjk0NiA3LjIzOS0yLjUxMWExMS43MjIgMTEuNzIyIDAgMCAxLTQuNDY4LTkuMjI4ek0zOC4yMTcgMTIuMDMzYzAgNi40ODktNS4yNSAxMS43MzktMTEuNzM5IDExLjczOS0yLjczOSAwLTUuMjUtLjk0Ni03LjIzOS0yLjUxMWExMS42NzIgMTEuNjcyIDAgMCAwIDQuNDY4LTkuMjI4YzAtMy43NS0xLjc2MS03LjA3Ni00LjQ2OC05LjIyOSAxLjk5LTEuNTY1IDQuNS0yLjUxIDcuMjQtMi41MSA2LjQ4OCAwIDExLjczOCA1LjI4MiAxMS43MzggMTEuNzM5eiIgZmlsbD0iI0JBRDFFNyIvPjwvZz48L3N2Zz4=" alt="Mastercard" class="border_">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTUiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNNi41OTUgNS4xMjlsLS45ODItMi42NjctLjk3NyAyLjY2N2gxLjk2ek0yOC4yMyA0LjA2N2MtLjE5Ny4xMzQtLjQzLjEzOC0uNzEuMTM4aC0xLjc0M1YyLjcyaDEuNzY3Yy4yNSAwIC41MTEuMDExLjY4LjEyLjE4Ni4wOTguMzAxLjMwNS4zMDEuNTkxIDAgLjI5Mi0uMTEuNTI4LS4yOTUuNjM2em0xMi40MzUgMS4wNjJsLS45OTItMi42NjctLjk4NyAyLjY2N2gxLjk4em0tMjMuMTggMi44ODZoLTEuNDdsLS4wMDYtNS4yNC0yLjA4IDUuMjRoLTEuMjZsLTIuMDg2LTUuMjQ0djUuMjQ0SDcuNjY0bC0uNTUxLTEuNDkySDQuMTI2bC0uNTU4IDEuNDkySDIuMDFsMi41Ny02LjY5aDIuMTMybDIuNDQgNi4zMzRWMS4zMjZoMi4zNDFsMS44NzggNC41MzggMS43MjUtNC41MzhoMi4zOXY2LjY4OXptNS44NjMgMGgtNC43OTN2LTYuNjloNC43OTRWMi43MkgxOS45OXYxLjIwNWgzLjI3OHYxLjM3MkgxOS45OVY2LjYzaDMuMzU5djEuMzg0em02Ljc1OS00Ljg4N2MwIDEuMDY1LS42NCAxLjYxOC0xLjAxMiAxLjc4Mi4zMTUuMTM0LjU4My4zNy43MS41NjUuMjAzLjMzMS4yMzguNjMuMjM4IDEuMjI2djEuMzE0aC0xLjQ0N2wtLjAwNi0uODQzYzAtLjQwMy4wMzUtLjk4My0uMjI2LTEuMzA0LS4yMS0uMjM1LS41My0uMjg2LTEuMDQ2LS4yODZoLTEuNTR2Mi40MzNoLTEuNDM2di02LjY5aDMuMzAxYy43MzQgMCAxLjI3NC4wMjIgMS43MzcuMzIxLjQ1NS4zLjcyNy43MzUuNzI3IDEuNDgyem0yLjI5NiA0Ljg4N0gzMC45NFYxLjMyNmgxLjQ2NHY2LjY4OXptMTYuOTg1IDBoLTIuMDM0bC0yLjcyLTUuMDJ2NS4wMmgtMi45MjJsLS41NTgtMS40OTJoLTIuOThsLS41NDMgMS40OTJoLTEuNjc5Yy0uNjk3IDAtMS41OC0uMTcyLTIuMDgtLjc0LS41MDUtLjU2OC0uNzY3LTEuMzM3LS43NjctMi41NTQgMC0uOTkuMTU2LTEuOS43NzQtMi42MTQuNDY0LS41MzUgMS4xOS0uNzgxIDIuMTgtLjc4MWgxLjM4OHYxLjQzM2gtMS4zNmMtLjUyMyAwLS44MTkuMDg3LTEuMTA0LjM5Ny0uMjQ0LjI4Mi0uNDEzLjgxNC0uNDEzIDEuNTE1IDAgLjcxNi4xMjkgMS4yMzMuMzk2IDEuNTcuMjIuMjY1LjYyMS4zNDYgMSAuMzQ2aC42NDNsMi4wMjMtNS4yNmgyLjE1bDIuNDMgNi4zMjdWMS4zMjdoMi4xODRsMi41MjIgNC42NThWMS4zMjdoMS40N3Y2LjY4OHpNMS45OTQgOS4zMjloMi40NTFsLjU1My0xLjQ4NmgxLjIzN2wuNTUxIDEuNDg2aDQuODI0VjguMTkzbC40MzEgMS4xNGgyLjUwNGwuNDMtMS4xNTdWOS4zM2gxMS45ODhsLS4wMDYtMi40NGguMjMyYy4xNjMuMDA3LjIxLjAyNC4yMS4zMjN2Mi4xMTdoNi4ydi0uNTY4Yy41LjMgMS4yNzguNTY4IDIuMzAyLjU2OGgyLjYwOGwuNTU5LTEuNDg2aDEuMjM3bC41NDYgMS40ODZoNS4wMjZWNy45MTdsLjc2MiAxLjQxMmg0LjAyOFYwSDQ2LjY4djEuMTAyTDQ2LjEyMiAwaC00LjA5djEuMTAyTDQxLjUxOCAwaC01LjUyNWMtLjkyNCAwLTEuNzM3LjE0NC0yLjM5NC41NDVWMGgtMy44MTN2LjU0NUMyOS4zNjkuMTMyIDI4LjggMCAyOC4xNjcgMGgtMTMuOTNsLS45MzUgMi40MS0uOTYtMi40MUg3Ljk1NHYxLjEwMkw3LjQ3MiAwSDMuNzMxTDEuOTkzIDQuNDM2IDAgOS4zMjloMS45OTR6TTU0LjIwMyAxNC45NDd2LTQuMjhoLTMuNjI1Yy0uODA4IDAtMS4zOTYuMjEzLTEuODExLjU0NXYtLjU0NWgtMy45NjNjLS42MzMgMC0xLjM3Ny4xNzItMS43MjguNTQ1di0uNTQ1aC03LjA3N3YuNTQ1Yy0uNTYyLS40NDgtMS41MTMtLjU0NS0xLjk1MS0uNTQ1SDI5LjM4di41NDVjLS40NDUtLjQ3Ni0xLjQzNS0uNTQ1LTIuMDQtLjU0NWgtNS4yMjNsLTEuMTk1IDEuNDI3LTEuMTItMS40MjdIMTJ2OS4zMjhoNy42NTVsMS4yMzItMS40NSAxLjE2IDEuNDUgNC43Mi4wMDV2LTIuMTk1aC40NjNjLjYyNi4wMSAxLjM2NC0uMDE3IDIuMDE1LS4zMjh2Mi41MTdoMy44OTN2LTIuNDMyaC4xODhjLjI0IDAgLjI2My4wMTIuMjYzLjI3NnYyLjE1NmgxMS44MjRjLjc1IDAgMS41MzYtLjIxMyAxLjk3LS41OTd2LjU5N2gzLjc1Yy43ODEgMCAxLjU0NC0uMTIgMi4xMjMtLjQzdi0uMDFjLjg0Ny0uNTk1IDEuNDEtMS42MzkgMS40MS0yLjgzYTMuNTcyIDMuNTcyIDAgMCAwLS40NjMtMS43Nzd6bS0yNi45MDkgMS40OTJoLTEuODA2djIuMjQzaC0yLjgxM2wtMS43ODItMi4yMTQtMS44NTIgMi4yMTRoLTUuNzM0di02LjY4Nmg1LjgyMmwxLjc4IDIuMTkxIDEuODQyLTIuMTkxaDQuNjI1YzEuMTQ4IDAgMi40MzkuMzUxIDIuNDM5IDIuMjAyIDAgMS44NTgtMS4yNTYgMi4yNDEtMi41MiAyLjI0MXptOC43MTEtLjMwM2MuMjA1LjMyNi4yMzQuNjMuMjQgMS4yMnYxLjMyNmgtMS40NTJ2LS44MzdjMC0uNDAyLjAzNC0uOTk3LS4yMzUtMS4zMDktLjIxMi0uMjM5LS41MzMtLjI5Ny0xLjA2Mi0uMjk3SDMxLjk1djIuNDQzaC0xLjQ1NHYtNi42ODZoMy4zNDJjLjczMyAwIDEuMjY2LjAzNSAxLjc0Mi4zMTUuNDU3LjMwNS43NDQuNzIyLjc0NCAxLjQ4NSAwIDEuMDY3LS42NDUgMS42MTItMS4wMjYgMS43NzkuMzIuMTMuNTg1LjM2Ni43MDguNTZ6bTUuOTUtMi43NTdoLTMuMzl2MS4yMTZoMy4zMDh2MS4zNjRoLTMuMzA3djEuMzNsMy4zOS4wMDd2MS4zODdoLTQuODMxdi02LjY4N2g0LjgzdjEuMzgzem0zLjY4NyA1LjMwM2gtMi44MnYtMS40MzRoMi44MWMuMjc0IDAgLjQ2OC0uMDQuNTktLjE2NmEuNjI0LjYyNCAwIDAgMCAuMTcyLS40MzUuNjAyLjYwMiAwIDAgMC0uMTc3LS40NDNjLS4xMTItLjEwMi0uMjYzLS4xNDgtLjUxNi0uMTQ4LTEuMzUzLS4wNS0zLjA0OS4wNDYtMy4wNDktMi4wNyAwLS45Ny41NTItMS45OSAyLjA3LTEuOTloMi45MDJ2MS40MjNoLTIuNjU1Yy0uMjYzIDAtLjQzNS4wMTEtLjU4LjEyLS4xNTkuMTA5LS4yMTguMjY5LS4yMTguNDgyIDAgLjI1Mi4xMzUuNDIzLjMxNy40OTguMTUzLjA1OC4zMTYuMDc1LjU2My4wNzVsLjc4LjAyNWMuNzg1LjAyIDEuMzI1LjE3IDEuNjUzLjUzNy4yODIuMzIxLjQzMi43MjcuNDMyIDEuNDE1IDAgMS40NC0uODE0IDIuMTExLTIuMjc0IDIuMTExem03LjQ1LS42NDVjLS4zODIuNDI1LS45OTcuNjQ1LTEuNzk5LjY0NWgtMi43OTZ2LTEuNDM0aDIuNzg0Yy4yNzcgMCAuNDctLjA0LjU4Ny0uMTY2LjEtLjEwMi4xNy0uMjUzLjE3LS40MzUgMC0uMTk1LS4wNy0uMzUtLjE3Ni0uNDQzLS4xMDUtLjEwMi0uMjU4LS4xNDgtLjUxLS4xNDgtMS4zNi0uMDUtMy4wNTUuMDQ2LTMuMDU1LTIuMDcgMC0uOTcuNTU3LTEuOTkgMi4wNzctMS45OWgyLjgyOHYxLjQyM2gtMi41ODNjLS4yNjIgMC0uNDM4LjAxMS0uNTg1LjEyLS4xNTMuMTA5LS4yMTIuMjctLjIxMi40ODEgMCAuMjUzLjEyOS40MjQuMzE3LjQ5OC4xNTMuMDYuMzE3LjA3Ni41NTcuMDc2bC43ODUuMDI0Yy43OTEuMDIxIDEuMzIuMTcxIDEuNjQxLjUzOC4wNTkuMDUuMDk1LjEwOC4xMzYuMTY1YTUuNTU3IDUuNTU3IDAgMCAwLS4wNS0uMDdjLjI1LjM2Ny40MDEuODIyLjQwMSAxLjMxNiAwIC41NjctLjE5OCAxLjA4MS0uNTE3IDEuNDd6bS0zNC43MTQtNC42NThsMS41ODMgMS45NDgtMS42NTMgMS45NjJoLTMuNTZ2LTEuMzNoMy4xNzh2LTEuMzY1aC0zLjE3OFYxMy4zOGgzLjYzem0zLjQ0NyAxLjk3MWwyLjIyMy0yLjYzNnY1LjM2bC0yLjIyMy0yLjcyNHptNi40MzctMS4xNTFjMCAuNTgtLjM0Ny44ODItLjkwMy44ODJoLTEuODdWMTMuMzhoMS44ODhjLjUyMSAwIC44ODUuMjM1Ljg4NS44MnptNi40Ni0uMDk4YzAgLjI4Ni0uMTEyLjUxNy0uMy42NDItLjE5NC4xMjYtLjQzMy4xMzctLjcxNS4xMzdoLTEuNzU5di0xLjVoMS43ODNjLjI1OCAwIC41MTYuMDA1LjY5LjEyLjE5LjEwOC4zLjMxNS4zLjYwMXoiLz48L2c+PC9zdmc+" alt="American Express" class="border_">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzYiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbC1ydWxlPSJub256ZXJvIiBmaWxsPSJub25lIj48cGF0aCBkPSJNNzQuMTQyIDguMzQyYTcuNDc2IDcuNDc2IDAgMCAxLTEuNDA0LjY2IDYuNjQ5IDYuNjQ5IDAgMCAxLTEuNjYyLjQxNGMtLjI0Mi4wNC0uNDg3LjA3NC0uNzQuMDk5aC0uMDA4Yy0yLjMyOC4yLTQuMzE4LS4zMDEtNS40NTQtMS4zNzItLjAxMS0uMDA3LS4wMTgtLjAyLS4wMy0uMDI4IDAgLjA0MiAwIC4wODMtLjAwNi4xMjguMDA1LjQ3Ny4xODIuOTM2LjUgMS4yOTIuOTIyIDEuMDYgMi42OTcgMS42MzggNC43NiAxLjY3IDEuMzc1LjAwOSAyLjYzLS4yNSAzLjU5LS43MTIuNDUzLS4yMS44Ni0uNTA3IDEuMi0uODc1LjMyMy0uMzUxLjUxLS44MDguNTIyLTEuMjg2IDAtLjMtLjA3Mi0uNTk1LS4yMS0uODYtLjMwOC4zNC0uNjY1LjYzMy0xLjA1OC44N3ptLTQuMDU4LTEuNDY0Yy0yLjE3Ni4xNjctNC4wNTEtLjI0LTUuMjE2LTEuMTY4LjAzNS40MzQuMjA5Ljg0NS40OTYgMS4xNzMuOTIxIDEuMDYgMi42OTggMS42MzUgNC43NiAxLjY3IDEuMzc2LjAwOCAyLjYzLS4yNSAzLjU4OS0uNzEzYTMuNzM1IDMuNzM1IDAgMCAwIDEuMi0uODc1Yy4zMjItLjM1Mi41MDYtLjgwNy41Mi0xLjI4MyAwLS4zNzMtLjExMi0uNzM4LS4zMi0xLjA0OC0uMjk4LjM5OS0xLjU4MSAxLjk4Mi01LjAyOSAyLjI0NHptLjA2My0uOThjMS4zNzYuMDA5IDIuNjMtLjI0OCAzLjU4Ny0uNzEzYTMuNzMzIDMuNzMzIDAgMCAwIDEuMjA0LS44NzUgMS44ODQgMS44ODQgMCAwIDAgLjAyMS0yLjU3N0M3NC4wMzUuNjcyIDcyLjI2MS4wOTggNzAuMTk4LjA2NWMtMS4zNzUtLjAxLTIuNjI5LjI0Ny0zLjU4Ny43MS0uNDU1LjIxLS44NjQuNTA3LTEuMjAzLjg3NWExLjg4NiAxLjg4NiAwIDAgMC0uMDIyIDIuNThjLjkyIDEuMDU5IDIuNjk4IDEuNjM0IDQuNzYgMS42Njh6TTY2LjEzIDEuODk1Yy41LS42MTIgMi4wNi0xLjIxMiAzLjg4MS0xLjE3OCAxLjIxOS4wMDggMi4zMTIuMjY4IDMuMDUuNjQ1YTIuNSAyLjUgMCAwIDEgLjgxMy41OTguNzA3LjcwNyAwIDAgMS0uMDA4IDEuMDM1Yy0uNDk5LjYxMy0yLjA2IDEuMjEtMy44ODMgMS4xNzktMS4yMTgtLjAxLTIuMzEtLjI3LTMuMDUxLS42NWEyLjYgMi42IDAgMCAxLS44MTQtLjU5OC44MDguODA4IDAgMCAxLS4yMjEtLjUyMy43OTUuNzk1IDAgMCAxIC4yMzMtLjUwOHoiIGZpbGw9IiNCQUQxRTciLz48cGF0aCBkPSJNMTguOTI0IDcuMjY0Yy0uNDg5LS41NjItMS4xOC0uODQ0LTIuMDc0LS44NDVoLTQuMDhsLS4zMDUgMS41NDZoNC4wOGMuMzg4LS4wMjEuNzYyLjE0NSAxLjAwNi40NDYuMjQuMzEyLjMyNy43MTYuMjM0IDEuMDk4bC0uMDU4LjI2NC0uMDIuMTgzaC0zLjc4M2EzLjc4NCAzLjc4NCAwIDAgMC0yLjQzLjg3NCAzLjY4MiAzLjY4MiAwIDAgMC0xLjM1IDIuMjE1bC0uMDQuMTYzYy0uMTkuODkzLS4wNDUgMS42MzIuNDM2IDIuMjE2LjQ4LjU4NCAxLjE2OS44NzUgMi4wNjMuODc0aDUuMzQxbDEuNDQ4LTYuODY2Yy4xNzgtLjg4My4wMjItMS42MDUtLjQ2OC0yLjE2OHptLTIuMjIgNy40OWgtMy43NzZhMS4yNzIgMS4yNzIgMCAwIDEtMS4wMjItLjQ0N2MtLjI1MS0uMjk4LS4zMy0uNjY0LS4yMzQtMS4wOThsLjA0LS4xNjJjLjA4NC0uNDM4LjMyNy0uODMuNjgyLTEuMDk4YTEuODk5IDEuODk5IDAgMCAxIDEuMjEtLjQ0OGgzLjc2bC0uNjYgMy4yNTJ6bTExLjM5OC04LjMzNWwtMS43MjggOC4zMTRoLTMuODk3YTEuMjcgMS4yNyAwIDAgMS0xLjAyMi0uNDQ4Yy0uMjUyLS4yOTctLjMyOS0uNjYzLS4yMzMtMS4wOThsMS4zOTItNi43NjdoLTEuNTZMMTkuNjUgMTMuMTljLS4xOS44OTQtLjA0IDEuNjMzLjQ0OCAyLjIxNi40ODguNTgyIDEuMTguODc0IDIuMDczLjg3NWgzLjkyMmwtLjEyMS41NjhjLS4xMDIuNDMyLS4zNS44MTUtLjcwMSAxLjA4NmExLjg1IDEuODUgMCAwIDEtMS4xOS40NTVIMTguNzRsLS4zMzIgMS41NDdoNS4zNDFhMy43MTYgMy43MTYgMCAwIDAgMi4zOTktLjg5NCAzLjgzOSAzLjgzOSAwIDAgMCAxLjM4Mi0yLjE5NUwyOS42OSA2LjQxOWgtMS41ODh6TTQ0LjUyNyAxNi4yOTloLTUuMzRjLS44OTUgMC0xLjU4My0uMjkxLTIuMDYzLS44NzQtLjQ4LS41ODMtLjYyNi0xLjMyMS0uNDM4LTIuMjE2bC4wNDEtLjE2MmEzLjY4IDMuNjggMCAwIDEgMS4zNDEtMi4yMTYgMy43ODMgMy43ODMgMCAwIDEgMi40My0uODc0aDMuNzhsLjAyLS4xODMuMDYxLS4yNjRhMS4yOTkgMS4yOTkgMCAwIDAtLjIzNC0xLjA5OCAxLjIxMiAxLjIxMiAwIDAgMC0xLjAwNy0uNDQ2aC00LjM5MmwuMzA1LTEuNTQ2aDQuMzk5Yy44OTMgMCAxLjU4NC4yODIgMi4wNzIuODQ1cy42NDQgMS4yODIuNDY4IDIuMTU5bC0xLjQ0MyA2Ljg3NXptLTEuMjQtMS41NDRsLjY1LTMuMjUzaC0zLjc2Yy0uNDQzLjAwNC0uODcuMTYyLTEuMjA5LjQ0OC0uMzU1LjI3LS41OTcuNjYtLjY4MiAxLjA5OGwtLjA0LjE2MmMtLjA5NS40MzQtLjAxNy44LjIzNCAxLjA5OC4yNTMuMjk4LjYzLjQ2MyAxLjAyMi40NDdoMy43ODV6TTU0Ljc4IDEzLjY1N2EzLjA4NiAzLjA4NiAwIDAgMS0xLjM2NCAyLjAxMiA0LjA0OCA0LjA0OCAwIDAgMS0yLjMxOC42N2gtNS4yODRsLjMyMi0xLjU0NWg1LjI4NmMxLjA0MyAwIDEuNjM5LS4zNzggMS43ODgtMS4xMzZsLjA4NS0uMzYzYy4xNjMtLjc1Ny0uMjc4LTEuMTM2LTEuMzIxLTEuMTM2aC0yLjM3N2MtLjg4MSAwLTEuNTU5LS4yMjMtMi4wMzItLjY3LS41NDItLjQ4OC0uNzI1LTEuMTU5LS41NS0yLjAxMmwuMDgzLS4zNjZjLjE2LS44MjkuNjUyLTEuNTU2IDEuMzYzLTIuMDEyYTQuMDUzIDQuMDUzIDAgMCAxIDIuMzE3LS42N2g1LjMwNWwtLjMwNiAxLjU0NUg1MC40N2MtMS4wNDMgMC0xLjY0Ny4zNzktMS44MDkgMS4xMzZsLS4wOC4zNjZjLS4xNTIuNzU4LjI5NiAxLjEzNiAxLjM0MiAxLjEzNkg1Mi4zYy44OCAwIDEuNTU4LjIyNCAyLjAzMy42NzEuNTMuNDg4LjcwNiAxLjE1OS41MjggMi4wMTJsLS4wODEuMzYyek02MS45MjIgMTYuMjc4aC0yLjQ4Yy0uODk1IDAtMS41ODYtLjI5MS0yLjA3My0uODc1LS40ODctLjU4My0uNjM2LTEuMzIyLS40NDctMi4yMTZsMS4wOTctNS4zMDRoLS45NzRsLjM0MS0xLjU5MWguOTc2bC43MzItMy41MzZoMS41OTFsLS43MzIgMy41MzZoMy4yOTZsLS4zNDEgMS41OTFoLTMuMjk2bC0xLjA5NyA1LjMwNGMtLjA5NS40MzMtLjAyLjc5Ni4yMjcgMS4wOTguMjUuMzAyLjYyNi40NjggMS4wMTcuNDQ4aDIuNDY4bC0uMzA1IDEuNTQ1ek0xMS44MTggNy4zMmEzLjY2IDMuNjYgMCAwIDEtMS4zNTIgMi4xNThjLS43MjguNTg4LTEuNTIuODgyLTIuMzc1Ljg4MkgyLjc2NEwxLjU0IDE2LjNIMEwyLjc4MyAyLjkxaDYuODc2Yy44NTUgMCAxLjUyLjI5NCAxLjk5NC44ODIuNDc1LjU4OC42MjcgMS4zMDguNDU1IDIuMTZsLS4yOSAxLjM2N3ptLTEuNTQzIDBsLjI4LTEuMzY0Yy4wOTQtLjQyOC4wMi0uNzg5LS4yMi0xLjA4M2ExLjIyNCAxLjIyNCAwIDAgMC0uOTk5LS40NDFoLTUuMzNMMy4wODQgOC44NEg4LjQxQTEuODMgMS44MyAwIDAgMCA5LjU5MiA4LjRjLjM0OC0uMjcuNTktLjY1MS42ODYtMS4wOGgtLjAwM3oiIGZpbGw9IiNGRkYiLz48cGF0aCBkPSJNNDEuODE4IDQuMzExaC02LjQ3N2EyLjA0NSAyLjA0NSAwIDAgMC0xLjkxNiAxLjU1bC0uNjA1IDIuOTU0aDQuMDQxbC0uMzI2IDEuNTdIMzIuNTFsLTEuMjUgNS45MjloLTEuNTY4bDIuMTYtMTAuNDU1YTMuOTUyIDMuOTUyIDAgMCAxIDMuODEyLTMuMDk5aDYuNDc3bC0uMzIzIDEuNTUxeiIgZmlsbD0iI0ZGRiIvPjwvZz48L3N2Zz4=" alt="PayFast" class="border_">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MS41MDYiIGhlaWdodD0iMjIuNTk2IiB2aWV3Qm94PSIwIDAgODEuNTA2IDIyLjU5NiI+PGcgZGF0YS1uYW1lPSJHcm91cCAxIiBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik01Ni44OTMgMTQuMzM1YTMuNDQyIDMuNDQyIDAgMSAxIDMuNDQ3LTMuNDQxIDMuNDQyIDMuNDQyIDAgMCAxLTMuNDQ3IDMuNDQxem0wLTkuNDkzYTYuMDUyIDYuMDUyIDAgMSAwIDYuMDQ3IDYuMDUyIDYuMDUzIDYuMDUzIDAgMCAwLTYuMDQ3LTYuMDUyek0zMi42ODMgMTQuMzM1YTMuNDQyIDMuNDQyIDAgMSAxIDMuNDQ4LTMuNDQxIDMuNDQyIDMuNDQyIDAgMCAxLTMuNDQ4IDMuNDQxem0wLTkuNDkzYTYuMDUyIDYuMDUyIDAgMSAwIDYuMDQ4IDYuMDUyIDYuMDUzIDYuMDUzIDAgMCAwLTYuMDQ4LTYuMDUyek01MC4wMzMgMTYuOTQ5SDM5LjU0MlYxNWw2LjM0Ny02LjkwNWgtNS4xMzFhMS4xOSAxLjE5IDAgMCAxLTEuMjE2LTEuMTYzVjUuNjQ5aDEwLjQ5MXYxLjk5MmwtNi42MyA2Ljg2MWg1LjQxNWExLjE5IDEuMTkgMCAwIDEgMS4yMTYgMS4xNjJ2MS4yODVNNzcuNjYzIDE2Ljk0OWgtMi43NTRsLTIuMjY4LTYuNjQzLTIuMjg5IDYuNjQzaC0yLjc1OGwtMy44NDItMTEuM2gxLjg2MWExLjYwNiAxLjYwNiAwIDAgMSAxLjUzMSAxLjA4OWwxLjkzMiA1Ljg0OCAyLjM2MS02LjkzN2gyLjM4NGwyLjM2MSA2Ljk2IDEuOTMzLTUuODdhMS42MDUgMS42MDUgMCAwIDEgMS41MzEtMS4wOWgxLjg2bC0zLjg0MyAxMS4zTTIxLjc1MiAxMS4yOWEuOTcyLjk3MiAwIDAgMS0xLjA3Ni0uODY4IDkuNjU5IDkuNjU5IDAgMCAwLTQuODM0LTcuMjgxQTkgOSAwIDAgMCA0Ljg3NyA0Ljg1NmEuOTM5LjkzOSAwIDAgMS0xLjM2My4wMDYgMS4wMjYgMS4wMjYgMCAwIDEtLjAwNi0xLjQxNCAxMC44NzggMTAuODc4IDAgMCAxIDEzLjI0Ny0yLjA3IDExLjY2MyAxMS42NjMgMCAwIDEgNS44MzQgOC43OTQuOTkzLjk5MyAwIDAgMS0uODM2IDEuMTE3Ii8+PHBhdGggZD0iTTExLjcwMiA5LjIzYTEuNjY1IDEuNjY1IDAgMSAwIDEuNjY4IDEuNjY1IDEuNjY3IDEuNjY3IDAgMCAwLTEuNjY4LTEuNjY1em0wIDUuM2EzLjYzMSAzLjYzMSAwIDEgMSAzLjYzMS0zLjYzMSAzLjYzNSAzLjYzNSAwIDAgMS0zLjYzMSAzLjYzMXoiLz48cGF0aCBkPSJNMTMuNzE5IDUuMTc4YS45NjEuOTYxIDAgMCAxLS4wMjMuMjEzLjk3My45NzMgMCAwIDEtLjk0NS43ODkuODczLjg3MyAwIDAgMS0uMjA3LS4wMjMgNS4zNzIgNS4zNzIgMCAwIDAtMS4xMzEtLjEyMiA1LjU0OCA1LjU0OCAwIDAgMC0xLjc0LjI4MyA1LjY1NSA1LjY1NSAwIDAgMC0xLjk5IDEuMTM3Yy0uNDc5LjQyOS0uOTQ4LjkzMi0xLjQgMS40MTgtLjIzNi4yNTMtLjQ2OS41LS43MDUuNzQ2bC0zLjQxOSAzLjUyMi0xLjIgMS4yMzVhLjQ4OS40ODkgMCAwIDEtLjgzMy0uMjUzcS0uMDY3LS4zNTEtLjExMi0uNzA4YTEuNjUyIDEuNjUyIDAgMCAxIC40NTMtMS4zNTVsMS42OC0xLjczMiAyLjA2LTIuMTIxYy4yMjYtLjIzMy40NS0uNDczLjY3My0uNzEyLjQ4NS0uNTIzLjk4My0xLjA1OSAxLjUzLTEuNTQ4YTcuNTggNy41OCAwIDAgMSAyLjY2Ny0xLjUzMiA3LjMwNSA3LjMwNSAwIDAgMSAzLjg3NS0uMjEzLjk5Ljk5IDAgMCAxIC43NjYuOTc2TTExLjMwMiAyMi41OTZhMTEuMTM1IDExLjEzNSAwIDAgMS05LjU1Ny01LjU0Ny45ODEuOTgxIDAgMCAxIC4xNS0xLjE3N2wyLjgxOS0yLjg2N2EuOTQ0Ljk0NCAwIDAgMSAuODY3LS4yNjUuOTYuOTYgMCAwIDEgLjcuNTkxIDUuMzY2IDUuMzY2IDAgMCAwIDkuNjI5Ljg0MSA1LjU2MiA1LjU2MiAwIDAgMCAuOC0yLjk3NyA1LjIxOCA1LjIxOCAwIDAgMC0uMDQyLS41OTIgNS41MzMgNS41MzMgMCAwIDAtMS42Mi0zLjI3OC45ODUuOTg1IDAgMCAxLS4wMzQtMS4zNzYuOTQ0Ljk0NCAwIDAgMSAxLjM1MS0uMDMgNy41IDcuNSAwIDAgMSAyLjE5OCA0LjQzIDcuMjg2IDcuMjg2IDAgMCAxIC4wNTguOTM1IDcuNDcyIDcuNDcyIDAgMCAxLTEuNSA0LjUxNCA3LjI0NCA3LjI0NCAwIDAgMS0xMS45NzYtLjQ3OWwtMS4zNTEgMS4zNzVhOS4xIDkuMSAwIDAgMCAxNC42ODEuNDUuOTQ0Ljk0NCAwIDAgMSAxLjM0My0uMTQ3Ljk4NC45ODQgMCAwIDEgLjE0NSAxLjM2NyAxMS4wMDcgMTEuMDA3IDAgMCAxLTguNjYyIDQuMjMxIi8+PC9nPjwvc3ZnPg==" alt="Ozow" class="border_">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iMjUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48Y2lyY2xlIGZpbGw9IiNGRkYiIGN4PSIxMi41IiBjeT0iMTIuNSIgcj0iMTIuNSIvPjxwYXRoIGQ9Ik05LjI2NyAxNy4yMjJjLS40NjYgMC0uODg1LS4wODgtMS4yNTgtLjI2M2EyLjc4IDIuNzggMCAwIDEtLjk1LS43MjUgMy4yNiAzLjI2IDAgMCAxLS42LTEuMDkzIDQuMzA2IDQuMzA2IDAgMCAxLS4yMDktMS4zNjR2LS4yNjNjMC0uNTYyLjA3NC0xLjA3LjIyMS0xLjUyNS4xNDgtLjQ1NS4zNS0uODQxLjYwNi0xLjE2LjI1Ni0uMzE4LjU1OC0uNTY0LjkwNi0uNzM3LjM0Ny0uMTc0LjcyMS0uMjYgMS4xMjEtLjI2LjQ1OCAwIC44NTYuMDg2IDEuMTk0LjI2LjMzOC4xNzMuNjE3LjQxNi44MzkuNzI4LjIyMS4zMTIuMzg2LjY4My40OTUgMS4xMTMuMTA5LjQzLjE2My45MDIuMTYzIDEuNDE2di42ODVINy42NzdjLjAyLjI3Ny4wNy41MzIuMTU0Ljc2NC4wODQuMjMzLjE5Ny40MzQuMzQxLjYwM2ExLjQ5IDEuNDkgMCAwIDAgMS4xNzcuNTQzYy4zNSAwIC42NTMtLjA3OS45MTEtLjIzNy4yNTgtLjE1OC40ODMtLjM3NS42NzMtLjY1MmwuNzYzLjgyNGEyLjg2MiAyLjg2MiAwIDAgMS0uMzc2LjQ5N2MtLjE1LjE2LS4zMjQuMzAzLS41MjQuNDI4YTIuODIxIDIuODIxIDAgMCAxLTEuNTI5LjQxOHptLS4xNjktNi4xMDZjLS4zODggMC0uNzAyLjE1NC0uOTQuNDYxLS4yNC4zMDgtLjM5Mi43MzYtLjQ1OCAxLjI4NWgyLjY5N3YtLjExOWEzLjI3IDMuMjcgMCAwIDAtLjA5LS42MSAxLjY0NSAxLjY0NSAwIDAgMC0uMjI0LS41MiAxLjEyNCAxLjEyNCAwIDAgMC0uMzk0LS4zNjIgMS4xOTYgMS4xOTYgMCAwIDAtLjU5LS4xMzV6bTMuNiA1Ljk3NFY3LjVoMi45MDdjLjQ1OCAwIC44Ny4wNTIgMS4yMzUuMTU1LjM2NS4xMDMuNjczLjI2LjkyNi40Ny4yNTIuMjEyLjQ0NS40OC41OC44MDguMTMzLjMyNy4yLjcxNC4yIDEuMTYyIDAgLjQ0LS4xMDUuODM1LS4zMTQgMS4xODYtLjIxLjM1MS0uNTE3LjYyMy0uOTIuODE3LjI0NC4wNzQuNDU3LjE4My42MzcuMzI2LjE4LjE0Mi4zMy4zMS40NDkuNTA0LjExOC4xOTMuMjA2LjQwNi4yNjUuNjM5LjA1OC4yMzIuMDg3LjQ3NC4wODcuNzI0IDAgLjQ2MS0uMDY3Ljg2Ni0uMiAxLjIxNS0uMTM1LjM1LS4zMy42NDEtLjU4My44NzZhMi40NzYgMi40NzYgMCAwIDEtLjkyNi41MyAzLjk2IDMuOTYgMCAwIDEtMS4yMzIuMTc4aC0zLjExem0xLjQ3NC00LjMyN3YyLjk5N2gxLjYzN2MuMjQgMCAuNDUzLS4wMzUuNjM3LS4xMDUuMTg1LS4wNy4zNC0uMTcuNDYzLS4zYTEuMjUgMS4yNSAwIDAgMCAuMjgtLjQ2NWMuMDYyLS4xOC4wOTMtLjM4LjA5My0uNTk5IDAtLjQ3NC0uMTEtLjg0Ny0uMzMyLTEuMTItLjIyMS0uMjcyLS41OC0uNDA4LTEuMDc3LS40MDhoLTEuNzAxem0wLTEuMjI1aDEuNDQ0Yy40NTkgMCAuODE3LS4xMTggMS4wNzUtLjM1M3MuMzg3LS41NjcuMzg3LS45OThjMC0uNDc0LS4xMTktLjgxNi0uMzU4LTEuMDI3LS4yMzktLjIxLS42MS0uMzE2LTEuMTE1LS4zMTZoLTEuNDMzdjIuNjk0eiIgZmlsbD0iIzBCNzlCRiIvPjxjaXJjbGUgZmlsbD0iI0JBRDFFNyIgY3g9IjI2LjI1IiBjeT0iMi41IiByPSIyLjUiLz48cGF0aCBkPSJNMzMuNDI0IDE3LjYxNGMtLjQ1NiAwLS44NjYtLjA3Ni0xLjIzLS4yMjhhMi43MDkgMi43MDkgMCAwIDEtLjkzLS42MjcgMi43NDIgMi43NDIgMCAwIDEtLjU4Ni0uOTQ1IDMuMzMxIDMuMzMxIDAgMCAxLS4yMDUtMS4xOHYtLjIyN2MwLS40ODYuMDcyLS45MjYuMjE2LTEuMzE5YTMuMDEgMy4wMSAwIDAgMSAuNTkzLTEuMDAzIDIuNjEgMi42MSAwIDAgMSAuODg2LS42MzhjLjM0LS4xNS43MDUtLjIyNSAxLjA5Ni0uMjI1LjQ0OCAwIC44MzguMDc1IDEuMTY4LjIyNS4zMy4xNS42MDQuMzYuODIuNjMuMjE3LjI3LjM3OC41OS40ODQuOTYzLjEwNy4zNzIuMTYuNzguMTYgMS4yMjR2LjU5M2gtNC4wMjhjLjAyLjIzOS4wNy40Ni4xNTEuNjYuMDgyLjIwMi4xOTMuMzc2LjMzNC41MjJhMS41MzIgMS41MzIgMCAwIDAgMS4xNS40N2MuMzQyIDAgLjY0LS4wNjkuODkyLS4yMDVhMi4wOSAyLjA5IDAgMCAwIC42NTgtLjU2NGwuNzQ2LjcxMmEyLjUzIDIuNTMgMCAwIDEtLjg4LjggMi45NSAyLjk1IDAgMCAxLS42NjQuMjYyYy0uMjQ2LjA2Ny0uNTI0LjEtLjgzMS4xem0tLjE2Ni01LjI4Yy0uMzggMC0uNjg2LjEzMi0uOTIuMzk4LS4yMzMuMjY2LS4zODIuNjM2LS40NDcgMS4xMWgyLjYzOHYtLjEwMmEyLjUyNSAyLjUyNSAwIDAgMC0uMDg4LS41MjcgMS4zNDMgMS4zNDMgMCAwIDAtLjIyLS40NSAxLjA2IDEuMDYgMCAwIDAtLjM4NC0uMzEzIDEuMjk3IDEuMjk3IDAgMCAwLS41NzktLjExN3pNMzYuNzcgMTcuNVY5LjIwNmgyLjg0M2MuNDQ4IDAgLjg1LjA0NCAxLjIwOC4xMzQuMzU3LjA4OS42NTkuMjI1LjkwNS40MDcuMjQ3LjE4Mi40MzYuNDE1LjU2Ny42OTguMTMxLjI4My4xOTcuNjE4LjE5NyAxLjAwNSAwIC4zOC0uMTAzLjcyMi0uMzA4IDEuMDI2LS4yMDUuMzAzLS41MDUuNTM5LS45LjcwNi4yNC4wNjUuNDQ3LjE1OS42MjQuMjgyLjE3Ni4xMjMuMzIzLjI2OS40MzguNDM2LjExNi4xNjcuMjAzLjM1MS4yNi41NTIuMDU3LjIwMi4wODUuNDEuMDg1LjYyNyAwIC4zOTktLjA2NS43NDktLjE5NiAxLjA1MWExLjk4IDEuOTggMCAwIDEtLjU3Ljc1OGMtLjI0OS4yMDMtLjU1LjM1Ni0uOTA2LjQ1OGE0LjM0NCA0LjM0NCAwIDAgMS0xLjIwNS4xNTRIMzYuNzd6bTEuNDQyLTMuNzQzdjIuNTkyaDEuNmMuMjM2IDAgLjQ0NC0uMDMuNjI0LS4wOS4xOC0uMDYyLjMzMS0uMTQ4LjQ1My0uMjYuMTIyLS4xMTIuMjEzLS4yNDYuMjczLS40MDIuMDYxLS4xNTUuMDkyLS4zMjguMDkyLS41MTggMC0uNDEtLjEwOS0uNzMzLS4zMjUtLjk2OC0uMjE3LS4yMzYtLjU2OC0uMzU0LTEuMDU0LS4zNTRoLTEuNjYzem0wLTEuMDZoMS40MTJjLjQ0OCAwIC43OTktLjEgMS4wNTEtLjMwNC4yNTMtLjIwMy4zOC0uNDkuMzgtLjg2MyAwLS40MS0uMTE4LS43MDYtLjM1MS0uODg5LS4yMzQtLjE4Mi0uNTk3LS4yNzMtMS4wOTEtLjI3M2gtMS40MDF2Mi4zM3ptOS4xODUgNC4yYTEuOTY3IDEuOTY3IDAgMCAxLS43MTcuNTI5Yy0uMjg1LjEyNS0uNjIzLjE4OC0xLjAxNC4xODgtLjMwNCAwLS41OC0uMDQzLS44My0uMTI4YTEuNjA1IDEuNjA1IDAgMCAxLS42NC0uNDA1IDEuODcgMS44NyAwIDAgMS0uNDE2LS43MTIgMy4yNjQgMy4yNjQgMCAwIDEtLjE0OC0xLjA0NXYtMy45ODhoMS4zODR2NGMwIC4yMjMuMDI3LjQwOC4wOC41NTVhLjk1Ljk1IDAgMCAwIC4yMTMuMzUzLjc0Ljc0IDAgMCAwIC4zMTEuMTg4Yy4xMTguMDM2LjI0MS4wNTQuMzcuMDU0LjM1NyAwIC42NDYtLjA2NS44NjYtLjE5NC4yMi0uMTI5LjM4Ni0uMzA1LjQ5Ni0uNTN2LTQuNDI2aDEuMzg0VjE3LjVoLTEuMzA1bC0uMDM0LS42MDR6bTQuOTQ4LS4zODhjLjE2NyAwIC4zMjMtLjAyNi40Ny0uMDc3LjE0Ni0uMDUxLjI3My0uMTI0LjM4MS0uMjE3LjEwOS0uMDkzLjE5Ni0uMjA0LjI2Mi0uMzMzLjA2Ny0uMTI5LjEwNC0uMjcuMTExLS40MjFoMS4zMDVhMS45NzUgMS45NzUgMCAwIDEtLjIyLjgzNyAyLjI4IDIuMjggMCAwIDEtLjU0LjY4NmMtLjIyNi4xOTYtLjQ5LjM1LS43OS40NjItLjMuMTEyLS42Mi4xNjgtLjk2Mi4xNjgtLjQ3NSAwLS44ODgtLjA4Mi0xLjI0LS4yNDVhMi40ODMgMi40ODMgMCAwIDEtLjg3Ni0uNjY3IDIuNzg3IDIuNzg3IDAgMCAxLS41MjItLjk4NSA0LjEwNCA0LjEwNCAwIDAgMS0uMTctMS4xOTZ2LS4yYzAtLjQyMS4wNTYtLjgyLjE3LTEuMTk2LjExNC0uMzc2LjI4OC0uNzA1LjUyMi0uOTg4LjIzMy0uMjgzLjUyNS0uNTA2Ljg3NC0uNjcuMzUtLjE2My43NjEtLjI0NSAxLjIzNi0uMjQ1LjM3MiAwIC43MTEuMDU3IDEuMDE3LjE3MS4zMDYuMTE0LjU2OC4yNzQuNzg2LjQ3OS4yMTguMjA1LjM5LjQ1LjUxMy43MzUuMTIzLjI4NC4xOS41OTguMjAyLjk0aC0xLjMwNWExLjQzNiAxLjQzNiAwIDAgMC0uMS0uNDY4IDEuMTQ2IDEuMTQ2IDAgMCAwLS42MjQtLjY1IDEuMjQzIDEuMjQzIDAgMCAwLS41LS4wOTZjLS4yODEgMC0uNTEzLjA1OC0uNjk1LjE3NGExLjI4NCAxLjI4NCAwIDAgMC0uNDMzLjQ1M2MtLjEwNy4xODYtLjE4LjM5OS0uMjIuNjM4LS4wNC4yNC0uMDYuNDgtLjA2LjcyM3YuMmMwIC4yNS4wMi40OTQuMDYuNzMyLjA0LjIzNy4xMTMuNDQ5LjIyLjYzNS4xMDYuMTg2LjI1LjMzNi40My40NS4xOC4xMTQuNDEzLjE3LjY5OC4xN3ptNS4yNDMtMS42NTJsLS42MTUuNjMyVjE3LjVINTUuNTlWOC43NWgxLjM4NHY1LjA0N2wuNDMzLS41NDEgMS43MDMtMS45MmgxLjY2NGwtMi4yOSAyLjU3IDIuNTM1IDMuNTk0aC0xLjYwMWwtMS44MjktMi42NDN6bTcuMjEuOTY4YS43NzUuNzc1IDAgMCAwLS4wNS0uMjc2LjU2NC41NjQgMCAwIDAtLjE5LS4yNCAxLjUzMiAxLjUzMiAwIDAgMC0uNDAyLS4yMDcgNC42NyA0LjY3IDAgMCAwLS42NzUtLjE4MyA1Ljk5OSA1Ljk5OSAwIDAgMS0uOTAyLS4yNTYgMi43ODMgMi43ODMgMCAwIDEtLjY5OC0uMzczIDEuNjE5IDEuNjE5IDAgMCAxLS40NTMtLjUxNiAxLjQgMS40IDAgMCAxLS4xNjMtLjY4M2MwLS4yNS4wNTYtLjQ5LjE2Ni0uNzE1YTEuNzggMS43OCAwIDAgMSAuNDc1LS41OTVjLjIwNy0uMTcxLjQ1OC0uMzA3Ljc1Mi0uNDA4LjI5NS0uMS42MjQtLjE1Ljk4OS0uMTUuMzgzIDAgLjcyOC4wNSAxLjAzNC4xNS4zMDUuMS41NjQuMjQuNzc3LjQxNi4yMTMuMTc3LjM3NS4zODUuNDg3LjYyNC4xMTIuMjQuMTY4LjQ5Ny4xNjguNzc1SDY0LjczYS45MDcuOTA3IDAgMCAwLS4wNjgtLjM0NS44Ni44NiAwIDAgMC0uMjA1LS4zLjk5Mi45OTIgMCAwIDAtLjM0LS4yMDcgMS4zMTggMS4zMTggMCAwIDAtLjQ3LS4wNzdjLS4xNzQgMC0uMzI2LjAyMi0uNDU1LjA2Ni0uMTMuMDQzLS4yMzYuMS0uMzIyLjE3YS42NzIuNjcyIDAgMCAwLS4yNTMuNTM5YzAgLjEwMi4wMTkuMTk0LjA1Ny4yNzMuMDM4LjA4LjEwNS4xNTIuMjAyLjIxNy4wOTcuMDY0LjIyNy4xMjQuMzkuMTguMTYzLjA1NC4zNjguMTA4LjYxNS4xNjIuMzU3LjA3Ni42NzcuMTY1Ljk2LjI2Ny4yODMuMTAzLjUyMi4yMjguNzE4LjM3Ni4xOTUuMTQ4LjM0NS4zMjMuNDQ3LjUyNC4xMDMuMjAyLjE1NC40NC4xNTQuNzE4IDAgLjI3NC0uMDU5LjUyNC0uMTc3Ljc1MmExLjczMyAxLjczMyAwIDAgMS0uNTA0LjU5IDIuNDQ2IDIuNDQ2IDAgMCAxLS43ODkuMzg0Yy0uMzA3LjA5MS0uNjUuMTM3LTEuMDI1LjEzNy0uNDIyIDAtLjc5NS0uMDYtMS4xMi0uMThhMi41NjcgMi41NjcgMCAwIDEtLjgxNy0uNDcgMS45NTggMS45NTggMCAwIDEtLjQ5OS0uNjU3IDEuNzg0IDEuNzg0IDAgMCAxLS4xNjgtLjc1aDEuMzQ1Yy4wMTEuMTkuMDU1LjM1LjEzLjQ3OWEuOTYuOTYgMCAwIDAgLjI5MS4zMTNjLjExOC4wOC4yNTEuMTM4LjQuMTc0LjE0Ny4wMzYuMy4wNTQuNDU1LjA1NC4zNjQgMCAuNjQyLS4wNy44MzItLjIwOGEuNjQ0LjY0NCAwIDAgMCAuMjg0LS41NDR6IiBmaWxsPSIjRkZGIi8+PC9nPjwvc3ZnPg==" alt="eBucks" class="border_">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3Ni4yOTIiIGhlaWdodD0iMTQuNzQ4IiB2aWV3Qm94PSIwIDAgNzYuMjkyIDE0Ljc0OCI+PHBhdGggZGF0YS1uYW1lPSJQYXRoIDQiIGQ9Ik0xOS4wOTQgOS43ODF2LjA2OGEzLjI0NSAzLjI0NSAwIDAgMCAzLjIyMSAzLjIwOGguMTI3YTMuMjQ5IDMuMjQ5IDAgMCAwIDMuMjItMy4yMTF2LS4wNjhhMy4yNiAzLjI2IDAgMCAwLTEuMDE4LTIuNCAzLjQ0NCAzLjQ0NCAwIDAgMC0xLjE1NC0uNzA3IDMuMzEzIDMuMzEzIDAgMCAwLTEuMDI0LS4xNzhoLS4xOGEzLjI3NiAzLjI3NiAwIDAgMC0xLjY2OC41MDUgMy45NzYgMy45NzYgMCAwIDAtLjcyNy42MjEgMy4yMiAzLjIyIDAgMCAwLS42NCAxLjE1MyAyLjg5NCAyLjg5NCAwIDAgMC0uMTU2IDEuMDA5bTMuMi00Ljk3NmguMTYxYTUuMDIgNS4wMiAwIDAgMSAyLjk4MyAxLjA1MiA0Ljg3NiA0Ljg3NiAwIDAgMSAuOTIxLjk1MSA0Ljk0IDQuOTQgMCAwIDEgLjk5IDIuOTc4IDUgNSAwIDAgMS0xLjQyNSAzLjQ5MyA1LjExMiA1LjExMiAwIDAgMS0zLjQ2NCAxLjQ3NGgtLjE2MmE0Ljk2MSA0Ljk2MSAwIDAgMS0yLjk4OS0xLjA1OCA0Ljc3OCA0Ljc3OCAwIDAgMS0uODM0LS44NDQgNC44OTMgNC44OTMgMCAwIDEtMS4wNjYtMy4wNzQgNC45NjQgNC45NjQgMCAwIDEgMS4yOC0zLjMyOCA0LjYxMiA0LjYxMiAwIDAgMSAuOTUtLjgxNSA0LjkgNC45IDAgMCAxIDIuNjU5LS44MjRtNy43NjcgNC45NjN2LjA3NmEzLjI4MSAzLjI4MSAwIDAgMCAzLjIyIDMuMjJoLjEyNmEzLjI3NSAzLjI3NSAwIDAgMCAzLjIyMS0zLjIydi0uMDc3YTMuMjMgMy4yMyAwIDAgMC0uOTY3LTIuMzE1IDMuMDg3IDMuMDg3IDAgMCAwLTEuMjM0LS43NjcgMyAzIDAgMCAwLTEtLjE4NWgtLjE2NmEzLjI3NiAzLjI3NiAwIDAgMC0zLjIgMy4yN00yOS4xODIuODQ5aC4wNzlhLjgxNy44MTcgMCAwIDEgLjY4OC40MzEgMS4xMTMgMS4xMTMgMCAwIDEgLjExNy41OHYzLjQzMWMwIC4xNDguMS4yNjQuMzExLjM0OC4wNjQuMDA4LjEuMDA5LjEwNi4wMDlhMi4zNjkgMi4zNjkgMCAwIDAgLjY5LS4zMyA1LjA4IDUuMDggMCAwIDEgMi4xMTQtLjQ5NGguMTY1YTQuOTQyIDQuOTQyIDAgMCAxIDIuNjE5LjggNC44OCA0Ljg4IDAgMCAxIDEuOTc3IDIuNTYgNC45NjggNC45NjggMCAwIDEgLjI2MiAxLjU3MnYuMDU4YTQuOTUyIDQuOTUyIDAgMCAxLTEuMjIyIDMuMjI5IDQuODI3IDQuODI3IDAgMCAxLS45LjggNC44ODMgNC44ODMgMCAwIDEtMi44MjQuODkzIDUuMDYgNS4wNiAwIDAgMS0yLjczNS0uOC4zNTcuMzU3IDAgMCAwLS4xOTItLjA1OGgtLjAzMWMtLjIwOCAwLS4zNjUuMTU4LS40NzUuNDc1YS44NC44NCAwIDAgMS0xLjQ0NS0uMDQ4IDEuMSAxLjEgMCAwIDEtLjEtLjM2OVYxLjY0M2EuODM5LjgzOSAwIDAgMSAuNDc1LS43MTcgMSAxIDAgMCAxIC4zMTktLjA3OW0xMC44ODYgMy45NzhoLjEzNmEuODA4LjgwOCAwIDAgMSAuNjExLjMzLjg0MS44NDEgMCAwIDEgLjE1NC40NTd2OC4zMzJhLjgzMi44MzIgMCAwIDEtLjQ5NC43MzcuOTYxLjk2MSAwIDAgMS0uMy4wNjhoLS4wNzlhLjgxNi44MTYgMCAwIDEtLjY4OC0uNDI3IDEuMTEzIDEuMTEzIDAgMCAxLS4xMTUtLjU3NFY1LjgyNGEuOS45IDAgMCAxIC40LS44NzQuNjY3LjY2NyAwIDAgMSAuMzc4LS4xMjVtLjA0LTMuMzQ2aC4wNTdhMS4wMDYgMS4wMDYgMCAwIDEgLjkuNTcuOTI2LjkyNiAwIDAgMSAuMTA2LjQzN3YuMWExLjAxMSAxLjAxMSAwIDAgMS0uNTkyLjg5MyAxLjA4IDEuMDggMCAwIDEtLjQ0Ni4xIDEuMDE5IDEuMDE5IDAgMCAxLS45NjktLjY2Ljg5MS44OTEgMCAwIDEtLjA2OS0uMzMxdi0uMDkyYTEgMSAwIDAgMSAuNy0uOTU4Ljk0Mi45NDIgMCAwIDEgLjMxMS0uMDU5bTYuNDM3IDMuMzM2YTQuOTA3IDQuOTA3IDAgMCAxIDIuODMzLjg4My44NDguODQ4IDAgMCAxIC4yODkuNjU5LjgwOC44MDggMCAwIDEtLjQzNy43MDcuOTYuOTYgMCAwIDEtLjM4OC4xMDggMS4zNSAxLjM1IDAgMCAxLS43MTctLjI4MSAzLjI1OSAzLjI1OSAwIDAgMC0xLjU5Mi0uNGgtLjA1OGEzLjI3NSAzLjI3NSAwIDAgMC0xLjU3Mi40NDYgMy4zNTggMy4zNTggMCAwIDAtMS40NjUgMS43ODYgMy40MTMgMy40MTMgMCAwIDAtLjE3NSAxLjA2NiAzLjI5MyAzLjI5MyAwIDAgMCAxLjA2NyAyLjQxNiAzLjQxMiAzLjQxMiAwIDAgMCAxLjMyLjczOCAzLjIyNCAzLjIyNCAwIDAgMCAuODI0LjEyNWguMDc4YTMuMzI5IDMuMzI5IDAgMCAwIDEuODUzLS41NjIuOTMuOTMgMCAwIDEgLjQzNi0uMTE1Ljg3My44NzMgMCAwIDEgLjY4OS4zNzcuOTExLjkxMSAwIDAgMSAuMTM1LjQ1Ny44NzcuODc3IDAgMCAxLS41MzMuOCA0Ljk4NCA0Ljk4NCAwIDAgMS01LjYzNS0uMzMgNS4zMjQgNS4zMjQgMCAwIDEtLjctLjY4IDQuMDA1IDQuMDA1IDAgMCAxLS41NjMtLjc5NCA0LjkgNC45IDAgMCAxLS42NS0yLjQ0NSA0Ljk4MyA0Ljk4MyAwIDAgMSAxLjAxLTMgNi4yMzEgNi4yMzEgMCAwIDEgLjY0OS0uNzA3IDUuMjc1IDUuMjc1IDAgMCAxIDEuMDEtLjcgNS4wMzYgNS4wMzYgMCAwIDEgMi4yODktLjU2M200Ljk0NCAwYS45MjkuOTI5IDAgMCAxIC42NjEuMzMxLjQ1MS40NTEgMCAwIDAgLjIzMi4wNjhoLjAyOWExLjUgMS41IDAgMCAwIC40NTUtLjE2NSAzLjY3NSAzLjY3NSAwIDAgMSAxLjI2Mi0uMjM0IDMuNTQ1IDMuNTQ1IDAgMCAxIDIuMjY4Ljg0MyAyLjAzMyAyLjAzMyAwIDAgMSAuMTc1LjE4NWMtLjYzNC42NDYtLjk2NS45Ny0uOTg4Ljk3YS40LjQgMCAwIDEtLjIxNS4wNjkuOTEyLjkxMiAwIDAgMS0uNDM3LS4xOTUgMS44MjIgMS44MjIgMCAwIDAtLjgzMy0uMTk1IDEuNzc3IDEuNzc3IDAgMCAwLTEuMzEuNTkgMS44MTYgMS44MTYgMCAwIDAtLjQ3NSAxLjI0M3Y1LjQ2YS44NjYuODY2IDAgMCAxLS4zLjc1OC43NDMuNzQzIDAgMCAxLS41LjJoLS4wODdhLjgyMS44MjEgMCAwIDEtLjc0Ni0uNTYzIDEuMTc0IDEuMTc0IDAgMCAxLS4wNDktLjRWNS43NzZhLjg1My44NTMgMCAwIDEgLjI4Mi0uNzI3Ljc5NC43OTQgMCAwIDEgLjU3MS0uMjM0bTYuNjI0IDQuOTQ4YzAgLjQ1Mi4wNTQuNzIuMTY1LjhhLjQ0My40NDMgMCAwIDAgLjMxMS4xMTggMS4yNTggMS4yNTggMCAwIDAgLjU0My0uMzMxcS4wNDctLjAxOCAzLjkwOS0yLjc3NmEuNDE0LjQxNCAwIDAgMCAuMTQ1LS4zMDl2LS4wNTRhLjM4NC4zODQgMCAwIDAtLjE5NC0uMzExIDMuMjQxIDMuMjQxIDAgMCAwLTEuNDg1LS40MDdoLS4xOTRhMy4yNTkgMy4yNTkgMCAwIDAtMy4yIDMuMjY5bTMuMjg4LTQuOTU3YTQuOTggNC45OCAwIDAgMSAzLjYyNyAxLjU2MiAxLjc2NiAxLjc2NiAwIDAgMSAuNTYyLjkzLjQzOC40MzggMCAwIDAgLjAxMS4xMDguODY0Ljg2NCAwIDAgMS0uMjgxLjZxLS4xNTYuMTI1LTQuODEzIDMuNDM0YzAgLjAwNi0uMjYxLjItLjc4Ny41NzJhLjQyNi40MjYgMCAwIDAtLjExNS4yNzF2LjA1OWEuMzg4LjM4OCAwIDAgMCAuMi4zMiAzLjMyMSAzLjMyMSAwIDAgMCAxLjQ4NS40aC4xOTVhMy4yMzggMy4yMzggMCAwIDAgMi43NTUtMS42MjkgMy40NiAzLjQ2IDAgMCAwIC4zMi0uNzI3IDEuMzU2IDEuMzU2IDAgMCAxIC4yNzItLjY2MS44ODYuODg2IDAgMCAxIC41OS0uMjYxLjgwOC44MDggMCAwIDEgLjgwNi41NTIuNjg0LjY4NCAwIDAgMSAuMDQ4LjI2M3YuMDI4YTQuMTI2IDQuMTI2IDAgMCAxLS4zNTEgMS4yMzEgNS4zNDcgNS4zNDcgMCAwIDEtLjY3IDEuMDY3IDUuNCA1LjQgMCAwIDEtLjg1My44MTUgNC44MTggNC44MTggMCAwIDEtMS4xMTYuNjMgNC43NDkgNC43NDkgMCAwIDEtMS43ODYuMzc4aC0uMTUzYTUuMDA1IDUuMDA1IDAgMCAxLTIuODkxLS45NjEgNS4yMDcgNS4yMDcgMCAwIDEtMS4xLTEuMTE1IDYuNDUzIDYuNDUzIDAgMCAxLS41MDYtLjg3NCA1LjMzOCA1LjMzOCAwIDAgMS0uNDI1LTJBNS4wNDggNS4wNDggMCAwIDEgNTcuNiA2LjU0OGE1LjUgNS41IDAgMCAxIC44LS43NDYgNC45NzQgNC45NzQgMCAwIDEgMi45ODktMSIgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PGcgZGF0YS1uYW1lPSJHcm91cCAxIj48cGF0aCBkYXRhLW5hbWU9IlBhdGggNSIgZD0iTTY4LjAzNCA5LjcyNHYuMTA2YTMuMjU4IDMuMjU4IDAgMCAwIDMuMTkxIDMuMjNoLjE3NWEzLjIxMiAzLjIxMiAwIDAgMCAyLjA3NC0uOCAzLjMyNyAzLjMyNyAwIDAgMCAuNi0uNjg3IDMuMjcgMy4yNyAwIDAgMCAuNTI0LTEuNzM4di0uMTExYTMuMjY4IDMuMjY4IDAgMCAwLTMuMTk2LTMuMjI2aC0uMTc1YTMuMjUxIDMuMjUxIDAgMCAwLTIuMDc2LjggMy4zNjMgMy4zNjMgMCAwIDAtMS4xMTcgMi40MjZNNzUuNDE3LjgyOGguMDY4YS44MzcuODM3IDAgMCAxIC43MzguNTA1IDEuMDQ2IDEuMDQ2IDAgMCAxIC4wNjguM3YxMi4zMTFhLjgxNC44MTQgMCAwIDEtLjUzNC43NDYgMS4wNTMgMS4wNTMgMCAwIDEtLjMyMi4wNTguODI0LjgyNCAwIDAgMS0uNzY0LS41MzMuNDMyLjQzMiAwIDAgMC0uNDA3LS4zMzFoLS4wMTlhLjYzNy42MzcgMCAwIDAtLjMzMS4xMjcgNC44NDggNC44NDggMCAwIDEtMi41MTIuNzM3aC0uMTQ2YTQuOTQ4IDQuOTQ4IDAgMCAxLTIuODQyLS45MyA0Ljg0IDQuODQgMCAwIDEtMS4xNzQtMS4yIDQuOTgxIDQuOTgxIDAgMCAxIC4wMzEtNS43MzMgNC42NDkgNC42NDkgMCAwIDEgMS4yNS0xLjIgNC43NDMgNC43NDMgMCAwIDEgMS40NzQtLjcgNS42MSA1LjYxIDAgMCAxIDEuMzU5LS4xNzUgNS4wNTIgNS4wNTIgMCAwIDEgMi42NjguOC42LjYgMCAwIDAgLjE2NS4wMzguNDI0LjQyNCAwIDAgMCAuNDA3LS4zMSAxLjE2IDEuMTYgMCAwIDAgLjAxLS4xMTdWMS44MjhhLjkyLjkyIDAgMCAxIC41MTMtLjkzLjk2OS45NjkgMCAwIDEgLjMtLjA2NyIgZmlsbD0iI2ZlZmVmZSIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9nPjxwYXRoIGRhdGEtbmFtZT0iUGF0aCA2IiBkPSJNMi4wMjQgNi4wNDlhLjY0NC42NDQgMCAwIDEtLjU0MS0uOTkgNS43NTcgNS43NTcgMCAwIDEgOC4zNjktMS41MTUuNjQzLjY0MyAwIDEgMS0uNzY4IDEuMDMxIDQuNDc2IDQuNDc2IDAgMCAwLTYuNTI0IDEuMTguNjQuNjQgMCAwIDEtLjUzOS4yOTQiIGZpbGw9IiNiYWQxZTciIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjxwYXRoIGRhdGEtbmFtZT0iUGF0aCA3IiBkPSJNLjY0MSA0LjM1NGEuNjQzLjY0MyAwIDAgMS0uNTQyLS45OSA3LjE4NSA3LjE4NSAwIDAgMSAxMC40NDctMS44OTEuNjQzLjY0MyAwIDAgMS0uNzY2IDEuMDMyIDUuOSA1LjkgMCAwIDAtOC42MDEgMS41NTYuNjM4LjYzOCAwIDAgMS0uNTQuMjk0IiBmaWxsPSIjYmFkMWU3IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBkYXRhLW5hbWU9IlBhdGggOCIgZD0iTTE1LjE0OSA1Ljg1MWE0LjUxNyA0LjUxNyAwIDAgMC0xLjAxNy0uNjdxLS4xNDEtLjA1OC0uMjgxLS4xMjFsLS4wOTItLjAzMWE0LjE0NiA0LjE0NiAwIDAgMC0xLjIzNi0uMiAzLjk5IDMuOTkgMCAwIDAtMS40ODcuMjkyYy0uMDE3LjAwNy0uMDM0LjAxMi0uMDUyLjAyMi0uMDYxLjAyNS0uMTE4LjA1NC0uMTc4LjA4M3MtLjEyMS4wNi0uMTguMDkyYy0uMDE5LjAxMS0uMDM3LjAyMy0uMDU1LjAzMmE0LjUxNyA0LjUxNyAwIDAgMC0uNDUuMyAzLjIwOCAzLjIwOCAwIDAgMS0uMzA4LjI2NC41LjUgMCAwIDEtLjI4LjEzMWgtLjAzOGEuNS41IDAgMCAxLS4yODEtLjEzMSAzLjI3NyAzLjI3NyAwIDAgMS0uMzA4LS4yNjQgNC42MTggNC42MTggMCAwIDAtLjQ0OS0uM2wtLjA1OC0uMDMyYy0uMDU4LS4wMzMtLjExOS0uMDYyLS4xNzgtLjA5MnMtLjExOS0uMDU4LS4xNzktLjA4M2EuMzMyLjMzMiAwIDAgMC0uMDUyLS4wMjIgMy45ODQgMy45ODQgMCAwIDAtMS40ODgtLjI5MiA0LjE0NiA0LjE0NiAwIDAgMC0xLjIzNi4ybC0uMDkyLjAzMmMtLjEwOC4wNDgtLjIuMDg4LS4yODEuMTIxYTQuNDU4IDQuNDU4IDAgMCAwLTEuMDE2LjY3QTMuOTI0IDMuOTI0IDAgMCAwIDMuMSA2Ljg3YTMuNTEzIDMuNTEzIDAgMCAwLS40MjcgMS40NjZ2NS4zYTEuMjQ2IDEuMjQ2IDAgMCAwIC4xLjU1MSAxLjIgMS4yIDAgMCAwIC4yMS4yNDMgMS4yMjEgMS4yMjEgMCAwIDAgLjIwOC4xMjcuOC44IDAgMCAwIC4yODguMDY2aC4wM2EuOTYxLjk2MSAwIDAgMCAuMzIyLS4wNzVjLjAyNi0uMDExLjA0OS0uMDI0LjA3My0uMDM2YS45NzYuOTc2IDAgMCAwIC4zNDQtLjM5MiAxLjI1IDEuMjUgMCAwIDAgLjA3Ny0uNDg0di01LjMxYTEuOSAxLjkgMCAwIDEgLjM0OS0uODgyYy4wMzEtLjA0NC4wNjUtLjA4OS4xLS4xMzVhMi4yNjcgMi4yNjcgMCAwIDEgLjkzMy0uNjkzbC4wMzgtLjAxOGMuMDU2LS4wMTguMTE0LS4wMzYuMTcyLS4wNTEuMDI2LS4wMDguMDU0LS4wMTguMDgxLS4wMjMuMDQ2LS4wMTEuMDkyLS4wMTguMTM4LS4wMjVzLjA3Ny0uMDE1LjEyLS4wMjEuMTA1LS4wMDUuMTU4LS4wMDhjLjAzMiAwIC4wNjMtLjAwNi4xLS4wMDZoLjAwOWEyLjEzMSAyLjEzMSAwIDAgMSAuMjQ0LjAxNC40MTUuNDE1IDAgMCAxIC4wNjguMDEyYy4wNTQuMDA4LjEwOC4wMTQuMTYxLjAyN3MuMTMzLjAzNC4yLjA1NWguMDE1YTIuMzYgMi4zNiAwIDAgMSAxLjA4NC43ODMgMS45NjcgMS45NjcgMCAwIDEgLjM4OC45NDF2NS4zMzZhMS4yMjMgMS4yMjMgMCAwIDAgLjEwNy41MzQgMS4wNDYgMS4wNDYgMCAwIDAgLjIyMS4yNzMuOTI0LjkyNCAwIDAgMCAuMTc3LjEgMS4xNTQgMS4xNTQgMCAwIDAgLjMwNy4wNzVoLjA0OGExLjEgMS4xIDAgMCAwIC4zLS4wNzUuOTE1LjkxNSAwIDAgMCAuMTc4LS4xIDEuMDMgMS4wMyAwIDAgMCAuMjIxLS4yNzMgMS4yMjMgMS4yMjMgMCAwIDAgLjEwOC0uNTM0VjguMjk2YTEuOTY3IDEuOTY3IDAgMCAxIC4zODgtLjk0MSAyLjM0NyAyLjM0NyAwIDAgMSAxLjA4Ni0uNzgxIDIuMTI5IDIuMTI5IDAgMCAxIC4yMTMtLjA1OWMuMDU0LS4wMTMuMTA4LS4wMTkuMTYxLS4wMjdhLjQyOC40MjggMCAwIDEgLjA2OS0uMDEyIDIuMTQ1IDIuMTQ1IDAgMCAxIC4yNDUtLjAxNGguMDA5Yy4wMzIgMCAuMDYzIDAgLjEuMDA2LjA1MiAwIC4xMDcgMCAuMTU4LjAwOGwuMTIuMDIxYy4wMzkuMDA3LjA5NC4wMTQuMTM2LjAyNHMuMDU3LjAxNS4wODQuMDIzYy4wNTguMDE1LjExNS4wMzMuMTcxLjA1MmwuMDM4LjAxOGEyLjI3OCAyLjI3OCAwIDAgMSAuOTMzLjY5M2wuMS4xMzVhMS44OCAxLjg4IDAgMCAxIC4zNDguODgydjUuMzA3YTEuMjcxIDEuMjcxIDAgMCAwIC4wNzguNDg0Ljk3OS45NzkgMCAwIDAgLjM0NC4zOTEuOTU2Ljk1NiAwIDAgMCAuNC4xMTFoLjAyOWEuOC44IDAgMCAwIC4yODgtLjA2Ni45MTUuOTE1IDAgMCAwIC40MTctLjM3IDEuMjQ0IDEuMjQ0IDAgMCAwIC4xLS41NTF2LTUuM2EzLjUwNyAzLjUwNyAwIDAgMC0uNDI2LTEuNDY1IDMuOTU2IDMuOTU2IDAgMCAwLS43NzctMS4wMTgiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==" alt="MobiCred" class="border_">
+                            </div>
+                            <div class="cell large-shrink responsive-footer-module_bottom-strip-text_2-STO border_">
+                                <span class="responsive-footer-module_copyright_3MJCd">© Esquire Technologies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #endregion -->
+        </div>
+    </div>
+
+    <!-- #region  Element of PhotoSwipe-->
+    <!-- Root element of PhotoSwipe -->
+    <div id="pswp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar clearfix">
+                    <div class="pswp__counter"></div>
+                    <div class="pswp__zoom-controls">
+                        <button class="pswp__button pswp-action pswp__button--zoom" title="Zoom in/out"></button>
+                        <button class="pswp__button pswp-action pswp__button--fs" title="Toggle fullscreen"></button>
+                    </div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)">×</button>
+                    <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="pswp__button pswp-arrow pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                <button class="pswp__button pswp-arrow pswp__button--arrow--right" title="Next (arrow right)"></button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #endregion -->
+
+    <!--#region render cart-->
+    @await Component.InvokeAsync("CartRight")
+    <!--endregion-->
+
+
+
+
+
+
+
+
+    <!-- #region  Script Section-->
+    <!--owl carousel-->
+    <script>
+        jQuery(document).ready(function($) {
+            $(".loop").owlCarousel({
+                center: true,
+                items: 2,
+                loop: true,
+                margin: 10,
+                autoHeight:true,
+                responsive: {
+                    600: {
+                        items: 4,
+                    },
+                },
+            });
+
+            $(".loop-special-products").owlCarousel({
+                center: false,
+                items: 2,
+                loop: true,
+                margin: 10,
+                autoHeight:true,
+                dots: false,
+                nav: true,
+                navText: ['<span class="carousel-control-prev-icon border_" aria-hidden="true"></span>', '<span class="carousel-control-next-icon border_" aria-hidden="true"></span>'],
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    600: {
+                        items: 4,
+                    },
+                },
+            });
+        });
+    </script>
+    <!--Search menu-->
+    <script>
+        $(document).ready(function(e) {
+            $(".search-panel .dropdown-menu")
+                .find("a")
+                .click(function(e) {
+                    e.preventDefault();
+                    var param = $(this).attr("href").replace("#", "");
+                    var concept = $(this).text();
+                    $(".search-panel span#search_concept").text(concept);
+                    $(".input-group #search_param").val(param);
+                });
+        });
+    </script>
+    <!--carousel-->
+    <script>
+        /*var myCarousel = document.querySelector('#carouselExampleSlidesOnly')
+        var carousel = new bootstrap.Carousel(myCarousel, {
+            interval: 2000,
+            wrap: false
+        });
+        var myCarousel2 = document.querySelector('#carouselExampleControlsNoTouching')
+        var carousel2 = new bootstrap.Carousel(myCarousel2, {
+            interval: 2000,
+            wrap: false
+        });*/
+        $(document).ready(function() {
+            $("#carouselExampleSlidesOnly").carousel({
+                interval: 2000,
+            });
+            $("#carouselExampleControlsNoTouching").carousel({
+                interval: 2000,
+            });
+        });
+    </script>
+    <!-- #endregion -->
+    <!--script src="~/user/Theme02/js/jquery-3.6.0.min.js"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="~/user/Theme02/Scripts/modernizr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script-- src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>  
+    <!--script src="~/user/Theme02/js/bootstrap.min.js" crossorigin="anonymous"></script-->
+    <script src="~/user/Theme02/js/2-peafraeu7bfkaljhasgbrud0k76gr91qrgkmu7zka1.js"></script>
+    <script src="~/user/Theme02/js/en-au.js" charset="UTF-8"></script>
+    <!-- Search Select -->
+    <script src="~/admin/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="~/user/Theme02/js/smartstore.articlelist.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!--<script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.gallery.js"></script>
+    <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.media.js"></script>
+    <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.offcanvas.js"></script>
+    <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.rangeslider.js"></script>
+    <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.responsiveNav.js"></script>
+    <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.thumbzoomer.js"></script>
+    <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.viewport.js"></script>-->
+    
+
+<script type="text/javascript">
+    $('.gal').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: true,
+    fade: true,
+    asNavFor: '.gal-nav'
+    });
+    $('.gal-nav').slick({
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    asNavFor: '.gal',
+    dots: false,
+    arrows: true,
+    centerMode: true,
+    focusOnSelect: true,
+    prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+    nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+    });
+
+    $('.Slider_').slick({
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 5,
+    responsive: [
+        {
+        breakpoint: 768,
+        settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 5
+        }
+        },
+        {
+        breakpoint: 480,
+        settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 1
+        }
+        }
+    ],
+    prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+    nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+    });
+</script>
+<script>
+    $(document).ready(function(){ 
+    $('.claimedRight').each(function (f) {
+        var newstr = $(this).text().substring(0,150);
+        $(this).text(newstr);
+        });
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+@{
+    Layout = null;
+}
+
+<a asp-controller="compare" asp-action="index" class="shopbar-button navbar-toggler">
+    <span class="shopbar-button-icon border_">
+        <i class="icm icm-repeat"></i>
+        <span class="badge badge-pill label-cart-amount badge-warning" style="" data-bind-to="CompareItemsCount">@ViewBag.countItems</span>
+    </span>
+    <span class="shopbar-button-label border_">
+        <span>Compare</span><br>
+        <strong>Products</strong>
+    </span>
+    <span class="shopbar-button-label-sm border_">
+        Compare
+    </span>
+</a>

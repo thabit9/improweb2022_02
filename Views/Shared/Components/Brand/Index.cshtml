@@ -1,0 +1,20 @@
+@{
+    Layout = null;
+}
+
+<div class="dropdown-menu dropdown-multicol" aria-labelledby="navbarDropdown">
+    <div class="col-container border_" id="style-10">
+        @foreach (var group in Model)
+        {
+            <div class="dropdown-row">
+                <a class="dropdown-item labelx" href="#">@group.Key</a>
+                <div class="dropdown-divider"></div>
+                @foreach (var brand in group)
+                {
+                <a class="dropdown-item" asp-controller="product" asp-action="brand" asp-route-id="@brand.ManufID">@brand.ManufacturerName</a>  
+                }
+            </div>
+        }
+    </div>
+</div> 
+

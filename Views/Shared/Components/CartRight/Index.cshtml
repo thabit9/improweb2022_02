@@ -1,0 +1,197 @@
+@{
+    Layout = null;
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+
+<!--aside class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"-->
+<aside id="offcanvas-cart" class="offcanvas offcanvas-lg offcanvas-overlay offcanvas-right offcanvas-shadow" data-lg="true" data-blocker="true" data-overlay="true">
+<div class="offcanvas-content">
+    <div class="offcanvas-cart-header offcanvas-tabs">
+        <ul class="nav nav-tabs nav-tabs-line row no-gutters" role="tablist">
+            <li class="nav-item col border_">
+                <a id="cart-tab" class="nav-link active show loaded" data-toggle="tab" href="#occ-cart" role="tab" data-url="/shoppingcart/offcanvasshoppingcart" aria-selected="true">
+                    <span class="title">Shopping Cart</span>
+                    <span class="badge badge-pill label-cart-amount badge-warning" data-bind-to="CartItemsCount" style="">@ViewBag.countItems</span>
+                </a>
+            </li>
+            <li class="nav-item col border_">
+                <a id="wishlist-tab" class="nav-link" data-toggle="tab" href="#occ-wishlist" role="tab" data-url="/shoppingcart/offcanvaswishlist">
+                    <span class="title">Wishlist</span>
+                    <span class="badge badge-pill label-cart-amount badge-warning" data-bind-to="WishlistItemsCount" style="display:none">0</span>
+                </a>
+            </li>
+            <li class="nav-item col border_">
+                <a id="compare-tab" class="nav-link" data-toggle="tab" href="#occ-compare" role="tab" data-url="/catalog/offcanvascompare">
+                    <span class="title">Compare</span>
+                    <span class="badge badge-pill label-cart-amount badge-warning" data-bind-to="CompareItemsCount" style="display:none">0</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="offcanvas-cart-content border_">
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="occ-cart" role="tabpanel">
+                <div class="offcanvas-cart-body offcanvas-scrollable">
+                    <div class="alert alert-success alert-dismissible rounded-0 fade show border_" role="alert">
+                        <button type="button" class="close border_" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <span class="border_">
+                            The product has been successfully added to your cart
+                        </span>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible rounded-0 fade hide border_" role="alert">
+                        <button type="button" class="close border_" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <span class="border_">
+                            The product could not be added to your cart!
+                        </span>
+                    </div>
+
+
+                    <div class="offcanvas-cart-items">
+                    @if (ViewBag.cart != null)
+                    {   var i = 1;
+                        @foreach (var productInfo in ViewBag.cart)
+                        {
+                            var photoName = "~/products/NoPic.jpg";
+                            if(productInfo.Photo.ToString().Length > 4){
+                                try{
+                                    int iSplit = productInfo.Photo.ToString().LastIndexOf("/");
+                                    if (iSplit > 0){
+                                        string url = productInfo.Photo.ToString().Substring(0, iSplit + 1);
+                                        string file = productInfo.Photo.ToString().Substring(iSplit + 1, productInfo.Photo.ToString().Length - iSplit - 1);
+                                        photoName = url + "Big_" + file;
+                                    }
+                                }catch(Exception){
+                                    throw "There is a error in GetBigProductImage the url is: " + productInfo.Photo.ToString();
+                                }
+                            }else{
+                                photoName = "/products/NoPic.jpg";
+                            }
+                            <div class="offcanvas-cart-item">
+                                <div class="row sm-gutters">
+                                    <div class="col col-alpha">
+                                        <a class="img-center-container border_" href="/transocean-chronograph" title="Show details for @Html.Encode(productInfo.Description.ToString()).Substring(0,50)">
+                                            <img alt="Picture of @Html.Encode(productInfo.Description.ToString()).Substring(0,50)" src="@photoName?size=256" title="Show details for @Html.Encode(productInfo.Description.ToString()).Substring(0,50)">
+                                        </a>
+                                    </div>
+                                    <div class="col col-data">
+                                        <a class="name font-weight-medium border_" href="/transocean-chronograph" title="@Html.Encode(productInfo.Description.ToString()).Substring(0,50)">@Html.Encode(productInfo.Description.ToString()).Substring(0,50)</a>
+                                        <div class="short-desc text-muted claimedRight reduceDesc_ border_">
+                                            @productInfo.Description
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row sm-gutters flex-wrap align-items-center mt-2">
+                                    <div class="col col-alpha">
+                                        <div class="qty-input">
+                                            <div class="input-group bootstrap-touchspin border_">
+                                                @{var buttonMinus = "bootstrap-touchspin-down"+ i; }
+                                                <span class="input-group-btn border_">
+                                                    <button class="btn btn-secondary @buttonMinus" type="button" onclick="subst(@i)"><i class="fa fa-minus"></i></button>
+                                                </span>
+                                                <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                                                @{var numberInput = "itemquantity"+ i; }
+                                                <input class="form-control" data-max="10000" data-min="1" data-postfix="" data-sci-id="1" data-step="1" data-type="cart" data-update-url="/shoppingcart/updatecartitem" data-val="true" data-val-number="The field 'EnteredQuantity' must be a number." id="@numberInput" name="quantity" type="text" value="@productInfo.Quantity" style="display: block;">
+                                                <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                                                @{var buttonAdd = "bootstrap-touchspin-up"+ i; }
+                                                <span class="input-group-btn border_">
+                                                    <button class="btn btn-secondary @buttonAdd" type="button" onclick="add(@i)"><i class="fa fa-plus"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <span class="price unit-price border_">
+                                            R@(productInfo.PurchasePrice * productInfo.Quantity) Inc VAT
+                                        </span>
+                                    </div>
+                                    <div class="col ml-auto text-nowrap border_">
+                                        <a asp-controller="wishlist" asp-action="addwishlist" asp-route-id="@productInfo.ProdID" asp-route-redirect="@Context.Request.GetEncodedUrl()" class="btn btn-secondary btn-sm btn-icon ajax-cart-link" title="Move to wishlist" rel="nofollow" data-name="@Html.Encode(productInfo.Description.ToString()).Substring(0,50)" data-type="cart" data-action="addfromcart">
+                                            <i class="fal fa-heart"></i>
+                                        </a>
+                                        <a class="btn btn-secondary btn-to-danger btn-sm btn-icon remove ajax-cart-link" title="Remove" asp-controller="cart" asp-action="remove" asp-route-id="@productInfo.ProdID" data-name="@Html.Encode(productInfo.Description.ToString()).Substring(0,50)" data-type="cart" data-action="remove">
+                                            <i class="fal fa-trash-alt"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            i++;
+                        }
+                    }
+                    </div>
+                </div>
+                <div class="offcanvas-cart-footer border_">
+                    <div class="offcanvas-cart-footer-row">
+                        <div class="offcanvas-cart-footer-col mr-3">
+                            <div>
+                                <div class="sub-total-caption border_">
+                                    Subtotal:
+                                </div>
+                                <div class="sub-total price border_">
+                                    R @ViewBag.Total Inc VAT
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offcanvas-cart-footer-col row sm-gutters d-flex flex-wrap">
+                            <div class="col">
+                                <a asp-controller="cart" asp-action="index" class="btn btn-success btn-flat btn-flat-light btn-block btn-action border_">
+                                    Go to cart
+                                </a>
+                            </div>
+                            <div class="col border_">
+                                <a class="btn btn-clear btn-block btn-action border_" href="/login?checkoutAsGuest=True&amp;returnUrl=%2Fcart">
+                                    <i class="fa fa-check"></i>
+                                    <span>Checkout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="occ-wishlist" role="tabpanel"></div>
+                <div class="tab-pane fade" id="occ-compare" role="tabpanel"></div>
+                    <div class="throbber small white" style="visibility: visible; display: none; opacity: 0;">
+                        <div class="throbber-flex"><div>
+                            <div class="throbber-content hide"></div>
+                                <div class="spinner active">
+                                    <svg style="width:50px; height:50px" viewBox="0 0 64 64"><circle class="circle" cx="32" cy="32" r="29" fill="none" stroke-width="3"></circle></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<script>
+    function add(i) {
+        //let form = document.getElementById("cartform");
+        var a = $("#itemquantity"+ i ).val();
+        a++;
+        if (a && a >= 1) {
+            $(".bootstrap-touchspin-down"+ i ).removeAttr("disabled");
+        }
+        $("#itemquantity"+ i ).val(a);
+        $( "#cartform" ).delay(60000).submit();
+    };
+    function subst(i) {
+        //let form = document.getElementById("cartform");
+        var b = $("#itemquantity"+ i).val();
+        // this is wrong part
+        if (b && b >= 1) {
+            b--;
+            $("#itemquantity"+ i ).val(b);
+            $( "#cartform" ).delay(60000).submit();
+        }
+        else {
+            $(".bootstrap-touchspin-down"+ i ).attr("disabled", "disabled");
+        }
+    };
+</script>

@@ -1,0 +1,491 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using System.Web
+@using improweb2022_02.Models;
+
+<div id="content" class="container">
+    <div class="row">
+     <!-- #region BreadCrump -->
+     <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+      <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+       <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+         <meta itemprop="name" content="Home page" />
+         <meta itemprop="position" content="1" />
+         <i class="fa fa-home"></i>
+        </a>
+       </li>
+       <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a href="#" title="Sports" itemprop="item"> <meta itemprop="position" content="2" /><span itemprop="name" dir="auto">Products</span> </a>
+       </li>
+       <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a href="#" title="Soccer" itemprop="item"> <meta itemprop="position" content="3" /><span itemprop="name" dir="auto">CategoryGroupA</span> </a>
+       </li>
+      </ol>
+      <div class="breadcrumb-item active border_">
+       <span>Product Details</span>
+      </div>
+     </div>
+     <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+     <!-- #region Product Detail -->
+     <div id="content-center" class="col-lg-12 border_">
+      <div class="page product-details-page border_" itemscope="" itemtype="http://schema.org/Product">
+       <article class="pd page-body">
+        <div id="main-update-container" class="update-container border_" data-url="/product/updateproductdetails?productId=10&amp;bundleItemId=0">
+         <form action="/evopower-5-3-trainer-hs-ball" id="pd-form" method="post" novalidate="novalidate">
+          <!-- Top Content: Picture, Description, Attrs, Variants, Bundle Items, Price etc. -->
+          <section class="row pd-section pd-section-top">
+           <!-- Picture -->
+           <div class="col-12 col-md-6 col-lg-7 pd-data-col border_">
+            <div id="pd-gallery-container border_">
+             <div id="pd-gallery-container-inner">
+              <div id="pd-gallery" class="mb-3">
+               <div class="gal-box border_">
+                <!-- Thumbnail navigation -->
+                <div class="gal-nav-cell border_">
+                 <div class="gal-nav gal-initialized">
+                  <button type="button" class="btn btn-secondary btn-flat btn-circle btn-sm gal-arrow gal-prev gal-disabled"><i class="fa fa-chevron-up" style="vertical-align: top"></i></button>
+                  <div class="gal-list" style="height: 469.271px">
+                   <div class="gal-track" itemscope="" itemtype="http://schema.org/ImageGallery" style="transform: translate3d(0px, 0px, 0px)">
+
+                    <div class="gal-item gal-current" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject" data-gal-index="0">
+                     <a class="gal-item-viewport" itemprop="contentUrl" href="@ViewBag.FeaturedPhoto" data-type="image" data-width="1200" data-height="1200" data-medium-image="@ViewBag.FeaturedPhoto?size=600" title="@ViewBag.Product.ProductName" data-picture-id="@ViewBag.FeaturedPhotoID">
+                      <img src="@ViewBag.FeaturedPhoto?size=72" class="gal-item-content file-img" alt="@ViewBag.Product.ProductName" title="@ViewBag.Product.ProductName" />
+                     </a>
+                    </div>
+                    @{
+                    var index = 1;
+                    foreach (var photox in ViewBag.OtherPhoto)
+                    {
+                    <div class="gal-item" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject" data-gal-index="@index">
+                     <a class="gal-item-viewport" itemprop="contentUrl" href="~/products/@photox.Name" data-type="image" data-width="770" data-height="770" data-medium-image="~/products/@photox.Name?size=600" title="iPhone Plus Abo, Bild 2 groß" data-picture-id="3039">
+                      <img src="~/products/@photox.Name?size=72" class="gal-item-content file-img" alt="Bild von iPhone Plus Abo" title="iPhone Plus Abo, Bild 2 groß" />
+                     </a>
+                    </div>
+                    index++;
+                    }
+                    }
+                   </div>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-flat btn-circle btn-sm gal-arrow gal-next"><i class="fa fa-chevron-down"></i></button>
+                 </div>
+                </div>
+                <!-- Picture -->
+                <div class="gal-cell border_">
+                 <div class="gal slick-initialized slick-slider slick-dotted" role="toolbar" style="height: 546.997px">
+                  <div aria-live="polite" class="slick-list draggable">
+                   <div class="slick-track" role="listbox" style="opacity: 1; width: 3822px; transform: translate3d(0px, 0px, 0px)">
+                    <div class="gal-item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide00" style="width: 546px">
+                     <a class="gal-item-viewport" href="~/products/@ViewBag.FeaturedPhoto" data-thumb-image="~/products/@ViewBag.FeaturedPhoto?size=72" data-medium-image="~/products/@ViewBag.FeaturedPhoto?size=600" data-picture-id="3045" tabindex="0">
+                      <img class="gal-item-content file-img" src="~/products/@ViewBag.FeaturedPhoto?size=600" data-zoom="~/products/@ViewBag.FeaturedPhoto" data-zoom-width="1200" data-zoom-height="1200" alt="@ViewBag.Product.ProductName" title="iPhone Plus Abo" itemprop="image" />
+                     </a>
+                    </div>
+                    @foreach (var photox in ViewBag.OtherPhoto)
+                    {
+                    <div class="gal-item slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide01" style="width: 546px">
+                     <a class="gal-item-viewport" href="~/products/@photox.Name" data-thumb-image="~/products/@photox?size=72" data-medium-image="~/products/@photox.Name?size=600" data-picture-id="3039" tabindex="-1">
+                      <img class="gal-item-content file-img" data-zoom="~/products/@photox.Name?size=600" data-zoom-width="770" data-zoom-height="770" alt="Bild von iPhone Plus Abo" title="iPhone Plus Abo" itemprop="image" src="~/products/@photox.Name?size=600" style="opacity: 1" />
+                     </a>
+                    </div>
+                    }
+
+                   </div>
+                  </div>
+                  <ul class="slick-dots" style="display: block" role="tablist">
+                   <li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation00" id="slick-slide00"><button type="button" data-role="none" role="button" tabindex="0">1</button></li>
+                   <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation01" id="slick-slide01" class=""><button type="button" data-role="none" role="button" tabindex="0">2</button></li>
+                   <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation02" id="slick-slide02" class=""><button type="button" data-role="none" role="button" tabindex="0">3</button></li>
+                   <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation03" id="slick-slide03"><button type="button" data-role="none" role="button" tabindex="0">4</button></li>
+                   <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation04" id="slick-slide04"><button type="button" data-role="none" role="button" tabindex="0">5</button></li>
+                   <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation05" id="slick-slide05"><button type="button" data-role="none" role="button" tabindex="0">6</button></li>
+                   <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation06" id="slick-slide06"><button type="button" data-role="none" role="button" tabindex="0">7</button></li>
+                  </ul>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+           <!-- Sidebar: Info, Price, Buttons etc. -->
+           <aside class="col-12 col-md-6 col-lg-5 pd-info-col zoom-window-container">
+            <!-- Title/Brand/ReviewSummary -->
+            <div class="pd-info pd-group">
+             <!-- Brand -->
+             <div class="pd-brand-block border_">
+              <a class="pd-brand" href="/nike">
+               <!--img class="pd-brand-picture border_" src="//localhost:88/media/48/catalog/nike.png?size=256" alt="Picture for manufacturer Nike" title="All products from Nike"-->
+               <p class="border_">@ViewBag.Product.Manufacturer.BrandName</p>
+              </a>
+              <meta itemprop="brand" content="@ViewBag.Product.Manufacturer.BrandName" />
+              <meta itemprop="sku" content="@ViewBag.Product.ProductCode" />
+             </div>
+             <!-- Title -->
+             <div class="page-title border_">
+              <h1 class="pd-name" itemprop="name">@ViewBag.Product.ProductName</h1>
+             </div>
+             <!-- Short description -->
+             <div class="pd-description border_" itemprop="description">@ViewBag.Product.Description</div>
+            </div>
+            <!-- Review Overview -->
+            <div class="pd-review-summary pd-group">
+             <div class="pd-rating-box border_">
+              <div class="rating">
+               <div style="width: 0%"></div>
+              </div>
+             </div>
+             <span class="pd-review-link border_">
+              <a href="/product/reviews/10">Be the first to review this item</a>
+             </span>
+            </div>
+            <!-- Bundle Items -->
+            <!-- Product attributes (SKU, EAN, Weight etc.) -->
+            <div class="pd-attrs-container" data-partial="Attrs"></div>
+            <!-- Offer box -->
+            <div class="pd-offer border_" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+             <meta itemprop="itemCondition" content="http://schema.org/NewCondition" />
+             <link itemprop="url" href="http://localhost:88/evopower-5-3-trainer-hs-ball" />
+             <div class="pd-offer-price-container" data-partial="Price">
+              <div class="pd-offer-price">
+               <!-- Current price -->
+               <div class="pd-group clearfix">
+                <div class="row sm-gutters pd-price-group">
+                 <div class="col-auto pd-price-block">
+                  <meta itemprop="priceCurrency" content="USD" />
+                  <div class="pd-price pd-price--offer border_">
+                   <meta itemprop="price" content="59.90" />
+                   <span class=""> R @ViewBag.Product.PurchasePrice excl tax </span>
+                  </div>
+                 </div>
+                </div>
+                <!-- Regular price -->
+                <div class="pd-oldprice-line d-flex border_">
+                 <span>Regular:</span>
+                 <span class="pd-oldprice pl-1">R @ViewBag.Product.PurchasePrice excl tax</span>
+                </div>
+                <div class="pd-oldprice-line d-flex border_">
+                 <span>You save:</span>
+                 <span class="pl-1">R @((float)ViewBag.Product.PurchasePrice - (float)ViewBag.Product.PurchasePrice) <span class="pd-saving-percent">(14 %)</span></span>
+                </div>
+               </div>
+               <!-- Tier prices -->
+               <div class="pd-tierprices"></div>
+               <!-- Pangv & legal info -->
+               <div class="pd-group">
+                <div class="pd-legalinfo border_">excl. VAT plus <a href="/shippinginfo">shipping</a></div>
+               </div>
+              </div>
+             </div>
+             <meta itemprop="availability" content="http://schema.org/InStock" />
+             <div class="pd-stock-info-container" data-partial="Stock">
+              <div class="pd-stock-info pd-group">
+               <div class="deliverytime-group d-flex border_">
+                <span class="delivery-date-block">
+                 <span>Arrives:</span>
+                 <span class="delivery-date"><b>Fri, Feb 18</b> - <b>Tue, Mar 1</b></span>
+                </span>
+               </div>
+              </div>
+             </div>
+             <div class="art-variant-info">
+              <div class="art-color-opts border_">
+               <a href="/frontend/iphone-plus?color-260-0-1248=4894" class="art-color-opt" style="background-color: #dddfde" title="Silber auswählen"></a>
+               <a href="/frontend/iphone-plus?color-260-0-1248=4895" class="art-color-opt" style="background-color: #e3d0ba" title="Gold auswählen"></a>
+               <a href="/frontend/iphone-plus?color-260-0-1248=4897" class="art-color-opt" style="background-color: #d9a6ad" title="Rose auswählen"></a>
+               <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
+               <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
+              </div>
+              <div class="art-more-opts border_">
+               <span class="bidi-embed">MID:</span>
+               <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">@ViewBag.Product.StockQty</a>
+               <span class="bidi-embed">DBN:</span>
+               <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
+               <span class="bidi-embed">CTN:</span>
+               <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+              </div>
+             </div>
+             <div class="pd-offer-actions-container" data-partial="OfferActions">
+              <div class="row pd-offer-actions">
+               <div class="col pd-offer-action-qty border_">
+                <form asp-controller="cart" asp-action="buy" method="post">
+                <div class="qty-input">
+                 <div class="input-group bootstrap-touchspin">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary bootstrap-touchspin-down" type="button"><i class="fa fa-minus"></i></button>
+                    </span>
+                    <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none"></span>
+                    <input class="form-control form-control-lg" data-max="10000" data-min="1" data-postfix="" data-step="1" data-val="true" data-val-number="The field 'EnteredQuantity' must be a number." id="addtocart_10_AddToCart_EnteredQuantity" name="addtocart_10.AddToCart.EnteredQuantity" type="text" value="1" style="display: block" />
+                    <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none"></span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
+                    </span>
+                 </div>
+                </div>
+                </form>
+               </div>
+               <div class="col flex-grow-1 border_">
+                <a asp-controller="cart" asp-action="buy" asp-route-id="@ViewBag.Product.ProdID" class="btn btn-primary btn-lg btn-block btn-add-to-cart ajax-cart-link"  rel="nofollow" data-href="/cart/addproduct/10/1" data-form-selector="#pd-form" data-type="cart" data-action="add" data-toggle="offcanvas" data-target="#offcanvas-cart">
+                 <i class="fa fa-cart-arrow-down d-none d-sm-inline-block d-md-none d-xl-inline-block"></i>
+                 <span>Add to cart</span>
+                </a>
+               </div>
+              </div>
+             </div>
+             <div class="pd-actions-container">
+              <div class="row sm-gutters pd-actions">
+               <div class="col-3 pd-action-item border_">
+                <a data-href="/cart/addproduct/10/2" data-form-selector="#pd-form" title="Add to wishlist" href="#" class="pd-action-link pd-action-link-special ajax-cart-link action-add-to-wishlist" rel="nofollow" data-type="wishlist" data-action="add">
+                 <i class="pd-action-icon icm icm-heart"></i>
+                 <span class="pd-action-label">Add to List</span>
+                </a>
+               </div>
+               <div class="col-3 pd-action-item border_">
+                <a data-href="/catalog/addproducttocompare/10" title="Add to compare list" href="#" class="pd-action-link pd-action-link-special action-compare ajax-cart-link" rel="nofollow" data-type="compare" data-action="add">
+                 <i class="pd-action-icon icm icm-repeat"></i>
+                 <span class="pd-action-label">Compare</span>
+                </a>
+               </div>
+               <div class="col-3 pd-action-item border_">
+                <a class="pd-action-link action-ask-question action-ask-question" href="javascript:void(0)" data-href="/product/askquestionajax/10" data-form-selector="#pd-form" rel="nofollow" title="Question about product?">
+                 <i class="pd-action-icon icm icm-envelope"></i>
+                 <span class="pd-action-label">Questions?</span>
+                </a>
+               </div>
+               <div class="col-3 pd-action-item border_">
+                <a class="pd-action-link action-bullhorn" href="/product/emailafriend/10" rel="nofollow">
+                 <i class="pd-action-icon icm icm-bullhorn"></i>
+                 <span class="pd-action-label">Email a friend</span>
+                </a>
+               </div>
+              </div>
+             </div>
+            </div>
+            <script>
+             // Ask question
+             $(document).on("click", ".action-ask-question", function (e) {
+              e.preventDefault();
+              const el = $(this);
+              const form = el.data("form-selector");
+              if (form) {
+               const href = el.data("href");
+               $.ajax({
+                cache: false,
+                url: href,
+                data: $(form).serialize(),
+                success: function (response) {
+                 // Redirect to ask question get action
+                 if (response.redirect) location.href = response.redirect;
+                },
+               });
+              }
+             });
+            </script>
+            <!-- social share -->
+            <div class="pd-share d-flex justify-content-left mt-3">
+             <!-- AddThis Button BEGIN -->
+             <div class="addthis_toolbox addthis_default_style addthis_32x32_style border_">
+              <a class="addthis_button_facebook addthis_button_preferred_1 at300b" title="Facebook" href="#"
+               ><span class="at-icon-wrapper" style="background-color: rgb(59, 89, 152); line-height: 32px; height: 32px; width: 32px"
+                ><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-facebook-2" title="Facebook" alt="Facebook" style="width: 32px; height: 32px" class="at-icon at-icon-facebook">
+                 <title id="at-svg-facebook-2">Facebook</title>
+                 <g>
+                  <path d="M22 5.16c-.406-.054-1.806-.16-3.43-.16-3.4 0-5.733 1.825-5.733 5.17v2.882H9v3.913h3.837V27h4.604V16.965h3.823l.587-3.913h-4.41v-2.5c0-1.123.347-1.903 2.198-1.903H22V5.16z" fill-rule="evenodd"></path>
+                 </g></svg></span
+              ></a>
+              <a class="addthis_button_twitter addthis_button_preferred_2 at300b" title="Twitter" href="#"
+               ><span class="at-icon-wrapper" style="background-color: rgb(29, 161, 242); line-height: 32px; height: 32px; width: 32px"
+                ><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-twitter-3" title="Twitter" alt="Twitter" style="width: 32px; height: 32px" class="at-icon at-icon-twitter">
+                 <title id="at-svg-twitter-3">Twitter</title>
+                 <g>
+                  <path d="M27.996 10.116c-.81.36-1.68.602-2.592.71a4.526 4.526 0 0 0 1.984-2.496 9.037 9.037 0 0 1-2.866 1.095 4.513 4.513 0 0 0-7.69 4.116 12.81 12.81 0 0 1-9.3-4.715 4.49 4.49 0 0 0-.612 2.27 4.51 4.51 0 0 0 2.008 3.755 4.495 4.495 0 0 1-2.044-.564v.057a4.515 4.515 0 0 0 3.62 4.425 4.52 4.52 0 0 1-2.04.077 4.517 4.517 0 0 0 4.217 3.134 9.055 9.055 0 0 1-5.604 1.93A9.18 9.18 0 0 1 6 23.85a12.773 12.773 0 0 0 6.918 2.027c8.3 0 12.84-6.876 12.84-12.84 0-.195-.005-.39-.014-.583a9.172 9.172 0 0 0 2.252-2.336" fill-rule="evenodd"></path>
+                 </g></svg></span
+              ></a>
+              <a class="addthis_button_print addthis_button_preferred_3 at300b" title="Print" href="#">
+               <span class="at-icon-wrapper" style="background-color: rgb(115, 138, 141); line-height: 32px; height: 32px; width: 32px">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-print-4" title="Print" alt="Print" style="width: 32px; height: 32px" class="at-icon at-icon-print">
+                 <title id="at-svg-print-4">Print</title>
+                 <g>
+                  <path d="M24.67 10.62h-2.86V7.49H10.82v3.12H7.95c-.5 0-.9.4-.9.9v7.66h3.77v1.31L15 24.66h6.81v-5.44h3.77v-7.7c-.01-.5-.41-.9-.91-.9zM11.88 8.56h8.86v2.06h-8.86V8.56zm10.98 9.18h-1.05v-2.1h-1.06v7.96H16.4c-1.58 0-.82-3.74-.82-3.74s-3.65.89-3.69-.78v-3.43h-1.06v2.06H9.77v-3.58h13.09v3.61zm.75-4.91c-.4 0-.72-.32-.72-.72s.32-.72.72-.72c.4 0 .72.32.72.72s-.32.72-.72.72zm-4.12 2.96h-6.1v1.06h6.1v-1.06zm-6.11 3.15h6.1v-1.06h-6.1v1.06z"></path>
+                 </g>
+                </svg>
+               </span>
+              </a>
+              <a class="addthis_button_email addthis_button_preferred_4 at300b" target="_blank" title="Email" href="#">
+               <span class="at-icon-wrapper" style="background-color: rgb(132, 132, 132); line-height: 32px; height: 32px; width: 32px"
+                ><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-email-5" title="Email" alt="Email" style="width: 32px; height: 32px" class="at-icon at-icon-email">
+                 <title id="at-svg-email-5">Email</title>
+                 <g>
+                  <g fill-rule="evenodd"></g>
+                  <path d="M27 22.757c0 1.24-.988 2.243-2.19 2.243H7.19C5.98 25 5 23.994 5 22.757V13.67c0-.556.39-.773.855-.496l8.78 5.238c.782.467 1.95.467 2.73 0l8.78-5.238c.472-.28.855-.063.855.495v9.087z"></path>
+                  <path d="M27 9.243C27 8.006 26.02 7 24.81 7H7.19C5.988 7 5 8.004 5 9.243v.465c0 .554.385 1.232.857 1.514l9.61 5.733c.267.16.8.16 1.067 0l9.61-5.733c.473-.283.856-.96.856-1.514v-.465z"></path>
+                 </g>
+                </svg>
+               </span>
+              </a>
+              <a class="addthis_button_compact at300m" href="#">
+               <span class="at-icon-wrapper" style="background-color: rgb(255, 101, 80); line-height: 32px; height: 32px; width: 32px">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" role="img" aria-labelledby="at-svg-addthis-1" title="More" alt="More" style="width: 32px; height: 32px" class="at-icon at-icon-addthis">
+                 <title id="at-svg-addthis-1">AddThis</title>
+                 <g>
+                  <path d="M18 14V8h-4v6H8v4h6v6h4v-6h6v-4h-6z" fill-rule="evenodd"></path>
+                 </g>
+                </svg>
+               </span>
+              </a>
+              <a class="addthis_counter addthis_bubble_style border_" href="#" style="display: inline-block" tabindex="1000">
+               <a class="addthis_button_expanded" target="_blank" title="More" href="#">0</a>
+               <a class="atc_s addthis_button_compact border_">Share<span></span></a>
+              </a>
+              <div class="atclear"></div>
+             </div>
+             <script type="text/javascript">
+              var addthis_config = {
+               data_track_addressbar: false,
+              };
+             </script>
+             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50f6c18f03ecbb2f"></script>
+             <!-- AddThis Button END -->
+            </div>
+           </aside>
+          </section>
+         </form>
+        </div>
+        <!-- Bottom Content: Full Description, Specification, Review etc. -->
+        <section class="pd-section pd-section-bottom">
+         <!-- Tabs -->
+         <div class="pd-tabs tabbable nav-responsive" id="pd-tabs" data-breakpoint="<md">
+          <ul class="nav nav-tabs nav-tabs-line">
+           <li class="nav-item border_">
+            <a class="nav-link active" href="#pd-tabs-1" data-toggle="tab" data-loaded="true"><span class="tab-caption">Description</span><span class="nav-link-summary"></span></a>
+           </li>
+           <li class="nav-item border_">
+            <a class="nav-link" href="#pd-tabs-2" data-toggle="tab" data-loaded="true"><span class="tab-caption">Features</span></a>
+           </li>
+           <li class="nav-item border_">
+            <a class="nav-link" href="#pd-tabs-3" data-toggle="tab" data-loaded="true"><span class="tab-caption">Reviews</span><span class="ml-2 badge badge-secondary">0</span></a>
+           </li>
+          </ul>
+          <div class="tab-content">
+           <div class="tab-content-header">
+            <a href="javascript:void()" class="btn btn-secondary btn-flat btn-no-border offcanvas-closer rounded-0" title="Close">
+             <i class="fa fa-chevron-left"></i>
+             <span>Close</span>
+            </a>
+           </div>
+           <div class="tab-pane active" role="tabpanel" id="pd-tabs-1">
+            <div itemprop="description" class="long-text html-editor-content">
+             <div class="more-less" data-max-height="260" style="max-height: none">
+              <div class="more-block border_">
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(ViewBag.product.LongDescription))
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="tab-pane" role="tabpanel" id="pd-tabs-2">
+            <div class="pd-specs table-responsive">
+             <table class="table pd-specs-table">
+              <tbody>
+               <tr>
+                <td class="pd-spec-name">Manufacturer</td>
+                <td class="pd-spec-value">
+                 <span>Nike</span>
+                </td>
+               </tr>
+               <tr>
+                <td class="pd-spec-name">Material</td>
+                <td class="pd-spec-value">
+                 <span>leather</span>
+                </td>
+               </tr>
+              </tbody>
+             </table>
+            </div>
+           </div>
+           <div class="tab-pane" role="tabpanel" id="pd-tabs-3">
+            <p class="mb-4">
+             <a class="btn btn-warning" href="/product/reviews/10">
+              <span>Write a review</span>
+             </a>
+            </p>
+            <p class="text-muted">There are no reviews yet</p>
+           </div>
+          </div>
+          <input type="hidden" class="loaded-tab-name" name="LoadedTabs" value="#pd-tabs-1" />
+          <input type="hidden" class="loaded-tab-name" name="LoadedTabs" value="#pd-tabs-2" />
+          <input type="hidden" class="loaded-tab-name" name="LoadedTabs" value="#pd-tabs-3" />
+         </div>
+         <script>
+          $(function () {
+           $("#pd-tabs").responsiveNav();
+          });
+         </script>
+         <!-- Tags -->
+         <!-- Related products -->
+         <!-- Products also purchased -->
+        </section>
+       </article>
+       <div class="product-grid recently-viewed-product-grid block block-boxed">
+        <div class="block-title border_">
+         <h3>Recently viewed products</h3>
+        </div>
+        @if(ViewBag.RelatedProducts != null)  
+        {
+        <div class="block-body pt-0">
+         <div class="artlist-carousel">
+          <div id="artlist-1867478033" class="artlist artlist-grid artlist-4-cols slick-initialized slick-slider">
+           <div aria-live="polite" class="slick-list draggable">
+            <div class="slick-track" role="listbox" style="opacity: 1; width: 552px; transform: translate3d(0px, 0px, 0px)">
+            @foreach (var relatedProduct in ViewBag.RelatedProducts)
+            {
+                Product productInfo = (Product)relatedProduct;
+                /*ProductImages photo = productInfo.ProductImagesx.SingleOrDefault(ph => ph.Status && ph.Featured);
+                var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
+                var photoName = productInfo.ImgURL == null ? "NoPic.jpg" : productInfo.ImgURL;
+
+                <article class="art slick-slide slick-current slick-active border_" data-id="10" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide10" style="width: 185px">
+                <div class="art-picture-block border_">
+                <a class="art-picture img-center-container" href="/evopower-5-3-trainer-hs-ball" title="@relatedProduct.ProductName" tabindex="0">
+                    <img src="@photoName" alt="@relatedProduct.ProductName" title="@relatedProduct.ProductName" loading="lazy" />
+                </a>
+                </div>
+                <div class="art-brand border_">
+                <span>@relatedProduct.Manufacturer.BrandName</span>
+                </div>
+                <h3 class="art-name border_">
+                <a href="/evopower-5-3-trainer-hs-ball" title="@relatedProduct.ProductName" tabindex="0">
+                    <span>@relatedProduct.ProductName</span>
+                </a>
+                </h3>
+                <div class="art-price-block">
+                <span class="art-price border_"> From R @relatedProduct.PurchasePrice excl Tax </span>
+                </div>
+                </article>
+            }
+            </div>
+           </div>
+          </div>
+         </div>       
+        </div>
+        }else{
+            <p>The are no related products to this product.</p>
+        }
+       </div>
+      </div>
+      <script>
+       $(function () {
+        var settings = {
+         galleryStartIndex: 0,
+         enableZoom: toBool("True"),
+        };
+
+        $("#pd-form").productDetail(settings);
+       });
+      </script>
+     </div>
+     <!-- #endregion -->
+    </div>
+</div>

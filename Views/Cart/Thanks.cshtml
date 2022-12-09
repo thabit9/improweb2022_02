@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a href="#" title="Dashboard" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Checkout</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Thanks</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+            THANK YOU MESSAGE
+            AFTER PURCHASING PRODUCTS
+    </div>
+</div>

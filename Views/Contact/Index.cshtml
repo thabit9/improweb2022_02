@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+
+<div id="content-wrapper">
+    <section id="content" class="container">
+        <div class="row">
+            <!-- #region BreadCrump -->
+            <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+                <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                            <meta itemprop="name" content="Home page" />
+                            <meta itemprop="position" content="1" />
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                </ol>
+                <div class="breadcrumb-item active border_">
+                    <span>Contact Us</span>
+                </div>
+            </div>
+            <!-- #endregion -->
+        </div>
+        <div id="content-body" class="row">
+            <div id="content-center" class="col-lg-12 border_">
+                <div class="page contact-page border_">
+                    <div class="page-title border_">
+                        <h1 class="h2">Contact Us</h1>
+                    </div>
+                    <div class="topic-html-content-body lead my-3 html-editor-content" id="ph-topic-body-4">
+                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                <td style="width: 36px;"><i class="fa fa-fw fa-home"></i>
+                                </td>
+                                <td style="width: 1445px;">
+                                    @if(ViewBag.Organisations.OrgStreet1 != null){
+                                        @ViewBag.Organisations.OrgStreet1<span>,</span>   
+                                    }
+                                    @if(ViewBag.Organisations.OrgStreet2 != null){
+                                        @ViewBag.Organisations.OrgStreet2<span>,</span>   
+                                    }
+                                    @if(ViewBag.Organisations.OrgStreet3 != null){
+                                        @ViewBag.Organisations.OrgStreet3<span>,</span> 
+                                    }
+                                    @if(ViewBag.Organisations.OrgStreet4 != null){
+                                        @ViewBag.Organisations.OrgStreet4<span>,</span>   
+                                    }
+                                    @if(ViewBag.Organisations.OrgStreet5 != null){
+                                        @ViewBag.Organisations.OrgStreet5
+                                    }
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="width: 36px;"><i class="fa fa-fw fa-phone"></i>
+                                </td>
+                                <td style="width: 1445px;">Phone: @ViewBag.Organisations.OrgTel1
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="width: 36px;"><i class="fa fa-fw fa-fax"></i>
+                                </td>
+                                <td style="width: 1445px;">Fax: @ViewBag.Organisations.OrgFax
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="width: 36px;"><i class="fa fa-fw fa-globe"></i>
+                                </td>
+                                <td style="width: 1445px;">Website: www.esquireshop.com
+                                </td>
+                                </tr>
+                                <tr>
+                                <td style="width: 36px;"><i class="fa fa-fw fa-envelope"></i>
+                                </td>
+                                <td style="width: 1445px;">Email: info@esquire.co.za
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="page-body">
+                        <form action="/frontend/en/contactus" class="contact-form" method="post" novalidate="novalidate">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label" for="FullName">Your name</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="FullName" name="FullName" placeholder="Optional" type="text" value="">
+                                <span class="field-validation-valid" data-valmsg-for="FullName" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label required" for="Email">Your email</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" data-val="true" data-val-email="'Your email' is not a valid email address." data-val-required="" id="Email" name="Email" type="email" value="">
+                                <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label required" for="Enquiry">Enquiry</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" cols="20" data-val="true" data-val-required="" id="Enquiry" name="Enquiry" placeholder="Enter your enquiry" rows="6"></textarea>
+                                <span class="field-validation-valid" data-valmsg-for="Enquiry" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col col-sm-auto offset-sm-3 text-muted">
+                                * Input elements with asterisk are required and have to be filled out.
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-sm-9">
+                                <div class="form-group row gdpr-consent ">
+                                    <div class="col form-control-plaintext">
+                                        <div class="form-check">
+                                            <input class="form-check-input gdpr-consent-check" id="gdpr-consent-716956774" name="GdprConsent" type="checkbox" value="true"><input name="GdprConsent" type="hidden" value="false">
+                                            <label class="form-check-label" for="gdpr-consent-716956774">
+                                                Yes I've read the <a href="/frontend/en/privacyinfo">privacy terms</a> and agree that my data given by me can be stored electronically. My data will thereby only be used to process my inquiry.
+                                            </label>
+                                        </div>
+                                        <span class="field-validation-valid" data-valmsg-for="GdprConsent" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>	
+					        </div>
+				        </div>
+				        <div class="form-group row">
+                            <div class="col col-sm-auto offset-sm-3">
+                                <button type="submit" name="send-email" class="btn btn-primary btn-lg btn-block">
+                                    Submit
+                                </button>
+                            </div>
+				        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

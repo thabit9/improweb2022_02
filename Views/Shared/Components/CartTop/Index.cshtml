@@ -1,0 +1,15 @@
+@{
+    Layout = null;
+}
+
+<a asp-controller="cart" asp-action="index" class="shopbar-button navbar-toggler" >
+    <span class="shopbar-button-icon border_">
+            <i class="icm icm-bag"></i>
+            <span class="badge badge-pill label-cart-amount badge-warning" style="" data-bind-to="CartItemsCount">@ViewBag.countItems</span>
+    </span>
+    <span class="shopbar-button-label border_">
+            <span>Shopping</span><br>
+    <strong class="border_">Basket</strong>
+    </span>
+    <span class="shopbar-button-label-sm border_"> Basket </span>
+</a>

@@ -1,0 +1,19 @@
+@{
+    Layout = null;
+}
+
+<div class="loop owl-carousel owl-theme border_">
+    @{ var index = 0; }
+    @foreach (var bannerx in Model)
+    {   
+        var slideActive = "";
+        if(index == 0){
+            slideActive = "active";
+        }
+        <div class="item @slideActive border_">
+            <img src="~/Bannersx/@bannerx.Photo" alt="Epson Advert" />
+        </div>
+        index++;
+    }
+</div>
+
