@@ -42,7 +42,7 @@ namespace improweb2022_02.Controllers
         [Route("addWishlist/{id}")]
         public IActionResult AddWishlist(Int64 id, string redirect)
         {
-            var user = User.FindFirst(ClaimTypes.Name);
+            var user = User.FindFirst(ClaimTypes.Name); 
             var customer = _db.Customers.SingleOrDefault(a => a.Email.Equals(user.Value));
             var product = _db.Products.Find(id);
             //check if product was added by client before
