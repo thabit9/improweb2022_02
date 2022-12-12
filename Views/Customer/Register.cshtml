@@ -46,24 +46,24 @@
                         <div class="col-12 col-lg-9 col-xl-8">
                             <fieldset class="content-group border_">
                                 <legend><span>Account Details</span></legend>
-                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="OrganisationName">Organisation Name</label>
+                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="AccountName">Organisation Name</label>
                                     <div class="col-md-9">
-                                        <div class="form-group">
+                                        <!--div class="form-group">
                                             <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" asp-for="Customer.OrgID" asp-items="@Model.Organisations">
                                             </select>
-                                        </div> 
-                                        <!--input class="form-control remember" id="OrganisationName" name="OrganisationName" placeholder="Organisation Name" type="text">
-                                        <span-- class="field-validation-valid" data-valmsg-for="OrganisationName" data-valmsg-replace="true"></span-->
+                                        </div--> 
+                                        <input class="form-control remember" id="AccountName" data-val="true" data-val-required="'Organisation Name' should not be empty." name="AccountName" placeholder="Organisation Name" type="text" asp-for="Account.AccountName" >
+                                        <span class="field-validation-valid" data-valmsg-for="AccountName" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
-                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="AccountNumber">Account Number:.</label>
+                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="AccountNo">Account Number:.</label>
                                     <div class="col-md-9">
-                                        <div class="form-group">
+                                        <!--div class="form-group">
                                             <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" asp-for="Customer.AccountID" asp-items="@Model.Accounts">
                                             </select>
-                                        </div> 
-                                        <!--input class="form-control remember" id="AccountNumber" name="AccountNumber" placeholder="Account Number" type="text" value="">
-                                        <span-- class="field-validation-valid" data-valmsg-for="AccountNumber" data-valmsg-replace="true"></span-->
+                                        </div--> 
+                                        <input class="form-control remember" id="AccountNo" data-val="true" data-val-required="'AccountNo' should not be empty." name="AccountNo" placeholder="Account Number" type="text"  asp-for="Account.AccountNo" >
+                                        <span class="field-validation-valid" data-valmsg-for="AccountNo" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
                                 <div class="form-group rowx">
@@ -71,7 +71,7 @@
                                     <div class="col-md-9">
                                         <div class="row xs-gutters">
                                             <div class="col">
-                                                <select class="date-part form-control noskin remember" data-minimum-results-for-search="100" data-native-menu="false" id="DefaultBranch" name="DefaultBranch">
+                                                <select class="date-part form-control noskin remember" data-minimum-results-for-search="100" data-native-menu="false" id="DefaultBranch" name="DefaultBranch"  data-val="true" data-val-required="'Select DefaultBranch'." >
                                                     <option>Default Branch</option>
                                                     <option value="1">Midrand</option>
                                                     <option value="2">Cape Town</option>
@@ -104,13 +104,13 @@
                                 </div>
                                 <div class="form-group rowx"><label class="col-md-3 col-form-label" for="FirstName">First name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="FirstName" placeholder="First Name" type="text" asp-for="Customer.FirstName">
+                                        <input class="form-control remember" id="FirstName" data-val="true" data-val-required="'First Name' should not be empty." name="FirstName" placeholder="First Name" type="text" asp-for="Customer.FirstName">
                                         <span class="field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
                                 <div class="form-group rowx"><label class="col-md-3 col-form-label" for="LastName">Last name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="LastName" placeholder="Last Name" type="text" asp-for="Customer.Surname">
+                                        <input class="form-control remember" id="LastName" data-val="true" data-val-required="'LastName' should not be empty." name="Last Name" placeholder="Last Name" type="text" asp-for="Customer.Surname">
                                         <span class="field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
@@ -296,7 +296,7 @@
                                 <div class="form-group rowx">
                                     <label class="col-md-3 col-form-label required" for="Tel1">Preferred Contact No:.</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="Tel1" type="text" placeholder="Preferred Contact No" asp-for="Customer.Tel">
+                                        <input class="form-control remember" id="Tel1" data-val="true" data-val-required="'Telephone' should not be empty." name="Tel1" type="text" placeholder="Preferred Contact No" asp-for="Customer.Tel">
                                         <span class="field-validation-valid" data-valmsg-for="Tel1" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
@@ -314,7 +314,8 @@
                                         <span class="field-validation-valid" data-valmsg-for="FaxNumber" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
-                                <div class="form-group rowx"><label class="col-md-3 col-form-label required" for="Email">Email</label>
+                                <div class="form-group rowx">
+                                    <label class="col-md-3 col-form-label required" for="Email">Email</label>
                                     <div class="col-md-9">
                                         <input class="form-control remember" data-val="true" data-val-email="'Email' is not a valid email address." data-val-required="'Email' should not be empty." id="Email" name="Email" type="email"  asp-for="Customer.Email">
                                         <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
@@ -323,7 +324,7 @@
                                 <div class="form-group rowx">
                                     <label class="col-md-3 col-form-label required" for="Username">Username</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="Username" type="text" asp-for="Customer.Email">
+                                        <input class="form-control remember" id="Username" data-val="true" data-val-email="'Email' is not a valid email address."  data-val-required="'Username' should not be empty." name="Username" type="text" asp-for="Customer.Email">
                                         <span class="field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
@@ -361,7 +362,8 @@
                             </fieldset>
                             <fieldset class="content-group">
                                 <legend><span>Company Details</span></legend>
-                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="Company">Company name</label>
+                                <div class="form-group rowx">
+                                    <label class="col-md-3 col-form-label" for="Company">Company name</label>
                                     <div class="col-md-9">
                                         <input class="form-control remember" id="Company" name="Company" placeholder="Optional" type="text" value="">
                                         <span class="field-validation-valid" data-valmsg-for="Company" data-valmsg-replace="true"></span>

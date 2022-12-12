@@ -29,7 +29,7 @@ namespace improweb2022_02.Controllers
         {
             var customerViewModel = new CustomerViewModel();
             customerViewModel.Customer = new Customer();
-            customerViewModel.Organisations = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_db.Organisations.ToList(), "Id", "OrgName");
+            customerViewModel.Organisations = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_db.Organisations.ToList(), "OrgID", "OrgName");
             customerViewModel.Accounts = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_db.Accounts.ToList(), "AccountID", "AccountName");  
             return View("Register", customerViewModel);
         }
@@ -38,30 +38,43 @@ namespace improweb2022_02.Controllers
         [Route("register")]
         public IActionResult Register(CustomerViewModel customerViewModel)
         {
-            var exists = _db.Customers.Count(a => a.Email.Equals(customerViewModel.Customer.Email)) > 0;
-            if(!exists){
-                //customerViewModel.Customer.Password = BCrypt.Net.BCrypt.HashPassword(customerViewModel.Customer.Password);
-                customerViewModel.Customer.Active = true;
-                customerViewModel.Customer.DateCreated = DateTime.Now;
-                _db.Customers.Add(customerViewModel.Customer);
-                _db.SaveChanges();
-                var CustID = customerViewModel.Customer.CustID;
-            
-                //add Role Customer to New Customer
-                /*var roleAccount = new RoleAccount()
-                {
-                    RoleId = 2, //Customer Role on the role table
-                    UserId = customerViewModel.Customer.CustID,
-                    Status = true
-                };
-                _db.RoleAccounts.Add(roleAccount);
-                _db.SaveChanges();*/
+            var account = _db.Accounts.Count(ac => ac.AccountNo.Equals(customerViewModel.Account.AccountNo)) > 0;
+            if(account){
 
-                return RedirectToAction("billingaddress", "Customer", CustID);
+                var account_ = _db.Accounts.Where(a => a.AccountNo == customerViewModel.Account.AccountNo).FirstOrDefault();
+                var exists = _db.Customers.Count(a => a.Email.Equals(customerViewModel.Customer.Email)) > 0;
+
+                if(!exists){
+                    //customerViewModel.Customer.Password = BCrypt.Net.BCrypt.HashPassword(customerViewModel.Customer.Password);
+                    customerViewModel.Customer.Active = true;
+                    customerViewModel.Customer.DateCreated = DateTime.Now;
+                    customerViewModel.Customer.AccountID = account_.AccountID;
+                    
+                    _db.Customers.Add(customerViewModel.Customer);
+                    _db.SaveChanges();
+                    var CustID = customerViewModel.Customer.CustID;
+
+                    //add Role Customer to New Customer
+                    /*var roleAccount = new RoleAccount()
+                    {
+                        RoleId = 2, //Customer Role on the role table
+                        UserId = customerViewModel.Customer.CustID,
+                        Status = true
+                    };
+                    _db.RoleAccounts.Add(roleAccount);
+                    _db.SaveChanges();*/
+
+                    return RedirectToAction("billingaddress", "Customer", CustID);
+                }
+                else
+                {
+                    ViewBag.error = "Customer email already exist.";
+                    return RedirectToAction("register", "Customer", customerViewModel);
+                }
             }
             else
             {
-                ViewBag.error = "Customer email already exist.";
+                ViewBag.error = "Account doesn't exist. Please Register an account first";
                 return RedirectToAction("register", "Customer", customerViewModel);
             }
 
@@ -70,7 +83,7 @@ namespace improweb2022_02.Controllers
 
         [HttpGet]
         [Route("billingaddress")]
-        public IActionResult BillingAddress(int custId)
+        public IActionResult BillingAddress(Int64 custId)
         {   
             var customerViewModel = new CustomerViewModel();
             customerViewModel.Customer = _db.Customers.Find(custId);   

@@ -16,8 +16,8 @@ namespace improweb2022_02.Models
         [Key]
         public Int64 ProdGroupID { get; set; } 
         public string GroupName { get; set; }  
-        public Int16 Status { get; set; }
-        public int IndustryNo { get; set; }
+        public Byte Status { get; set; }
+        public Int64 IndustryNo { get; set; }
         public bool IsComponent { get; set; }
         public bool Locked { get; set; }
         public virtual Industry Industry { get; set;}

@@ -158,6 +158,11 @@ namespace improweb2022_02.DataAccess
                     .WithMany(p => p.InverseParents)
                     .HasForeignKey(d => d.ParentOrgId)
                     .HasConstraintName("FK_Organisation_Organisation");
+                
+                /*entity.HasOne(d => d.Industryx)
+                    .WithMany(p => p.Organisations)
+                    .HasForeignKey(d => d.Industry)
+                    .HasConstraintName("FK_Industry_Organisation");*/
 
             });
             modelBuilder.Entity<Product>(entity =>
@@ -401,10 +406,10 @@ namespace improweb2022_02.DataAccess
             });
             modelBuilder.Entity<ProductGroups>(entity =>
             {
-                entity.HasOne(d => d.Industry)
+                /*entity.HasOne(d => d.Industry)
                     .WithMany(p => p.ProductGroups)
                     .HasForeignKey(d => d.IndustryNo)
-                    .HasConstraintName("FK_ProductGroup_Industry");
+                    .HasConstraintName("FK_ProductGroup_Industry");*/
 
             });             
             modelBuilder.Entity<ProdGroupLink>(entity =>

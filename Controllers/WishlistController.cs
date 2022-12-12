@@ -43,21 +43,27 @@ namespace improweb2022_02.Controllers
         public IActionResult AddWishlist(Int64 id, string redirect)
         {
             var user = User.FindFirst(ClaimTypes.Name); 
-            var customer = _db.Customers.SingleOrDefault(a => a.Email.Equals(user.Value));
-            var product = _db.Products.Find(id);
-            //check if product was added by client before
-            var wishItemsAdded = _db.Wishlists.Where(w => w.CustID == customer.CustID && w.ProdID == product.ProdID);
-            if (wishItemsAdded == null)
+            if(user != null)
             {
-                var WishlistItem = new Wishlist()
+                var customer = _db.Customers.SingleOrDefault(a => a.Email.Equals(user.Value));
+                var product = _db.Products.Find(id);
+                //check if product was added by client before
+                var wishItemsAdded = _db.Wishlists.Where(w => w.CustID == customer.CustID && w.ProdID == product.ProdID).SingleOrDefault();
+                if (wishItemsAdded == null)
                 {
-                    CustID = customer.CustID,
-                    ProdID = product.ProdID,
-                    CreationDate = DateTime.Now,
-                    Price = product.PurchasePrice
-                };
-                _db.Add(WishlistItem);
-                _db.SaveChanges();
+                    var WishlistItem = new Wishlist()
+                    {
+                        CustID = customer.CustID,
+                        ProdID = product.ProdID,
+                        CreationDate = DateTime.Now,
+                        Price = product.PurchasePrice
+                    };
+                    _db.Add(WishlistItem);
+                    _db.SaveChanges();
+                }
+            }else
+            {
+                return RedirectToAction("Login", "Customer");
             }
             
             return Redirect(redirect);

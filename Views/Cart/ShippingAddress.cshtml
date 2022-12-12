@@ -1,0 +1,461 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="index" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Cart Items</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Shipping Address</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <!-- #region Product Detail -->
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="costeps row no-gutters">
+                <div class="col-2 costep visited border_" data-step="cart">
+                    <a class="costep-link" asp-controller="cart" asp-action="index">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Cart</span>
+                    </a>
+                </div>
+                <div class="col-2 costep active border_" data-step="address">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Address</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="shipping">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Shipping</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="payment">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Payment</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="confirm">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Confirm</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="complete">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Complete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="page shopping-cart-page">
+                <div class="page-title border_">
+                    <h1 class="h3">Shipping Address</h1>
+                </div>
+                <div class="page-body checkout-data">
+                    <fieldset class="content-group mb-3">
+                        <legend><span>Select Shipping address</span></legend>
+                        <div class="card-deck card-cols-sm-1 card-cols-md-2 card-cols-lg-3 address-list">
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22142')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">Edvan</span>
+                                                <span class="bidi-embed">de Lima</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>eadelima@outlook.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>83981565154</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            Global Hitss - Faculdade SESI-SP de Educação) Função<br>Edvan de Lima<br>Av Palmares, 39 Artur Lundgren I<br>336<br>53415-530 Paulista<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22190')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">mmtmn</span>
+                                                <span class="bidi-embed">ferdu</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>2623476654@qq.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>426138</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            麦麦提敏<br>mmtmn ferdu<br>昌吉市农职院附近<br>848000 昌吉回族自治州<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22209')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">Hop</span>
+                                                <span class="bidi-embed">Hiy</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>demo@smartstore.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>0563245453</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            Hop Hiy<br>Kump<br>7655 757<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22220')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">ismet</span>
+                                                <span class="bidi-embed">karadağ</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>demo@smartstore.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>asdasdads</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            ismet karadağ<br>mec.mah.san.mec.sok.no.6.6<br>22 istanbul<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22238')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">saw</span>
+                                                <span class="bidi-embed">saw</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>demo@smartstore.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>4545345</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            saw saw<br>123<br>8666 jb<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22243')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">dfgsdfgsdf</span>
+                                                <span class="bidi-embed">dfgsdfgsdfg</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>dfgsdfgsdgsdf@ajac.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>1111111111111111</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            dfgsdfgsdf dfgsdfgsdfg<br>dfgsdfgsd<br>99<br>13295-000 Itupeva<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22244')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">Aldiyar</span>
+                                                <span class="bidi-embed">Ualee</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>qwerty@gmail.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>777777777777</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            Aldiyar Ualee<br>fasdsad<br>sdgd<br>4845 wqeqwwq<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body address-list-item">
+                                <div class="address-item">
+                                    <button class="btn btn-warning btn-block select-billing-address-button" onclick="setLocation('/frontend/en/checkout/selectbillingaddress?addressId=22251')">
+                                        <span>Ship to this address</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+
+                                    <div class="address-data mt-3">
+                                        <div class="name pb-2">
+                                            <strong>
+                                                <span class="bidi-embed">Gordan</span>
+                                                <span class="bidi-embed">Saw</span>
+                                            </strong>
+                                        </div>
+                                        <div class="email">
+                                            <span>Email:</span>
+                                            <span>kienseng.saw@lshgroup.com</span>
+                                        </div>
+                                            <div class="phone">
+                                                <span>Phone number:</span>
+                                                <span>12345</span>
+                                            </div>
+                                        
+                                        <div class="address">
+                                            Gordan Saw<br>33 Capenter street<br>123456 dutch<br>DEUTSCHLAND
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="content-group">
+                        <legend><span>Or enter new address</span></legend>
+                        <div class="enter-address">
+                            <form action="/frontend/en/checkout/billingaddress" method="post" novalidate="novalidate">					
+                                <div class="enter-address-body">
+                                    <input data-val="true" data-val-number="The field 'ID' must be a number." data-val-required="" id="NewAddress_Id" name="NewAddress.Id" type="hidden" value="0">
+                                    <div class="form-horizontal">    
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="NewAddress_Company">Company</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" id="NewAddress_Company" name="NewAddress.Company" placeholder="Optional" type="text" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.Company" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <hr>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label required" for="NewAddress_FirstName">First name</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" data-val="true" data-val-required="" id="NewAddress_FirstName" name="NewAddress.FirstName" type="text" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.FirstName" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label required" for="NewAddress_LastName">Last name</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" data-val="true" data-val-required="" id="NewAddress_LastName" name="NewAddress.LastName" type="text" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.LastName" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label required" for="NewAddress_Address1">Address 1</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" data-val="true" data-val-required="" id="NewAddress_Address1" name="NewAddress.Address1" type="text" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.Address1" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="NewAddress_Address2">Address 2</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" id="NewAddress_Address2" name="NewAddress.Address2" placeholder="Optional" type="text" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.Address2" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label required" for="NewAddress_City">City</label>
+                                            <div class="col-sm-9">
+                                                <div class="row sm-gutters d-flex">
+                                                    <div class="col">
+                                                        <input class="form-control" data-val="true" data-val-required="" id="NewAddress_City" name="NewAddress.City" placeholder="" type="text" value="">
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <label class="text-right col-form-label required" for="NewAddress_ZipPostalCode">Zip / postal code</label>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <input class="form-control" data-val="true" data-val-required="" id="NewAddress_ZipPostalCode" name="NewAddress.ZipPostalCode" placeholder="" style="width: 6rem" type="text" value="">
+                                                    </div>
+                                                </div>
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.City" data-valmsg-replace="true"></span>
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.ZipPostalCode" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label required" for="NewAddress_CountryId">Country</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control country-input country-selector select2-hidden-accessible" data-addemptystateifrequired="true" data-region-control-selector="#NewAddress_StateProvinceId" data-states-ajax-url="/frontend/en/country/getstatesbycountryid" data-val="true" data-val-number="The field 'Country' must be a number." data-val-required="" id="NewAddress_CountryId" name="NewAddress.CountryId" tabindex="-1" aria-hidden="true"><option value="0">Select country</option>
+                                                <option value="1">Deutschland</option>
+                                                </select><span class="select2 select2-container select2-container--bootstrap" dir="ltr"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-NewAddress_CountryId-container"><span class="select2-selection__rendered" id="select2-NewAddress_CountryId-container" title="Select country"><span class="select2-option">Select country</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.CountryId" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="NewAddress_StateProvinceId">State / province</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field 'State / province' must be a number." id="NewAddress_StateProvinceId" name="NewAddress.StateProvinceId" tabindex="-1" aria-hidden="true">
+                                                    <option value="0">Other (Non US)</option>
+                                                </select>
+                                                <span class="select2 select2-container select2-container--bootstrap" dir="ltr">
+                                                    <span class="selection">
+                                                        <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-NewAddress_StateProvinceId-container">
+                                                            <span class="select2-selection__rendered" id="select2-NewAddress_StateProvinceId-container" title="Other (Non US)">
+                                                                <span class="select2-option">Other (Non US)</span>
+                                                            </span>
+                                                            <span class="select2-selection__arrow" role="presentation">
+                                                                <b role="presentation"></b>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="dropdown-wrapper" aria-hidden="true"></span>
+                                                </span>
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.StateProvinceId" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <hr>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label required" for="NewAddress_Email">Email</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" data-val="true" data-val-email="'Email' is not a valid email address." data-val-required="" id="NewAddress_Email" name="NewAddress.Email" type="email" value="demo@smartstore.com">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.Email" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label required" for="NewAddress_PhoneNumber">Phone number</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" data-val="true" data-val-required="" id="NewAddress_PhoneNumber" name="NewAddress.PhoneNumber" type="tel" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.PhoneNumber" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="NewAddress_FaxNumber">Fax number</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" id="NewAddress_FaxNumber" name="NewAddress.FaxNumber" placeholder="Optional" type="tel" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NewAddress.FaxNumber" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="offset-sm-3 col-sm-9 text-muted address-required-hint">
+                                            * Input elements with asterisk are required and have to be filled out.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a class="btn btn-secondary btn-lg" href="/frontend/en/cart">
+                                        <i class="fa fa-angle-left"></i>
+                                        <span>Back</span>
+                                    </a>
+                                    <input type="submit" id="nextstep" name="nextstep" class="d-none">
+                                    <button class="btn btn-warning btn-lg new-address-next-step-button" onclick="$('#nextstep').trigger('click');return false;">
+                                        <span>Next</span>
+                                        <i class="fa fa-angle-right"></i>
+                                    </button>
+                                </div>
+                            </form>			
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

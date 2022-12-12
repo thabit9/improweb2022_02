@@ -7,6 +7,7 @@ namespace improweb2022_02.ViewModels
     public class CustomerViewModel
     {
         public Customer Customer { get; set; }
+        public Account Account { get; set; }
         //public SelectList Categories { get; set; }
         public SelectList Accounts { get; set; }
         public SelectList Organisations { get; set; }

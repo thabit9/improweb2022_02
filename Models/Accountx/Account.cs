@@ -17,7 +17,7 @@ namespace improweb2022_02.Models
         public Int64 AccountID { get; set; }
         public string AccountNo { get; set; }
         public string AccountName { get; set; }
-        public Int64 DefaultBranch { get; set; }
+        public Int64? DefaultBranch { get; set; }
         [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", 
          ErrorMessage = "Please enter valid Telephone no.")]
         public string AccTel { get; set; }
@@ -26,7 +26,7 @@ namespace improweb2022_02.Models
         public string AccFax { get; set; }
 
         #region Company Address
-        [Required(ErrorMessage = "Address Line 1. is required")]
+        //[Required(ErrorMessage = "Address Line 1. is required")]
         [Display(Name = "Address Line 1")]
         public string Postal1 { get; set; }
         [Display(Name = "Address Line 2(Optional)")]
@@ -35,17 +35,17 @@ namespace improweb2022_02.Models
         public string Postal3 { get; set; }
         [Display(Name = "Address Line 4(Optional)")]
         public string Postal4 { get; set; }
-        [Required(ErrorMessage = "Postal Code must be provided")]
+        //[Required(ErrorMessage = "Postal Code must be provided")]
         [DataType(DataType.PostalCode), 
          Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
-        [Required]
+        //[Required]
         [Display(Name = "Province")]
         public string Province { get; set; }
         #endregion
 
         #region Company Address
-        [Required(ErrorMessage = "Address Line 1. is required")]
+        //[Required(ErrorMessage = "Address Line 1. is required")]
         [Display(Name = "Address Line 1")]
         public string Delivery1 { get; set; }
         [Display(Name = "Delivery Address Line 2(Optional)")]
@@ -66,8 +66,8 @@ namespace improweb2022_02.Models
         public string Notes { get; set; }
         public bool Defalut { get; set; }
         public bool Active { get; set; }
-        public Int64 FromDoorID { get; set; }
-        public Int16 UsePrice { get; set; }
+        public Int64? FromDoorID { get; set; }
+        public byte UsePrice { get; set; }
 
         #region bank details
         [Display(Name = "Bank Name")]
@@ -86,14 +86,14 @@ namespace improweb2022_02.Models
         public bool UseSpendingLimit { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Start Date")]
-        public DateTime SpendLimitStartDate { get; set; }
+        public DateTime? SpendLimitStartDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "End Date")]
-        public DateTime SpendLimitEndDate { get; set; }
+        public DateTime? SpendLimitEndDate { get; set; }
         
-        public Int64 OrgID { get; set; }
-        public Int16 AccountCreditTypeId { get; set; }
-        public Int64 DeliveryID { get; set; }
+        public Int64? OrgID { get; set; }
+        public byte? AccountCreditTypeId { get; set; }
+        public Int64? DeliveryID { get; set; }
 
 
         [ForeignKey(nameof(AccountCreditTypeId))]

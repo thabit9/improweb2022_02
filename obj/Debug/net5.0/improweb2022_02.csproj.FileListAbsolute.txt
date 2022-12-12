@@ -204,3 +204,5 @@ E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Vie
 E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Views\Contact\Index.cshtml.g.cs
 E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Views\Shared\Components\CartRight\Index.cshtml.g.cs
 E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Views\Home\Index_.cshtml.g.cs
+E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Views\Cart\BillingAddress.cshtml.g.cs
+E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Views\Cart\ShippingAddress.cshtml.g.cs

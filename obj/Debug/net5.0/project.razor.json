@@ -15879,6 +15879,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Thabis Documents\\Projects\\NETCore5\\improweb2022_02\\Views\\Cart\\ShippingAddress.cshtml",
+      "TargetPath": "Views\\Cart\\ShippingAddress.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Thabis Documents\\Projects\\NETCore5\\improweb2022_02\\Views\\Customer\\Dashboard.cshtml",
       "TargetPath": "Views\\Customer\\Dashboard.cshtml",
       "FileKind": "mvc"
@@ -16011,6 +16016,11 @@
     {
       "FilePath": "e:\\Thabis Documents\\Projects\\NETCore5\\improweb2022_02\\Views\\Cart\\Index.cshtml",
       "TargetPath": "Views\\Cart\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Thabis Documents\\Projects\\NETCore5\\improweb2022_02\\Views\\Cart\\BillingAddress.cshtml",
+      "TargetPath": "Views\\Cart\\BillingAddress.cshtml",
       "FileKind": "mvc"
     },
     {

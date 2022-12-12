@@ -218,6 +218,17 @@ namespace improweb2022_02.Controllers
             return View("Thanks");
         }
 
+        [Route("billingaddress")]
+        public IActionResult BillingAddress()
+        {
+            return View("BillingAddress");
+        }
+        [Route("shippingaddress")]
+        public IActionResult ShippingAddress()
+        {
+            return View("ShippingAddress");
+        }
+
         public int exists(Int64 id, List<Item> cart)
         {
             for (var i = 0; i < cart.Count; i++)

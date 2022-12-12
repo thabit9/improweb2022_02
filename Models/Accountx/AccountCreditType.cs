@@ -14,7 +14,7 @@ namespace improweb2022_02.Models
         }
 
         [Key]
-        public Int16 ccountCreditTypeId { get; set; }
+        public byte ccountCreditTypeId { get; set; }
         public string Description { get; set; }
 
         [InverseProperty(nameof(Account.CreditType))]

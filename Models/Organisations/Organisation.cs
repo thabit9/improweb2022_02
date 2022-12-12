@@ -39,12 +39,14 @@ namespace improweb2022_02.Models
         [DataType(DataType.Text), MaxLength(50),
          Display(Name = "Organisation VAT N0")]
         public string OrgVATno { get; set; }
-        public bool VATRegistered { get; set; }
-        public float OrgVATPercentage { get; set; }
-        public Int16 Status { get; set; }
-        public Int16 BuyLevel { get; set; } //ForeignKey
-        public Int64 IndustryID { get; set; } //IndustryID//ForeignKey
+        public bool? VATRegistered { get; set; }
+        public float? OrgVATPercentage { get; set; }
+        public byte? Status { get; set; }
+        public byte? BuyLevel { get; set; } //ForeignKey
+        public Int64? Industry { get; set; } //IndustryID//ForeignKey
         public string DeliveryCost { get; set; }
+
+        
         #region Company Address
         //[Required(ErrorMessage = "Address Line 1. is required")]
         [Display(Name = "Organisation Address Line 1")]
@@ -76,9 +78,9 @@ namespace improweb2022_02.Models
         public string OrgFax { get; set; }
         public string OrgAbout { get; set; }
         public string OrgNotes { get; set; }
-        public int OrgEmployeeCount { get; set; }
+        public int? OrgEmployeeCount { get; set; }
         public string OrgSerialNo { get; set; } //another software will generate this
-        public string QuotaionHeader { get; set; }
+        public string QuotationHeader { get; set; }
         public string QuotationFooter { get; set; }
         public string InvoiceHeader { get; set; }
         public string invoiceFooter { get; set; }
@@ -87,48 +89,49 @@ namespace improweb2022_02.Models
         [DataType(DataType.Date)]
         [Display(Name = "Date Created")]
         public DateTime? CreateDate { get; set; }
-        public int isFranchise { get; set; }
+        public byte? isFranchise { get; set; }
         public string WEBOrgURL { get; set; }
-        public int WEBPriceUsed { get; set; }
+        public byte? WEBPriceUsed { get; set; }
         public string WEBStockOnly { get; set; }
-        public int WEBMinStock { get; set; }
-        public bool WEBNoImg { get; set; }
-        public int WEBUseGroup { get; set; }
+        public byte? WEBMinStock { get; set; }
+        public bool? WEBNoImg { get; set; }
+        public byte? WEBUseGroup { get; set; }
         [EmailAddress]
         [DataType(DataType.EmailAddress), 
          MaxLength(255), 
          Display(Name = "Info Email")]
-        public string WEBMailInfo { get; set; }
+        public string WEBEMailInfo { get; set; }
         [EmailAddress]
         [DataType(DataType.EmailAddress), 
          MaxLength(255), 
          Display(Name = "Order Email")]
-        public string WEBMailOrders { get; set; }
-        public bool WEBAutoOrder { get; set; }
+        public string WEBEMailOrders { get; set; }
+        public bool? WEBAutoOrder { get; set; }
         public string WEBProdOrderBy { get; set; }
         public string WEBHomePage { get; set; }
         public string WEBCustom1 { get; set; }
         public string WEBCustom2 { get; set; }
-        public bool DocSigned { get; set; }
+        public bool? DocSigned { get; set; }
         #region Default Dimensions
         [Display(Name = "Default Length")]
-        public Single OrgLength { get; set; }
+        public Single? OrgLength { get; set; }
         [Display(Name = "Default Widht")]
-        public Single OrgWidth { get; set; }
+        public Single? OrgWidth { get; set; }
         [Display(Name = "Default Height")]
-        public Single OrgHeight { get; set; }
+        public Single? OrgHeight { get; set; }
         [Display(Name = "Default Mass")]
-        public Single OrgMass { get; set; }
+        public Single? OrgMass { get; set; }
         #endregion
-        public bool WEBHideComponents { get; set; }
-        public int CourierCostModel { get; set; }
+        
+        public bool? WEBHideComponents { get; set; }
+        public byte? CourierCostModel { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
-        public Int64 FromDoorID { get; set; }
+        public Int64? FromDoorID { get; set; }
         public string IExpressUserID { get; set; }
-        public double OrgMonthlyPayExtra { get; set; }
-        public int OrgPayMethod { get; set; }
-        public int OrgShipFrom { get; set; }
+        public double? OrgMonthlyPayExtra { get; set; }
+        public byte? OrgPayMethod { get; set; }
+        public byte? OrgShipFrom { get; set; }
         #region bank details
         [Display(Name = "Account Type")]
         public string AccountType { get; set; }
@@ -138,15 +141,15 @@ namespace improweb2022_02.Models
         public string AccountBranch { get; set; }
         #endregion
         public string TipsTricksEmailBody { get; set; }
-        public int FinType { get; set; }
+        public int? FinType { get; set; }
         public string WEBReject { get; set; }
-        public bool SendNewEmail { get; set; }
-        public bool ShowProductImagesInQuotations { get; set; }
-        public bool IsLive { get; set; }
-        public bool QuotesDirectToInvoice { get; set; }
+        public bool? SendNewsEmail { get; set; }
+        public bool? ShowProductImagesInQuotations { get; set; }
+        public bool? IsLive { get; set; }
+        public bool? QuotesDirectToInvoice { get; set; }
         public string StatementHeader { get; set; }
         public string StatementFooter { get; set; }
-        public int improPayType { get; set; }
+        public int? improPayType { get; set; }
         [EmailAddress]
         [DataType(DataType.EmailAddress), 
          MaxLength(255), 
@@ -159,29 +162,28 @@ namespace improweb2022_02.Models
         public string improPAYEmail { get; set; }
         public string DuplicateTwo { get; set; } 
         public string DuplicateMore { get; set; }
-        public bool DuplicateIntegratedPriority { get; set; }
-        public bool UseImproDisti { get; set; }
-        public int IntPaymentID { get; set; }
+        public bool? DuplicateIntegratedPriority { get; set; }
+        public bool? UseImproDisti { get; set; }
+        public int? IntPaymentID { get; set; }
         public string ScreenHtml { get; set; }
         [EmailAddress]
         [DataType(DataType.EmailAddress), 
          MaxLength(255), 
          Display(Name = "Username")]
         public string MDSUsername { get; set; }
-        //[Required(ErrorMessage = "Password is required")]
         [StringLength(255, ErrorMessage = "Must be between 8 and 255 characters", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string MDSPassword { get; set; }
         public string MDSToken { get; set; }
-        public bool EsquireMenu { get; set; }
-        public bool MenuAtoZ { get; set; }
-        public Single DimMarkup { get; set; }
+        public bool? EsquireMenu { get; set; }
+        public bool? MenuAtoZ { get; set; }
+        public Single? DimMarkup { get; set; }
         public string CDAddressKey { get; set; }
         public string CourierDirectAccount { get; set; }
         //public bool Status { get; set; }
         //[ForeignKey(nameof(UpdatePriority))]
-        public int UpdatePriority { get; set; }
+        public int? UpdatePriority { get; set; }
 
         [ForeignKey(nameof(ParentOrgId))]
         public Int64? ParentOrgId { get; set; }
@@ -192,7 +194,7 @@ namespace improweb2022_02.Models
         public virtual ICollection<Product> Products { get; set; }
         
         //public virtual BankAccountTypex BankAccountType { get; set; }
-        public virtual Industry Industry { get; set; }
+        //public virtual Industry Industryx { get; set; }
         public virtual Couriers Courier { get; set; }
         public virtual ICollection<UpdatePriority> UpdatePriorities { get; set; }
         public virtual ICollection<OrgPayMethod> OrgPayMethods { get; set; }
