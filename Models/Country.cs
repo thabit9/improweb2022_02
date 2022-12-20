@@ -19,10 +19,10 @@ namespace improweb2022_02.Models
         public string Sign { get; set; }
         public string ISOCode { get; set; }
         public string FractionalUnit { get; set; }
-        public int NumberToBasic { get; set; }
+        public int? NumberToBasic { get; set; }
         public string IECountry { get; set; }
-        public double ToOneZAR { get; set; }
-        public DateTime LastZARUpdate { get; set; }
+        public double? ToOneZAR { get; set; }
+        public DateTime? LastZARUpdate { get; set; }
         public string CountryCode { get; set; }
         public string Iso2Code { get; set; }
         public string PhoneCode { get; set; }

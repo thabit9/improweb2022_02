@@ -30,10 +30,10 @@
                 Not Registered?
             </h4>
             <p class="border_"><span class="text-danger">Please Note:</span> You must already be Registered as an Esquire customer before you can Register Online<br /> If you are not registered as yet, <a href="#">Click Here.</a></p>
-            @if (ViewBag.error != null)
+            @if (ViewBag.Error != "")
             {
                 <div class="alert alert-danger" role="alert">
-                    @ViewBag.error
+                    @ViewBag.Error
                 </div>
             }
             <form asp-controller="customer" asp-action="register" method="post" class="form-horizontal" id="register-form" novalidate="novalidate">
@@ -52,7 +52,7 @@
                                             <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" asp-for="Customer.OrgID" asp-items="@Model.Organisations">
                                             </select>
                                         </div--> 
-                                        <input class="form-control remember" id="AccountName" data-val="true" data-val-required="'Organisation Name' should not be empty." name="AccountName" placeholder="Organisation Name" type="text" asp-for="Account.AccountName" >
+                                        <input class="form-control remember" id="AccountName" data-val="true" data-val-required="'Organisation Name' should not be empty." placeholder="Organisation Name" type="text" asp-for="Account.AccountName" >
                                         <span class="field-validation-valid" data-valmsg-for="AccountName" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                             <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" asp-for="Customer.AccountID" asp-items="@Model.Accounts">
                                             </select>
                                         </div--> 
-                                        <input class="form-control remember" id="AccountNo" data-val="true" data-val-required="'AccountNo' should not be empty." name="AccountNo" placeholder="Account Number" type="text"  asp-for="Account.AccountNo" >
+                                        <input class="form-control remember" id="AccountNo" data-val="true" data-val-required="'AccountNo' should not be empty." placeholder="Account Number" type="text"  asp-for="Account.AccountNo" >
                                         <span class="field-validation-valid" data-valmsg-for="AccountNo" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
@@ -71,8 +71,7 @@
                                     <div class="col-md-9">
                                         <div class="row xs-gutters">
                                             <div class="col">
-                                                <select class="date-part form-control noskin remember" data-minimum-results-for-search="100" data-native-menu="false" id="DefaultBranch" name="DefaultBranch"  data-val="true" data-val-required="'Select DefaultBranch'." >
-                                                    <option>Default Branch</option>
+                                                <select class="date-part form-control noskin remember" data-minimum-results-for-search="100" data-native-menu="false" id="DefaultBranch" asp-for="Account.DefaultBranch"  data-val="true" data-val-required="'Select DefaultBranch'." >
                                                     <option value="1">Midrand</option>
                                                     <option value="2">Cape Town</option>
                                                     <option value="3">Durban</option>
@@ -104,13 +103,13 @@
                                 </div>
                                 <div class="form-group rowx"><label class="col-md-3 col-form-label" for="FirstName">First name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="FirstName" data-val="true" data-val-required="'First Name' should not be empty." name="FirstName" placeholder="First Name" type="text" asp-for="Customer.FirstName">
+                                        <input class="form-control remember" id="FirstName" data-val="true" data-val-required="'First Name' should not be empty." placeholder="First Name" type="text" asp-for="Customer.FirstName">
                                         <span class="field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
                                 <div class="form-group rowx"><label class="col-md-3 col-form-label" for="LastName">Last name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="LastName" data-val="true" data-val-required="'LastName' should not be empty." name="Last Name" placeholder="Last Name" type="text" asp-for="Customer.Surname">
+                                        <input class="form-control remember" id="LastName" data-val="true" data-val-required="'LastName' should not be empty." placeholder="Last Name" type="text" asp-for="Customer.Surname">
                                         <span class="field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
@@ -296,7 +295,7 @@
                                 <div class="form-group rowx">
                                     <label class="col-md-3 col-form-label required" for="Tel1">Preferred Contact No:.</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="Tel1" data-val="true" data-val-required="'Telephone' should not be empty." name="Tel1" type="text" placeholder="Preferred Contact No" asp-for="Customer.Tel">
+                                        <input class="form-control remember" id="Tel1" data-val="true" data-val-required="'Telephone' should not be empty." type="text" placeholder="Preferred Contact No" asp-for="Customer.Tel">
                                         <span class="field-validation-valid" data-valmsg-for="Tel1" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
@@ -317,14 +316,14 @@
                                 <div class="form-group rowx">
                                     <label class="col-md-3 col-form-label required" for="Email">Email</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" data-val="true" data-val-email="'Email' is not a valid email address." data-val-required="'Email' should not be empty." id="Email" name="Email" type="email"  asp-for="Customer.Email">
+                                        <input class="form-control remember" data-val="true" data-val-email="'Email' is not a valid email address." data-val-required="'Email' should not be empty." id="Email" type="email"  asp-for="Customer.Email">
                                         <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
                                 <div class="form-group rowx">
                                     <label class="col-md-3 col-form-label required" for="Username">Username</label>
                                     <div class="col-md-9">
-                                        <input class="form-control remember" id="Username" data-val="true" data-val-email="'Email' is not a valid email address."  data-val-required="'Username' should not be empty." name="Username" type="text" asp-for="Customer.Email">
+                                        <input class="form-control remember" id="Username" data-val="true" data-val-email="'Email' is not a valid email address."  data-val-required="'Username' should not be empty." type="text" asp-for="Customer.Email">
                                         <span class="field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>

@@ -32,7 +32,7 @@
                     @ViewBag.error
                 </div>
             }
-            <form asp-controller="customer" asp-action="bilingAddress" method="post" class="form-horizontal" id="register-form" novalidate="novalidate">
+            <form asp-controller="customer" asp-action="billingaddress" method="post" class="form-horizontal" id="register-form" novalidate="novalidate">
                 <input name="__RequestVerificationToken" type="hidden" value="52-hh7HFzx16GakHg88WemFLTSgG8fYcOVQ1-rn9QYMldPMsc6b-Yil9GXxmWq9JYXr4SdAsGFNL8cvn0Sa8fcL1_UOCPx0IbuZ1ODC4g_s1">
                 <div class="page registration-page">
                     <div class="page-title border_">
@@ -41,8 +41,8 @@
                     <div class="page-body rowx">
                         <div class="col-12 col-lg-9 col-xl-8">
                             <fieldset class="content-group border_">
-                                <legend><span>Account Details</span></legend>
-                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="OrganisationName">Organisation Name</label>
+                                <legend><span>Address Details</span></legend>
+                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="OrganisationName">Postal Country</label>
                                     <div class="col-md-9">
                                         <div class="form-group">
                                             <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" asp-for="Customer.PostalCountry"  asp-items="@Model.Countries">
@@ -50,22 +50,72 @@
                                         </div> 
                                     </div>
                                 </div>
-                                <div class="form-group rowx">
-                                    <label class="col-md-3 col-form-label required" for="DefaultBranch">Default Branch:</label>
+                                
+                                <div class="form-group rowx"><label class="col-md-3 col-form-label" for="CDTown">Town or Suburb</label>
                                     <div class="col-md-9">
-                                        <div class="row xs-gutters">
-                                            <div class="col">
-                                                <select class="date-part form-control noskin remember" data-minimum-results-for-search="100" data-native-menu="false" id="DefaultBranch" name="DefaultBranch">
-                                                    <option>Default Branch</option>
-                                                    <option value="1">Midrand</option>
-                                                    <option value="2">Cape Town</option>
-                                                    <option value="3">Durban</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <span class="field-validation-valid" data-valmsg-for="DefaultBranch" data-valmsg-replace="true"></span>
+                                        <input class="form-control remember" id="CDTown" data-val="true" data-val-required="'Town/Suburb' should not be empty." placeholder="First Name" type="text" asp-for="Customer.CDTown">
+                                        <span class="field-validation-valid" data-valmsg-for="CDTown" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
+
+                                <div class="form-horizontal">  
+                                <div class="form-group row"><label class="col-sm-3 col-form-label required" for="NewAddress_Address1">Address 1</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" data-val="true" data-val-required="" id="NewAddress_Address1" name="NewAddress_Address1" type="text" value="">
+                                        <span class="field-validation-valid" data-valmsg-for="NewAddress.Address1" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row"><label class="col-sm-3 col-form-label" for="NewAddress_Address2">Address 2</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="NewAddress_Address2" name="NewAddress.Address2" placeholder="Optional" type="text" value="">
+                                        <span class="field-validation-valid" data-valmsg-for="NewAddress.Address2" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label required" for="NewAddress_City">City</label>
+                                    <div class="col-sm-9">
+                                        <div class="row sm-gutters d-flex">
+                                            <div class="col">
+                                                <input class="form-control" data-val="true" data-val-required="" id="NewAddress_City" name="NewAddress.City" placeholder="" type="text" value="">
+                                            </div>
+                                            <div class="col col-auto">
+                                                <label class="text-right col-form-label required" for="NewAddress_ZipPostalCode">Zip / postal code</label>
+                                            </div>
+                                            <div class="col col-auto">
+                                                <input class="form-control" data-val="true" data-val-required="" id="NewAddress_ZipPostalCode" asp-for="Customer.PostalCode" placeholder="" style="width: 6rem" type="text" value="">
+                                            </div>
+                                        </div>
+                                        <span class="field-validation-valid" data-valmsg-for="NewAddress.City" data-valmsg-replace="true"></span>
+                                        <span class="field-validation-valid" data-valmsg-for="NewAddress.ZipPostalCode" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="NewAddress_StateProvinceId">State / province</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field 'State / province' must be a number." id="NewAddress_StateProvinceId" name="NewAddress.StateProvinceId" tabindex="-1" aria-hidden="true">
+                                            <option value="0">Other (Non US)</option>
+                                        </select>
+                                        <span class="select2 select2-container select2-container--bootstrap" dir="ltr">
+                                            <span class="selection">
+                                                <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-NewAddress_StateProvinceId-container">
+                                                    <span class="select2-selection__rendered" id="select2-NewAddress_StateProvinceId-container" title="Other (Non US)">
+                                                        <span class="select2-option">Other (Non US)</span>
+                                                    </span>
+                                                    <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
+                                                </span>
+                                            </span>
+                                            <span class="dropdown-wrapper" aria-hidden="true"></span>
+                                        </span>
+                                        <span class="field-validation-valid" data-valmsg-for="NewAddress.StateProvinceId" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <hr>
+                                </div>
+
                             </fieldset>
                             <div class="form-group rowx">
                                 <div class="col">

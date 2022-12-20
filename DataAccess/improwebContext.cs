@@ -81,6 +81,8 @@ namespace improweb2022_02.DataAccess
         public virtual DbSet<Invoice> Invoices{ get; set; }
         public virtual DbSet<Wishlist> Wishlists{ get; set; }
         public virtual DbSet<InvoiceDetails> InvoiceDetails { get; set; }
+        public virtual DbSet<WEBBilling> WEBBillings { get; set; }
+        public virtual DbSet<WEBShipping> WEBShippings { get; set; }
 
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -319,6 +321,24 @@ namespace improweb2022_02.DataAccess
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Organisation_Customer");
             });
+            
+            modelBuilder.Entity<WEBBilling>(entity =>
+            {
+                entity.HasOne(c => c.Customer)
+                    .WithMany(b => b.WEBBillings)
+                    .HasForeignKey(c => c.CustID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Customer_Billing");
+            });            
+            modelBuilder.Entity<WEBShipping>(entity =>
+            {
+                entity.HasOne(c => c.Customer)
+                    .WithMany(b => b.WEBShippings)
+                    .HasForeignKey(c => c.CustID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Customer_Shipping");
+            });
+
             modelBuilder.Entity<Wishlist>(entity =>
             {
                 entity.HasOne(d => d.Customer)

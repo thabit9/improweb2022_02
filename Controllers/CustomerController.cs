@@ -10,6 +10,7 @@ using improweb2022_02.Models;
 using improweb2022_02.DataAccess;
 using improweb2022_02.ViewModels;
 using improweb2022_02.Security;
+using Microsoft.AspNetCore.Http;
 
 namespace improweb2022_02.Controllers
 {
@@ -38,6 +39,7 @@ namespace improweb2022_02.Controllers
         [Route("register")]
         public IActionResult Register(CustomerViewModel customerViewModel)
         {
+            ViewBag.Error = "";
             var account = _db.Accounts.Count(ac => ac.AccountNo.Equals(customerViewModel.Account.AccountNo)) > 0;
             if(account){
 
@@ -49,7 +51,7 @@ namespace improweb2022_02.Controllers
                     customerViewModel.Customer.Active = true;
                     customerViewModel.Customer.DateCreated = DateTime.Now;
                     customerViewModel.Customer.AccountID = account_.AccountID;
-                    
+
                     _db.Customers.Add(customerViewModel.Customer);
                     _db.SaveChanges();
                     var CustID = customerViewModel.Customer.CustID;
@@ -64,17 +66,18 @@ namespace improweb2022_02.Controllers
                     _db.RoleAccounts.Add(roleAccount);
                     _db.SaveChanges();*/
 
-                    return RedirectToAction("billingaddress", "Customer", CustID);
+
+                    return RedirectToAction("billingaddress", "Customer", new {custId = CustID});
                 }
                 else
                 {
-                    ViewBag.error = "Customer email already exist.";
+                    ViewBag.Error = "Customer email already exist.";
                     return RedirectToAction("register", "Customer", customerViewModel);
                 }
             }
             else
             {
-                ViewBag.error = "Account doesn't exist. Please Register an account first";
+                ViewBag.Error = "Account doesn't exist. Please Register an account first";
                 return RedirectToAction("register", "Customer", customerViewModel);
             }
 
@@ -95,9 +98,42 @@ namespace improweb2022_02.Controllers
         [Route("billingaddress")]
         public IActionResult BillingAddress(CustomerViewModel customerViewModel)
         {
-            _db.Entry(customerViewModel.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _db.SaveChanges();
-            return RedirectToAction("login", "Customer");
+            try{
+                var currentCustomer = _db.Customers.Find(customerViewModel.Customer.CustID);
+                if(currentCustomer != null){
+
+                   var postalAddr = Request.Form["NewAddress_Address1"];
+                   var postalAddr2 = Request.Form["NewAddress_Address2"];
+                   var postalCity = Request.Form["NewAddress_City"];
+
+                   var Address = "";
+                   if(postalAddr != ""){
+                        Address = Address + postalAddr + ",";
+                   }
+                   if(postalAddr2 != ""){
+                        Address = Address + postalAddr2 + ",";
+                   }
+                   if(postalAddr != ""){
+                        Address = Address + postalCity + ",";
+                   }
+                   currentCustomer.PostalAdd =  Address.ToString();
+                   currentCustomer.PostalCountry = customerViewModel.Customer.PostalCountry;
+                   currentCustomer.PostalCode = customerViewModel.Customer.PostalCode;
+                   if(customerViewModel.Customer.PostalCountry.ToString().ToLower() != "south africa"){
+                        currentCustomer.PostalType = "ToCountry";
+                   }else{
+                        currentCustomer.PostalType = "ToDoorDomestic";
+                   }
+                }
+
+                //_db.Entry(customerViewModel.Customer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("login", "Customer");
+            }catch
+            {
+                throw;
+            }
+
         }
 
 

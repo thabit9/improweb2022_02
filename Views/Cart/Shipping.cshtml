@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+@model improweb2022_02.ViewModels.CountryViewModel;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="index" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Cart Items</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="BillingAddress" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Address</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Shipping</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <!-- #region Product Detail -->
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="costeps row no-gutters">
+                <div class="col-2 costep visited border_" data-step="cart">
+                    <a class="costep-link" asp-controller="cart" asp-action="index">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Cart</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="address">
+                    <a class="costep-link" asp-controller="cart" asp-action="BillingAddress">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Address</span>
+                    </a>
+                </div>
+                <div class="col-2 costep active border_" data-step="shipping">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Shipping</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="payment">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Payment</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="confirm">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Confirm</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="complete">
+                    <a class="costep-link" href="javascript:void(0)">
+                    <i class="costep-icon"></i>
+                    <span class="costep-label">Complete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="page shopping-cart-page">
+                <div class="page-title border_">
+                    <h1 class="h3">Shipping</h1>
+                </div>
+                <div class="page-body checkout-data">
+                    <form action="/frontend/en/checkout/shippingmethod" method="post">				
+                        <ul class="list-group opt-list shipping-options">
+                            <li class="list-group-item opt-list-item shipping-option-item active">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="shippingoption_0" type="radio" name="shippingoption" class="opt-radio form-check-input" checked="checked" value="Abholung___Shipping.FixedRate">
+                                        <label class="form-check-label" for="shippingoption_0">
+                                            <span class="opt-name" dir="auto">Collect from shop</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="opt-info text-muted shipping-option-description">
+                                    <div dir="auto">
+                                        Holen Sie Ihre Bestellung direkt bei uns ab.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item opt-list-item shipping-option-item">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="shippingoption_1" type="radio" name="shippingoption" class="opt-radio form-check-input" value="Versand___Shipping.FixedRate">
+                                        <label class="form-check-label" for="shippingoption_1">
+                                            <span class="opt-name" dir="auto">Pay upon Delivery</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="opt-info text-muted shipping-option-description">
+                                    <div dir="auto">
+                                        Ihre Bestellung wird Ihnen durch unsere Versandpartner zugestellt.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item opt-list-item shipping-option-item">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="shippingoption_2" type="radio" name="shippingoption" class="opt-radio form-check-input" value="Lieferung ab Italien per Spedition___Shipping.FixedRate">
+                                        <label class="form-check-label" for="shippingoption_2">
+                                            <span class="opt-name" dir="auto">Lieferung ab Italien per Spedition</span>
+                                        </label>
+                                    </div>
+                                    <div class="opt-fee shipping-fee text-danger">
+                                        $61.20
+                                    </div>
+                                </div>
+                                <div class="opt-info text-muted shipping-option-description">
+                                    <div dir="auto">
+                                        Der Versand wird in Ihrem Auftrage von uns in die Wege geleitet. Bei Bestellungen unter 300,- Euro berechnen wir einen Mindermengenaufschlag in Höhe von 30,- Euro.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item opt-list-item shipping-option-item">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="shippingoption_3" type="radio" name="shippingoption" class="opt-radio form-check-input" value="Selbstabholung___Shipping.FixedRate">
+                                        <label class="form-check-label" for="shippingoption_3">
+                                            <span class="opt-name" dir="auto">Card Payments</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="opt-info text-muted shipping-option-description">
+                                    <div dir="auto">
+                                        Abholung ab Lager in Italien. 5% Discount
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="buttons">
+                            <a class="btn btn-secondary btn-lg" asp-controller="cart" asp-action="BillingAddress">
+                                <i class="fa fa-angle-left"></i>
+                                <span>Back</span>
+                            </a>    
+                            <input type="submit" name="nextstep" id="nextstep" class="d-none">
+                            <button class="btn btn-warning btn-lg shipping-method-next-step-button" onclick="$('#nextstep').trigger('click');return false;">
+                                <span>Next</span>
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

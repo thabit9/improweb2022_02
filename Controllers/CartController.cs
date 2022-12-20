@@ -9,6 +9,7 @@ using improweb2022_02.Models;
 using improweb2022_02.DataAccess;
 using improweb2022_02.Helpers;
 using System.Security.Claims;
+using improweb2022_02.ViewModels;
 
 namespace improweb2022_02.Controllers
 {
@@ -218,15 +219,58 @@ namespace improweb2022_02.Controllers
             return View("Thanks");
         }
 
+        [HttpGet]
         [Route("billingaddress")]
         public IActionResult BillingAddress()
         {
-            return View("BillingAddress");
+            var user = User.FindFirst(ClaimTypes.Name);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Customer");
+            }
+            else
+            {
+                var customer = _db.Customers.SingleOrDefault(a => a.Email.Equals(user.Value));
+                ViewBag.customer = customer;
+                //get the billing Address
+                var billingAddress = _db.WEBBillings.Where(b => b.CustID == customer.CustID).ToList();
+                ViewBag.BillingAddress = billingAddress;
+                //populate countries
+                var countryViewModel = new CountryViewModel();
+                countryViewModel.Countries = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_db.Countries.ToList(), "CountryId", "Name"); 
+                 
+                return View("BillingAddress");   
+            }
         }
+
         [Route("shippingaddress")]
         public IActionResult ShippingAddress()
         {
             return View("ShippingAddress");
+        }
+
+        [Route("shipping")]
+        public IActionResult Shipping()
+        {
+            return View("Shipping");
+        }
+
+        [Route("payment")]
+        public IActionResult Payment()
+        {
+            return View("Payment");
+        }
+
+        [Route("confirm")]
+        public IActionResult Confirm()
+        {
+            return View("Confirm");
+        }
+
+        [Route("complete")]
+        public IActionResult Complete()
+        {
+            return View("Complete");
         }
 
         public int exists(Int64 id, List<Item> cart)

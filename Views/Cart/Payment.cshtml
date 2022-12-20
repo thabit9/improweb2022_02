@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+@model improweb2022_02.ViewModels.CountryViewModel;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="index" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Cart Items</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="BillingAddress" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Address</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Payment</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <!-- #region Product Detail -->
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="costeps row no-gutters">
+                <div class="col-2 costep visited border_" data-step="cart">
+                    <a class="costep-link" asp-controller="cart" asp-action="index">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Cart</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="address">
+                    <a class="costep-link" asp-controller="cart" asp-action="BillingAddress">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Address</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="shipping">
+                    <a class="costep-link" asp-controller="cart" asp-action="Shipping">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Shipping</span>
+                    </a>
+                </div>
+                <div class="col-2 costep active border_" data-step="payment">
+                    <a class="costep-link" href="javascript:void(0)">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Payment</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="confirm">
+                    <a class="costep-link" href="javascript:void(0)">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Confirm</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="complete">
+                    <a class="costep-link" href="javascript:void(0)">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Complete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="page shopping-cart-page">
+                <div class="page-title border_">
+                    <h1 class="h3">Select payment method</h1>
+                </div>
+                <div class="page-body checkout-data">
+                    <form action="/frontend/en/checkout/shippingmethod" method="post">				
+                        <ul class="list-group opt-list payment-methods">
+                            <li class="list-group-item opt-list-item payment-method-item active">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="paymentmethod_0" type="radio" name="paymentmethod" data-has-info="true" data-lazy-info="false" class="opt-radio form-check-input" value="Payments.Prepayment" checked="checked">
+                                        <label class="form-check-label" for="paymentmethod_0">
+                                            <span class="opt-name">Prepayment</span>
+                                        </label>
+                                    </div>    
+                                </div>
+                                <div class="opt-info payment-method-info" data-system-name="Payments.Prepayment">
+                                    <div class="text-muted">
+                                        Once your order is placed, you will be contacted by our staff to confirm the order.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item opt-list-item payment-method-item">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="paymentmethod_1" type="radio" name="paymentmethod" data-has-info="true" data-lazy-info="false" class="opt-radio form-check-input" value="Payments.PayInStore">
+                                        <label class="form-check-label" for="paymentmethod_1">
+                                            <span class="opt-name">Pay in store</span>
+                                        </label>
+                                    </div>  
+                                </div>
+                                <div class="opt-info payment-method-info" data-system-name="Payments.PayInStore">
+                                    <div class="text-muted">
+                                        Reserve items at your local store, and pay in store when you pick up your order.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item opt-list-item payment-method-item">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="paymentmethod_2" type="radio" name="paymentmethod" data-has-info="true" data-lazy-info="true" class="opt-radio form-check-input" value="Payments.Manual">
+                                        <label class="form-check-label" for="paymentmethod_2">
+                                            <span class="opt-name">Credit card (manual)</span>
+                                        </label>
+                                    </div>         
+                                </div>
+                            </li>
+                            <li class="list-group-item opt-list-item payment-method-item">
+                                <div class="opt-data">
+                                    <div class="form-check opt-control option-name radio">
+                                        <input id="paymentmethod_3" type="radio" name="paymentmethod" data-has-info="true" data-lazy-info="false" class="opt-radio form-check-input" value="Payments.CashOnDelivery">
+                                        <label class="form-check-label" for="paymentmethod_3">
+                                            <span class="opt-name">Cash on delivery</span>
+                                        </label>
+                                    </div>                               
+                                </div>
+                                <div class="opt-info payment-method-info" data-system-name="Payments.CashOnDelivery">
+                                    <div class="text-muted">
+                                        Once your order is placed, you will be contacted by our staff to confirm the order.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="buttons">
+                            <a class="btn btn-secondary btn-lg" asp-controller="cart" asp-action="BillingAddress">
+                                <i class="fa fa-angle-left"></i>
+                                <span>Back</span>
+                            </a>    
+                            <input type="submit" name="nextstep" id="nextstep" class="d-none">
+                            <button class="btn btn-warning btn-lg shipping-method-next-step-button" onclick="$('#nextstep').trigger('click');return false;">
+                                <span>Next</span>
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

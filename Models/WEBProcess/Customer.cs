@@ -15,6 +15,8 @@ namespace improweb2022_02.Models
             ReviewProducts = new HashSet<ReviewProduct>();
             ReviewFlags = new HashSet<ReviewFlags>();
             Wishlists = new HashSet<Wishlist>();
+            WEBBillings = new HashSet<WEBBilling>();
+            WEBShippings = new HashSet<WEBShipping>();
         }
 
         [Key]
@@ -117,8 +119,8 @@ namespace improweb2022_02.Models
         public virtual ICollection<ReviewProduct> ReviewProducts { get; set; }
         public virtual ICollection<ReviewFlags> ReviewFlags { get; set; }
         public virtual ICollection<Wishlist> Wishlists { get; set; }
-
-
+        public virtual ICollection<WEBBilling> WEBBillings { get; set; }
+        public virtual ICollection<WEBShipping> WEBShippings { get; set; }
 
     }
 }

@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+@model improweb2022_02.ViewModels.CountryViewModel;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="index" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Cart Items</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="BillingAddress" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Address</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="Shipping" title="Shipping" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Shipping</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="Payment" title="Payment" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Payment</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="Confirm" title="Confirm" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Confirm</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Complete</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <!-- #region Product Detail -->
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="costeps row no-gutters">
+                <div class="col-2 costep visited border_" data-step="cart">
+                    <a class="costep-link" asp-controller="cart" asp-action="index">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Cart</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="address">
+                    <a class="costep-link" asp-controller="cart" asp-action="BillingAddress">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Address</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="shipping">
+                    <a class="costep-link" asp-controller="cart" asp-action="Shipping">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Shipping</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="payment">
+                    <a class="costep-link" asp-controller="cart" asp-action="Payment">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Payment</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="confirm">
+                    <a class="costep-link"  asp-controller="cart" asp-action="Confirm">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Confirm</span>
+                    </a>
+                </div>
+                <div class="col-2 costep active border_" data-step="complete">
+                    <a class="costep-link" href="javascript:void(0)">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Complete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="page checkout-completed-page">
+                <div class="heading mt-3">
+                    <h1 class="heading-title font-weight-light border_">Your order has been received</h1>
+                </div>
+                <h3 class="text-muted font-weight-light border_">
+                    Thank you for your purchase!
+                </h3>   
+                <div class="page-body checkout-data pt-4 border_">
+                    <div class="order-completed">    
+                        <div class="body fs-h5">
+                            <p>
+                                <span>Your order number:</span>
+                                <a rel="nofollow" href="/frontend/en/order/details/15525/"><strong>15525</strong></a>
+                            </p>
+                        </div>
+                        <p class="pt-3 mb-5">
+                            <a class="btn btn-warning" rel="nofollow" href="/frontend/en/order/details/15525/">
+                                <span>Order details</span>
+                            </a>
+                            <a class="btn btn-secondary order-completed-continue-button" href="/frontend/en">
+                                <span>Continue shopping</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>                   
+        </div>
+    </div>
+</div>
+

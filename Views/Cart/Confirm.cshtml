@@ -1,0 +1,444 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using improweb2022_02.Models;
+@using Microsoft.AspNetCore.Http.Extensions
+@model improweb2022_02.ViewModels.CountryViewModel;
+
+<div id="content" class="container">
+    <div class="row">
+        <!-- #region BreadCrump -->
+        <div class="breadcrumb-container d-none d-md-flex flex-wrap align-items-center mb-4 border_">
+            <ol class="breadcrumb mb-0 border_" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="home" asp-action="index" title="Top" itemprop="item">
+                        <meta itemprop="name" content="Home page" />
+                        <meta itemprop="position" content="1" />
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="index" title="Cart" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Cart Items</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="BillingAddress" title="BillingAddress" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Address</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                    <a asp-controller="cart" asp-action="Shipping" title="Shipping" itemprop="item">
+                        <meta itemprop="position" content="2"><span itemprop="name" dir="auto">Shipping</span>
+                    </a>
+                </li>
+            </ol>
+            <div class="breadcrumb-item active border_">
+                <span>Confirm</span>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </div>
+    <div id="content-body" class="row">
+        <!-- #region Product Detail -->
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="costeps row no-gutters">
+                <div class="col-2 costep visited border_" data-step="cart">
+                    <a class="costep-link" asp-controller="cart" asp-action="index">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Cart</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="address">
+                    <a class="costep-link" asp-controller="cart" asp-action="BillingAddress">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Address</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="shipping">
+                    <a class="costep-link" asp-controller="cart" asp-action="Shipping">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Shipping</span>
+                    </a>
+                </div>
+                <div class="col-2 costep visited border_" data-step="payment">
+                    <a class="costep-link" asp-controller="cart" asp-action="Payment">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Payment</span>
+                    </a>
+                </div>
+                <div class="col-2 costep active border_" data-step="confirm">
+                    <a class="costep-link" href="javascript:void(0)">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Confirm</span>
+                    </a>
+                </div>
+                <div class="col-2 costep inactive border_" data-step="complete">
+                    <a class="costep-link" href="javascript:void(0)">
+                        <i class="costep-icon"></i>
+                        <span class="costep-label">Complete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="content-center" class="col-lg-12 border_">
+            <div class="page checkout-confirm-page">
+                <div class="page-title">
+                    <h1 class="h3">Please confirm your order.</h1>
+                </div>
+                <div class="page-body checkout-data">
+                    <form id="confirm-order-form" method="post" action="/frontend/en/checkout/confirm/">
+                        <p class="page-intro lead">
+                            Please verify the order total and the specifics regarding the billing address and, if required, the shipping address. You can make corrections to your entry anytime by clicking on <strong>back</strong>. If everything is as it should be, deliver your order to us by clicking <strong>confirm</strong>.
+                        </p>
+                        <input type="hidden" id="customercommenthidden" name="customercommenthidden">
+                        <div id="terms-of-service-consent-box" class="card mb-3">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input id="termsofservice" type="checkbox" name="termsofservice" class="form-check-input">
+                                    <label class="mb-0 form-check-label" for="termsofservice">I agree with the <a class="terms-trigger read" href="/frontend/en/conditionsofuse/?popup=true" data-toggle="modal" data-target="#terms-of-service-modal">terms of service</a> and I adhere to them unconditionally. I've read the <a class="terms-trigger read" href="/frontend/en/privacyinfo/?popup=true" data-toggle="modal" data-target="#terms-of-service-modal">privacy terms</a> and agree that my data given by me can be stored electronically.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="confirm-warnings" class="confirm-order">
+                        </div>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8FRUy5qHdnNFsutyiu6BACW2sqennFfcSDtWiy6nD3KEMTO0URl_L0Wjp1VsANXC-UqvdqH31gz4bI5JRipYtKj5Sd-scObNEaIQwPFl7X7TsD_roG6l2NX3Z6bqGdzKc-uGqxorcI4wkO04O1RkwHv6HViUpKcn5mH4lAaQdRGWyoGsHxxrTEWjNquQL3EIYA">
+                    </form>
+                    <div class="order-summary-body mb-4">
+                        <div class="order-summary-content cart-content" data-empty-text="Your Shopping Cart is empty!">
+                            <div class="card card-body order-review-data-box mb-3">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col mb-4 mb-lg-0 billinginfo">
+                                                <div class="row sm-gutters">
+                                                    <div class="col">
+                                                        <div class="heading">
+                                                            <h5 class="heading-title font-weight-medium">Billing Address</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <a class="btn btn-primary btn-sm change-checkout-data change-billing-address" href="/frontend/en/checkout/billingaddress/">
+                                                        Change
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <div class="name">
+                                                        Mohammed Gaber
+                                                    </div>
+                                                    <div class="address1">
+                                                        20 st El-Gheryany from Wekalet El-Laymon
+                                                    </div>
+                                                    <div class="address2">
+                                                        Egypt
+                                                    </div>
+                                                    <div class="city-state-zip">
+                                                        Alexandria, Bayern 21519
+                                                    </div>
+                                                    <div class="country">
+                                                        Deutschland
+                                                    </div>
+                                                </div>
+                                                <div class="email">
+                                                    <span class="pr-1">Email:</span>
+                                                    <span>m.gaber2020@gmail.com</span>
+                                                </div>
+                                                <div class="phone">
+                                                    <span>Phone:</span>
+                                                    <span>1110331771</span>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-4 mb-lg-0 shippinginfo">
+                                                <div class="row sm-gutters">
+                                                    <div class="col">
+                                                        <div class="heading">
+                                                            <h5 class="heading-title font-weight-medium">Shipping Address</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <a class="btn btn-primary btn-sm change-checkout-data change-shipping-address" href="/frontend/en/checkout/shippingaddress/">
+                                                        Change
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <div class="name">
+                                                        Mohammed Gaber
+                                                    </div>
+                                                    <div class="address1">
+                                                        20 st El-Gheryany from Wekalet El-Laymon
+                                                    </div>
+                                                    <div class="address2">
+                                                        Egypt
+                                                    </div>
+                                                    <div class="city-state-zip">
+                                                        Alexandria, Bayern 21519
+                                                    </div>
+                                                    <div class="country">
+                                                        Deutschland
+                                                    </div>
+                                                </div>
+                                                <div class="email">
+                                                    <span class="pr-1">Email:</span>
+                                                    <span>m.gaber2020@gmail.com</span>
+                                                </div>
+                                                <div class="phone">
+                                                    <span>Phone:</span>
+                                                    <span>1110331771</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row sm-gutters">
+                                                    <div class="col">
+                                                        <div class="heading">
+                                                            <h5 class="heading-title font-weight-medium">Shipping Method</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>Abholung</p>
+                                                <div class="row sm-gutters">
+                                                    <div class="col">
+                                                        <div class="heading">
+                                                            <h5 class="heading-title font-weight-medium">Payment Method</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col col-auto">
+                                                        <a class="btn btn-primary btn-sm change-checkout-data change-payment-method" href="/frontend/en/checkout/paymentmethod/">
+                                                            Change
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <p>Prepayment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row d-none">
+                                    <div class="billinginfo col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-header d-flex flex-nowrap justify-content-between">
+                                                <h5 class="m-0">Billing Address</h5>
+                                                <a class="change-checkout-data change-billing-address" href="/frontend/en/checkout/billingaddress/">
+                                                    Change
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-2">
+                                                    <div class="name">
+                                                        Mohammed Gaber
+                                                    </div>
+                                                    <div class="address1">
+                                                        20 st El-Gheryany from Wekalet El-Laymon
+                                                    </div>
+                                                    <div class="address2">
+                                                        Egypt
+                                                    </div>
+                                                    <div class="city-state-zip">
+                                                        Alexandria, Bayern 21519
+                                                    </div>
+                                                    <div class="country">
+                                                        Deutschland
+                                                    </div>
+                                                </div>
+                                                <div class="email">
+                                                    <span class="pr-1">Email:</span>
+                                                    <span>m.gaber2020@gmail.com</span>
+                                                </div>
+                                                <div class="phone">
+                                                    <span>Phone:</span>
+                                                    <span>1110331771</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="shippinginfo col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-header d-flex flex-nowrap justify-content-between">
+                                                <h5 class="m-0">Shipping Address</h5>
+                                                <a class="change-checkout-data change-shipping-address" href="/frontend/en/checkout/shippingaddress/">
+                                                    Change
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-2">
+                                                    <div class="name">
+                                                        Mohammed Gaber
+                                                    </div>
+                                                    <div class="address1">
+                                                        20 st El-Gheryany from Wekalet El-Laymon
+                                                    </div>
+                                                    <div class="address2">
+                                                        Egypt
+                                                    </div>
+                                                    <div class="city-state-zip">
+                                                        Alexandria, Bayern 21519
+                                                    </div>
+                                                    <div class="country">
+                                                        Deutschland
+                                                    </div>
+                                                </div>
+                                                <div class="email">
+                                                    <span class="pr-1">Email:</span>
+                                                    <span>m.gaber2020@gmail.com</span>
+                                                </div>
+                                                <div class="phone">
+                                                    <span>Phone:</span>
+                                                    <span>1110331771</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment-method mb-3 d-none">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-nowrap justify-content-between">
+                                            <h5 class="m-0">Payment Method</h5>
+                                            <a class="change-checkout-data change-payment-method" href="/frontend/en/checkout/paymentmethod/">
+                                                Change
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            Prepayment
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shipping-method mb-3 d-none">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-nowrap justify-content-between">
+                                            <h5 class="m-0">Shipping Method</h5>
+                                            <a class="change-checkout-data change-shipping-method" href="/frontend/en/checkout/shippingmethod/">
+                                                Change
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            Abholung
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment-box card mb-3">
+                                <div class="card-header h5">
+                                    Do you want to tell us something regarding this order?
+                                </div>
+                                <div class="card-body">
+                                    <textarea placeholder="Optional" class="form-control" id="CustomerComment" name="CustomerComment"></textarea>
+                                </div>
+                            </div>
+                            <form method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" action="/frontend/en/cart/">
+                                <div class="card">
+                                    <div id="cart-items" class="cart mb-0">
+                                        <div class="cart-head">
+                                            <div class="cart-row">
+                                                <div class="cart-col cart-col-main">
+                                                    Product(s)
+                                                </div>
+                                                <div class="cart-col cart-col-price">
+                                                    Price
+                                                </div>
+                                                <div class="cart-col cart-col-qty">
+                                                    Qty.
+                                                </div>
+                                                <div class="cart-col cart-col-price cart-col-subtotal">
+                                                    Total
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart-body">
+                                            <div class="cart-row">
+                                                <div class="cart-col cart-col-main">
+                                                    <div class="row sm-gutters">
+                                                        <div class="col cart-item-img">
+                                                            <img class="img-fluid file-img" src="//core.smartstore.com/frontend/media/406/catalog/armelloses-shirt-meccanica.jpg?size=256" alt="Picture of Ärmelloses Shirt Meccanica" title="Show details for Ärmelloses Shirt Meccanica">
+                                                        </div>
+                                                        <div class="col">
+                                                            <a class="cart-item-link" href="/frontend/en/aermelloses-shirt-meccanica?color-223-0-183=3556&amp;size-223-0-184=3557" title="Description">Ärmelloses Shirt Meccanica</a>
+                                                            <div class="cart-item-attrs fs-sm my-2">
+                                                            </div>
+                                                            <div class="attributes text-muted fs-sm mb-2">
+                                                                Color: Rot<br>Größe: XS
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-col cart-col-price" data-caption="Price">
+                                                    <span class="price">$38.76</span>
+                                                </div>
+                                                <div class="cart-col cart-col-qty" data-caption="Quantity">
+                                                    <span>1</span>
+                                                </div>
+                                                <div class="cart-col cart-col-price cart-col-subtotal" data-caption="Total">
+                                                    <span class="price">$38.76</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart-footer rounded-bottom">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div id="order-totals">
+                                                    <table class="cart-summary">
+                                                        <tbody>
+                                                            <tr class="cart-summary-subtotal">
+                                                                <td class="cart-summary-label">Subtotal:</td>
+                                                                <td class="cart-summary-value">$38.76</td>
+                                                            </tr>
+                                                            <tr class="cart-summary-shipping">
+                                                                <td class="cart-summary-label">
+                                                                    <span class="text-nowrap">Shipping:</span>
+                                                                    <span class="font-weight-medium">
+                                                                        Abholung
+                                                                    </span>
+                                                                </td>
+                                                                <td class="cart-summary-value">
+                                                                    <span class="cart-summary-neg">$0.00</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="cart-summary-tax">
+                                                                <td class="cart-summary-label">Tax:</td>
+                                                                <td class="cart-summary-value">$6.46</td>
+                                                            </tr>
+                                                            <tr class="cart-summary-total">
+                                                                <td class="cart-summary-label">Total:</td>
+                                                                <td class="cart-summary-value">
+                                                                    <span>$38.76</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>                     
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8FRUy5qHdnNFsutyiu6BACW2sqennFfcSDtWiy6nD3KEMTO0URl_L0Wjp1VsANXC-UqvdqH31gz4bI5JRipYtKj5Sd-scObNEaIQwPFl7X7TsD_roG6l2NX3Z6bqGdzKc-uGqxorcI4wkO04O1RkwHv6HViUpKcn5mH4lAaQdRGWyoGsHxxrTEWjNquQL3EIYA">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="cart-buttons my-4 row">
+                        <div class="col-sm-6 col-lg-4 order-last order-sm-first mt-3 mt-sm-0">
+                            <a class="btn btn-secondary btn-lg btn-block" href="/frontend/en/checkout/paymentmethod/">
+                                <i class="fa fa-angle-left mr-3"></i>
+                                <span>Back</span>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 ml-lg-auto">
+                            <button class="btn btn-danger btn-lg btn-block btn-buy" onclick="return false;">
+                                <span>Confirm</span>
+                                <i class="fa fa-angle-right ml-3"></i>
+                            </button>
+                        </div>
+                    </div>     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
