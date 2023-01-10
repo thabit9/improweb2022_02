@@ -6,6 +6,23 @@
 @using Microsoft.AspNetCore.Http.Extensions
 @model improweb2022_02.ViewModels.CountryViewModel;
 
+<style>
+    .hidden {
+        display: none;
+    }
+    li {
+        font-size: 18px;
+        list-style-type: none;
+    }
+    #results {
+        display: block;
+        text-align: center;
+    }
+    #paygate {
+        display: none;
+    }
+</style>
+
 <div id="content" class="container">
     <div class="row">
         <!-- #region BreadCrump -->
@@ -434,11 +451,88 @@
                                 <span>Confirm</span>
                                 <i class="fa fa-angle-right ml-3"></i>
                             </button>
+
+                            @if(ViewBag == "PayWeb"){
+                                <button class="btn btn-danger btn-lg btn-block btn-buy" id="btn-pay">
+                                    <span>Confirm</span>
+                                    <i class="fa fa-angle-right ml-3"></i>
+                                </button>
+                            }
+
+                            @if(ViewBag.Paymethod == "PayPal")
+                            {
+                                var i = 1;
+                                <form method="post" enctype="multipart/form-data" action="@ViewBag.payPalConfig.PostUrl">  
+                                    <input type="hidden" name="upload" value="1"/>
+                                    <input type="hidden" name="return" value="@ViewBag.payPalConfig.ReturnUrl"/>
+                                    <input type="hidden" name="cmd" value="_cart"/>
+                                    <input type="hidden" name="business" value="@ViewBag.payPalConfig.Business"/>
+                                    <input type="hidden" name="upload" value="1"/>                            
+                                    @foreach (var productInfo in ViewBag.cart)
+                                    {
+                                        <input type="hidden" name="item_number_@i" value="@productInfo.ProdID" />
+                                        <input type="hidden" name="item_name_@i" value="@Html.Encode(productInfo.Description.ToString()).Substring(0,50)" />
+                                        <input type="hidden" name="amount_@i" value="@productInfo.PurchasePrice" />
+                                        <input type="hidden" name="quantity_@i" value="@productInfo.Quantity" />
+                                        i++;
+                                    }
+                                    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
+                                </form>
+                            }
                         </div>
-                    </div>     
+                    </div> 
+
+                    @if(ViewBag == "PayWeb"){
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-4 ml-lg-auto">
+                                <p class="text-center">
+                                    <ul class="text-info" id="results"></ul>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hidden">
+                            <form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST">
+                                <input id="PAY_REQUEST_ID" name="PAY_REQUEST_ID" type="hidden" />
+                                <input id="CHECKSUM" name="CHECKSUM" type="hidden" />
+                                <input id="REDIRECT" type="submit" />
+                            </form>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $('#btn-pay').on('click', function () {
+        let node = document.createElement("li");
+        node.innerText = "Processing...";
+        document.querySelector("#results").appendChild(node);
+        $.get(`/pay/getrequest`)
+            .done(data => success(data))
+            .fail(err => error(err));
+    });
+    function success(data) {
+        let requestNode = document.createElement("li");
+        requestNode.innerText = "Request retrieved";
+        document.querySelector("#results").appendChild(requestNode);
+        requestNode.innerText = data.message;
+        if (data.success) {
+            $("#PAY_REQUEST_ID").val(data.results.PAY_REQUEST_ID);
+            $("#CHECKSUM").val(data.results.CHECKSUM);
+            let redirectNode = document.createElement("li");
+            redirectNode.innerText = "Redirecting...";
+            document.querySelector("#results").appendChild(redirectNode);
+            document.querySelector("#REDIRECT").click();
+        }
+    }
+    function error(data) {
+        console.log("Error");
+        let node = document.createElement("li");
+        node.innerText = data;
+        document.querySelector("#results").appendChild(node);
+    }
+</script>
 

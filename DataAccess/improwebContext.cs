@@ -1,4 +1,5 @@
 using improweb2022_02.Models;
+using improweb2022_02.PayGate;
 using Microsoft.EntityFrameworkCore;
 
 namespace improweb2022_02.DataAccess
@@ -83,7 +84,8 @@ namespace improweb2022_02.DataAccess
         public virtual DbSet<InvoiceDetails> InvoiceDetails { get; set; }
         public virtual DbSet<WEBBilling> WEBBillings { get; set; }
         public virtual DbSet<WEBShipping> WEBShippings { get; set; }
-
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 

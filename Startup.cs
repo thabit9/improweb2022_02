@@ -20,10 +20,10 @@ namespace improweb2022_02
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -40,7 +40,7 @@ namespace improweb2022_02
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
-            var connection = Configuration.GetConnectionString("improwebDbContextCon");
+            var connection = _configuration.GetConnectionString("improwebDbContextCon");
             services.AddDbContext<improwebContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connection));
         }
 
