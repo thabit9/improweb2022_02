@@ -7,20 +7,20 @@ using System.Net;
 using System.Web;
 using Microsoft.Extensions.Configuration;
 
-namespace improweb2022_02.Services.CourierMate
+namespace improweb2022_02.Helpers
 {
-    public class CourierMateService
+    public class WebConfigService
     {
-        public static CourierMateConfig getCourierConfig()
+        public static WebConfig getWebConfig()
         {
             var builder = new ConfigurationBuilder()
                                 .SetBasePath(Directory.GetCurrentDirectory())
                                 .AddJsonFile("appsettings.json");
             var _configuration = builder.Build();
-            return new CourierMateConfig(){
-                End_Point = _configuration["CourierMate:End_point"],
-                Username = _configuration["CourierMate:Username"],
-                Password = _configuration["CourierMate:Password"]
+            return new WebConfig(){
+                OrgID = long.Parse(_configuration["appSettings:OrgID"]),
+                CurrencyFormat = _configuration["appSettings:CurrencyFormat"],
+                CurrencyFormat2 = _configuration["appSettings:CurrencyFormat_backup"]
             };
         }
     }

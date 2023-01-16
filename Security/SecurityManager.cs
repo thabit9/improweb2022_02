@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using improweb2022_02.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace improweb2022_02.Security
 {
@@ -86,6 +87,24 @@ namespace improweb2022_02.Security
         {
             await httpContext.SignOutAsync(/*schema*/);
         }
+
+        /*public static bool isLogin()
+        {
+            bool p = false;
+            try
+            {
+                //var user = User.FindFirst(ClaimTypes.Name);
+                HttpSessionState session = HttpContext.Current.Session;
+                if ((bool)session["isLogin"])
+                    p = true;
+            }
+            catch
+            {
+                p = false;
+            }
+            return p;
+        }*/
+
 
     }
 }
