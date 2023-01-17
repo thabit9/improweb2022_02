@@ -20,7 +20,16 @@ namespace improweb2022_02.Helpers
             return new WebConfig(){
                 OrgID = long.Parse(_configuration["appSettings:OrgID"]),
                 CurrencyFormat = _configuration["appSettings:CurrencyFormat"],
-                CurrencyFormat2 = _configuration["appSettings:CurrencyFormat_backup"]
+                CurrencyFormat2 = _configuration["appSettings:CurrencyFormat_backup"],
+                internetExpressWebID = _configuration["GlobalSettings:internetExpressWebID"],
+                DefaultPrice = _configuration["appSettings:DefaultPrice"],
+                AdminEmail = _configuration["appSettings:AdminEmail"],
+                OrderEmail = _configuration["appSettings:OrderEmail"],
+                ShippingEmail = _configuration["appSettings:ShippingEmail"],
+                BrandsPerLine = _configuration["appSettings:BrandsPerLine"],
+                BrandsLine = _configuration["appSettings:BrandsLine"],
+                BrandLineSplit = _configuration["appSettings:BrandLineSplit"],
+                SiteName = _configuration["appSettings:SiteName"]
             };
         }
     }

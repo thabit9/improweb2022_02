@@ -220,7 +220,7 @@ namespace improweb2022_02.Controllers
 
                 //Remove items in cart
                 HttpContext.Session.Remove("cart");
-                return RedirectToAction("Thanks");
+                return RedirectToAction("Thanks"); 
             }
         }
 

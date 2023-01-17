@@ -34,7 +34,8 @@ namespace improweb2022_02
                     options.LogoutPath = "/admin/login/signout";
                     options.AccessDeniedPath = "/admin/account/accessdenied";
                 });
-            services.AddSession();
+            //services.AddSession();
+            services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddMvc().AddSessionStateTempDataProvider();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();

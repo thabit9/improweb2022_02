@@ -86,6 +86,8 @@ namespace improweb2022_02.DataAccess
         public virtual DbSet<WEBShipping> WEBShippings { get; set; }
         //public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<GlobalSettings> GlobalSettings { get; set; }
+        public virtual DbSet<DistProduct> DistProducts{ get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 

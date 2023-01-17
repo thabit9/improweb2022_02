@@ -173,7 +173,7 @@ namespace improweb2022_02.Controllers
 
         public int getStockCount(Int64 prodID)
         {
-            var query = (from s in _db.SourceLists
+            var query = (from s in _db.SourceLists 
                         join os in _db.OrganisationSources on s.SourceID equals os.SourceID
                         join dp in _db.Products on s.SourceOrgID equals dp.OrgID  
                         join bs in _db.BranchStocks on dp.ProdID equals  bs.ProdID
