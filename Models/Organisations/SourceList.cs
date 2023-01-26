@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +14,7 @@ namespace improweb2022_02.Models
         }
 
         [Key]
-        public int SourceID { get; set; }
+        public Int64 SourceID { get; set; } 
         public string SourceName { get; set; }
         public string SourceDescription { get; set; }
         public int SourceOrgID { get; set; }

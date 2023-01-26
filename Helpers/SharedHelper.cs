@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,10 +9,20 @@ using System.Linq;
 using improweb2022_02.Models;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+//using Microsoft.Data.Entity;
 
 namespace improweb2022_02.Helpers
 {
-    public class Shared
+    public class StockCountModel
+    {
+        public long OrgBraID { get; set; }
+        public string OrgBraShort { get; set; }
+        public string OrgBraName { get; set; }
+        public Double StockCount { get; set; }
+        public string UsualAvailability { get; set; }
+        public string ShowStockType { get; set; }
+    }
+    public class SharedHelper
     {
         public struct LoginDetails
 		{
@@ -152,26 +163,35 @@ namespace improweb2022_02.Helpers
         public const string devSitePath = @"C:\inetpub\wwwroot\esquireonline\";
 
 
-        private improwebContext _db;
-        private HttpContextAccessor _httpContextAccessor;
-        public Shared()
+        //private readonly improwebContext _db;
+        //private HttpContextAccessor _httpContextAccessor;
+        public SharedHelper()
         {  
-            _db = new improwebContext();  
-            _httpContextAccessor = new HttpContextAccessor();    
+            //_db = new improwebContext();  
+            //_httpContextAccessor = new HttpContextAccessor();    
         }
+        /*private readonly improwebContext _db;
+        public SharedHelper(improwebContext db)
+        {  
+            _db = db;    
+        }*/
 
-        public WebConfig webConfig = WebConfigService.getWebConfig();
-        public string CurrencyFormat()
+        //public WebConfig webConfig = WebConfigService.getWebConfig();
+        public static string CurrencyFormat()
         {
+            WebConfig webConfig = WebConfigService.getWebConfig();
             return webConfig.CurrencyFormat;
         }
-        public string CurrencyFormatNoR()
+        public static string CurrencyFormatNoR()
         {
+            WebConfig webConfig = WebConfigService.getWebConfig();
             return webConfig.CurrencyFormat2;
         }
-        public VATData VAT()
+        public static VATData VAT()
         {
             VATData vd = new VATData();
+            var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
             var orgData = _db.Organisations.Where(o => o.OrgID == webConfig.OrgID).FirstOrDefault();
             if (orgData.OrgVATPercentage != null)
             {
@@ -191,22 +211,27 @@ namespace improweb2022_02.Helpers
             }
             return vd;
         }
-        public List<Customer> GetAccUsers(long accountID)
+        public static List<Customer> GetAccUsers(long accountID)
         {
+            var _db = new improwebContext();
             var customers = _db.Customers.Where(c => c.AccountID == accountID).ToList();
             return customers;
         }
-        public string GetAccountNo(long custID)
+        public static string GetAccountNo(long custID)
         {
+            var _db = new improwebContext();
             var customer = _db.Customers.Where(c => c.CustID == custID).FirstOrDefault();
             var accountID = customer.AccountID;
             var account = _db.Accounts.Where(a => a.AccountID == accountID).FirstOrDefault();
             
             return account.AccountNo;
         }  
-        public DataSet GetCartDimensionsByDataSet(long custID)
+        public static DataSet GetCartDimensionsByDataSet(long custID)
         {
             DataSet ds = new DataSet();
+            var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
+            var _httpContextAccessor = new HttpContextAccessor();
             long orgID = long.Parse(webConfig.OrgID.ToString()); 
             try
             {
@@ -293,8 +318,11 @@ namespace improweb2022_02.Helpers
             }
             return ds;
         }
-        public List<Dictionary<string, object>> GetCartDimensionsByDictionary(long custID)
+        public static List<Dictionary<string, object>> GetCartDimensionsByDictionary(long custID)
         {
+            var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
+            var _httpContextAccessor = new HttpContextAccessor();
             List<Dictionary<string, object>> _prodDimensions = new List<Dictionary<string, object>>();
             long orgID = long.Parse(webConfig.OrgID.ToString()); 
             try
@@ -386,13 +414,16 @@ namespace improweb2022_02.Helpers
             }
             return _prodDimensions;
         }
-        public FromDoorAddress GetFromDoorAddress(long branchID)
+        public static FromDoorAddress GetFromDoorAddress(long branchID)
         {
             FromDoorAddress address = new FromDoorAddress();
+            var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
+            var _httpContextAccessor = new HttpContextAccessor();
             long orgID = long.Parse(webConfig.OrgID.ToString());
             try
             {
-                var _orgBranch = _db.OrganisationBranches.Where(o => o.OrgBranchID == branchID).FirstOrDefault();
+                var _orgBranch = _db.OrganisationBranches.Where(o => o.OrgBraID == branchID).FirstOrDefault();
                 if (_orgBranch != null)
                 {
                     StringBuilder _stringBuilder = new StringBuilder();
@@ -427,9 +458,12 @@ namespace improweb2022_02.Helpers
             }
             return address;
         }
-        public Shipping GetShippingGeneral(long custID)
+        public static Shipping GetShippingGeneral(long custID)
         {
             Shipping _shipping = new Shipping();
+            var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
+            var _httpContextAccessor = new HttpContextAccessor();
             long orgID = long.Parse(webConfig.OrgID.ToString());
             try
             {
@@ -496,35 +530,40 @@ namespace improweb2022_02.Helpers
             }
             return _shipping;
         }
-        public string GetNewPrice(object usePrice)
+        public static string GetNewPrice(object usePrice)
 		{
             if (usePrice == null || int.Parse(usePrice.ToString()) < 1)
                 return GetDefaultPrice();
             else
                 return usePrice.ToString();
 		}
-        private string GetDefaultPrice()
+        private static string GetDefaultPrice()
 		{
+            WebConfig webConfig = WebConfigService.getWebConfig();
 			return webConfig.DefaultPrice;
 		}
         
         // Sending Emails
-        public void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from)
+        public static void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from)
 		{
             SendMail(strSubject, strHTMLBody, to, from, null, true);
 		}
-        public void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from, bool includeSignature)
+        public static void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from, bool includeSignature)
         {
             SendMail(strSubject, strHTMLBody, to, from, null, includeSignature);
         }
-        public void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from, MailAddress[] bcc)
+        public static void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from, MailAddress[] bcc)
         {
             SendMail(strSubject, strHTMLBody, to, from, bcc, true);
         }
-        public void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from, MailAddress[] bcc, bool includeSignature)
+        public static void SendMail(string strSubject, string strHTMLBody, MailAddress[] to, MailAddress from, MailAddress[] bcc, bool includeSignature)
 		{
             try
             {
+                var _db = new improwebContext();
+                WebConfig webConfig = WebConfigService.getWebConfig();
+                var _httpContextAccessor = new HttpContextAccessor();
+
                 string[] strAdminEmails = GetAdminEMail().Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                 string strSite = webConfig.SiteName.ToString();
                 MailMessage myMail = new MailMessage();
@@ -564,7 +603,7 @@ namespace improweb2022_02.Helpers
                 SmtpClient client = new SmtpClient(EmailServer);
                 client.Send(myMail);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 string strTo="";
                 foreach (MailAddress address in to)
@@ -576,21 +615,89 @@ namespace improweb2022_02.Helpers
             }
 		}
         // Get Emails
-        public string GetAdminEMail()
+        public static string GetAdminEMail()
         {
+            WebConfig webConfig = WebConfigService.getWebConfig();
             return webConfig.AdminEmail;
         }
-        public string GetOrdersEMail()
+        public static string GetOrdersEMail()
         {
+            WebConfig webConfig = WebConfigService.getWebConfig();
             return webConfig.OrderEmail;
         }
-        public string GetShippingEmail()
+        public static string GetShippingEmail()
         {
+            WebConfig webConfig = WebConfigService.getWebConfig();
             return webConfig.ShippingEmail;
         }
-
-        private string CreateBrandsMenu()
+        public static MailAddress splitEMailFrom(string strAddress, string strName)
         {
+            MailAddress mOut;
+            try
+            {
+                if (strAddress.IndexOf(";") > 2)
+                {
+                    string[] arrEMail = strAddress.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    mOut = new MailAddress(arrEMail[0], strName);
+                }
+                else
+                {
+                    mOut = new MailAddress(strAddress, strName);
+                }
+            }
+            catch (Exception)
+            {
+                mOut = new MailAddress(strAddress, strName);
+                //Code Here...
+                //DebugMe(1, "Error splitting E-Mail in splitEMailFrom " + strAddress + " was!", ex);
+            }
+            return mOut;
+        }
+        public static MailAddress[] splitEMailTo(string strAddressesToSplit, string strName)
+        {
+            List<MailAddress> mList = new List<MailAddress>();
+            try
+            {
+                if (strAddressesToSplit.IndexOf(";") > 2)
+                {
+                    string[] arrEMail = strAddressesToSplit.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string email in arrEMail)
+                        mList.Add(new MailAddress(email, strName));
+                }
+                else
+                {
+                    mList.Add(new MailAddress(strAddressesToSplit, strName));
+                }
+            }
+            catch (Exception)
+            {
+                // Code Here...
+                //DebugMe(1, "Error splitting E-Mail in splitEMailTo " + strAddressesToSplit + " was!", ex);
+            }
+            return mList.ToArray();
+        }
+        public static MailAddress[] GetMailAddresses(string addresses)
+        {
+            List<MailAddress> toReturn = new List<MailAddress>();
+            if (addresses.IndexOf(";") > 0)
+            {
+                string[] emails = addresses.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string email in emails)
+                    toReturn.Add(new MailAddress(email));
+            }
+            else
+            {
+                toReturn.Add(new MailAddress(addresses));
+            }
+            return toReturn.ToArray();
+        }
+
+        private static string CreateBrandsMenu()
+        {
+            var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
+            var _httpContextAccessor = new HttpContextAccessor();
+
             long orgID = long.Parse(webConfig.OrgID.ToString());
             int iPerRow = int.Parse(webConfig.BrandsPerLine);
             try
@@ -631,37 +738,176 @@ namespace improweb2022_02.Helpers
             }
             return "";
         }
-        public string GetStockCount(string strProdID, stockDisplayType sdt)
+        
+        public static long? GetDefaultBranch()
         {
-            var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name);
-            StringBuilder sbOut = new StringBuilder();
-            try
-            {
-                var _customer = _db.Customers.SingleOrDefault(a => a.Email.Equals(user.Value));
+            var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
+            var _httpContextAccessor = new HttpContextAccessor();
 
+            var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name);
+            if(user != null){
+                var _customer = _db.Customers.Where(a => a.Email.Equals(user.Value) && a.OrgID == 94).SingleOrDefault();
                 var _defaultBranch = (from a in _db.Accounts
-                              join c in _db.Customers on a.AccountID equals c.AccountID
-                              where(c.CustID == _customer.CustID)
-                              select new { DefaulBranch = a.DefaultBranch }).FirstOrDefault();
-                var _query = (from sl in _db.SourceLists
-                              join os in _db.OrganisationSources on sl.SourceID equals os.SourceID
-                              join dp in _db.Products 
-                              join bs in _db.BranchStocks on dp.ProdID equals bs.ProdID)
+                    join c in _db.Customers on a.AccountID equals c.AccountID
+                    where(c.CustID == _customer.CustID)
+                    select new { DefaulBranch = a.DefaultBranch }).FirstOrDefault();
+                return _defaultBranch.DefaulBranch;
             }
+            else
+            {
+                return 0;
+            }
+            
+        }
+        public static List<StockCountModel> GetStockCount(long prodID/*, stockDisplayType sdt*/)
+        {         
+            //var _db = new improwebContext();
+            WebConfig webConfig = WebConfigService.getWebConfig();
+            var _httpContextAccessor = new HttpContextAccessor();
+
+            var _branchStockCount = new List<StockCountModel>();
+            //var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name); 
+            //StringBuilder sbOut = new StringBuilder();
+            //try
+            //{
+                /*
+                SELECT Accounts.DefaultBranch 
+                FROM Accounts INNER JOIN WEBCustomer ON Accounts.AccountID = WEBCustomer.AccountID 
+                WHERE (WEBCustomer.CustID = 54600") => DefaultBranch = 1
+
+                SELECT OrganisationBranch.OrgBraID, OrganisationBranch.OrgBraShort, OrganisationBranch.OrgBraName, BranchStock.StockCount, Products.UsualAvailability, SourceList.ShowStockType 
+                FROM SourceList 
+                    INNER JOIN OrganisationSource ON SourceList.SourceID = OrganisationSource.SourceID 
+                    INNER JOIN Products DistributorProducts 
+                    INNER JOIN BranchStock ON DistributorProducts.ProdID = BranchStock.ProdID 
+                    INNER JOIN OrganisationBranch ON BranchStock.OrgBraID = OrganisationBranch.OrgBraID 
+                    INNER JOIN Products ON DistributorProducts.ProductCode = Products.ProductCode 
+                    ON SourceList.SourceOrgID = DistributorProducts.OrgID AND OrganisationSource.OrgSourceID = Products.OrgSourceID 
+                WHERE (Products.ProdID = 8744152) ORDER BY OrganisationBranch.[Order], OrganisationBranch.OrgBraShort
+                */ 
+                /*  
+                var _query = _db.SourceLists
+                    .Join(_db.OrganisationSources, sl => sl.SourceID, os => os.SourceID, (sl, os) => new { sl, os })
+                    .Join(_db.Products, _os => _os.os.OrgSourceID, dp => dp.OrgSourceID, (_os, dp) => new { _os, dp })
+                    .Join(_db.BranchStocks, _dp => _dp.dp.ProdID, bs => bs.ProdID, (_dp, bs) => new { _dp, bs })
+                    .Join(_db.OrganisationBranches, _bs => _bs.bs.OrgBraID, ob => ob.OrgBraID, (_bs, ob) => new { _bs, ob })
+                    .Join(_db.Products, x => new { x1=x._bs._dp.dp.ProductCode, x2=(long)x._bs._dp._os.os.OrgSourceID },
+                                        y => new { x1=y.ProductCode, x2=(long)y.OrgSourceID }, (x, y) => new { x, y})
+                    .Where(_x => _x.y.ProdID == 8744152)
+                    .OrderBy(_x => _x.x.ob.Order)
+                    //.ThenByDescending(x => x.x.ob.OrgBraShort).ToList();
+                    .ThenBy(x => x.x.ob.OrgBraShort).ToList();
+                */
+                /*
+                var _customer = _db.Customers.Where(a => a.Email.Equals(user.Value) && a.OrgID == 94).SingleOrDefault();
+                var _defaultBranch = (from a in _db.Accounts
+                    join c in _db.Customers on a.AccountID equals c.AccountID
+                    where(c.CustID == _customer.CustID)
+                    select new { DefaulBranch = a.DefaultBranch }).FirstOrDefault();
+                */
+                using (var _db = new improwebContext()){
+                var _TestDataRequest = _db.OrganisationBranches.ToList();
+                _branchStockCount = (from sl in _db.SourceLists
+                    join os in _db.OrganisationSources on sl.SourceID equals os.SourceID
+                    join dp in _db.Products on sl.SourceOrgID equals dp.OrgID
+                    join bs in _db.BranchStocks on dp.ProdID equals bs.ProdID
+                    join ob in _db.OrganisationBranches on bs.OrgBraID equals ob.OrgBraID
+                    join p in _db.Products on new { X1=dp.ProductCode, X2=(long)os.OrgSourceID } equals new { X1=p.ProductCode, X2=(long)p.OrgSourceID }
+                    where (p.ProdID == prodID)
+                    orderby ob.Order, ob.OrgBraShort
+                    select new StockCountModel {
+                        OrgBraID = ob.OrgBraID, 
+                        OrgBraShort = ob.OrgBraShort, 
+                        OrgBraName = ob.OrgBraName, 
+                        StockCount = bs.StockCount, 
+                        UsualAvailability = p.UsualAvailability, 
+                        ShowStockType = sl.ShowStockType
+                    }).ToList();
+                }
+
+            /*}
             catch
             {
                 // Code Here..
-            }
-            return sbOut.ToString();
+            }*/
+            return _branchStockCount;
+        }
+        public static double GetProductStockCount(long prodID, long branchID)
+        {     
+            var _db = new improwebContext();
+            int toReturn = 0;
+            var _stockCount = (from sl in _db.SourceLists
+                join os in _db.OrganisationSources on sl.SourceID equals os.SourceID
+                join dp in _db.Products on sl.SourceOrgID equals dp.OrgID
+                join bs in _db.BranchStocks on dp.ProdID equals bs.ProdID
+                join ob in _db.OrganisationBranches on bs.OrgBraID equals ob.OrgBraID
+                join p in _db.Products on new { X1=dp.ProductCode, X2=(long)os.OrgSourceID } equals new { X1=p.ProductCode, X2=(long)p.OrgSourceID }
+                where (p.ProdID == prodID && ob.OrgBraID == branchID)
+                orderby ob.Order, ob.OrgBraShort
+                select new {
+                    StockCount = bs.StockCount
+                }).FirstOrDefault();
+
+            if(_stockCount != null)
+                toReturn = (int)Math.Round((double)_stockCount.StockCount);
+        
+            return toReturn;
+        }        
+        
+        public static Customer GetCustomerDetails(long custID)
+        {     
+            var _db = new improwebContext();
+            var _customer =_db.Customers.Where(c => c.CustID == custID).FirstOrDefault();
+            return _customer;
+        }
+        public static List<Country> GetCountries() 
+        {     
+            var _db = new improwebContext();
+            var _countries = _db.Countries.OrderBy(c => c.Name).ToList();
+            return _countries;
         }
 
-
         // Seaching a dictionary
-        public Dictionary<string, object> SearchList(List<Dictionary<string, object>> testData, 
+        /*
+        public static Dictionary<string, object> SearchList(List<Dictionary<string, object>> testData, 
             Dictionary<string, object> searchPattern)
         {
             return testData.FirstOrDefault(x => searchPattern.All(x.Contains));
-        }        
+        }  
+        public static List<Dictionary<string, object>> SearchList2(this List<Dictionary<string, object>> list,
+            Dictionary<string, object> searchPattern)
+        {
+            return list.Where(item =>
+                searchPattern.All(x => item.ContainsKey(x.Key) && 
+                    x.Value.Equals(item[x.Key])
+                )).ToList();
+        } 
+        public static List<Dictionary<string, object>> SearchList3(List<Dictionary<string, object>> testData, 
+            Dictionary<string, object> searchPattern)
+        {
+            return testData.Where(t =>
+                {
+                    bool flag = true;
+                    foreach (KeyValuePair<string, object> p in searchPattern)
+                    {
+                        if (!t.ContainsKey(p.Key) || !t[p.Key].Equals(p.Value))
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    return flag;
+                }).ToList();
+
+        }  
+        public static List<Dictionary<string, object>> SearchList4(List<Dictionary<string, object>> testData, 
+            Dictionary<string, object> searchPattern)
+        {
+            return testData.Where(t => searchPattern
+                    .All(p => t.ContainsKey(p.Key) && t[p.Key].Equals(p.Value))).ToList();
+        } 
+        */  
 		public static string Val(string strIn)
 		{
 			strIn = strIn==null?"":strIn;
@@ -680,7 +926,7 @@ namespace improweb2022_02.Helpers
 			}
 			return strOut;
 		}
-        public bool isSouthAfrica(string text)
+        public static bool isSouthAfrica(string text)
 		{
 			return text.ToUpper()=="SOUTH AFRICA";
 		}

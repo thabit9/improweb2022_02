@@ -16,7 +16,7 @@ namespace improweb2022_02.Models
         }
 
         [Key]
-        public Int64 OrgBranchID { get; set; }
+        public Int64 OrgBraID { get; set; }
         public Int64 OrgID { get; set; }
         [Required]
         [DataType(DataType.Text), MaxLength(50),

@@ -12,7 +12,7 @@ namespace improweb2022_02.Models
         {
         }
 
-        //[Key]
+        [Key]
         public string GlobalKey { get; set; }
         public string GlobalValue { get; set; }
     }

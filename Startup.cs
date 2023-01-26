@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using improweb2022_02.DataAccess;
+using improweb2022_02.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +44,8 @@ namespace improweb2022_02
 
             var connection = _configuration.GetConnectionString("improwebDbContextCon");
             services.AddDbContext<improwebContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connection));
+            services.AddSingleton<DapperContext>();
+            services.AddScoped<SharedHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

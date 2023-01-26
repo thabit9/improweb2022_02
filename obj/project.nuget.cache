@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "fYXgrmiXJ6ONd6wjzdfoeegRLXPvWJF0e11F64r6S2a+K4/FAcvVkl7wwb5FycvnmRgzbOZiFXIE8hbUlS0SMA==",
+  "dgSpecHash": "NcesC39PkeCeLcu/KgCKPnqO6fOiC1QO/Z3dkq++rIOoZxFcJ1tmgGEDRCljSwmpxMiucYnMCLTA+yp2a1WG0g==",
   "success": true,
   "projectFilePath": "E:\\Thabis Documents\\Projects\\NETCore5\\improweb2022_02\\improweb2022_02.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Thabi.ESQUIRE\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Thabi.ESQUIRE\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
+    "C:\\Users\\Thabi.ESQUIRE\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\Thabi.ESQUIRE\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Thabi.ESQUIRE\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",
     "C:\\Users\\Thabi.ESQUIRE\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.1\\microsoft.aspnetcore.cryptography.internal.5.0.1.nupkg.sha512",

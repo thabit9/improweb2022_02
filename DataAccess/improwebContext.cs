@@ -149,6 +149,7 @@ namespace improweb2022_02.DataAccess
                     .HasConstraintName("FK_Account_Role_Role");
 
             });
+            
             modelBuilder.Entity<Organisation>(entity =>
             {
                 entity.Property(e => e.OrgName)
@@ -171,6 +172,7 @@ namespace improweb2022_02.DataAccess
                     .HasConstraintName("FK_Industry_Organisation");*/
 
             });
+
             modelBuilder.Entity<Product>(entity =>
             {    
                 entity.HasOne(d => d.Organisation)
@@ -189,7 +191,21 @@ namespace improweb2022_02.DataAccess
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.OrgSourceID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrganisationSource_Product");
+                    .HasConstraintName("FK_OrganisationSource_Product"); 
+            });
+            modelBuilder.Entity<OrganisationSource>(entity =>
+            {                      
+                entity.HasOne(d => d.Source)
+                    .WithMany(p => p.OrganisationSources)
+                    .HasForeignKey(d => d.SourceID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SourceList_OrganisationSource");
+
+                entity.HasOne(d => d.Organisation)
+                    .WithMany(p => p.OrganisationSources)
+                    .HasForeignKey(d => d.OrgID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Organisation_OrganisationSource");                 
             });
             modelBuilder.Entity<BranchStock>(entity => 
             {
@@ -207,6 +223,16 @@ namespace improweb2022_02.DataAccess
                     .HasConstraintName("FK_BranchStock_Product_OrgnisarionBranch");
 
             });
+            modelBuilder.Entity<OrganisationBranch>(entity => 
+            {
+                entity.HasOne(d => d.Organisation)
+                    .WithMany(p => p.OrganisationBranches)
+                    .HasForeignKey(d => d.OrgID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Organisation_OrganisationBranch");
+
+            });
+
             modelBuilder.Entity<Industry>(entity =>
             {
                 entity.Property(e => e.Description)

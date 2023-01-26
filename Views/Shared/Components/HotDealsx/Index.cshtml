@@ -3,6 +3,7 @@
 }
 
 @using Microsoft.AspNetCore.Http.Extensions
+@using improweb2022_02.Helpers
 
 @foreach (var hotProduct in Model)
 {
@@ -43,12 +44,15 @@
                         <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                     </div>
                     <div class="art-more-opts">
-                        <span class="bidi-embed">MID:</span>
-                        <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">26</a>
-                        <span class="bidi-embed">DBN:</span>
-                        <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
-                        <span class="bidi-embed">CTN:</span>
-                        <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                    @{
+                       //var _shared = new SharedHelper();
+                       var stockCount = SharedHelper.GetStockCount(product.ProdID);
+                       foreach(var stock in stockCount)
+                       {
+                            <span class="bidi-embed">@stock.OrgBraShort:</span>
+                            <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">@stock.StockCount.ToString()</a>   
+                       }
+                    }
                     </div>
                 </div>
                 <div class="row no-gutters art-btn-group border_">

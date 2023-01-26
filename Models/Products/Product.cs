@@ -96,7 +96,7 @@ namespace improweb2022_02.Models
 
         public Int64? OrgID { get; set; }
         public Int64? ManufID { get; set; }//ManuFID
-        public Int64? OrgSourceID { get; set; }
+        public Int64? OrgSourceID { get; set; } 
         public Int64? DebitOrderFormID { get; set; }
         public Int64? DeliveryID { get; set; }
         public Int64? MasterProdID { get; set; }

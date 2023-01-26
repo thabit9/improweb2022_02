@@ -15,7 +15,7 @@ namespace improweb2022_02.Models
         }
 
         [Key]
-        public Int64 OrgSourceID { get; set; }
+        public Int64 OrgSourceID { get; set; } 
         public Int64 OrgID { get; set; }
         public Int64 SourceID { get; set; }
         public bool SetOutputMe { get; set; }
@@ -27,13 +27,13 @@ namespace improweb2022_02.Models
         public int DefaultMarkup6 { get; set; } 
         [DataType(DataType.Text), MaxLength(255)]
         public string UsualAvailability { get; set; }
-        public int DefaultWaranty { get; set; }
+        public int DefaultWarranty { get; set; }
         [DataType(DataType.Text), MaxLength(100)]
         public string OrderFromName { get; set; }
         [DataType(DataType.Text), MaxLength(100)]
         public string OrderFromEMail { get; set; }
         [DataType(DataType.Text), MaxLength(50)]
-        public string SourceAccountNo { get; set; }
+        public string SourceAccNo { get; set; }
         public Int64 DefaultBranch { get; set; }
         [DataType(DataType.Text), MaxLength(400)]
         public string ExcludeGroups { get; set; }

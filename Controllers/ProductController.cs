@@ -10,6 +10,7 @@ using improweb2022_02.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using X.PagedList;
+using improweb2022_02.Helpers;
 
 namespace improweb2022_02.Controllers
 {
@@ -170,24 +171,29 @@ namespace improweb2022_02.Controllers
             return RedirectToAction("Details", new { id = prodid});
         }
 
-
-        public int getStockCount(Int64 prodID)
+        [Route("getstockcount")]
+        public List<StockCountModel> GetStockCount(long prodID)
         {
-            var query = (from s in _db.SourceLists 
-                        join os in _db.OrganisationSources on s.SourceID equals os.SourceID
-                        join dp in _db.Products on s.SourceOrgID equals dp.OrgID  
-                        join bs in _db.BranchStocks on dp.ProdID equals  bs.ProdID
-                        join ob in _db.OrganisationBranches on bs.OrgBraID equals ob.OrgBranchID 
-                        join p in _db.Products on dp.ProductCode equals p.ProductCode 
-                        select s).ToList(); 
-
-            var user = User.FindFirst(ClaimTypes.Name);
-            var customer = _db.Customers.SingleOrDefault(a => a.Email.Equals(user.Value));
-            var product = _db.Products.Find(prodID);
-            var StockCount = product.BranchStocks.SingleOrDefault(s => s.ProdID == prodID);
-
-            return StockCount.StockCount;
+            var _branchStockCount = new List<StockCountModel>();
+                _branchStockCount = (from sl in _db.SourceLists
+                    join os in _db.OrganisationSources on sl.SourceID equals os.SourceID
+                    join dp in _db.Products on sl.SourceOrgID equals dp.OrgID
+                    join bs in _db.BranchStocks on dp.ProdID equals bs.ProdID
+                    join ob in _db.OrganisationBranches on bs.OrgBraID equals ob.OrgBraID
+                    join p in _db.Products on new { X1=dp.ProductCode, X2=(long)os.OrgSourceID } equals new { X1=p.ProductCode, X2=(long)p.OrgSourceID }
+                    where (p.ProdID == prodID)
+                    orderby ob.Order, ob.OrgBraShort
+                    select new StockCountModel {
+                        OrgBraID = ob.OrgBraID, 
+                        OrgBraShort = ob.OrgBraShort, 
+                        OrgBraName = ob.OrgBraName, 
+                        StockCount = bs.StockCount, 
+                        UsualAvailability = p.UsualAvailability, 
+                        ShowStockType = sl.ShowStockType
+                    }).ToList();
+            return _branchStockCount;
         }
+
         public enum stockDisplayType
         {
             allBranches = 0,
