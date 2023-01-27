@@ -238,6 +238,7 @@
                             </div>
                         </article>
                     </div>
+                    
                     index++;
                     }
                 </div>    
@@ -245,8 +246,8 @@
             <script type="text/javascript">  
                 $(document).ready(function() { 
                     for(var i=0; i< productCount; i++){
-                        var url = "/Product/GetStockCount";  
-                        var postID = $("#featured_product_" + i).val();
+                        var url = "/Product/GetBranchesStock";  
+                        var postID = $("#featured_product_" + index).val();
                         $.post(url, { prodID: postID}, function (data) {  
                             $("#featured_stockcount_"+ i).html(data);  
                         });  
@@ -271,6 +272,10 @@
             </div>
             <div class="row">
                 <div id="owl-demo" class="loop-special-products owl-carousel owl-theme owl-loaded owl-drag">   
+                    @{ 
+                        var index2 = 1; 
+                        var productCount2 = ViewBag.FeaturedProducts.Count;
+                    }
                     @foreach(var LatestProduct in ViewBag.LatestProducts)         
                     { 
                     var photoName = "~/products/NoPic.jpg";
@@ -285,7 +290,7 @@
                     }
                     
                     <div class="ite border_">
-                        <input type="hidden" id="latest_product_@index" value="@LatestProduct.ProdID"/>
+                        <input type="hidden" id="latest_product_@index2" value="@LatestProduct.ProdID"/>
                         <article class="art border_" data-id="260">
                             <div class="art-picture-block border_">
                                 <a class="art-picture img-center-container" asp-controller="product" asp-action="details" asp-route-id="@LatestProduct.ProdID" title="Zeige Details für iPhone Plus">
@@ -317,7 +322,7 @@
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                                     </div>
-                                    <div class="art-more-opts latest_stockcount_@index">
+                                    <div class="art-more-opts latest_stockcount_@index2">
                                     </div>
                                 </div>
                                 <div class="row no-gutters art-btn-group border_">
@@ -343,8 +348,8 @@
             
             <script type="text/javascript">  
                 $( document ).ready(function() { 
-                    for(var i=0; i< productCount; i++){
-                        var url = "/Product/GetStockCount";  
+                    for(var i=0; i< productCount2; i++){
+                        var url = "/Product/GetBranchesStock";  
                         var postID = $("#latest_product_" + i).val();
                         $.post(url, { prodID: postID}, function (data) {  
                             $("#latest_stockcount_"+ i).html(data);  

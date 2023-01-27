@@ -44,7 +44,7 @@ namespace improweb2022_02.Controllers
             #endregion
 
             var _branchStock = new List<StockCountModel>();
-            _branchStock = GetBranchesStock(8761839);
+            _branchStock = GetBranchesStock(8748701);
             var _branchStock2 = new List<BranchStock>();
             _branchStock2 = GetBranchesStock();
 
@@ -110,6 +110,7 @@ namespace improweb2022_02.Controllers
             return _branchStock;
         }
 
+        [Route("GetBranchesStock")]
         public List<StockCountModel> GetBranchesStock(long prodID)
         {
             var query = @"SELECT ob.OrgBraID, ob.OrgBraShort, ob.OrgBraName, bs.StockCount, p.UsualAvailability, sl.ShowStockType 

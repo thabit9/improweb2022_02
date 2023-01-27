@@ -14,13 +14,13 @@ namespace improweb2022_02.Models
     {
         public Product()
         {
-            /*ProductImagesx = new HashSet<ProductImages>();
+            ProductImagesx = new HashSet<ProductImages>();
             InvoiceDetails = new HashSet<InvoiceDetails>();
             Features = new HashSet<Features>();
             Specifications = new HashSet<Specifications>();
             ReviewProducts = new HashSet<ReviewProduct>();
             BranchStocks = new HashSet<BranchStock>();
-            Wishlists = new HashSet<Wishlist>();*/
+            Wishlists = new HashSet<Wishlist>();
         }
         [Key]
         public Int64 ProdID { get; set; }
@@ -100,7 +100,7 @@ namespace improweb2022_02.Models
         public Int64? DebitOrderFormID { get; set; }
         public Int64? DeliveryID { get; set; }
         public Int64? MasterProdID { get; set; }
-        public int CategoryID { get; set; }
+        public int? CategoryID { get; set; }
 
         public virtual Organisation Organisation { get; set; }       
         public virtual Manufacturer Manufacturer { get; set; }
