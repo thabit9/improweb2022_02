@@ -175,7 +175,7 @@ namespace improweb2022_02.Controllers
         }
 
 
-        [Route("getbranchstock")]
+        //[Route("getbranchstock/{prodID}")]
         public List<StockCountModel> GetBranchesStock(long prodID)
         {
             var query = @"SELECT ob.OrgBraID, ob.OrgBraShort, ob.OrgBraName, bs.StockCount, p.UsualAvailability, sl.ShowStockType 

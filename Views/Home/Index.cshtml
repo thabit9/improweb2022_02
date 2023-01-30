@@ -165,7 +165,7 @@
             <div class="row">
                 <div id="owl-demo" class="loop-special-products owl-carousel owl-theme owl-loaded owl-drag">   
                     @{ 
-                        var index = 1; 
+                        var index = 0; 
                         var productCount = ViewBag.FeaturedProducts.Count;
                     }
                     @foreach(var featuredProduct in ViewBag.FeaturedProducts)         
@@ -245,12 +245,24 @@
             </div>
             <script type="text/javascript">  
                 $(document).ready(function() { 
-                    for(var i=0; i< productCount; i++){
-                        var url = "/Product/GetBranchesStock";  
-                        var postID = $("#featured_product_" + index).val();
-                        $.post(url, { prodID: postID}, function (data) {  
-                            $("#featured_stockcount_"+ i).html(data);  
-                        });  
+                    for(var ix2=0; ix2< @productCount; ix2++){
+                        var prodID = $("#featured_product_" + ix2).val();
+                        //var url = "/Product/GetBranchesStock/"+ prodID;  
+                        /*$.post(url, {}, function (data) {  
+                            $("#featured_stockcount_"+ ix2).html(data);  
+                        });*/ 
+                        $.ajax({ 
+                            type: "GET", 
+                            url: '@Url.Action("GetBranchesStock", "product")', 
+                            data: { prodID: prodID }, 
+                            contentType: "application/json; charset=utf-8", 
+                            dataType: 'json', 
+                            success: function (result) { 
+                                $("#featured_stockcount_"+ ix2).html(data);   
+                            },
+                            error: { 
+                            } 
+                        }); 
                     }
                 });  
             </script> 
@@ -273,7 +285,7 @@
             <div class="row">
                 <div id="owl-demo" class="loop-special-products owl-carousel owl-theme owl-loaded owl-drag">   
                     @{ 
-                        var index2 = 1; 
+                        var index2 = 0; 
                         var productCount2 = ViewBag.FeaturedProducts.Count;
                     }
                     @foreach(var LatestProduct in ViewBag.LatestProducts)         
@@ -342,20 +354,21 @@
                             </div>
                         </article>
                     </div>
+                    index2++;
                     }
                 </div>    
             </div>
             
             <script type="text/javascript">  
-                $( document ).ready(function() { 
-                    for(var i=0; i< productCount2; i++){
-                        var url = "/Product/GetBranchesStock";  
-                        var postID = $("#latest_product_" + i).val();
-                        $.post(url, { prodID: postID}, function (data) {  
+                /*$( document ).ready(function() { 
+                    for(var ix=0; ix< @productCount2; ix++){
+                        var prodID = $("#latest_product_" + ix).val();
+                        var url = "/Product/GetBranchesStock/"+ prodID;  
+                        $.post(url, {}, function (data) {  
                             $("#latest_stockcount_"+ i).html(data);  
                         });  
                     }
-                });  
+                }); */ 
             </script> 
             <div class="row">
                 <div class="col-sm-12 border_">
