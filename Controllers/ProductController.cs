@@ -12,6 +12,9 @@ using Microsoft.Extensions.Configuration;
 using X.PagedList;
 using improweb2022_02.Helpers;
 using Dapper;
+using System.Data;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace improweb2022_02.Controllers
 {
@@ -175,8 +178,8 @@ namespace improweb2022_02.Controllers
         }
 
 
-        //[Route("getbranchstock/{prodID}")]
-        public List<StockCountModel> GetBranchesStock(long prodID)
+        [Route("getbranchstock")]
+        public JsonResult GetBranchesStock(long prodID)
         {
             var query = @"SELECT ob.OrgBraID, ob.OrgBraShort, ob.OrgBraName, bs.StockCount, p.UsualAvailability, sl.ShowStockType 
                         FROM SourceList sl
@@ -194,7 +197,163 @@ namespace improweb2022_02.Controllers
                 var branchStock = connection.Query<StockCountModel>(query);
                 _branchStock = branchStock.ToList();
             }
-            return _branchStock;
+            var _branchStockx = JsonConvert.SerializeObject(_branchStock);
+            return Json(_branchStockx);
+            
+        }
+
+        public List<DataFeedModel> GetDataFeed()
+        {
+            var orgID = SharedHelper.GetOrgID();
+            var arrOrg = SharedHelper.GetOrgWebDetail();
+            var strWEBPriceUsed = arrOrg.WEBPriceUsed.ToString();
+            double dblMinStock = double.Parse(SharedHelper.Val(arrOrg.WEBMinStock));
+            bool _checkStock = false;
+            /*
+            bool _outputFile = false;
+            bool _fixOutput = false;
+            DataTable dtOut = new DataTable();
+            DateTime tNow = DateTime.Now;
+            */        
+            string strKey = "";
+            string strID = "";
+            string strDC = "";
+            string strPrice = "";
+            string strShippingProductClass = "";
+
+            if (arrOrg.WEBStockOnly == "D" || arrOrg.WEBStockOnly == "A"){
+                _checkStock = true;
+            }
+            else{
+                arrOrg.WEBStockOnly = "A";
+            }
+            
+            try
+            {
+                if( Request.Query.Count > 0 )
+                {
+                   try{
+                    strKey = Request.Query["key"];
+                   }catch{
+                   } 
+                   try{
+                    strID = Request.Query["ID"];
+                   }catch{
+                   }
+                   try{
+                    strDC = Request.Query["DC"];
+                   }catch{
+                   }
+                   try{
+                    strPrice = Request.Query["Price"];
+                   }catch{
+                   }
+                   try{
+                    strShippingProductClass = Request.Query["ShippingProductClass"];
+                   }catch{
+                   }
+                }
+            }catch{
+                // Code Here...
+            }
+            
+            if (!string.IsNullOrEmpty(strPrice)){
+                int iPrice = int.Parse(strPrice);
+                if(iPrice > 0 && iPrice < 7){
+                    strWEBPriceUsed = strPrice;  
+                }
+            }
+            var _query = "";
+            switch (strKey){
+                case "1": //Price Check
+                _query = string.Format(@"
+SELECT Products.ProdID, Products.ProductCode, Products.LongDescription, 
+Products.Description, Products.URL, Products.ImgURL, Products.PriceExclVat{0} * 1.15 AS Price, 
+Manufacturers.ManufacturerName, Products.GroupName, Organisation.OrgName, 
+dbo.GetProductStockCount(Products.ProdID, Products.Status, N'{1}') AS StockCount, 
+Products.StockQty FROM Manufacturers RIGHT OUTER JOIN Organisation INNER JOIN
+SourceList INNER JOIN OrganisationSource ON SourceList.SourceID = OrganisationSource.SourceID 
+ON Organisation.OrgID = SourceList.SourceOrgID RIGHT OUTER JOIN
+Products ON OrganisationSource.OrgSourceID = Products.OrgSourceID ON 
+Manufacturers.ManufID = Products.ManufID 
+WHERE (Products.Active = 1) AND (Products.OutputMe = 1) AND (Products.OrgID = {2})
+ORDER BY Products.ProdID", strWEBPriceUsed, arrOrg.WEBStockOnly, orgID);
+                break;
+                case "2": //bluesting
+                break;
+                case "3": //Jump shopping
+                break;
+                case "4": //Traffic synergy
+                break;
+                case "5": //Hotprice OneShop
+                break;
+                case "6": //shopmania
+                break;
+                case "7": //Adwords list
+                break;
+                case "8": //Bid or Buy
+                break;
+                case "9": //uPrice.co.za
+                break;
+                case "10": //Yakealot 
+                break;
+                case "11": //Facebook Adverts
+                _query = string.Format(@"
+SELECT Products.ProdID, Products.ProductCode, Products.LongDescription, 
+Products.Description, Products.URL, Products.ImgURL, Products.PriceExclVat{0} * 1.15 AS Price, 
+Manufacturers.ManufacturerName, Products.GroupName, Organisation.OrgName, 
+dbo.GetProductStockCount(Products.ProdID, Products.Status, N'{1}') AS StockCount, 
+Products.StockQty FROM Manufacturers RIGHT OUTER JOIN Organisation INNER JOIN
+SourceList INNER JOIN OrganisationSource ON SourceList.SourceID = OrganisationSource.SourceID 
+ON Organisation.OrgID = SourceList.SourceOrgID RIGHT OUTER JOIN
+Products ON OrganisationSource.OrgSourceID = Products.OrgSourceID ON 
+Manufacturers.ManufID = Products.ManufID 
+WHERE (Products.Active = 1) AND (Products.OutputMe = 1) AND (Products.OrgID = {2})
+ORDER BY Products.ProdID", strWEBPriceUsed, arrOrg.WEBStockOnly, orgID);
+                break;
+                case "12": //New Century (Contains margins)
+                _query = string.Format(@"
+SELECT Products.ProdID, Products.ProductCode, Products.LongDescription, Products.[Description], 
+CAST(Products.Length AS nvarchar(20)) AS LengthCm, CAST(Products.Width AS nvarchar(20)) AS WidthCm, CAST(Products.Height AS nvarchar(20)) AS HeightCm, CAST(Products.Mass AS nvarchar(20)) AS MassKg,
+Products.URL, Products.ImgURL, Products.PriceExclVat{0} * 1.15 AS Price, (
+SELECT DISTINCT TOP 1 pgh.HeadName
+	FROM ProdGroupLink pgl
+	INNER JOIN ProductGroupHead pgh ON pgl.GroupHeadID = pgh.GroupHeadID
+	WHERE pgh.OrgID = 94 and pgl.ProdGroupName = Products.GroupName
+) AS CategoryHead, Products.GroupName, Manufacturers.ManufacturerName, Organisation.OrgName,
+dbo.GetProductStockCount(Products.ProdID, Products.[Status], N'{1}') AS StockCount, Products.StockQty FROM Manufacturers 
+RIGHT OUTER JOIN Organisation 
+INNER JOIN SourceList 
+INNER JOIN OrganisationSource ON SourceList.SourceID = OrganisationSource.SourceID ON Organisation.OrgID = SourceList.SourceOrgID 
+RIGHT OUTER JOIN Products ON OrganisationSource.OrgSourceID = Products.OrgSourceID ON Manufacturers.ManufID = Products.ManufID 
+WHERE (Products.Active = 1) AND (Products.OutputMe = 1) AND (Products.OrgID = {2})
+ORDER BY Products.ProdID
+",strWEBPriceUsed, arrOrg.WEBStockOnly, orgID);
+                break;
+                case "13": //Google Merchants Adverts
+                _query = string.Format(@"
+SELECT Products.ProdID, Products.ProductCode, Products.LongDescription, 
+Products.Description, Products.URL, Products.ImgURL, Products.PriceExclVat{0} * 1.15 AS Price, 
+Manufacturers.ManufacturerName, Products.GroupName, Organisation.OrgName, 
+dbo.GetProductStockCount(Products.ProdID, Products.Status, N'{1}') AS StockCount, 
+Products.StockQty FROM Manufacturers RIGHT OUTER JOIN Organisation INNER JOIN
+SourceList INNER JOIN OrganisationSource ON SourceList.SourceID = OrganisationSource.SourceID 
+ON Organisation.OrgID = SourceList.SourceOrgID RIGHT OUTER JOIN
+Products ON OrganisationSource.OrgSourceID = Products.OrgSourceID ON 
+Manufacturers.ManufID = Products.ManufID 
+WHERE (Products.Active = 1) AND (Products.OutputMe = 1) AND (Products.OrgID = {2})
+ORDER BY Products.ProdID", strWEBPriceUsed, arrOrg.WEBStockOnly, orgID);
+                break;
+
+            }
+            
+            var _dataFeed = new List<DataFeedModel>();
+            using (var connection = _dbx.CreateConnection())
+            {
+                var _datafeedProducts = connection.Query<DataFeedModel>(_query);
+                _dataFeed = _datafeedProducts.ToList();
+            }
+            return _dataFeed;
         }
 
         public enum stockDisplayType

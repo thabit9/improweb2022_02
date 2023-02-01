@@ -247,10 +247,10 @@
                 $(document).ready(function() { 
                     for(var ix2=0; ix2< @productCount; ix2++){
                         var prodID = $("#featured_product_" + ix2).val();
-                        //var url = "/Product/GetBranchesStock/"+ prodID;  
-                        /*$.post(url, {}, function (data) {  
-                            $("#featured_stockcount_"+ ix2).html(data);  
-                        });*/ 
+                        /*var url = "/Product/GetBranchesStock/"+ prodID;  
+                        $.post(url, {}, function (data) {  
+                            $(".featured_stockcount_"+ ix2).html(data);  
+                        });*/
                         $.ajax({ 
                             type: "GET", 
                             url: '@Url.Action("GetBranchesStock", "product")', 
@@ -258,11 +258,13 @@
                             contentType: "application/json; charset=utf-8", 
                             dataType: 'json', 
                             success: function (result) { 
-                                $("#featured_stockcount_"+ ix2).html(data);   
+                                var _resultList = JSON.parse(result);
+                                console.log(_resultList[0].ProdID);
+                                //$(".featured_stockcount_"+ ix2).html(_resultList);   
                             },
                             error: { 
                             } 
-                        }); 
+                        });
                     }
                 });  
             </script> 

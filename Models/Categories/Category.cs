@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,10 +14,10 @@ namespace improweb2022_02.Models
             InverseParents = new HashSet<Category>();
             Products = new HashSet<Product>();
         }
-        public int Id { get; set; } 
+        public Int64 Id { get; set; } 
         public string Name { get; set; }  
         public bool Status { get; set; }
-        public int? ParentId { get; set; }
+        public Int64? ParentId { get; set; }
 
         public virtual Category parent { get; set;}
         public virtual ICollection<Category> InverseParents { get; set;}

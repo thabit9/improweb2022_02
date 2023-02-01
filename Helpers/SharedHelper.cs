@@ -10,15 +10,41 @@ using improweb2022_02.Models;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 //using Microsoft.Data.Entity;
+using Dapper;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 
 namespace improweb2022_02.Helpers
 {
+    public class DataFeedModel
+    {
+        public long ProdID { get; set; }
+        public string ProductCode { get; set; }
+        public string ProductName { get; set; }
+        public string Category { get; set; }
+        public decimal? Price { get; set; }
+        public int AvailableQty { get; set; }
+        public string Condition { get; set; }
+        public string Brand { get; set; }
+        public string Location { get; set; }
+        public string ImageURL { get; set; }
+        public string ShippingProductClass { get; set; }
+        public string ProductSummary { get; set; }
+        public string ProductDescription { get; set; }
+        public decimal? LenghtCM { get; set; }
+        public decimal? WidthCM { get; set; }
+        public decimal? HeightCM { get; set; }
+        public decimal? MassKG { get; set; }
+
+    }
+    
+    [Serializable]
     public class StockCountModel
     {
         public long OrgBraID { get; set; }
         public string OrgBraShort { get; set; }
         public string OrgBraName { get; set; }
-        public Double StockCount { get; set; }
+        public int? StockCount { get; set; }
         public string UsualAvailability { get; set; }
         public string ShowStockType { get; set; }
     }
@@ -54,11 +80,12 @@ namespace improweb2022_02.Helpers
 			public string OrgStreet2;
 			public string OrgStreet3;
 			public string OrgStreet4;
-			public string Orgstreet5;
+			public string OrgStreet5;
 			public bool VATRegistered;
 			public string FromDoorID;
-            public string OrgVATPercentage;
-            public FinType FinType;
+            public string FirstUserID;
+            /*public string OrgVATPercentage;
+            public FinType FinType;*/
 		}
         public enum FinType
         {
@@ -162,21 +189,75 @@ namespace improweb2022_02.Helpers
         public const string EmailServer = "OIC";
         public const string devSitePath = @"C:\inetpub\wwwroot\esquireonline\";
 
-
-        //private readonly improwebContext _db;
-        //private HttpContextAccessor _httpContextAccessor;
         public SharedHelper()
         {  
-            //_db = new improwebContext();  
-            //_httpContextAccessor = new HttpContextAccessor();    
         }
-        /*private readonly improwebContext _db;
-        public SharedHelper(improwebContext db)
-        {  
-            _db = db;    
-        }*/
 
-        //public WebConfig webConfig = WebConfigService.getWebConfig();
+        public static long GetOrgID()
+        {
+            WebConfig webConfig = WebConfigService.getWebConfig();
+			return webConfig.OrgID; 
+        }
+        public static string GetConnection()
+        {
+            WebConfig webConfig = WebConfigService.getWebConfig();
+			return webConfig.ConnectionString; 
+        }
+        public static OrgWebDetail GetOrgWebDetail()
+        {
+            long strOrgID = GetOrgID();
+            string _query = @"
+SELECT TOP (1) Organisation.OrgName, Organisation.WEBEMailInfo, Organisation.WEBEMailOrders, Organisation.WEBOrgURL, Organisation.WEBPriceUsed, 
+    Organisation.WEBStockOnly, Organisation.isFranchise, Organisation.WEBMinStock, Organisation.WEBNoImg, Organisation.WEBUseGroup, 
+    Organisation.WEBAutoOrder, Organisation.WEBProdOrderBy, Organisation.OrgRegNo, Organisation.OrgVATNo, Organisation.OrgTel1, Organisation.OrgFax, 
+    Organisation.OrgStreet1, Organisation.OrgStreet2, Organisation.OrgStreet3, Organisation.OrgStreet4, Organisation.OrgStreet5, Organisation.VATRegistered, 
+    Organisation.FromDoorID, Users.UserID
+FROM Organisation INNER JOIN
+    Users ON Organisation.OrgID = Users.OrgID
+WHERE (Organisation.OrgID = " + strOrgID + ") AND (Users.Menu <> 10);";
+            SqlConnection _con = new SqlConnection();
+            _con.ConnectionString = GetConnection();
+            _con.Open();            
+            SqlCommand _cmd = new SqlCommand(_query, _con);
+            SqlDataReader _reader = _cmd.ExecuteReader();
+            OrgWebDetail _detail = new OrgWebDetail();
+            if (!_reader.HasRows)
+            {
+                return _detail;
+            }
+            else
+            {
+                _reader.Read();
+                _detail.OrgName = _reader["OrgName"].ToString();
+                _detail.WEBEMailInfo = _reader["WEBEMailInfo"].ToString();
+                _detail.WEBEMailOrders = _reader["WEBEMailOrders"].ToString();
+                _detail.WEBOrgURL = _reader["WEBOrgURL"].ToString();
+                _detail.WEBPriceUsed = _reader["WEBPriceUsed"].ToString();
+                _detail.WEBStockOnly = _reader["WEBStockOnly"].ToString();
+                _detail.isFranchise = _reader["isFranchise"].ToString();
+                _detail.WEBMinStock = _reader["WEBMinStock"].ToString();
+                _detail.WEBNoImg = (bool)_reader["WEBNoImg"];
+                _detail.WEBUseGroup = _reader["WEBUseGroup"].ToString();
+                _detail.WEBAutoOrder = (bool)_reader["WEBAutoOrder"];
+                _detail.WEBProdOrderBy = _reader["WEBProdOrderBy"].ToString();
+                _detail.OrgRegNo = _reader["OrgRegNo"].ToString();
+                _detail.OrgVATNo = _reader["OrgVATNo"].ToString();
+                _detail.OrgTel1 = _reader["OrgTel1"].ToString();
+                _detail.OrgFax = _reader["OrgFax"].ToString();
+                _detail.OrgStreet1 = _reader["OrgStreet1"].ToString();
+                _detail.OrgStreet2 = _reader["OrgStreet2"].ToString();
+                _detail.OrgStreet3 = _reader["OrgStreet3"].ToString();
+                _detail.OrgStreet4 = _reader["OrgStreet4"].ToString();
+                _detail.OrgStreet5 = _reader["OrgStreet5"].ToString();
+                _detail.VATRegistered = _reader["VATRegistered"] == DBNull.Value ? false : (bool)_reader["VATRegistered"];
+                _detail.FromDoorID = _reader["FromDoorID"].ToString();
+                _detail.FirstUserID = _reader["UserID"].ToString();
+                _reader.Close();
+                _cmd.Dispose();
+                _con.Close();
+            }
+            return _detail;
+        }
         public static string CurrencyFormat()
         {
             WebConfig webConfig = WebConfigService.getWebConfig();

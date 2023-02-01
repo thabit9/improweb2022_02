@@ -29,7 +29,8 @@ namespace improweb2022_02.Helpers
                 BrandsPerLine = _configuration["appSettings:BrandsPerLine"],
                 BrandsLine = _configuration["appSettings:BrandsLine"],
                 BrandLineSplit = _configuration["appSettings:BrandLineSplit"],
-                SiteName = _configuration["appSettings:SiteName"]
+                SiteName = _configuration["appSettings:SiteName"],
+                ConnectionString = _configuration["ConnectionStrings:improwebDbContextCon"]
             };
         }
     }

@@ -21,5 +21,6 @@ namespace improweb2022_02.Helpers
         public string BrandsLine { get; set; }
         public string BrandLineSplit { get; set; }
         public string SiteName { get; set; }
+        public string ConnectionString { get; set; }
     }
 }

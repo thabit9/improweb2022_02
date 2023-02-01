@@ -100,7 +100,7 @@ namespace improweb2022_02.Models
         public Int64? DebitOrderFormID { get; set; }
         public Int64? DeliveryID { get; set; }
         public Int64? MasterProdID { get; set; }
-        public int? CategoryID { get; set; }
+        public Int64? CategoryID { get; set; }
 
         public virtual Organisation Organisation { get; set; }       
         public virtual Manufacturer Manufacturer { get; set; }
