@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+
 
 namespace improweb2022_02
 {
@@ -43,7 +45,10 @@ namespace improweb2022_02
 
 
             var connection = _configuration.GetConnectionString("improwebDbContextCon");
-            services.AddDbContext<improwebContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connection));
+            services.AddDbContext<improwebContext>(options => options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(connection/*,
+                opt => opt.UseRowNumberForPaging()*/));
             services.AddSingleton<DapperContext>();
             services.AddScoped<SharedHelper>();
         }

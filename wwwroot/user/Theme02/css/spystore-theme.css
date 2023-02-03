@@ -20521,9 +20521,9 @@ body.bare {
  clip-path: inset(0 -5px -15px -5px);
  border-radius: 0 0 0.2rem 0.2rem;
  overflow: hidden;
- opacity: 0;
+ /*opacity: 0;
  visibility: hidden;
- z-index: -1;
+ z-index: -1;*/
 }
 .art.active .art-drop {
  opacity: 1;

@@ -250,12 +250,19 @@
                <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
               </div>
               <div class="art-more-opts border_">
-               <span class="bidi-embed">MID:</span>
-               <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">@ViewBag.Product.StockQty</a>
-               <span class="bidi-embed">DBN:</span>
-               <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">5</a>
-               <span class="bidi-embed">CTN:</span>
-               <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">0</a>
+                @{
+                    if(ViewBag.BranchStock.Count > 0){
+                        foreach(var branch in ViewBag.BranchStock)
+                        {
+                            <span class="bidi-embed">@branch.OrgBraShort:</span>
+                            <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">@branch.StockCount</a>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted">No Stock</p>
+                    }
+                }
               </div>
              </div>
              <div class="pd-offer-actions-container" data-partial="OfferActions">

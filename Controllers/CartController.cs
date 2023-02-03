@@ -16,6 +16,7 @@ using System.Net.Http;
 using System.Configuration;
 using System.Text;
 using improweb2022_02.PayPal;
+using Dapper;
 
 namespace improweb2022_02.Controllers
 {
@@ -23,11 +24,13 @@ namespace improweb2022_02.Controllers
     public class CartController : Controller
     {
         private improwebContext _db = new improwebContext();
+        private readonly DapperContext _dbx;
         private IConfiguration _configuration { get; set; }
         private IPayment _payment = new Payment();
-        public CartController(improwebContext db,  IConfiguration configuration)
+        public CartController(improwebContext db, DapperContext dbx, IConfiguration configuration)
         {
             _db = db;
+            _dbx = dbx;
             _configuration = configuration; 
         }
         
@@ -72,6 +75,7 @@ namespace improweb2022_02.Controllers
                     Description = product.Description,
                     PurchasePrice = decimal.Parse(product.PurchasePrice.ToString("#0.00")),
                     Photo =  /*photoName*/product.ImgURL,
+                    stockCount = 0,//GetStock(product.ProdID),
                     Quantity = 1,
                     CreatedDate = product.CreateDate
                 });
@@ -529,6 +533,111 @@ namespace improweb2022_02.Controllers
             return View("Complete");
         }
 
+
+        public string GetStock(long prodID, string ShowStockType)
+        {
+            var _query = "";
+            try
+            {
+                string _prodCode = "";
+                long _orgID = 0;
+                _query = @"
+SELECT Products.ProductCode, SourceList.SourceOrgID FROM Products INNER JOIN
+OrganisationSource ON Products.OrgSourceID = OrganisationSource.OrgSourceID 
+INNER JOIN SourceList ON OrganisationSource.SourceID = SourceList.SourceID
+WHERE (Products.ProdID = " + prodID + ")";
+                var _productSource = new ProductSource();
+                using (var connection = _dbx.CreateConnection())
+                {
+                    var productSource = connection.Query<ProductSource>(_query).FirstOrDefault();
+                    _productSource = productSource;
+                    _prodCode = _productSource.ProductCode;
+                    _orgID = _productSource.SourceOrgID;
+                }
+
+                var strUA = "";
+                var strOut = "";
+                double dblTCount = 0;
+                _query = @"
+SELECT OrganisationBranch.OrgBraShort, BranchStock.StockCount,
+DistributorProducts.OrgID, DistributorProducts.ProductCode, DistributorProducts.UsualAvailability 
+FROM Products DistributorProducts 
+INNER JOIN BranchStock ON DistributorProducts.ProdID = BranchStock.ProdID 
+INNER JOIN OrganisationBranch ON BranchStock.OrgBraID = OrganisationBranch.OrgBraID
+WHERE (DistributorProducts.OrgID = "+ _orgID + @") 
+AND (DistributorProducts.ProductCode = N'"+ _prodCode + @"')
+ORDER BY OrganisationBranch.OrgBraShort";
+                var _stockResults = new List<StockResults>();
+                using (var connection = _dbx.CreateConnection())
+                {
+                    var stockResults = connection.Query<StockResults>(_query);
+                    _stockResults = stockResults.ToList();
+
+                    if(_stockResults.Count > 0)
+                    {
+                        StringBuilder sbOut = new StringBuilder();
+                        foreach(var stock in _stockResults)
+                        {
+                            dblTCount += double.Parse(stock.StockCount.ToString().Trim());
+                            double dblSC = double.Parse(stock.StockCount.ToString().Trim());
+                            switch(ShowStockType)
+                            {
+
+                                case "P":
+                                    if (dblSC <= 0)
+                                    {
+                                        sbOut.Append(stock.OrgBraShort.ToString().Trim() + ":0 ");
+                                    }
+                                    else
+                                    {
+                                        sbOut.Append(stock.OrgBraShort.ToString().Trim() + ":" +
+                                            stock.StockCount.ToString().Trim() + " ");
+                                    }
+                                break;
+                                case "Y":
+                                    if (dblSC <= 0)
+                                    {
+                                        sbOut.Append(stock.OrgBraShort.ToString().Trim() + ":N ");
+                                    }
+                                    else
+                                    {
+                                        sbOut.Append(stock.OrgBraShort.ToString().Trim() + ":Y ");
+                                    }
+                                break;
+                                case "F":
+                                    if (dblSC != 0)
+                                    {
+                                        sbOut.Append(stock.OrgBraShort.ToString().Trim() + ":" +
+                                            stock.StockCount.ToString().Trim() + " ");
+                                    }
+                                break;
+                                default:
+                                    sbOut.Append(stock.OrgBraShort.ToString().Trim() + ":N/A ");
+                                break;
+                            }
+                            strOut = sbOut.ToString();
+                            strUA = stock.UsualAvailability.ToString();
+                        }
+                        if (dblTCount == 0)
+                        {
+                            strOut = strUA;
+                        }
+                    }
+                    else
+                    {
+                        strOut = "Stock quantity not available!";
+                    }
+                }
+                return strOut.Trim();
+
+            }
+            catch(Exception)
+            {
+                //code here..
+                 return "Stock quantity not available!";
+            }
+        }
+        
         public int exists(Int64 id, List<Item> cart)
         {
             for (var i = 0; i < cart.Count; i++)
@@ -540,5 +649,14 @@ namespace improweb2022_02.Controllers
             }
             return -1;
         }
+    }
+    public class ProductSource{
+        public string ProductCode { get; set; }
+        public long SourceOrgID { get; set; }
+    }
+    public class StockResults{
+        public string OrgBraShort { get; set; }
+        public string UsualAvailability { get; set; }
+        public double StockCount { get; set; }
     }
 }

@@ -34,19 +34,21 @@ namespace improweb2022_02.Controllers
             ViewBag.isHome = true;
 
             #region  Featured Products
-            var featuredProducts = _db.Products.OrderByDescending(p => p.ProdID).Where(p => p.Active && p.OutputMe && p.OrgID == 94 && p.Status == 1).Take(100).ToList();
+            var featuredProducts = _db.Products.OrderByDescending(p => p.ProdID).Where(p => p.Active && p.OutputMe && p.OrgID == 94 && p.Status == 1).Take(10).ToList();
             ViewBag.FeaturedProducts = featuredProducts;
             ViewBag.CountFeaturedProducts = featuredProducts.Count;
             #endregion
             #region Latest Products
-            var latestProducts = _db.Products.OrderByDescending(p => p.ProdID).Where(p => p.Active && p.OutputMe && p.OrgID == 94 && p.Status == 1).Take(40).ToList();
+            var latestProducts = _db.Products.OrderByDescending(p => p.ProdID).Where(p => p.Active && p.OutputMe && p.OrgID == 94 && p.Status == 1).Take(10).ToList();       
             ViewBag.LatestProducts = latestProducts;
             #endregion
 
+            /*
             var _branchStock = new List<StockCountModel>();
             _branchStock = GetBranchesStock(8748701);
             var _branchStock2 = new List<BranchStock>();
             _branchStock2 = GetBranchesStock();
+            */
 
             try{
              //_branchStockCount = new List<StockCountModel>();

@@ -20,7 +20,7 @@ namespace improweb2022_02.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dddd, dd MMMM yyyy}")]  
         public DateTime? CreatedDate {get; set;}
 
-
+        public int stockCount { get; set; }
         public int Quantity { get; set; }
     }
 

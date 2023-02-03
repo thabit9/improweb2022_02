@@ -37,6 +37,10 @@ namespace improweb2022_02.Controllers
             var product = _db.Products.Find(id);
             var featuredPhoto = /*product.ProductImagesx.SingleOrDefault(p => p.Status && p.Featured)*/product.ImgURL;
             var OtherImages = product.ProductImagesx.Where(p => p.ProdID == id).ToList();
+            
+            var _branchStock = new List<StockCountModel>();
+            _branchStock = GetBranchStock(product.ProdID);
+
             var Features = product.Features.ToList();
             var Specifications = product.Specifications.ToList();
             var reviews = product.ReviewProducts.Where(rs => rs.ReviewStatusID == 2).ToList();
@@ -45,6 +49,7 @@ namespace improweb2022_02.Controllers
             ViewBag.Product = product;
             //ViewBag.StockCount = stockCount;
             ViewBag.FeaturedPhoto = featuredPhoto == null ? "~/products/NoPic.jpg" : /*featuredPhoto.Name*/featuredPhoto;
+            ViewBag.BranchStock = _branchStock;
             //ViewBag.FeaturedPhotoID = featuredPhoto.ProdImageID;
             ViewBag.OtherPhoto = OtherImages;
             ViewBag.Features = Features;
@@ -178,7 +183,30 @@ namespace improweb2022_02.Controllers
         }
 
 
-        [Route("getbranchstock")]
+        [Route("GetBranchStock")]
+        public List<StockCountModel> GetBranchStock(long prodID)
+        {
+            var query = @"SELECT ob.OrgBraID, ob.OrgBraShort, ob.OrgBraName, bs.StockCount, p.UsualAvailability, sl.ShowStockType 
+                        FROM SourceList sl
+                        join OrganisationSource os on sl.SourceID = os.SourceID
+                        join Products pr on sl.SourceOrgID = pr.OrgID 
+                        join BranchStock bs on pr.ProdID = bs.ProdID
+                        join OrganisationBranch ob on bs.OrgBraID = ob.OrgBraID
+                        join Products p on p.ProductCode = pr.ProductCode and os.OrgSourceID = p.OrgSourceID
+                        where (p.ProdID = "+ prodID + @") 
+                        order by ob.[Order], ob.OrgBraShort";
+
+            var _branchStock = new List<StockCountModel>();
+            using (var connection = _dbx.CreateConnection())
+            {
+                var branchStock = connection.Query<StockCountModel>(query);
+                _branchStock = branchStock.ToList();
+            }
+            return _branchStock;
+        }
+
+        [HttpGet]
+        [Route("getbranchesstock")]
         public JsonResult GetBranchesStock(long prodID)
         {
             var query = @"SELECT ob.OrgBraID, ob.OrgBraShort, ob.OrgBraName, bs.StockCount, p.UsualAvailability, sl.ShowStockType 
@@ -202,6 +230,8 @@ namespace improweb2022_02.Controllers
             
         }
 
+        [HttpGet]
+        [Route("getdatafeed")]
         public List<DataFeedModel> GetDataFeed()
         {
             var orgID = SharedHelper.GetOrgID();

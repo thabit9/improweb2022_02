@@ -169,11 +169,7 @@
                         var productCount = ViewBag.FeaturedProducts.Count;
                     }
                     @foreach(var featuredProduct in ViewBag.FeaturedProducts)         
-                    { 
-                    /*Product product = (Product)featuredProduct;
-                    ProductImages photo = product.ProductImagesx.SingleOrDefault(ph => ph.Status && ph.Featured);
-                    var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
-                    
+                    {                     
                     var photoName = "~/products/NoPic.jpg";
                     if (featuredProduct.ImgURL != null){
                         photoName = featuredProduct.ImgURL;
@@ -193,7 +189,7 @@
                                     <img src="@photoName" alt="@photoName" title="Zeige Details für iPhone Plus" loading="lazy">
                                 </a>
                             </div>
-                            <div class="art-brand border_">
+                            <div class="art-brand border_" id="_brand_@index">
                                 <span>@featuredProduct.Manufacturer.ManufacturerName</span>
                             </div>
                             <h3 class="art-name border_">
@@ -201,9 +197,9 @@
                                     <span class="reduceTitle_">@Html.Encode(featuredProduct.Description.ToString()).Substring(0,50)</span>
                                 </a>
                             </h3>
-                            <!--div class="art-description claimedRight reduceDesc_ border_" title="@featuredProduct.Description">
+                            <div class="art-description claimedRight reduceDesc_ border_" title="@featuredProduct.Description">
                                 @featuredProduct.Description
-                            </div-->
+                            </div>
                             <div class="art-price-block">
                                 <span class="art-price">
                                     R @featuredProduct.PurchasePrice Excl VAT
@@ -218,7 +214,7 @@
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                                     </div>
-                                    <div class="art-more-opts featured_stockcount_@index">
+                                    <div class="art-more-opts" id="featured_stockcount_@index">
                                     </div>
                                 </div>
                                 <div class="row no-gutters art-btn-group border_">
@@ -238,36 +234,10 @@
                             </div>
                         </article>
                     </div>
-                    
                     index++;
                     }
                 </div>    
             </div>
-            <script type="text/javascript">  
-                $(document).ready(function() { 
-                    for(var ix2=0; ix2< @productCount; ix2++){
-                        var prodID = $("#featured_product_" + ix2).val();
-                        /*var url = "/Product/GetBranchesStock/"+ prodID;  
-                        $.post(url, {}, function (data) {  
-                            $(".featured_stockcount_"+ ix2).html(data);  
-                        });*/
-                        $.ajax({ 
-                            type: "GET", 
-                            url: '@Url.Action("GetBranchesStock", "product")', 
-                            data: { prodID: prodID }, 
-                            contentType: "application/json; charset=utf-8", 
-                            dataType: 'json', 
-                            success: function (result) { 
-                                var _resultList = JSON.parse(result);
-                                console.log(_resultList[0].ProdID);
-                                //$(".featured_stockcount_"+ ix2).html(_resultList);   
-                            },
-                            error: { 
-                            } 
-                        });
-                    }
-                });  
-            </script> 
 
             <div class="row">
                 <div class="col-sm-12 border_">
@@ -336,7 +306,7 @@
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                                     </div>
-                                    <div class="art-more-opts latest_stockcount_@index2">
+                                    <div class="art-more-opts" id="latest_stockcount_@index2">
                                     </div>
                                 </div>
                                 <div class="row no-gutters art-btn-group border_">
@@ -361,17 +331,7 @@
                 </div>    
             </div>
             
-            <script type="text/javascript">  
-                /*$( document ).ready(function() { 
-                    for(var ix=0; ix< @productCount2; ix++){
-                        var prodID = $("#latest_product_" + ix).val();
-                        var url = "/Product/GetBranchesStock/"+ prodID;  
-                        $.post(url, {}, function (data) {  
-                            $("#latest_stockcount_"+ i).html(data);  
-                        });  
-                    }
-                }); */ 
-            </script> 
+
             <div class="row">
                 <div class="col-sm-12 border_">
                     <hr>
@@ -3154,3 +3114,77 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">  
+    $( document ).ready(function() { 
+        //debugger;
+        //var _append = 'Price Here';
+        for(var ix=0; ix < @productCount; ix++){
+            var prodID = $("#featured_product_" + ix).val();
+            $.ajax({ 
+                type: "GET", 
+                url: '@Url.Action("GetBranchesStock", "product")', 
+                data: { prodID: prodID }, 
+                contentType: "application/json; charset=utf-8", 
+                dataType: 'json', 
+                success: function (result) { 
+                    var _resultList = JSON.stringify(result);
+                    var _resultList2 = JSON.parse(result);
+                    var _append = '';
+                    var _appendx = '';
+                    jQuery(_resultList2).each(function(i, item){
+                        //_appendx = '';
+                        console.log(item.OrgBraID, item.OrgBraShort, item.OrgBraName, item.StockCount, item.UsualAvailability, item.ShowStockType);                                    
+                        _appendx += '<span class="bidi-embed">'+ item.OrgBraShort +':</span><a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">'+ item.StockCount +'</a>';
+                        
+                    });
+                    $('#_brand_'+ix).append('<span>x</span>');
+                    var id = '#featured_stockcount_'+ ix;
+                    _append = _appendx;
+                    updateStockCount(_append, id);
+                    console.log('----------------------------------------------------------------'); 
+                    console.log("'"+_append+"'");
+                },
+                error: { 
+                } 
+            });
+        }
+        function updateStockCount(_append, id){
+            $(id).html(_append);
+            return;
+        }
+        
+        var _append2 = 'price2 here';
+        for(var ix2=0; ix< @productCount2; ix2++){
+            var prodID2 = $("#latest_product_" + ix2).val();
+            $.ajax2({ 
+                type: "GET", 
+                url: '@Url.Action("GetBranchesStock", "product")', 
+                data: { prodID: prodID2 }, 
+                contentType: "application/json; charset=utf-8", 
+                dataType: 'json',
+                success: function (result) { 
+                    var _resultListx = JSON.stringify(result2);
+                    var _resultList2x = JSON.parse(result2);
+                    var _append2 = '';
+                    var _append2x = '';
+                    jQuery(_resultList2).each(function(i, item){
+                        //_appendx = '';
+                        console.log(item.OrgBraID, item.OrgBraShort, item.OrgBraName, item.StockCount, item.UsualAvailability, item.ShowStockType)                                    
+                        _append2x += '<span class="bidi-embed">'+ item.OrgBraShort +':</span><a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">'+ item.StockCount +'</a>';
+                        
+                    });
+                    var id2 = '#featured_stockcount_'+ ix;
+                    _append2 = _append2x;
+                    updateStockCount(_append2, id2);
+                    console.log('----------------------------------------------------------------'); 
+                    console.log("'"+ _append2 +"'");
+                    var _stockId2 = '#latest_stockcount_'+ ix2;
+                    $(_stockId2).html('<div>'+ _append2 +'</div>');
+                }, 
+                error: { 
+                } 
+            });
+            $('#latest_stockcount_'+ ix).html('<div>' + _append2 + '</div>'); 
+        }
+    }); 
+</script> 
