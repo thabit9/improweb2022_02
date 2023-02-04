@@ -6,9 +6,18 @@
 @foreach (var hotProduct in Model)
 {
     Product product = (Product)hotProduct;
-    /*ProductImages photo = productInfo.ProductImagesx.SingleOrDefault(ph => ph.Status && ph.Featured);
-    var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
-    var photoName = product.ImgURL == null ? "NoPic.jpg" : product.ImgURL;
+    var photoName = "~/products/NoPic.jpg";
+    if (hotProduct.ImgURL != null){
+        photoName = hotProduct.ImgURL;
+    }
+    if(hotProduct.ImgURL == null){
+        photoName = "/products/NoPic.jpg";
+    }
+    if(hotProduct.ImgURL == ""){
+        photoName = "/products/NoPic.jpg";
+    }
+
+
 <article class="art border_" data-id="260">
     <div class="art-picture-block border_" style="width: 150px; float: left; margin-right: 10px;">
         <a class="art-picture img-center-container" asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID" title="@hotProduct.ProductName">
@@ -23,8 +32,8 @@
                 </div>
             </div>
             <h3 class="art-name border_">
-                <a asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID"  title="@hotProduct.ProductName">
-                    <span>@hotProduct.ProductName</span>
+                <a asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID" title="iPhone Plus">
+                    <span class="reduceTitle_">@Html.Encode(hotProduct.Description.ToString()).Substring(0,50)</span>
                 </a>
             </h3>
             <div class="art-description claimedRight reduceDesc_ border_" title="@hotProduct.Description">
@@ -41,12 +50,12 @@
                 <div class="art-more-opts border_">
                     @{
                        //var _shared = new SharedHelper();
-                       var stockCount = SharedHelper.GetStockCount(product.ProdID);
-                       foreach(var stock in stockCount)
+                       //var stockCount = SharedHelper.GetStockCount(product.ProdID);
+                       /*foreach(var stock in stockCount)
                        {
                             <span class="bidi-embed">@stock.OrgBraShort:</span>
                             <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">@stock.StockCount.ToString()</a>   
-                       }
+                       }*/
                     }
                 </div>
             </div>

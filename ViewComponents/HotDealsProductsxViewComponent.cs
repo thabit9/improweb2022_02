@@ -22,7 +22,7 @@ namespace improweb2022_02.ViewComponents
         public IViewComponentResult Invoke()
         {
             var _orgID =int.Parse(_configuration["appSettings:OrgID"]);
-            List<Product> hotProductsx = _db.Products.OrderByDescending(p => p.ProdID).Where(p => p.Active && p.OrgID == _orgID/*&& p.HotDeal*/).Skip(2).Take(3).ToList();
+            List<Product> hotProductsx = _db.Products.OrderByDescending(p => p.ProdID).Where(p => p.Active && p.OrgID == _orgID/*&& p.HotDeal*/)/*.Skip(2)*/.Take(3).ToList();
             return View("Index", hotProductsx);
         }
     }

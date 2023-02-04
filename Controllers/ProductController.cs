@@ -98,6 +98,8 @@ namespace improweb2022_02.Controllers
         {
             var pageNumber = page ?? 1;
 
+
+            #region Search Using Category Table
             var category = _db.Categories.Find(search_param);
             ViewBag.Category = category;
             ViewBag.SubCategory = _db.Categories.Where(c => c.ParentId == search_param);
@@ -106,6 +108,11 @@ namespace improweb2022_02.Controllers
             ViewBag.keyword = keyword;
             ViewBag.CountProducts = products.Count(p => p.Active);
             ViewBag.Products = products.ToPagedList(pageNumber, 6);
+            #endregion
+
+            #region improWEB Categories
+            
+            #endregion
 
             return View("Search");
         }
@@ -122,9 +129,12 @@ namespace improweb2022_02.Controllers
             var Specifications = product.Specifications.ToList();
             var reviews = product.ReviewProducts.Where(rs => rs.ReviewStatusID == 2).ToList();
             
+            var _branchStock = new List<StockCountModel>();
+            _branchStock = GetBranchStock(product.ProdID);
 
             ViewBag.Product = product;
             ViewBag.FeaturedPhoto = featuredPhoto == null ? "NoPic.jpg" : /*featuredPhoto.Name*/featuredPhoto;
+            ViewBag.BranchStock = _branchStock;
             //ViewBag.FeaturedPhotoID = featuredPhoto.ProdImageID;
             ViewBag.OtherPhoto = OtherImages;
             ViewBag.Features = Features;

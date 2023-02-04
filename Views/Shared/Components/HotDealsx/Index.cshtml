@@ -8,9 +8,17 @@
 @foreach (var hotProduct in Model)
 {
     Product product = (Product)hotProduct;
-                /*ProductImages photo = productInfo.ProductImagesx.SingleOrDefault(ph => ph.Status && ph.Featured);
-                var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
-                var photoName = product.ImgURL == null ? "NoPic.jpg" : product.ImgURL;
+    var photoName = "~/products/NoPic.jpg";
+    if (hotProduct.ImgURL != null){
+        photoName = hotProduct.ImgURL;
+    }
+    if(hotProduct.ImgURL == null){
+        photoName = "/products/NoPic.jpg";
+    }
+    if(hotProduct.ImgURL == ""){
+        photoName = "/products/NoPic.jpg";
+    }
+    
     <div class="col-sm-4">
         <article class="art border_" data-id="260">
             <div class="art-picture-block border_">
@@ -46,12 +54,12 @@
                     <div class="art-more-opts">
                     @{
                        //var _shared = new SharedHelper();
-                       var stockCount = SharedHelper.GetStockCount(product.ProdID);
-                       foreach(var stock in stockCount)
+                       //var stockCount = SharedHelper.GetStockCount(product.ProdID);
+                       /*foreach(var stock in stockCount)
                        {
                             <span class="bidi-embed">@stock.OrgBraShort:</span>
                             <a class="font-weight-medium bidi-embed" href="/frontend/iphone-plus">@stock.StockCount.ToString()</a>   
-                       }
+                       }*/
                     }
                     </div>
                 </div>
