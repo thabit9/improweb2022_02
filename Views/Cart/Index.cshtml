@@ -133,6 +133,22 @@
                                                                     <span class="delivery-date"><b>@productInfo.CreatedDate.ToString("dddd, dd MMMM yyyy")</b></span>
                                                                 </div>
                                                             </div>
+                                                            <div class="row cart-item-attr">
+                                                                @{
+                                                                    //WebConfig webConfig = WebConfigService.getWebConfig();
+                                                                    if(productInfo.stockCount == 0){
+                                                                        <p class="text-muted">Currently OUT of stock</p>
+                                                                    }
+                                                                    if(productInfo.stockCount > 0 && productInfo.stockCount < 5)
+                                                                    {
+                                                                        <p class="text-muted">Low stock( @productInfo.stockCount ). Order now to avoid disappointment!</p>
+                                                                    }
+                                                                    if(productInfo.stockCount > 5)
+                                                                    {
+                                                                        <p class="text-muted">@productInfo.stockCount In Stock</p>
+                                                                    }
+                                                                }
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col col-auto">

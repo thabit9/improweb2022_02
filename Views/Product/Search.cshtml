@@ -34,8 +34,8 @@
         <aside id="content-left" class="col-lg-3 mb-4 mb-lg-0 d-none d-lg-block border_">
             <div class="block block-catmenu mb-3">
                 <nav class="list-group catmenu">
-                    <a class="list-group-item list-group-item-action catmenu-path-item expanded" asp-controller="product" asp-action="category" asp-route-id="@ViewBag.Category.Id">
-                        <span class="has-count">@ViewBag.Category.Name</span>
+                    <a class="list-group-item list-group-item-action catmenu-path-item expanded" asp-controller="product" asp-action="category" asp-route-id="@ViewBag.Category.GroupHeadID">
+                        <span class="has-count">@ViewBag.Category.HeadName</span>
                     </a>
                     @{ 
                         var index = 0;
@@ -48,13 +48,13 @@
                         }
                         if(slideActive == "active")
                         {
-                        <a class="list-group-item @slideActive catmenu-item" asp-controller="product" asp-action="category" asp-route-id="@subcategory.Id">
-                            <span class="has-count">@subcategory.Name</span>
+                        <a class="list-group-item @slideActive catmenu-item" asp-controller="product" asp-action="category" asp-route-id="@subcategory.ProdGroupLinkID">
+                            <span class="has-count">@subcategory.ProdGroupName</span>
                         </a>
                         }else
                         {
-                        <a class="list-group-item list-group-item-action catmenu-item" asp-controller="product" asp-action="category" asp-route-id="@subcategory.Id">
-                            <span class="has-count">@subcategory.Name</span>
+                        <a class="list-group-item list-group-item-action catmenu-item" asp-controller="product" asp-action="category" asp-route-id="@subcategory.ProdGroupLinkID">
+                            <span class="has-count">@subcategory.ProdGroupName</span>
                         </a>
                         }
                         index++;
@@ -90,7 +90,7 @@
                                             <input class="facet-control-native" type="checkbox" value="14">
                                             <span class="facet-control-ui"></span>
                                             <span class="facet-label has-count">
-                                                @brand.BrandName
+                                                @brand.ManufacturerName
                                             </span>
                                             </label>
                                         </div>

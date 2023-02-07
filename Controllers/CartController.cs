@@ -17,6 +17,7 @@ using System.Configuration;
 using System.Text;
 using improweb2022_02.PayPal;
 using Dapper;
+using static improweb2022_02.Helpers.SharedHelper;
 
 namespace improweb2022_02.Controllers
 {
@@ -67,6 +68,15 @@ namespace improweb2022_02.Controllers
             var photoName = photo == null ? "NoPic.jpg" : photo.Name;*/
             if (SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
             {
+                //get weborgdetail
+                /*OrgWebDetail arrOrg = GetOrgWebDetail();
+                string strWEBProdOrderBy = arrOrg.WEBProdOrderBy.ToString();
+                string strWEBStockOnly = arrOrg.WEBStockOnly.ToString();
+                string strWEBMinStock = arrOrg.WEBMinStock.ToString();
+                string strWEBPriceUsed = SharedHelper.Val(prices.UsePriceNumber.ToString());
+                string strWEBPublicPriceUsed = SharedHelper.Val(prices.NormalPriceNo.ToString());
+                string strWEBDiscountPriceUsed = SharedHelper.Val(prices.DiscountPriceNo.ToString());*/
+
                 var cart = new List<Item>();
                 cart.Add(new Item {
                     ProdID = product.ProdID, 
@@ -75,7 +85,7 @@ namespace improweb2022_02.Controllers
                     Description = product.Description,
                     PurchasePrice = decimal.Parse(product.PurchasePrice.ToString("#0.00")),
                     Photo =  /*photoName*/product.ImgURL,
-                    stockCount = 0,//GetStock(product.ProdID),
+                    stockCount = GetBranchStock(product.ProdID),
                     Quantity = 1,
                     CreatedDate = product.CreateDate
                 });
@@ -94,6 +104,7 @@ namespace improweb2022_02.Controllers
                         Description = product.Description,
                         PurchasePrice =  decimal.Parse(product.PurchasePrice.ToString("#0.00")),
                         Photo =  /*photoName*/product.ImgURL,
+                        stockCount = GetBranchStock(product.ProdID),
                         Quantity = 1,
                         CreatedDate = product.CreateDate
                     });
@@ -126,6 +137,7 @@ namespace improweb2022_02.Controllers
                     Description = product.Description,
                     PurchasePrice =  decimal.Parse(product.PurchasePrice.ToString("#0.00")),
                     Photo = /*photoName*/product.ImgURL,
+                    stockCount = GetBranchStock(product.ProdID),
                     Quantity = quantity,
                     CreatedDate = product.CreateDate
                 });
@@ -144,6 +156,7 @@ namespace improweb2022_02.Controllers
                         Description = product.Description,
                         PurchasePrice =  decimal.Parse(product.PurchasePrice.ToString("#0.00")),
                         Photo =  /*photoName*/product.ImgURL,
+                        stockCount = GetBranchStock(product.ProdID),
                         Quantity = quantity,
                         CreatedDate = product.CreateDate
                     });
@@ -534,6 +547,33 @@ namespace improweb2022_02.Controllers
         }
 
 
+        //[Route("GetBranchStock")]
+        public int? GetBranchStock(long prodID)
+        {
+            
+            //WebConfig webConfig = WebConfigService.getWebConfig();
+            var query = @"SELECT ob.OrgBraID, ob.OrgBraShort, ob.OrgBraName, bs.StockCount, p.UsualAvailability, sl.ShowStockType 
+                        FROM SourceList sl
+                        join OrganisationSource os on sl.SourceID = os.SourceID
+                        join Products pr on sl.SourceOrgID = pr.OrgID 
+                        join BranchStock bs on pr.ProdID = bs.ProdID
+                        join OrganisationBranch ob on bs.OrgBraID = ob.OrgBraID
+                        join Products p on p.ProductCode = pr.ProductCode and os.OrgSourceID = p.OrgSourceID
+                        where (p.ProdID = "+ prodID + @") 
+                        order by ob.[Order], ob.OrgBraShort";
+            int? stock = 0;
+            //int lowStock = int.Parse(webConfig.ShowLowStockNumber.ToString());
+            var _branchStock = new List<StockCountModel>();
+            using (var connection = _dbx.CreateConnection())
+            {
+                var branchStock = connection.Query<StockCountModel>(query);
+                _branchStock = branchStock.ToList();
+                foreach(var _stock in _branchStock){
+                    stock += _stock.StockCount;
+                }
+            }
+            return stock;
+        }
         public string GetStock(long prodID, string ShowStockType)
         {
             var _query = "";

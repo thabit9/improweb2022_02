@@ -10,9 +10,9 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="">
-            @foreach (var category in Model.categories)
+            @foreach (var category in Model.productGroupHeads)
             {
-                <li><a class="dropdown-item" href="#@category.Id">@category.Name</a></li> 
+                <li><a class="dropdown-item" href="#@category.GroupHeadID">@category.HeadName</a></li> 
             }           
         </ul>
     </div>

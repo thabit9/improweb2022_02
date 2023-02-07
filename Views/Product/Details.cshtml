@@ -5,6 +5,10 @@
 @using System.Web
 @using improweb2022_02.Models;
 @using Microsoft.AspNetCore.Http.Extensions
+@using System.Security.Claims;
+@{
+    var user = User.FindFirst(ClaimTypes.Name);
+}
 
 <div id="content" class="container">
     <div class="row">
@@ -195,8 +199,12 @@
             <!-- Bundle Items -->
             <!-- Product attributes (SKU, EAN, Weight etc.) -->
             <div class="pd-attrs-container" data-partial="Attrs"></div>
+            
+            @if(user != null)
+            {
             <!-- Offer box -->
             <div class="pd-offer border_" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+             
              <meta itemprop="itemCondition" content="http://schema.org/NewCondition" />
              <link itemprop="url" href="@Html.Encode(ViewBag.Product.Description.ToString()).Substring(0,50)" />
              <div class="pd-offer-price-container" data-partial="Price">
@@ -370,6 +378,17 @@
               }
              });
             </script>
+
+            }
+            else
+            {
+                <div class="pd-offer border_" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                    <p class="text-muted border_">You need to login for more details!</p>
+                </div>
+            }
+            
+
+
             <!-- social share -->
             <div class="pd-share d-flex justify-content-left mt-3">
                 <!-- AddThis Button BEGIN -->
@@ -669,9 +688,12 @@
                             <span>@Html.Encode(relatedProduct.Description.ToString()).Substring(0,50)</span>
                         </a>
                     </h3>
+                    @if(user != null)
+                    {
                     <div class="art-price-block">
                         <span class="art-price border_"> From R @relatedProduct.PurchasePrice excl Tax </span>
                     </div>
+                    }
                 </article>
             }
             </div>

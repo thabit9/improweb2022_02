@@ -78,7 +78,7 @@ namespace improweb2022_02.Models
         public Int64 PostalAddressIEID { get; set; }
         public string IdNo { get; set; }
         public string VatNo { get; set; }
-        public byte SendEmails { get; set; }
+        public byte? SendEmails { get; set; }
         
         //Bank Details
         [Display(Name = "Bank Name")]
@@ -91,14 +91,14 @@ namespace improweb2022_02.Models
         public string BranchNo { get; set; }
 
         //Commissions and Discounts
-        public double CustomerDiscountPercentage { get; set; }
-        public byte CustomerDiscountPriceNo { get; set; }
-        public double AccountCommissionPercentage { get; set; }
+        public double? CustomerDiscountPercentage { get; set; }
+        public byte? CustomerDiscountPriceNo { get; set; }
+        public double? AccountCommissionPercentage { get; set; }
         public string ReferenceCode { get; set; }  
         //[Required]
         public bool IsCommissionActive { get; set; }
-        public int TimesToUseCommission { get; set; }
-        public double TotalCommissionPercentage { get; set; }    
+        public int? TimesToUseCommission { get; set; }
+        public double? TotalCommissionPercentage { get; set; }    
         //[Required]
         public bool CommissionOnProfit { get; set; }  
         //[Required]
@@ -106,11 +106,11 @@ namespace improweb2022_02.Models
         public string CDTown { get; set; }
 
 
-        public Int64 FraudulentUserID { get; set; }
-        public Int64 DefaultOrgBranchID { get; set; }
-        public int ReferenceMarketingJourneyId { get; set; }  
-        public Int64 OrgID { get; set; }
-        public Int64 AccountID { get; set; }
+        public Int64? FraudulentUserID { get; set; }
+        public Int64? DefaultOrgBranchID { get; set; }
+        public int? ReferenceMarketingJourneyId { get; set; }  
+        public Int64? OrgID { get; set; }
+        public Int64? AccountID { get; set; }
 
 
         public virtual Organisation Organisation { get; set; }

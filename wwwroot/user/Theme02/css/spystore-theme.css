@@ -18405,6 +18405,8 @@ body.bare {
  font-size: 0.8125rem;
  line-height: 1.2;
  vertical-align: top;
+ float: right !important;
+ 
 }
 .shopbar-light .shopbar-button {
  color: #393f46 !important;

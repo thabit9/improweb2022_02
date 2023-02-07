@@ -2,6 +2,10 @@
     Layout = null;
 }
 @using improweb2022_02.Helpers;
+@using System.Security.Claims;
+@{
+    var user = User.FindFirst(ClaimTypes.Name);
+}
 
 @foreach (var hotProduct in Model)
 {
@@ -47,6 +51,8 @@
                     <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
                     <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                 </div>
+                @if(user != null)
+                {
                 <div class="art-more-opts border_">
                     @{
                        //var _shared = new SharedHelper();
@@ -58,9 +64,12 @@
                        }*/
                     }
                 </div>
+                }
             </div>
         </div>
         <div class="art-actions-block">
+            @if(user != null)
+            {
             <div class="art-price-block border_">
                 <span class="art-price">
                     R @(decimal.Parse(hotProduct.PurchasePrice.ToString("#0.00"))) Excl VAT
@@ -78,6 +87,11 @@
                     <span class="d-none d-sm-inline">Add To Basket</span>
                 </a>
             </div>
+            }
+            else
+            {
+               <p class="text-muted border_">You need to login for more details</p> 
+            }
         </div>
     </div>
 </article>

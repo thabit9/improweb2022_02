@@ -22,5 +22,6 @@ namespace improweb2022_02.Helpers
         public string BrandLineSplit { get; set; }
         public string SiteName { get; set; }
         public string ConnectionString { get; set; }
+        public int ShowLowStockNumber { get; set; }
     }
 }

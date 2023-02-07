@@ -30,7 +30,8 @@ namespace improweb2022_02.Helpers
                 BrandsLine = _configuration["appSettings:BrandsLine"],
                 BrandLineSplit = _configuration["appSettings:BrandLineSplit"],
                 SiteName = _configuration["appSettings:SiteName"],
-                ConnectionString = _configuration["ConnectionStrings:improwebDbContextCon"]
+                ConnectionString = _configuration["ConnectionStrings:improwebDbContextCon"],
+                ShowLowStockNumber = int.Parse(_configuration["appSettings:ShowLowStockNumber"])
             };
         }
     }

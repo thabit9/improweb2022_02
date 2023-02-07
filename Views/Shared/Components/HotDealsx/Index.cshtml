@@ -4,6 +4,10 @@
 
 @using Microsoft.AspNetCore.Http.Extensions
 @using improweb2022_02.Helpers
+@using System.Security.Claims;
+@{
+    var user = User.FindFirst(ClaimTypes.Name);
+}
 
 @foreach (var hotProduct in Model)
 {
@@ -51,6 +55,8 @@
                         <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
                         <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                     </div>
+                    @if(user != null)
+                    {
                     <div class="art-more-opts">
                     @{
                        //var _shared = new SharedHelper();
@@ -62,8 +68,11 @@
                        }*/
                     }
                     </div>
+                    }
                 </div>
                 <div class="row no-gutters art-btn-group border_">
+                    @if(user != null)
+                    {
                     <a asp-controller="cart" asp-action="buy" asp-route-id="@hotProduct.ProdID" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="cart" data-action="add">
                         <i class="fa fa-cart-arrow-down"></i>
                     </a>
@@ -73,6 +82,7 @@
                     <a data-href="/frontend/catalog/addproducttocompare/260" href="#" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom" rel="nofollow" data-type="compare" data-action="add">
                         <i class="fa fa-retweet"></i>
                     </a>
+                    }
                     <a asp-controller="product" asp-action="details" asp-route-id="@hotProduct.ProdID" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
                         <i class="fa fa-info"></i>
                     </a>

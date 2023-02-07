@@ -94,24 +94,31 @@ namespace improweb2022_02.Controllers
 
         [HttpGet]
         [Route("search")]
-        public IActionResult Search(string keyword, int search_param, int? page)
+        public IActionResult Search(string keyword, long search_param, int? page)
         {
             var pageNumber = page ?? 1;
 
 
             #region Search Using Category Table
-            var category = _db.Categories.Find(search_param);
+            /*var category = _db.Categories.Find(search_param);
             ViewBag.Category = category;
             ViewBag.SubCategory = _db.Categories.Where(c => c.ParentId == search_param);
-            ViewBag.Manufacturer = _db.Manufacturers.OrderBy(m => m.ManufacturerName)/*.Where(m => m.Status)*/;
+            ViewBag.Manufacturer = _db.Manufacturers.OrderBy(m => m.ManufacturerName);
             var products = _db.Products.Where(p => p.ProductName.Contains(keyword) && p.CategoryID == search_param && p.Active).ToList();           
             ViewBag.keyword = keyword;
             ViewBag.CountProducts = products.Count(p => p.Active);
-            ViewBag.Products = products.ToPagedList(pageNumber, 6);
+            ViewBag.Products = products.ToPagedList(pageNumber, 6);*/
             #endregion
 
             #region improWEB Categories
-            
+            var category = _db.ProductGroupHeads.Find(search_param);
+            ViewBag.Category = category;
+            ViewBag.SubCategory = _db.ProdGroupLinks.Where(c => c.GroupHeadID == search_param);
+            ViewBag.Manufacturer = _db.Manufacturers.OrderBy(m => m.ManufacturerName);
+            var products = _db.Products.Where(p => p.ProductName.Contains(keyword) /*&& p.GroupName == search_param*/ && p.Active).ToList();
+            ViewBag.keyword = keyword;
+            ViewBag.CountProducts = products.Count(p => p.Active);
+            ViewBag.Products = products.ToPagedList(pageNumber, 6);
             #endregion
 
             return View("Search");

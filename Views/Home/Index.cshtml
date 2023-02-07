@@ -4,6 +4,10 @@
 @using improweb2022_02.Helpers
 @using improweb2022_02.Models;
 @using Microsoft.AspNetCore.Http.Extensions
+@using System.Security.Claims;
+@{
+    var user = User.FindFirst(ClaimTypes.Name);
+}
 
 <div class="container">
     <div class="row">
@@ -17,7 +21,6 @@
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne" style="">
                         <div class="accordion-body">
-
                             <ul class="list-group border_" style="border-radius: 0; max-height: 640px; overflow:scroll; overflow-x: hidden" id="style-10">
                                 <li class="list-group-item" style="padding-top:2px;padding-bottom:2px;">Main Store</li>
                                 <li class="list-group-item " style="padding-top:2px;padding-bottom:2px;">Audio Visual Store
@@ -214,10 +217,13 @@
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                                     </div>
+                                    @if(user != null){
                                     <div class="art-more-opts" id="featured_stockcount_@index">
                                     </div>
+                                    }
                                 </div>
                                 <div class="row no-gutters art-btn-group border_">
+                                    @if(user != null){
                                     <a asp-controller="cart" asp-action="buy" asp-route-id="@featuredProduct.ProdID" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-cart-arrow-down"></i>
                                     </a>
@@ -227,6 +233,7 @@
                                     <a asp-controller="compare" asp-action="compare" asp-route-id="@featuredProduct.ProdID" asp-route-redirect="@Context.Request.GetEncodedUrl()" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-retweet"></i>
                                     </a>
+                                    }
                                     <a asp-controller="product" asp-action="details" asp-route-id="@featuredProduct.ProdID" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-info"></i>
                                     </a>
@@ -306,10 +313,14 @@
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4902" class="art-color-opt" style="background-color: #af1e2d" title="Rot auswählen"></a>
                                         <a href="/frontend/iphone-plus?color-260-0-1248=4903" class="art-color-opt" style="background-color: #000000" title="Schwarz auswählen"></a>
                                     </div>
+                                    @if(user != null){
                                     <div class="art-more-opts" id="latest_stockcount_@index2">
                                     </div>
+                                    }
                                 </div>
                                 <div class="row no-gutters art-btn-group border_">
+                                    @if(user != null)
+                                    {
                                     <a asp-controller="cart" asp-action="buy" asp-route-id="@LatestProduct.ProdID" class="btn btn-primary ajax-cart-link px-sm-2 btn-lg art-btn col border_" title="Add To Basket" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-cart-arrow-down"></i>
                                     </a>
@@ -319,6 +330,7 @@
                                     <a asp-controller="compare" asp-action="compare" asp-route-id="@LatestProduct.ProdID" asp-route-redirect="@Context.Request.GetEncodedUrl()" class="btn btn-light btn-lg art-btn col ajax-cart-link border_" title="Compare Products" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-retweet"></i>
                                     </a>
+                                    }
                                     <a asp-controller="product" asp-action="details" asp-route-id="@LatestProduct.ProdID" class="btn btn-light btn-lg art-btn col border_" title="Product Detail" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-info"></i>
                                     </a>
