@@ -37,7 +37,16 @@ namespace improweb2022_02.Helpers
         public decimal? MassKG { get; set; }
 
     }
-    
+    public class CategoryModel{
+        public long CategoryID { get; set; }
+        public long ProductGroupTopID { get; set; } 
+        public string /*ProdGroupTopName*/StoreName { get; set; } 
+        public long OrgID { get; set; }
+        public long GroupHeadID { get; set; }  
+        public string /*HeadName*/CategoryHeadName { get; set; }
+        public long ProdGroupID { get; set; } 
+        public string /*GroupName*/CategoryName { get; set; }
+    }
     [Serializable]
     public class StockCountModel
     {

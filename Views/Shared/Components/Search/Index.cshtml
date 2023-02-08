@@ -9,10 +9,17 @@
             <span id="search_concept" name="categoryId">All Categories</span> 
             <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="">
+        <ul class="dropdown-menu customize-list" aria-labelledby="navbarDropdown" style="">
+            @{ var temp = "A"; }
             @foreach (var category in Model.productGroupHeads)
-            {
+            {   var alphabet = category.HeadName.ToString().Substring(0,1);
+                if(alphabet != temp)
+                {
+                    <li><a class="dropdown-item labelx" href="#">@alphabet</a></li>
+                    <div class="dropdown-divider"></div> 
+                }
                 <li><a class="dropdown-item" href="#@category.GroupHeadID">@category.HeadName</a></li> 
+                temp = alphabet;
             }           
         </ul>
     </div>
@@ -25,5 +32,20 @@
     </span>
 </div>
 </form>
+
+<style>
+    .customize-list {
+        /*position: absolute;
+        inset: 0px auto auto 0px;
+        margin: 0px;
+        transform: translate(0px, 41px);*/
+        -moz-column-count: 4;
+        -moz-column-gap: 20px;
+        -webkit-column-count: 4;
+        -webkit-column-gap: 20px;
+        column-count: 4;
+        column-gap: 20px;
+    }
+</style>
 
 

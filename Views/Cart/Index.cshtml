@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 @using improweb2022_02.Models;
-@using Microsoft.AspNetCore.Http.Extensions
-
+@using Microsoft.AspNetCore.Http.Extensions;
+@using improweb2022_02.Helpers;
 <div id="content" class="container">
     <div class="row">
         <!-- #region BreadCrump -->
@@ -137,15 +137,24 @@
                                                                 @{
                                                                     //WebConfig webConfig = WebConfigService.getWebConfig();
                                                                     if(productInfo.stockCount == 0){
-                                                                        <p class="text-muted">Currently OUT of stock</p>
+                                                                        <p class="text-muted">
+                                                                            <a class="btn btn-danger btn-to-danger btn-sm btn-icon border_">
+                                                                            <i class="fa-solid fa-xmark"></i>
+                                                                            </a> Currently OUT of stock</p>
                                                                     }
                                                                     if(productInfo.stockCount > 0 && productInfo.stockCount < 5)
                                                                     {
-                                                                        <p class="text-muted">Low stock( @productInfo.stockCount ). Order now to avoid disappointment!</p>
+                                                                        <p class="text-muted">
+                                                                            <a class="btn btn-gray btn-to-gray btn-sm btn-icon border_">
+                                                                            <i class="fa-sharp fa-solid fa-exclamation"></i>
+                                                                            </a> Low stock( @productInfo.stockCount ). Order now to avoid disappointment!</p>
                                                                     }
                                                                     if(productInfo.stockCount > 5)
                                                                     {
-                                                                        <p class="text-muted">@productInfo.stockCount In Stock</p>
+                                                                        <p class="text-muted">
+                                                                            <a class="btn btn-success btn-to-success btn-sm btn-icon border_">
+                                                                            <i class="fa-solid fa-check"></i>
+                                                                            </a> @productInfo.stockCount In Stock</p>
                                                                     }
                                                                 }
                                                             </div>
@@ -164,7 +173,7 @@
                                                 </div>
                                                 </div>
                                                 <div class="cart-col cart-col-price border_" data-caption="Price">
-                                                    <span class="price border_">R @productInfo.PurchasePrice incl VAT</span>
+                                                    <span class="price border_">@productInfo.PurchasePrice.ToString("R #,##0.00; (R #,##0.00);Zero") incl VAT</span>
                                                 </div>
                                                 <div class="cart-col cart-col-qty border_" data-caption="Quantity">
                                                     <div class="qty-input">
@@ -185,7 +194,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="cart-col cart-col-price cart-col-subtotal border_" data-caption="Total">
-                                                    <span class="price">R @(productInfo.PurchasePrice * productInfo.Quantity) incl VAT</span>
+                                                    @{var Pricex = productInfo.PurchasePrice * productInfo.Quantity;}
+                                                    <span class="price">@Pricex.ToString("R #,##0.00; (R #,##0.00);Zero") incl VAT</span>
                                                 </div>
                                             </div>
                                             i++;
@@ -272,7 +282,7 @@
                                                     <tbody>
                                                     <tr class="cart-summary-subtotal border_">
                                                     <td class="cart-summary-label border_">Subtotal:</td>
-                                                    <td class="cart-summary-value border_">R @ViewBag.Total incl VAT</td>
+                                                    <td class="cart-summary-value border_">@ViewBag.Total.ToString("R #,##0.00; (R #,##0.00);Zero") incl VAT</td>
                                                     </tr>
                                                     <tr class="cart-summary-shipping border_">
                                                     <td class="cart-summary-label border_">
@@ -289,7 +299,7 @@
                                                     <tr class="cart-summary-total border_">
                                                     <td class="cart-summary-label border_">Total:</td>
                                                     <td class="cart-summary-value border_">
-                                                        <span>R @ViewBag.Total</span>
+                                                        <span>@ViewBag.Total.ToString("R #,##0.00; (R #,##0.00);Zero")</span>
                                                     </td>
                                                     </tr>
                                                 </tbody>
