@@ -211,3 +211,7 @@ E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Vie
 E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Views\Cart\Payment.cshtml.g.cs
 E:\Thabis Documents\Projects\NETCore5\improweb2022_02\obj\Debug\net5.0\Razor\Views\Cart\Complete.cshtml.g.cs
 E:\Thabis Documents\Projects\NETCore5\improweb2022_02\bin\Debug\net5.0\Dapper.dll
+E:\Thabis Documents\Projects\NETCore5\improweb2022_02\bin\Debug\net5.0\easy-autocomplete\resources\categories.json
+E:\Thabis Documents\Projects\NETCore5\improweb2022_02\bin\Debug\net5.0\easy-autocomplete\resources\countries.json
+E:\Thabis Documents\Projects\NETCore5\improweb2022_02\bin\Debug\net5.0\easy-autocomplete\resources\people.json
+E:\Thabis Documents\Projects\NETCore5\improweb2022_02\bin\Debug\net5.0\easy-autocomplete\resources\site.json

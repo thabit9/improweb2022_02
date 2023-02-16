@@ -15,6 +15,8 @@ using Dapper;
 using System.Data;
 using System.Text.Json;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace improweb2022_02.Controllers
 {
@@ -77,6 +79,21 @@ namespace improweb2022_02.Controllers
 
             return View("Category");
         }
+        
+        [Route("category/{categoryName}")]
+        public IActionResult Category(string categoryName, int? page)
+        {
+            var pageNumber = page ?? 1;
+            var category = _db.ProductGroups.Where(c => c.GroupName == categoryName && c.Locked == true).OrderBy(c => c.GroupName).FirstOrDefault();
+            ViewBag.Category = category;
+            var products = _db.Products.Where(p => p.GroupName == categoryName && p.Active == true && p.OutputMe==true).OrderBy(p => p.ProdID).ToList();
+            ViewBag.CountProducts = products.Count(p => p.Active);
+            ViewBag.Products = products.Where(p => p.Active).ToList().ToPagedList(pageNumber, 3);
+            //ViewBag.SubCategory = _db.Categories.Where(c => c.ParentId == id);
+            ViewBag.Manufacturer = _db.Manufacturers.OrderBy(m => m.ManufacturerName)/*.Where(m => m.Status)*/;
+
+            return View("Category");
+        }
 
         [Route("brand/{id}")]
         public IActionResult Brand(Int64 id, int? page)
@@ -123,7 +140,97 @@ namespace improweb2022_02.Controllers
 
             return View("Search");
         }
+       
+        [HttpGet]
+        [Route("search2")]
+        public IActionResult  Search2(long search_param, string keyword)
+        {        
+            var _searchModel = new SearchViewModel();
+            string[]  _groupNameArr = new string[] {} /*{}*/ /*Array.Empty<string>()*/ /*new string[0]*/;
 
+            //determine the keyword
+            //keyword can be GroupName, ProductCode, ProductCategory, or Some Text on the Description
+            var _gropName_keyword = "and pg.GroupName like '%"+ keyword + "%'";
+            var _description_keyword = "or Description Like '%" + keyword + "%'";
+
+
+            var _query = @"
+SELECT TOP 100 pgt.ProductGroupTopId, pgt.Name as StoreName, pgt.OrgID, pgh.GroupHeadID, pgh.HeadName as CategoryHeadName, pg.ProdGroupID, pg.GroupName as CategoryName
+FROM ProductGroupTopLink pgtl
+join ProductGroupTop pgt on pgtl.ProductGroupTopId = pgt.ProductGroupTopId
+join ProductGroupHead pgh on pgtl.GroupHeadID = pgh.GroupHeadID
+join ProdGroupLink pgl on pgh.GroupHeadID = pgl.GroupHeadID
+join ProductGroups pg on pgl.ProdGroupName = pg.GroupName
+where pgt.OrgID = 94 and pgh.GroupHeadID = "+ search_param +" "+ _gropName_keyword +" order by pgt.ProductGroupTopId";
+            var _searchCategory = new List<CategoryModel>();
+            using (var connection = _dbx.CreateConnection()){
+                var _queryResults = connection.Query<CategoryModel>(_query);
+                _searchCategory = _queryResults.ToList(); 
+                
+                //get GroupNames to Array
+                var _groupName = new List<string>();
+                foreach(var groupName in _searchCategory){
+                    if (groupName.CategoryName != null || groupName.CategoryName != ""){
+                        _groupName.Add(groupName.CategoryName);
+                    }
+                }
+                _groupNameArr = _groupName.ToArray();
+            }  
+
+            //prepare the groupNames string for Sql
+            var _groupNameStr = "";
+            foreach(var item in _groupNameArr){
+                _groupNameStr += "'" + item + "', ";
+            }
+            if (_groupNameStr == ""){
+                _groupNameStr = "-1";
+            }else{
+                _groupNameStr = _groupNameStr.Remove(_groupNameStr.Length -2, 2);
+            }
+
+            var _query2 = @"
+Select top 1000 *
+from Products
+where GroupName in ("+ _groupNameStr +") and OrgID = 94 and Active = 1 and OutputMe = 1";
+            var _searchProducts = new List<Product>();
+            using (var connection = _dbx.CreateConnection()){
+                var _queryResults = connection.Query<Product>(_query2);
+                _searchProducts = _queryResults.ToList();             
+            }
+
+            var _query3 = @"
+Select top 1000 *
+from Products
+where GroupName in ("+ _groupNameStr +") and OrgID = 94 and Active = 1 and OutputMe = 1 "+ _description_keyword;
+            var _searchSpecificProducts = new List<Product>();
+            using (var connection = _dbx.CreateConnection()){
+                var _queryResults = connection.Query<Product>(_query3);
+                _searchSpecificProducts = _queryResults.ToList();             
+            }
+
+            //now add the results to the searchModel
+            _searchModel = new SearchViewModel(){
+                _category = _searchCategory,
+                _products = _searchProducts,
+                _specificProducts = _searchSpecificProducts
+            };
+            //return _searchModel; 
+            //return new JsonResult(_searchModel);
+            /*return new JsonResult()  
+            {  
+                _categoryModel = _searchCategory,
+                _proudctsModel = _searchProducts,
+                _specificProdModel = _searchSpecificProducts
+            };*/
+            return Json( new {
+                _category = _searchCategory.ToArray(),
+                _products = _searchProducts.ToArray(),
+                _specificProducts = _searchSpecificProducts.ToArray(),       
+                _keyword = keyword
+            });
+            //return JSON(json); 
+        }
+        
         [HttpGet]
         [Route("review/{id}")]
         public IActionResult Review(Int64 id)
@@ -412,4 +519,35 @@ ORDER BY Products.ProdID", strWEBPriceUsed, arrOrg.WEBStockOnly, orgID);
         }
         
     }
+
+    public class SearchViewModel{
+        public List<CategoryModel> _category { get; set; }
+        public List<Product> _products { get; set; }
+        public List<Product> _specificProducts { get; set; }
+    }
+    public class CategoryModel{
+        public long CategoryID { get; set; }
+        public long ProductGroupTopID { get; set; } 
+        public string /*ProdGroupTopName*/StoreName { get; set; } 
+        public long OrgID { get; set; }
+        public long GroupHeadID { get; set; }  
+        public string /*HeadName*/CategoryHeadName { get; set; }
+        public long ProdGroupID { get; set; } 
+        public string /*GroupName*/CategoryName { get; set; }  
+    } 
+    public class ProductsModel{
+        public long ProdID { get; set; }
+        public string ProductCode { get; set; }
+        public string ProductName { get; set; }
+        public string Description { get; set; }
+        [UIHint("Currency")]
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal PurchasePrice { get; set; }
+        public string Photo { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dddd, dd MMMM yyyy}")]  
+        public DateTime? CreatedDate {get; set;}
+    }
+
+
 }

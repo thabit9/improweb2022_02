@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
     <meta name="HandheldFriendly" content="true">
     <title>Esquire Technologies - Home</title>
+
+    <link href="~/EAutocomplete/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+	<link href="~/EAutocomplete/easy-autocomplete.themes.min.css" rel="stylesheet" type="text/css">
+
     <meta name="description" content="Shop on-line for special prices on computer hardware, software and many more products in South Africa">
     <meta name="keywords" content="computers, screens, mouse, it, keybord, ink cartridges, pc components, hard drives, cds, drivers, cables, gaming, dvd, credit card transactions, on-line computer shop, hardware specials, software specials, list your products, latest computer prices, specials, computer store, South Africa, cheap prices, unbeatable deals, fast and easy">
 
@@ -701,8 +705,215 @@
     <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.responsiveNav.js"></script>
     <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.thumbzoomer.js"></script>
     <script type="text/javascript" src="~/user/Theme02/Scripts/smartstore.viewport.js"></script>-->
+    <script src="~/EAutocomplete/jquery.easy-autocomplete.min.js" type="text/javascript"></script>
     
+    <script>
+        function _getSearchModel(_search_param, _keyword){
+            $.ajax({ 
+                type: "GET", 
+                url: '@Url.Action("Search2", "product")', 
+                data: { 
+                    search_param: _search_param, 
+                    keyword: _keyword 
+                }, 
+                contentType: "application/json; charset=utf-8", 
+                dataType: 'json', 
+                success: function (result) { 
+                    let _searchModelArr = [];
+                    jQuery(result).each(function(i, item) {
+                        _searchModelArr.push({ category: item._category });
+                        _searchModelArr.push({ products: item._products });
+                        _searchModelArr.push({ specificProducts: item._specificProducts });
+                        _searchModelArr.push({ keyword: item._keyword });
+                        //console.log(_searchModelArr);
+                        _createSearchElements(_searchModelArr);
+                    }); 
+                    
+                    /*
+                    _searchModelArrx.push.apply(_searchModelArrx, _searchModelArr);
+                    console.log(_searchModelArrx)
+                    console.log(_searchModelArrx[0].category.length)
+                    */
 
+                },
+                error: { 
+                } 
+            });
+        }
+        function _createSearchElements(_searchModelArr){
+            console.log("testing array")
+            console.log(_searchModelArr);
+            
+            const val = _searchModelArr[3].keyword;
+            const _parent = document.getElementsByClassName("input-group")[0];
+            console.log(_parent);
+
+            //create a div
+            let div1 = document.createElement("div");
+            div1.className = "instasearch-drop w-100 open";   
+            div1.setAttribute("id", this.id+"instasearch-drop")            
+            let div2 = document.createElement("div");
+            div2.className = "instasearch-drop-body clearfix";
+            
+            let h61 = document.createElement("h6");
+            h61.className = "instasearch-group-header";
+            h61.innerHTML = "Categories";
+
+            let ul1 = document.createElement("ul");
+            ul1.className = "instasearch-hits";
+            //for loop here for categories
+
+            let span2;
+            console.log(_searchModelArr[0].category.length);
+            for (let x = 0; x < _searchModelArr[0].category.length; x++) {
+                const category = _searchModelArr[0].category[x];
+
+                let li1 = document.createElement("li");
+                let a1 = document.createElement("a");
+                a1.className = "instasearch-hit";
+                a1.href = '@Url.Action("Category", "Product", new { categoryName = "'+ category.categoryName +'" })';
+
+                let span1 = document.createElement("span");
+                span1.className = "instasearch-match pl-1 border_";
+                /*make the matching letters bold:*/
+                span1.innerHTML = val;
+
+                span2 = document.createElement("span");
+                span2.className = "instasearch-hit-tag border_";
+                span2.innerHTML = "in "+ category.categoryName;
+
+                a1.appendChild(span1);
+                a1.appendChild(span2);
+                li1.appendChild(a1);
+                ul1.appendChild(li1);
+            }
+            //for loop ends here
+
+
+            let h62 = document.createElement("h6");
+            h62.className = "instasearch-group-header";
+            h62.innerHTML = "Hits";
+
+            let ul2 = document.createElement("ul");
+            ul2.className = "instasearch-hits has-thumbs";
+            
+            console.log(_searchModelArr[1].products.length);
+            for (let x = 0; x < _searchModelArr[1].products.length; x++) {
+                const product = _searchModelArr[1].products[x]; 
+                let li2 = document.createElement("li");
+                let a2 = document.createElement("a");
+                a2.className = "instasearch-hit";
+                a2.href = '@Url.Action("details", "Product", new { prodID = "'+ product.prodID +'" })';
+
+                let span3 = document.createElement("span");
+                span3.className = "instasearch-hit-wrapper";
+                let span4 = document.createElement("span");
+                span4.className = "instasearch-hit-thumb d-block";
+
+                //product image
+                let img1 = document.createElement("img");
+                img1.className = "img-fluid file-img";
+                img1.src = product.imgURL + "?size=72";
+                img1.alt = product.description.substring(0,50);
+                img1.title = product.description.substring(0,50);
+                span4.appendChild(img1);
+
+                let span5 = document.createElement("span");
+                span5.className = "d-block text-truncate";
+                let span6 = document.createElement("span");
+                span6.className = "d-block text-truncate";
+                /*let span7 = document.createElement("span");
+                span7.className = "instasearch-match";
+                span7.innerHTML = "computer";*/
+                span6.innerHTML = product.description;
+                
+                span5.appendChild(span6);
+                span3.appendChild(span4);
+                span3.appendChild(span5);
+                a2.appendChild(span3);
+                //a2.appendChild(span2);
+                li2.appendChild(a2);
+                ul2.appendChild(li2);
+            }
+            //for loop ends here
+
+
+            div2.appendChild(h61);
+            div2.appendChild(ul1);
+            div2.appendChild(h62);
+            div2.appendChild(ul2);    
+            div1.appendChild(div2);
+            //this.parentNode.appendChild(div1);
+            _parent.appendChild(div1);
+        }
+        function autocomplete(_input){
+            var _currentFocus; 
+            var _searchModelArrx = new Array();
+
+            _input.addEventListener("input", function(){
+                var a, b, i, val = this.value;               
+                var _search_param = $('#search_param').val();
+
+                closeAllLists();
+                if (!val){
+                    return false;
+                }else{  
+                    _currentFocus = -1;                  
+                    _getSearchModel(_search_param, val);
+                }
+            })
+
+            /*execute a function presses a key on the keyboard:*/
+            _input.addEventListener("keydown", function(e) {
+                var x = document.getElementById(this.id + "instasearch-drop");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                if (!x) return false;
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                var x = document.getElementsByClassName("instasearch-drop");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != _input) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+        autocomplete(document.getElementById("search-input"));
+    </script>
 <script type="text/javascript">
     $('.gal').slick({
     slidesToShow: 1,
