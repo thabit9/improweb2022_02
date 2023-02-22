@@ -759,6 +759,12 @@
             h61.className = "instasearch-group-header";
             h61.innerHTML = "Categories";
 
+            var overflow_div;
+            if (_searchModelArr[0].category.length > 11){
+                overflow_div = document.createElement("div")   
+                overflow_div.className = "instasearch-hits-container border_";
+            }
+
             let ul1 = document.createElement("ul");
             ul1.className = "instasearch-hits";
             //for loop here for categories
@@ -787,6 +793,7 @@
                 li1.appendChild(a1);
                 ul1.appendChild(li1);
             }
+            if (_searchModelArr[0].category.length > 11) overflow_div.appendChild(ul1);
             //for loop ends here
 
 
@@ -794,12 +801,17 @@
             h62.className = "instasearch-group-header";
             h62.innerHTML = "Hits";
 
+            var overflow_div2;
+            if (_searchModelArr[2].specificProducts.length > 11){
+                overflow_div2 = document.createElement("div")   
+                overflow_div2.className = "instasearch-hits-container border_";
+            }
             let ul2 = document.createElement("ul");
             ul2.className = "instasearch-hits has-thumbs";
             
-            console.log(_searchModelArr[1].products.length);
-            for (let x = 0; x < _searchModelArr[1].products.length; x++) {
-                const product = _searchModelArr[1].products[x]; 
+            console.log(_searchModelArr[2].specificProducts.length);
+            for (let x = 0; x < _searchModelArr[2].specificProducts.length; x++) {
+                const product = _searchModelArr[2].specificProducts[x]; 
                 let li2 = document.createElement("li");
                 let a2 = document.createElement("a");
                 a2.className = "instasearch-hit";
@@ -835,13 +847,22 @@
                 li2.appendChild(a2);
                 ul2.appendChild(li2);
             }
+            if (_searchModelArr[2].specificProducts.length > 11) overflow_div2.appendChild(ul2);
             //for loop ends here
 
 
             div2.appendChild(h61);
-            div2.appendChild(ul1);
+            if (_searchModelArr[0].category.length > 11){
+                div2.appendChild(overflow_div2); 
+            }else{
+                div2.appendChild(ul2); 
+            }  
             div2.appendChild(h62);
-            div2.appendChild(ul2);    
+            if (_searchModelArr[2].specificProducts.length > 11){
+                div2.appendChild(overflow_div2); 
+            }else{
+                div2.appendChild(ul2); 
+            }   
             div1.appendChild(div2);
             //this.parentNode.appendChild(div1);
             _parent.appendChild(div1);

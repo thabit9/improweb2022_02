@@ -150,7 +150,11 @@ namespace improweb2022_02.Controllers
 
             //determine the keyword
             //keyword can be GroupName, ProductCode, ProductCategory, or Some Text on the Description
-            var _gropName_keyword = "and pg.GroupName like '%"+ keyword + "%'";
+            var Flag_search_param = search_param != -1 ? true : false;
+            var Flag_keyword = keyword != "" ? true : false;
+
+            var _groupHead_search = Flag_search_param ? "and pgh.GroupHeadID = "+ search_param : "";
+            var _gropName_keyword = Flag_keyword ? "and pg.GroupName like '%"+ keyword + "%'": "";
             var _description_keyword = "or Description Like '%" + keyword + "%'";
 
 
@@ -161,7 +165,7 @@ join ProductGroupTop pgt on pgtl.ProductGroupTopId = pgt.ProductGroupTopId
 join ProductGroupHead pgh on pgtl.GroupHeadID = pgh.GroupHeadID
 join ProdGroupLink pgl on pgh.GroupHeadID = pgl.GroupHeadID
 join ProductGroups pg on pgl.ProdGroupName = pg.GroupName
-where pgt.OrgID = 94 and pgh.GroupHeadID = "+ search_param +" "+ _gropName_keyword +" order by pgt.ProductGroupTopId";
+where pgt.OrgID = 94 "+ _groupHead_search +" "+ _gropName_keyword +" order by pgt.ProductGroupTopId";
             var _searchCategory = new List<CategoryModel>();
             using (var connection = _dbx.CreateConnection()){
                 var _queryResults = connection.Query<CategoryModel>(_query);
@@ -179,19 +183,22 @@ where pgt.OrgID = 94 and pgh.GroupHeadID = "+ search_param +" "+ _gropName_keywo
 
             //prepare the groupNames string for Sql
             var _groupNameStr = "";
+            var _groupName_clause = "";
             foreach(var item in _groupNameArr){
                 _groupNameStr += "'" + item + "', ";
             }
             if (_groupNameStr == ""){
                 _groupNameStr = "-1";
-            }else{
+            }/*else{
                 _groupNameStr = _groupNameStr.Remove(_groupNameStr.Length -2, 2);
-            }
+            }*/
+            var Flag_groupName = _groupNameStr != "-1" ? true : false;
+            _groupName_clause = Flag_groupName ? "and GroupName in ("+ _groupNameStr.Remove(_groupNameStr.Length -2, 2) +") " : ""; 
 
             var _query2 = @"
 Select top 1000 *
 from Products
-where GroupName in ("+ _groupNameStr +") and OrgID = 94 and Active = 1 and OutputMe = 1";
+where OrgID = 94 and Active = 1 and OutputMe = 1 " + _groupName_clause;
             var _searchProducts = new List<Product>();
             using (var connection = _dbx.CreateConnection()){
                 var _queryResults = connection.Query<Product>(_query2);
@@ -201,7 +208,7 @@ where GroupName in ("+ _groupNameStr +") and OrgID = 94 and Active = 1 and Outpu
             var _query3 = @"
 Select top 1000 *
 from Products
-where GroupName in ("+ _groupNameStr +") and OrgID = 94 and Active = 1 and OutputMe = 1 "+ _description_keyword;
+where OrgID = 94 and Active = 1  and OutputMe = 1 "+ _groupName_clause +" "+ _description_keyword;
             var _searchSpecificProducts = new List<Product>();
             using (var connection = _dbx.CreateConnection()){
                 var _queryResults = connection.Query<Product>(_query3);

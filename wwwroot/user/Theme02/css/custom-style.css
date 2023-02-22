@@ -875,3 +875,9 @@ visibility: visible;
     color: red;
     font-size: 30px;
 }*/
+
+.instasearch-hits-container{
+    height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
