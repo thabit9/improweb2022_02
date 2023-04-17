@@ -46,7 +46,7 @@ namespace improweb2022_02.Controllers
             var Features = product.Features.ToList();
             var Specifications = product.Specifications.ToList();
             var reviews = product.ReviewProducts.Where(rs => rs.ReviewStatusID == 2).ToList();
-            //var stockCount = getStockCount(id);
+            //var stockCount = getStockCount(id); 
 
             ViewBag.Product = product;
             //ViewBag.StockCount = stockCount;

@@ -18,10 +18,10 @@ namespace improweb2022_02.Models
         public string Description { get; set; }
         public string SpecificationValue { get; set; }
         public string SpecificationGroup { get; set; }
-        public Int64 GroupOrder { get; set; }
-        public Int64 DescriptionOrder { get; set; }
+        public int GroupOrder { get; set; }
+        public int DescriptionOrder { get; set; }
         public Int64 ProdID { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Product Product { get; set; } 
 
     }
 }

@@ -14,11 +14,11 @@ namespace improweb2022_02.Models
         }
 
         [Key]
-        public Int64 ReviewFlagID { get; set; }
-        public Int64 CustID { get; set; }
+        public long ReviewFlagID { get; set; }
+        public long CustID { get; set; }
         public Int16 ReviewFlagTypeID { get; set; }
         public DateTime ReviewFlagDate { get; set; }
-        public Int64 ProdRevID { get; set; }
+        public long ProdRevID { get; set; }
 
         public virtual Customer Customer { get; set; }
         public virtual ReviewProduct ReviewProduct { get; set; }

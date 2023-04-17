@@ -15,7 +15,7 @@ namespace improweb2022_02.Models
         }
 
         [Key]
-        public Int16 ReviewStatusID { get; set; }
+        public short ReviewStatusID { get; set; }
         public string Description { get; set; }
 
         public virtual ICollection<ReviewProduct> ReviewProducts { get; set; }

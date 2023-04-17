@@ -15,20 +15,20 @@ namespace improweb2022_02.Models
         }
 
         [Key]
-        public Int64 ProdRevID { get; set; }
+        public long ProdRevID { get; set; }
         public string ProdCode { get; set; }
         public string ProdRevHeading { get; set; }
-        public Int16 ProdRevRating { get; set; }
+        public int ProdRevRating { get; set; }
         public string ProdRevPros { get; set; }
         public string ProdRevCons { get; set; }
         public string ProdRevText { get; set; }
         public DateTime ProdRevDate { get; set; }
 
-        public Int64 ProdID { get; set; }
-        public Int64 CustID { get; set; }
-        public Int64 OrgID { get; set; }
-        public Int64 RefID { get; set; }
-        public Int16 ReviewStatusID { get; set; }
+        public long ProdID { get; set; }
+        public long CustID { get; set; }
+        public long OrgID { get; set; }
+        public long RefID { get; set; }
+        public short ReviewStatusID { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual Customer Customer { get; set; }
